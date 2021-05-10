@@ -1,1 +1,1 @@
-docker exec -it app bash
+docker exec -it app-neko bash
