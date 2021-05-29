@@ -111,6 +111,14 @@
       <path value="$PROJECT_DIR$/vendor/prettus/laravel-validation" />
       <path value="$PROJECT_DIR$/vendor/goldspecdigital/laravel-eloquent-uuid" />
       <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
+      <path value="$PROJECT_DIR$/vendor/laracasts/flash" />
+      <path value="$PROJECT_DIR$/vendor/infyomlabs/adminlte-templates" />
+      <path value="$PROJECT_DIR$/vendor/infyomlabs/laravel-generator" />
+      <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

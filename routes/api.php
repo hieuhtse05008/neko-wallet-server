@@ -30,3 +30,6 @@ Route::middleware(["api"])->group(function (){
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users', 'UserController@index');
 });
+
+
+Route::resource('tokens', App\Http\Controllers\API\TokenAPIController::class);

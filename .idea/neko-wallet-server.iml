@@ -118,6 +118,14 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/prettus/laravel-validation" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/goldspecdigital/laravel-eloquent-uuid" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/sanctum" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laracasts/flash" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/infyomlabs/adminlte-templates" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/infyomlabs/laravel-generator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laravelcollective/html" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/event-manager" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

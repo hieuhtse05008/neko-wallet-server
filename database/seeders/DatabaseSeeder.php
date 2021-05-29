@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class DatabaseSeeder extends Seeder
 {
 
-    protected $toTruncate = ['words'];
+    protected $toTruncate = [];
 
     /**
      * Seed the application's database.
@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
         foreach($this->toTruncate as $table) {
             DB::table($table)->truncate();
         }
-        $this->call(WordSeeder::class);
 
         Model::reguard();
     }

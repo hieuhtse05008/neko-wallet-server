@@ -20,26 +20,7 @@ class AuthController extends Controller
         return 'OK';
     }
 
-    public function registerInfo()
-    {
-//        $words = DB::table('words')->orderBy(DB::raw('random()'))->limit(12)->pluck('content');
 
-        $users = User::all();
-        while (true) {
-            $words = DB::select("select string_agg(content,' ') as words from (select content from words order by random() LIMIT 12) as tmp;")[0]->words;
-            $isValidWords = true;
-            foreach ($users as $user) {
-                if (Hash::check($words, $user->password, [])) {
-                    $isValidWords = false;
-                    break;
-                }
-            }
-            if ($isValidWords) {
-                return $words;
-            }
-        }
-
-    }
 
     public function login(Request $request)
     {
