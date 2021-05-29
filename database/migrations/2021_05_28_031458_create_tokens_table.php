@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableWords extends Migration
+class CreateTokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateTableWords extends Migration
      */
     public function up()
     {
-        Schema::create('words', function (Blueprint $table) {
-            $table->string('content');
+        Schema::create('tokens', function (Blueprint $table) {
+            $table->id();
+            $table->string('symbol')->unique();
+            $table->string('last_price');
+            $table->string('price_change_percent');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +29,6 @@ class CreateTableWords extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('words');
+        Schema::dropIfExists('tokens');
     }
 }
