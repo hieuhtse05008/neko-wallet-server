@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Presenters\TokenPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TokenRepository;
-use App\Entities\Token;
-use App\Validators\TokenValidator;
+use App\Models\Token;
 
 /**
  * Class TokenRepositoryEloquent.
@@ -25,7 +25,11 @@ class TokenRepositoryEloquent extends BaseRepository implements TokenRepository
         return Token::class;
     }
 
-    
+    public function presenter()
+    {
+        return TokenPresenter::class;
+    }
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +38,5 @@ class TokenRepositoryEloquent extends BaseRepository implements TokenRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

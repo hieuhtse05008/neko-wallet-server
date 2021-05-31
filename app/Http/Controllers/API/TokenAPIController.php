@@ -35,6 +35,11 @@ class TokenAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+
+        $filter = [
+            'symbols' => $request->symbols,
+        ];
+
         $tokens = $this->tokenRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),

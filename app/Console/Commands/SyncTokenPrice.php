@@ -1,36 +1,55 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Console\Commands;
 
 use App\Models\Token;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
-class SyncTokenPriceBinance implements ShouldQueue
+class SyncTokenPrice extends Command
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'command:syncTokenPrice';
 
     /**
-     * Create a new job instance.
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Sync Token Price';
+
+    /**
+     * Create a new command instance.
      *
      * @return void
      */
     public function __construct()
     {
-        //
+        parent::__construct();
     }
 
     /**
-     * Execute the job.
+     * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
+        $seconds = 0;
+        while ($seconds < 60 ){
+            $this->syncPrice();
+            $this->info("Syncing!");
+            $seconds += 10;
+            sleep(10);
+        }
+        return 0;
+    }
+
+    private function syncPrice(){
         $httpClient = new \GuzzleHttp\Client();
         $url = 'https://api.binance.com/api/v3/ticker/24hr';
         $response = $httpClient->get($url);
@@ -49,6 +68,11 @@ class SyncTokenPriceBinance implements ShouldQueue
             ];
         }, $tokens);
         $tokens = array_values($tokens);
-        DB::table('tokens')->insert($tokens);
+        DB::table('tokens')->upsert($tokens,['symbol'],[
+            'last_price',
+            'price_change_percent'
+        ]);
+
     }
+
 }
