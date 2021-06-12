@@ -3,8 +3,22 @@
 namespace App\Http\Requests\API;
 
 use App\Models\Token;
-use InfyOm\Generator\Request\APIRequest;
 
+/**
+ * Class UpdateTokenAPIRequest
+ * @package App\Http\Requests\API
+ *
+ * @OA\Schema(
+ *     title="Token Update Request",
+ *     @OA\Xml(
+ *         name="UpdateTokenAPIRequest"
+ *     ),
+ *     @OA\Property(
+ *          property="id",
+ *          ref="#/components/schemas/Token/properties/id",
+ *      ),
+ * )
+ */
 class UpdateTokenAPIRequest extends APIRequest
 {
     /**
@@ -24,8 +38,9 @@ class UpdateTokenAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = Token::$rules;
-        
-        return $rules;
+        $updateRules = Token::$rules;
+        $keyRules = [];
+        $updateRules = getDataByKeys($updateRules, $keyRules);
+        return $updateRules;
     }
 }

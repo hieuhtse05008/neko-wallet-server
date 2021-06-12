@@ -34,7 +34,7 @@ return [
         'params'     => [
             'include' => 'include'
         ],
-        'serializer' => League\Fractal\Serializer\DataArraySerializer::class
+        'serializer' => \App\Serializer\SimpleArraySerializer::class
     ],
 
     /*
@@ -210,15 +210,15 @@ return [
         |   http://prettus.local/?search=lorem&searchJoin=or
         |
         */
-        'params'             => [
-            'search'       => 'search',
-            'searchFields' => 'searchFields',
-            'filter'       => 'filter',
-            'orderBy'      => 'orderBy',
-            'sortedBy'     => 'sortedBy',
-            'with'         => 'with',
-            'searchJoin'   => 'searchJoin',
-            'withCount'    => 'withCount'
+        'params' => [
+            'search' => 'search',
+            'searchFields' => 'searchFieldsDisabled',
+            'filter' => 'filterDisabled',
+            'orderBy' => 'orderBy',
+            'sortedBy' => 'sortedBy',
+            'with' => 'withDisabled',
+            'searchJoin' => 'searchJoin',
+            'withCount' => 'withCountDisabled'
         ]
     ],
     /*
@@ -230,7 +230,7 @@ return [
     'generator'  => [
         'basePath'      => app()->path(),
         'rootNamespace' => 'App\\',
-        'stubsOverridePath' => app()->path(),
+        'stubsOverridePath' => resource_path('l5-repository'),
         'paths'         => [
             'models'       => 'Models',
             'repositories' => 'Repositories',

@@ -1,9 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\API\TokenAPIController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,23 +13,21 @@ use App\Http\Controllers\API\TokenAPIController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware(["api"])->group(function (){
+//    Route::get('/tokens', [TokenAPIController::class,'index']);
+//    Route::post('/login', [AuthController::class,'login']);
+//});
+//
+//Route::middleware(['auth:sanctum'])->group(function () {
+//    Route::get('/users', 'UserController@index');
+//});
+
+Route::prefix("v1")->group(function(){
+    Route::group(["prefix" => 'tokens'], function () {
+        Route::get("/", [App\Http\Controllers\API\TokenAPIController::class, 'index']);
+        Route::post("/", [App\Http\Controllers\API\TokenAPIController::class, 'store']);
+        Route::get("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'show']);
+        Route::put("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'update']);
+        Route::delete("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'destroy']);
+    });
 });
-
-    Route::get('/register-info', [AuthController::class,'registerInfo']);
-
-Route::get('/test', [AuthController::class,'test']);
-Route::post('/login', [AuthController::class,'login']);
-
-Route::middleware(["api"])->group(function (){
-    Route::get('/tokens', [TokenAPIController::class,'index']);
-    Route::post('/login', [AuthController::class,'login']);
-});
-
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/users', 'UserController@index');
-});
-
-
-Route::resource('tokens', App\Http\Controllers\API\TokenAPIController::class);

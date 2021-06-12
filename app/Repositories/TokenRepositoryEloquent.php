@@ -2,41 +2,87 @@
 
 namespace App\Repositories;
 
-use App\Presenters\TokenPresenter;
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\TokenRepository;
 use App\Models\Token;
+use App\Presenters\TokenPresenter;
 
 /**
- * Class TokenRepositoryEloquent.
- *
- * @package namespace App\Repositories;
- */
-class TokenRepositoryEloquent extends BaseRepository implements TokenRepository
+ * Class TokenRepositoryEloquent
+ * @package App\Repositories
+ * @version June 12, 2021, 4:44 am UTC
+*/
+
+class TokenRepositoryEloquent extends Repository implements TokenRepository
 {
     /**
-     * Specify Model class name
-     *
-     * @return string
+     * @var array
      */
+    protected $fieldSearchable = [
+        'symbol',
+        'last_price',
+        'price_change_percent'
+    ];
+
+    /**
+     * Return searchable fields
+     *
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
+
+    /**
+     * Configure the Model
+     **/
     public function model()
     {
         return Token::class;
     }
 
+    /**
+     * @return string|null
+     */
     public function presenter()
     {
         return TokenPresenter::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * @param $query
+     * @param $filter
+     * @return mixed
      */
-    public function boot()
+    static public function queryFilter($query, $filter)
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+
+        return $query;
     }
 
+    /**
+     * @param int $limit
+     * @param array $filter
+     * @param bool $disabledRequestCriteria
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function list($limit, array $filter = [], $disabledRequestCriteria = false)
+    {
+        // TODO: Implement list() method.
+        $this->resetCriteria();
+
+        if (!$disabledRequestCriteria){
+
+        }
+
+        $this->scopeQuery(function ($query) use ($filter) {
+            return $query;
+        });
+
+        if ($limit) {
+            return $this->paginate($limit);
+        }
+        return $this->get();
+
+    }
 }

@@ -76,23 +76,4 @@ class $MODEL_NAME$APIController extends APIController
 
         return $this->respondSuccessWithMessage('$MODEL_NAME_HUMAN$ deleted successfully');
     }
-
-    /**
-     * Restore the specified $MODEL_NAME$ in database.
-     * PUT  /$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$/$PRIMARY_KEY_NAME$/restore
-     *
-     * @param $MODEL_NAME$ $trashed$MODEL_NAME$
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function restore($MODEL_NAME$ $trashed$MODEL_NAME$)
-    {
-        $trashed$MODEL_NAME$->delete();
-
-        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($trashed$MODEL_NAME$->id);
-
-        return $this->respondSuccess([
-            "$MODEL_NAME_SNAKE$" => $$MODEL_NAME_CAMEL$
-        ]);
-    }
 }

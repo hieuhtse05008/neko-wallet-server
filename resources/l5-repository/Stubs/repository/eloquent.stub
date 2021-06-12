@@ -2,8 +2,6 @@
 
 $NAMESPACE$
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
 use $REPOSITORY$
 use $MODEL$;
 $USE_VALIDATOR$
@@ -32,7 +30,30 @@ class $CLASS$RepositoryEloquent extends BaseRepository implements $CLASS$Reposit
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+
     }
-    
+
+    /**
+     * @param int $limit
+     * @param array $filter
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function list($limit, array $filter = [])
+    {
+        // TODO: Implement list() method.
+        $this->resetCriteria();
+
+        $this->scopeQuery(function ($query) use ($filter) {
+            return $query;
+        });
+
+        if ($limit) {
+            return $this->paginate($limit);
+        }
+
+        return $this->get();
+
+    }
+
 }

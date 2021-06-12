@@ -1,0 +1,373 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Neko wallet API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/tokens": {
+            "get": {
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Get a listing of the Token.",
+                "description": "Get all Tokens",
+                "operationId": "App\\Http\\Controllers\\API\\TokenAPIController::index",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of records the Token will return. Default: 0/'empty' (get all), greater than 0 (limited by value)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": ""
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Use pagination when the limit parameter is greater than 0",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Display a listing of the Token.\nGET /api/v1/tokens",
+                                            "type": "boolean"
+                                        },
+                                        "tokens": {
+                                            "description": "Display a listing of the Token.\nGET /api/v1/tokens",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TokenTransformer"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Store a newly created Token in database",
+                "description": "Store Token",
+                "operationId": "App\\Http\\Controllers\\API\\TokenAPIController::store",
+                "requestBody": {
+                    "description": "Data of Token",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTokenAPIRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Store a newly created Token in storage.\nPOST /api/v1/tokens",
+                                            "type": "boolean"
+                                        },
+                                        "token": {
+                                            "$ref": "#/components/schemas/TokenTransformer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tokens/{id}": {
+            "get": {
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Display the specified Token",
+                "description": "Get Token",
+                "operationId": "App\\Http\\Controllers\\API\\TokenAPIController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Token",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Display the specified Token.\nGET /api/v1/tokens/id",
+                                            "type": "boolean"
+                                        },
+                                        "token": {
+                                            "$ref": "#/components/schemas/TokenTransformer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Update the specified Token in storage",
+                "description": "Update Token",
+                "operationId": "App\\Http\\Controllers\\API\\TokenAPIController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Token",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data of Token",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTokenAPIRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "Update the specified Token in storage.\nPUT /api/v1/tokens/id",
+                                            "type": "boolean"
+                                        },
+                                        "token": {
+                                            "$ref": "#/components/schemas/TokenTransformer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Remove the specified Token from database",
+                "description": "Delete Token",
+                "operationId": "App\\Http\\Controllers\\API\\TokenAPIController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Token",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Remove the specified Token from database.\nDELETE /api/v1/tokens/id",
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "description": "Remove the specified Token from database.\nDELETE /api/v1/tokens/id",
+                                            "type": "string",
+                                            "example": "Token deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateTokenAPIRequest": {
+                "title": "Token Create Request",
+                "description": "Class CreateTokenAPIRequest",
+                "properties": {
+                    "id": {
+                        "$ref": "#/components/schemas/Token/properties/id"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "CreateTokenAPIRequest"
+                }
+            },
+            "UpdateTokenAPIRequest": {
+                "title": "Token Update Request",
+                "description": "Class UpdateTokenAPIRequest",
+                "properties": {
+                    "id": {
+                        "$ref": "#/components/schemas/Token/properties/id"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "UpdateTokenAPIRequest"
+                }
+            },
+            "Token": {
+                "title": "Token",
+                "description": "Class Token",
+                "required": [
+                    "symbol",
+                    "last_price",
+                    "price_change_percent"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "symbol": {
+                        "description": "symbol",
+                        "type": "string"
+                    },
+                    "last_price": {
+                        "description": "last_price",
+                        "type": "string"
+                    },
+                    "price_change_percent": {
+                        "description": "price_change_percent",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "created_at",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "updated_at",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Token"
+                }
+            },
+            "TokenTransformer": {
+                "title": "Token Transformer",
+                "description": "Class TokenTransformer.",
+                "properties": {
+                    "id": {
+                        "$ref": "#/components/schemas/Token/properties/id"
+                    },
+                    "created_at": {
+                        "description": "Created at",
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 1575041693
+                    },
+                    "updated_at": {
+                        "description": "Updated at",
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 1575041693
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "TokenTransformer"
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

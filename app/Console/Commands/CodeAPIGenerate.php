@@ -5,8 +5,6 @@ namespace App\Console\Commands;
 use App\Connector\DatabaseConnector;
 use App\Connector\MerchantConnector;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class CodeAPIGenerate
@@ -21,8 +19,7 @@ class CodeAPIGenerate extends Command
      */
     protected $signature = 'code:api-generate
                             {name : Name of table}
-                            {--tableName= : Name of table to get info}
-                            {--fromDb= : Database to get info table to generate field}';
+                            {--tableName= : Name of table to get info}';
 
     /**
      * The console command description.
@@ -66,13 +63,7 @@ class CodeAPIGenerate extends Command
             "--skip-migration" => true,
         ]);
 
-//        if ($this->option('fromDb')) {
-//            MerchantConnector::connectByDatabaseName($this->option('fromDb'));
-//        } else {
-//            MerchantConnector::connectByDatabaseName('demo');
-//        }
-
-        if ($this->option('fromDb') && $this->option('tableName')) {
+        if ($this->option('tableName')) {
             $this->call('infyom:api', [
                 'model' => $name,
                 '--fromTable' => true,

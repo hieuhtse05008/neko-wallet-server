@@ -9,6 +9,31 @@ use $MODEL$;
  * Class $CLASS$Transformer.
  *
  * @package $NAMESPACE$
+ *
+ * @OA\Schema(
+ *     title="$CLASS$ Transformer",
+ *     @OA\Xml(
+ *         name="$CLASS$Transformer"
+ *     ),
+ *     @OA\Property(
+ *          property="id",
+ *          ref="#/components/schemas/$CLASS$/properties/id",
+ *      ),
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="Created at",
+ *          type="integer",
+ *          format="int32",
+ *          example=1575041693,
+ *      ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="Updated at",
+ *          type="integer",
+ *          format="int32",
+ *          example=1575041693,
+ *      ),
+ * )
  */
 class $CLASS$Transformer extends TransformerAbstract
 {
@@ -26,8 +51,8 @@ class $CLASS$Transformer extends TransformerAbstract
 
             /* place your other model properties here */
 
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+            'created_at' => strtotime($model->created_at),
+            'updated_at' => strtotime($model->updated_at),
         ];
     }
 }
