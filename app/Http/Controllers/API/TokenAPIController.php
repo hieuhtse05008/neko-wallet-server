@@ -275,7 +275,7 @@ class TokenAPIController extends APIController
      *              type="integer",
      *              format="int64",
      *          ),
-     *      ),
+     *      ),ap
      *      @OA\Response(
      *          response=200,
      *          description="Successful deleted",
