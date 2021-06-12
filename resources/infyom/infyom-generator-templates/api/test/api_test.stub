@@ -1,14 +1,76 @@
-<?php namespace $NAMESPACE_API_TESTS$;
+<?php
 
+namespace $NAMESPACE_API_TESTS$;
+
+use App\Models\User;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use $NAMESPACE_TESTS$\TestCase;
 use $NAMESPACE_TESTS$\ApiTestTrait;
 use $NAMESPACE_MODEL$\$MODEL_NAME$;
 
+/**
+ * Class $MODEL_NAME$ApiTest
+ * @package Tests\APIs
+ */
 class $MODEL_NAME$ApiTest extends TestCase
 {
-    use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
+    private $response;
+
+    protected $token;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $user = User::find(config('app.testing_user'));
+        $this->token = JWTAuth::fromUser($user);
+        $this->withoutMiddleware(\Illuminate\Routing\Middleware\ThrottleRequests::class);
+    }
+
+    /**
+     * @param array $actualData
+     */
+    public function assertApiResponse(Array $actualData)
+    {
+        $this->assertApiSuccess();
+
+        $response = json_decode($this->response->getContent(), true);
+        $responseData = $response['$MODEL_NAME_SNAKE$'];
+
+        $this->assertNotEmpty($responseData['id']);
+        //$this->assertModelData($actualData, $responseData);
+    }
+
+     public function assertApiResponseListData()
+    {
+        $this->assertApiSuccess();
+
+        $response = json_decode($this->response->getContent(), true);
+        $responseData = $response['$MODEL_NAME_PLURAL_SNAKE$'];
+
+        $this->assertNotNull($responseData);
+    }
+
+    public function assertApiSuccess()
+    {
+        $this->response->assertStatus(200);
+        $this->response->assertJson(['status' => true]);
+    }
+
+    /**
+     * @param array $actualData
+     * @param array $expectedData
+     */
+    public function assertModelData(Array $actualData, Array $expectedData)
+    {
+        foreach ($actualData as $key => $value) {
+            if (in_array($key, ["creator_id", "updated_by", "deleted_by", "created_at", "updated_at","deleted_at"])) {
+                continue;
+            }
+            $this->assertEquals($actualData[$key], $expectedData[$key]);
+        }
+    }
 
     /**
      * @test
@@ -17,12 +79,30 @@ class $MODEL_NAME$ApiTest extends TestCase
     {
         $$MODEL_NAME_CAMEL$ = $MODEL_NAME$::factory()->make()->toArray();
 
-        $this->response = $this->json(
+        $this->response = $this->withHeaders([
+              'Authorization' => 'Bearer ' . $this->token,
+        ])->json(
             'POST',
-            '/$API_PREFIX$/$ROUTE_PREFIX$$MODEL_NAME_PLURAL_SNAKE$', $$MODEL_NAME_CAMEL$
+            '/$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$', $$MODEL_NAME_CAMEL$
         );
 
         $this->assertApiResponse($$MODEL_NAME_CAMEL$);
+    }
+
+    /**
+     * @test
+     */
+    public function test_list_$MODEL_NAME_SNAKE$()
+    {
+
+        $this->response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $this->token,
+        ])->json(
+            'GET',
+           '/$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$/'
+        );
+
+        $this->assertApiResponseListData();
     }
 
     /**
@@ -32,9 +112,11 @@ class $MODEL_NAME$ApiTest extends TestCase
     {
         $$MODEL_NAME_CAMEL$ = $MODEL_NAME$::factory()->create();
 
-        $this->response = $this->json(
+        $this->response = $this->withHeaders([
+              'Authorization' => 'Bearer ' . $this->token,
+        ])->json(
             'GET',
-            '/$API_PREFIX$/$ROUTE_PREFIX$$MODEL_NAME_PLURAL_SNAKE$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$
+            '/$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$
         );
 
         $this->assertApiResponse($$MODEL_NAME_CAMEL$->toArray());
@@ -48,9 +130,11 @@ class $MODEL_NAME$ApiTest extends TestCase
         $$MODEL_NAME_CAMEL$ = $MODEL_NAME$::factory()->create();
         $edited$MODEL_NAME$ = $MODEL_NAME$::factory()->make()->toArray();
 
-        $this->response = $this->json(
+        $this->response = $this->withHeaders([
+              'Authorization' => 'Bearer ' . $this->token,
+        ])->json(
             'PUT',
-            '/$API_PREFIX$/$ROUTE_PREFIX$$MODEL_NAME_PLURAL_SNAKE$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$,
+            '/$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$,
             $edited$MODEL_NAME$
         );
 
@@ -64,15 +148,19 @@ class $MODEL_NAME$ApiTest extends TestCase
     {
         $$MODEL_NAME_CAMEL$ = $MODEL_NAME$::factory()->create();
 
-        $this->response = $this->json(
+        $this->response = $this->withHeaders([
+              'Authorization' => 'Bearer ' . $this->token,
+        ])->json(
             'DELETE',
-             '/$API_PREFIX$/$ROUTE_PREFIX$$MODEL_NAME_PLURAL_SNAKE$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$
+             '/$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$
          );
 
         $this->assertApiSuccess();
-        $this->response = $this->json(
+        $this->response = $this->withHeaders([
+              'Authorization' => 'Bearer ' . $this->token,
+        ])->json(
             'GET',
-            '/$API_PREFIX$/$ROUTE_PREFIX$$MODEL_NAME_PLURAL_SNAKE$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$
+            '/$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$
         );
 
         $this->response->assertStatus(404);

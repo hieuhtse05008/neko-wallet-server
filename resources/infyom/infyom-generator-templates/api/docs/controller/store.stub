@@ -1,8 +1,8 @@
 /**
      * Store a newly created $MODEL_NAME$ in storage.
-     * POST /$MODEL_NAME_PLURAL_CAMEL$
+     * POST /$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$
      *
      * @param Create$MODEL_NAME$APIRequest $request
      *
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */

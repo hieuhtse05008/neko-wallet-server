@@ -1,0 +1,37 @@
+/**
+     * Store a newly created $MODEL_NAME$ in storage.
+     * POST /$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$
+     *
+     * @param Create$MODEL_NAME$APIRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Post(
+     *      path="/$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$",
+     *      summary="Store a newly created $MODEL_NAME_HUMAN$ in database",
+     *      tags={"$MODEL_NAME$"},
+     *      description="Store $MODEL_NAME_HUMAN$",
+     *      security={ {"bearer": {} }},
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="Data of $MODEL_NAME_HUMAN$",
+     *          @OA\JsonContent(
+     *              ref="#/components/schemas/Create$MODEL_NAME$APIRequest",
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful created",
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                  property="status",
+     *                  type="boolean",
+     *              ),
+     *              @OA\Property(
+     *                  property="$MODEL_NAME_SNAKE$",
+     *                  ref="#/components/schemas/$MODEL_NAME$Transformer",
+     *              ),
+     *          ),
+     *      ),
+     * )
+     */

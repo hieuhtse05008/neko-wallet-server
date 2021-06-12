@@ -16,6 +16,12 @@ class Create$TABLE_NAME_TITLE$Table extends Migration
     {
         Schema::create('$TABLE_NAME$', function (Blueprint $table) {
             $FIELDS$
+            $table->integer('creator_id')->unsigned()->nullable()->index();
+            $table->foreign('creator_id')->references('id')->on('users');
+            $table->integer('updated_by')->unsigned()->nullable()->index();
+            $table->foreign('updated_by')->references('id')->on('users');
+            $table->integer('deleted_by')->unsigned()->nullable()->index();
+            $table->foreign('deleted_by')->references('id')->on('users');
         });
     }
 

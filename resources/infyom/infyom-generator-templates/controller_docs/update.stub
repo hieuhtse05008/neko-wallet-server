@@ -1,0 +1,49 @@
+/**
+     * Update the specified $MODEL_NAME$ in storage.
+     * PUT /$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$/$PRIMARY_KEY_NAME$
+     *
+     * @param $MODEL_NAME$ $$MODEL_NAME_CAMEL$
+     * @param Update$MODEL_NAME$APIRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Put(
+     *      path="/$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$/{$PRIMARY_KEY_NAME$}",
+     *      summary="Update the specified $MODEL_NAME$ in storage",
+     *      tags={"$MODEL_NAME$"},
+     *      description="Update $MODEL_NAME$",
+     *      security={ {"bearer": {} }},
+     *      @OA\Parameter(
+     *          name="$PRIMARY_KEY_NAME$",
+     *          in="path",
+     *          required=true,
+     *          description="$PRIMARY_KEY_NAME$ of $MODEL_NAME$",
+     *          example="1",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64",
+     *          ),
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="Data of $MODEL_NAME_HUMAN$",
+     *          @OA\JsonContent(
+     *              ref="#/components/schemas/Update$MODEL_NAME$APIRequest",
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful updated",
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean",
+     *              ),
+     *              @OA\Property(
+     *                  property="$MODEL_NAME_SNAKE$",
+     *                  ref="#/components/schemas/$MODEL_NAME$Transformer",
+     *              ),
+     *          ),
+     *      ),
+     * )
+     */

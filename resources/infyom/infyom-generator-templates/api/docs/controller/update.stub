@@ -1,9 +1,9 @@
 /**
-     * Update the specified $MODEL_NAME$ in storage.
-     * PUT/PATCH /$MODEL_NAME_PLURAL_CAMEL$/{id}
+     * Update the specified $MODEL_NAME$ in database.
+     * PUT  /$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$/$PRIMARY_KEY_NAME$
      *
-     * @param int $id
+     * @param $MODEL_NAME$ $$MODEL_NAME_CAMEL$
      * @param Update$MODEL_NAME$APIRequest $request
      *
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */

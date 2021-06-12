@@ -3,8 +3,23 @@
 namespace $NAMESPACE_API_REQUEST$;
 
 use $NAMESPACE_MODEL$\$MODEL_NAME$;
-use InfyOm\Generator\Request\APIRequest;
+use App\Http\Requests\API\APIRequest;
 
+/**
+ * Class Create$MODEL_NAME$APIRequest
+ * @package $NAMESPACE_API_REQUEST$
+ *
+ * @OA\Schema(
+ *     title="$MODEL_NAME$ Create Request",
+ *     @OA\Xml(
+ *         name="Create$MODEL_NAME$APIRequest"
+ *     ),
+ *     @OA\Property(
+ *          property="id",
+ *          ref="#/components/schemas/$MODEL_NAME$/properties/id",
+ *     ),
+ * )
+ */
 class Create$MODEL_NAME$APIRequest extends APIRequest
 {
     /**
@@ -24,6 +39,9 @@ class Create$MODEL_NAME$APIRequest extends APIRequest
      */
     public function rules()
     {
-        return $MODEL_NAME$::$rules;
+        $createRules = $MODEL_NAME$::$rules;
+        $keyRules = [];
+        $createRules = getDataByKeys($createRules, $keyRules);
+        return $createRules;
     }
 }

@@ -1,0 +1,15 @@
+/**
+ * Class $MODEL_NAME$
+ * @package $NAMESPACE_MODEL$
+ * @version $GENERATE_DATE$
+ *
+ *
+ * @OA\Schema(
+ *     title="$MODEL_NAME$",
+ *     @OA\Xml(
+ *         name="$MODEL_NAME$"
+ *     ),
+ *     required={$REQUIRED_FIELDS$},
+ $PROPERTIES$
+ * )
+ */

@@ -3,10 +3,10 @@
 namespace $NAMESPACE_REPOSITORY$;
 
 use $NAMESPACE_MODEL$\$MODEL_NAME$;
-use $NAMESPACE_APP$\Repositories\BaseRepository;
-
+use $NAMESPACE_APP$\Repositories\Repository;
+use App\Presenters\$MODEL_NAME$Presenter;
 $DOCS$
-class $MODEL_NAME$Repository extends BaseRepository
+class $MODEL_NAME$RepositoryEloquent extends Repository implements $MODEL_NAME$Repository
 {
     /**
      * @var array
@@ -31,5 +31,51 @@ class $MODEL_NAME$Repository extends BaseRepository
     public function model()
     {
         return $MODEL_NAME$::class;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function presenter()
+    {
+        return $MODEL_NAME$Presenter::class;
+    }
+
+    /**
+     * @param $query
+     * @param $filter
+     * @return mixed
+     */
+    static public function queryFilter($query, $filter)
+    {
+
+        return $query;
+    }
+
+    /**
+     * @param int $limit
+     * @param array $filter
+     * @param bool $disabledRequestCriteria
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function list($limit, array $filter = [], $disabledRequestCriteria = false)
+    {
+        // TODO: Implement list() method.
+        $this->resetCriteria();
+
+        if (!$disabledRequestCriteria){
+
+        }
+
+        $this->scopeQuery(function ($query) use ($filter) {
+            return $query;
+        });
+
+        if ($limit) {
+            return $this->paginate($limit);
+        }
+        return $this->get();
+
     }
 }

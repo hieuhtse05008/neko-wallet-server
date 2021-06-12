@@ -1,3 +1,10 @@
-Route::group(['prefix' => '$RAW_ROUTE_PREFIX$'], function () {
-    Route::resource('$MODEL_NAME_PLURAL_SNAKE$', $NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class);
+Route::middleware(["auth:api"])->prefix("$ROUTE_PREFIX$$API_VERSION$")->group(function(){
+    Route::group(["prefix" => '$MODEL_NAME_PLURAL_DASHED$'], function () {
+        Route::get("/", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'index']);
+        Route::post("/", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'store']);
+        Route::get("{$MODEL_NAME_CAMEL$}", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'show']);
+        Route::put("{$MODEL_NAME_CAMEL$}", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'update']);
+        Route::delete("{$MODEL_NAME_CAMEL$}", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'destroy']);
+        Route::put("{trashed$MODEL_NAME$}/restore", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'restore']);
+    });
 });

@@ -1,1 +1,7 @@
-Route::resource('$MODEL_NAME_PLURAL_SNAKE$', $NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class);
+Route::group(["prefix" => '$MODEL_NAME_PLURAL_SNAKE$'], function () {
+    Route::get("/", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'show']);
+    Route::get("/", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'index']);
+    Route::post("/", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'store']);
+    Route::put("{$MODEL_NAME_CAMEL$}", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'update']);
+    Route::delete("{$MODEL_NAME_CAMEL$}", [$NAMESPACE_API_CONTROLLER$\$PATH_PREFIX$$MODEL_NAME$APIController::class, 'destroy']);
+});

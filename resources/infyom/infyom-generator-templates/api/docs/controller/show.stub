@@ -1,8 +1,8 @@
 /**
      * Display the specified $MODEL_NAME$.
-     * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$/{id}
+     * GET /$API_PREFIX$/$ROUTE_PREFIX$$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$/$PRIMARY_KEY_NAME$
      *
-     * @param int $id
+     * @param $MODEL_NAME$ $$MODEL_NAME_CAMEL$
      *
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
