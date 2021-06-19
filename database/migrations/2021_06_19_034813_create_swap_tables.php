@@ -40,7 +40,7 @@ class CreateSwapTables extends Migration
             $table->string('name');
             $table->string('symbol');
             $table->string('icon_url');
-            $table->string('decimal');
+            $table->integer('decimal');
             $table->string('address');
             $table->timestamps();
 
@@ -130,5 +130,6 @@ class CreateSwapTables extends Migration
      */
     public function down()
     {
+
     }
 }
