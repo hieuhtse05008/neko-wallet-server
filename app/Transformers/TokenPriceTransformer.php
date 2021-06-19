@@ -2,22 +2,22 @@
 
 namespace App\Transformers;
 
-use App\Models\Token;
+use App\Models\TokenPrice;
 use League\Fractal\TransformerAbstract;
 
 /**
- * Class TokenTransformer.
+ * Class TokenPriceTransformer.
  *
  * @package namespace App\Transformers;
  *
  * @OA\Schema(
- *     title="Token Transformer",
+ *     title="TokenPrice Transformer",
  *     @OA\Xml(
- *         name="TokenTransformer"
+ *         name="TokenPriceTransformer"
  *     ),
  *     @OA\Property(
  *          property="id",
- *          ref="#/components/schemas/Token/properties/id",
+ *          ref="#/components/schemas/TokenPrice/properties/id",
  *      ),
  *      @OA\Property(
  *          property="created_at",
@@ -35,16 +35,16 @@ use League\Fractal\TransformerAbstract;
  *      ),
  * )
  */
-class TokenTransformer extends TransformerAbstract
+class TokenPriceTransformer extends TransformerAbstract
 {
     /**
-     * Transform the Token entity.
+     * Transform the TokenPrice entity.
      *
-     * @param \App\Models\Token $model
+     * @param \App\Models\TokenPrice $model
      *
      * @return array
      */
-    public function transform(Token $model)
+    public function transform(TokenPrice $model)
     {
         return [
             'id'         => (int) $model->id,

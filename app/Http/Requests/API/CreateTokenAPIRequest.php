@@ -2,20 +2,20 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\Token;
+use App\Models\TokenPrice;
 
 /**
  * Class CreateTokenAPIRequest
  * @package App\Http\Requests\API
  *
  * @OA\Schema(
- *     title="Token Create Request",
+ *     title="TokenPrice Create Request",
  *     @OA\Xml(
  *         name="CreateTokenAPIRequest"
  *     ),
  *     @OA\Property(
  *          property="id",
- *          ref="#/components/schemas/Token/properties/id",
+ *          ref="#/components/schemas/TokenPrice/properties/id",
  *     ),
  * )
  */
@@ -38,7 +38,7 @@ class CreateTokenAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $createRules = Token::$rules;
+        $createRules = TokenPrice::$rules;
         $keyRules = [];
         $createRules = getDataByKeys($createRules, $keyRules);
         return $createRules;

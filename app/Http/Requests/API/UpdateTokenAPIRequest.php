@@ -2,20 +2,20 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\Token;
+use App\Models\TokenPrice;
 
 /**
  * Class UpdateTokenAPIRequest
  * @package App\Http\Requests\API
  *
  * @OA\Schema(
- *     title="Token Update Request",
+ *     title="TokenPrice Update Request",
  *     @OA\Xml(
  *         name="UpdateTokenAPIRequest"
  *     ),
  *     @OA\Property(
  *          property="id",
- *          ref="#/components/schemas/Token/properties/id",
+ *          ref="#/components/schemas/TokenPrice/properties/id",
  *      ),
  * )
  */
@@ -38,7 +38,7 @@ class UpdateTokenAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $updateRules = Token::$rules;
+        $updateRules = TokenPrice::$rules;
         $keyRules = [];
         $updateRules = getDataByKeys($updateRules, $keyRules);
         return $updateRules;

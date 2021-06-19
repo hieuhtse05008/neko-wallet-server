@@ -23,7 +23,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind(\App\Repositories\TokenRepository::class, \App\Repositories\TokenRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\TokenPriceRepository::class, \App\Repositories\TokenPriceRepositoryEloquent::class);
         //:end-bindings:
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Token;
+use App\Models\TokenPrice;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TokenFactory extends Factory
@@ -12,7 +12,7 @@ class TokenFactory extends Factory
      *
      * @var string
      */
-    protected $model = Token::class;
+    protected $model = TokenPrice::class;
 
     /**
      * Define the model's default state.

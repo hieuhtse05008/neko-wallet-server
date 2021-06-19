@@ -2,7 +2,7 @@
 
 namespace Tests\APIs;
 
-use App\Models\Token;
+use App\Models\TokenPrice;
 use App\Models\User;
 use Tests\TestCase;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -74,7 +74,7 @@ class TokenApiTest extends TestCase
      */
     public function test_create_token()
     {
-        $token = Token::factory()->make()->toArray();
+        $token = TokenPrice::factory()->make()->toArray();
 
         $this->response = $this->withHeaders([
               'Authorization' => 'Bearer ' . $this->token,
@@ -107,7 +107,7 @@ class TokenApiTest extends TestCase
      */
     public function test_read_token()
     {
-        $token = Token::factory()->create();
+        $token = TokenPrice::factory()->create();
 
         $this->response = $this->withHeaders([
               'Authorization' => 'Bearer ' . $this->token,
@@ -124,8 +124,8 @@ class TokenApiTest extends TestCase
      */
     public function test_update_token()
     {
-        $token = Token::factory()->create();
-        $editedToken = Token::factory()->make()->toArray();
+        $token = TokenPrice::factory()->create();
+        $editedToken = TokenPrice::factory()->make()->toArray();
 
         $this->response = $this->withHeaders([
               'Authorization' => 'Bearer ' . $this->token,
@@ -143,7 +143,7 @@ class TokenApiTest extends TestCase
      */
     public function test_delete_token()
     {
-        $token = Token::factory()->create();
+        $token = TokenPrice::factory()->create();
 
         $this->response = $this->withHeaders([
               'Authorization' => 'Bearer ' . $this->token,

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateTokenAPIRequest;
 use App\Http\Requests\API\UpdateTokenAPIRequest;
-use App\Models\Token;
-use App\Repositories\TokenRepository;
+use App\Models\TokenPrice;
+use App\Repositories\TokenPriceRepository;
 use Illuminate\Http\Request;
 
 /**
@@ -15,17 +15,17 @@ use Illuminate\Http\Request;
 
 class TokenAPIController extends APIController
 {
-    /** @var  TokenRepository */
+    /** @var  TokenPriceRepository */
     private $tokenRepository;
 
-    public function __construct(TokenRepository $tokenRepo)
+    public function __construct(TokenPriceRepository $tokenRepo)
     {
         parent::__construct();
         $this->tokenRepository = $tokenRepo;
     }
 
     /**
-     * Display a listing of the Token.
+     * Display a listing of the TokenPrice.
      * GET /api/v1/tokens
      *
      * @param Request $request
@@ -33,14 +33,14 @@ class TokenAPIController extends APIController
      *
      * @OA\Get(
      *      path="/api/v1/tokens",
-     *      summary="Get a listing of the Token.",
-     *      tags={"Token"},
+     *      summary="Get a listing of the TokenPrice.",
+     *      tags={"TokenPrice"},
      *      description="Get all Tokens",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="limit",
      *          in="query",
-     *          description="The number of records the Token will return. Default: 0/'empty' (get all), greater than 0 (limited by value)",
+     *          description="The number of records the TokenPrice will return. Default: 0/'empty' (get all), greater than 0 (limited by value)",
      *          example="",
      *          @OA\Schema(
      *              type="integer",
@@ -68,7 +68,7 @@ class TokenAPIController extends APIController
      *              @OA\Property(
      *                  property="tokens",
      *                  type="array",
-     *                  @OA\Items(ref="#/components/schemas/TokenTransformer"),
+     *                  @OA\Items(ref="#/components/schemas/TokenPriceTransformer"),
      *              ),
      *          ),
      *      ),
@@ -88,7 +88,7 @@ class TokenAPIController extends APIController
     }
 
     /**
-     * Store a newly created Token in storage.
+     * Store a newly created TokenPrice in storage.
      * POST /api/v1/tokens
      *
      * @param CreateTokenAPIRequest $request
@@ -97,13 +97,13 @@ class TokenAPIController extends APIController
      *
      * @OA\Post(
      *      path="/api/v1/tokens",
-     *      summary="Store a newly created Token in database",
-     *      tags={"Token"},
-     *      description="Store Token",
+     *      summary="Store a newly created TokenPrice in database",
+     *      tags={"TokenPrice"},
+     *      description="Store TokenPrice",
      *      security={ {"bearer": {} }},
      *      @OA\RequestBody(
      *          required=true,
-     *          description="Data of Token",
+     *          description="Data of TokenPrice",
      *          @OA\JsonContent(
      *              ref="#/components/schemas/CreateTokenAPIRequest",
      *          ),
@@ -118,7 +118,7 @@ class TokenAPIController extends APIController
      *              ),
      *              @OA\Property(
      *                  property="token",
-     *                  ref="#/components/schemas/TokenTransformer",
+     *                  ref="#/components/schemas/TokenPriceTransformer",
      *              ),
      *          ),
      *      ),
@@ -137,24 +137,24 @@ class TokenAPIController extends APIController
     }
 
     /**
-     * Display the specified Token.
+     * Display the specified TokenPrice.
      * GET /api/v1/tokens/id
      *
-     * @param Token $token
+     * @param TokenPrice $token
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Get(
      *      path="/api/v1/tokens/{id}",
-     *      summary="Display the specified Token",
-     *      tags={"Token"},
-     *      description="Get Token",
+     *      summary="Display the specified TokenPrice",
+     *      tags={"TokenPrice"},
+     *      description="Get TokenPrice",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="id",
      *          required=true,
      *          in="path",
-     *          description="id of Token",
+     *          description="id of TokenPrice",
      *          example="1",
      *          @OA\Schema(
      *              type="integer",
@@ -171,16 +171,16 @@ class TokenAPIController extends APIController
      *              ),
      *              @OA\Property(
      *                  property="token",
-     *                  ref="#/components/schemas/TokenTransformer",
+     *                  ref="#/components/schemas/TokenPriceTransformer",
      *              ),
      *          ),
      *      ),
      * )
      */
 
-    public function show(Token $token)
+    public function show(TokenPrice $token)
     {
-        /** @var Token $token */
+        /** @var TokenPrice $token */
         $token = $this->tokenRepository->find($token->id);
 
         return $this->respondSuccess([
@@ -189,25 +189,25 @@ class TokenAPIController extends APIController
     }
 
     /**
-     * Update the specified Token in storage.
+     * Update the specified TokenPrice in storage.
      * PUT /api/v1/tokens/id
      *
-     * @param Token $token
+     * @param TokenPrice $token
      * @param UpdateTokenAPIRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Put(
      *      path="/api/v1/tokens/{id}",
-     *      summary="Update the specified Token in storage",
-     *      tags={"Token"},
-     *      description="Update Token",
+     *      summary="Update the specified TokenPrice in storage",
+     *      tags={"TokenPrice"},
+     *      description="Update TokenPrice",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
      *          required=true,
-     *          description="id of Token",
+     *          description="id of TokenPrice",
      *          example="1",
      *          @OA\Schema(
      *              type="integer",
@@ -216,7 +216,7 @@ class TokenAPIController extends APIController
      *      ),
      *      @OA\RequestBody(
      *          required=true,
-     *          description="Data of Token",
+     *          description="Data of TokenPrice",
      *          @OA\JsonContent(
      *              ref="#/components/schemas/UpdateTokenAPIRequest",
      *          ),
@@ -231,14 +231,14 @@ class TokenAPIController extends APIController
      *              ),
      *              @OA\Property(
      *                  property="token",
-     *                  ref="#/components/schemas/TokenTransformer",
+     *                  ref="#/components/schemas/TokenPriceTransformer",
      *              ),
      *          ),
      *      ),
      * )
      */
 
-    public function update(Token $token, UpdateTokenAPIRequest $request)
+    public function update(TokenPrice $token, UpdateTokenAPIRequest $request)
     {
         $input = $request->validated();
 
@@ -250,12 +250,10 @@ class TokenAPIController extends APIController
     }
 
     /**
-     * Remove the specified Token from database.
+     * Remove the specified TokenPrice from database.
      * DELETE /api/v1/tokens/id
      *
-     * @param Token $token
-     *
-     * @throws \Exception
+     * @param TokenPrice $token
      *
      * @return \Illuminate\Http\JsonResponse
      *
@@ -293,12 +291,14 @@ class TokenAPIController extends APIController
      *          ),
      *      ),
      * )
+     *@throws \Exception
+     *
      */
 
-    public function destroy(Token $token)
+    public function destroy(TokenPrice $token)
     {
         $token->delete();
 
-        return $this->respondSuccessWithMessage('Token deleted successfully');
+        return $this->respondSuccessWithMessage('TokenPrice deleted successfully');
     }
 }

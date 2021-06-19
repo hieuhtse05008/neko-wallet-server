@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\Token;
-use App\Presenters\TokenPresenter;
+use App\Models\TokenPrice;
+use App\Presenters\TokenPricePresenter;
 
 /**
- * Class TokenRepositoryEloquent
+ * Class TokenPriceRepositoryEloquent
  * @package App\Repositories
  * @version June 12, 2021, 4:44 am UTC
 */
 
-class TokenRepositoryEloquent extends Repository implements TokenRepository
+class TokenPriceRepositoryEloquent extends Repository implements TokenPriceRepository
 {
     /**
      * @var array
@@ -37,7 +37,7 @@ class TokenRepositoryEloquent extends Repository implements TokenRepository
      **/
     public function model()
     {
-        return Token::class;
+        return TokenPrice::class;
     }
 
     /**
@@ -45,7 +45,7 @@ class TokenRepositoryEloquent extends Repository implements TokenRepository
      */
     public function presenter()
     {
-        return TokenPresenter::class;
+        return TokenPricePresenter::class;
     }
 
     /**

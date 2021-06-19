@@ -6,14 +6,14 @@ use App\Models\BaseModel as Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Token
+ * Class TokenPrice
  *
  * @package App\Models
  * @version June 12, 2021, 4:44 am UTC
  * @OA\Schema (
- *     title="Token",
+ *     title="TokenPrice",
  *     @OA\Xml(
- *         name="Token"
+ *         name="TokenPrice"
  *     ),
  *     required={"symbol", "last_price", "price_change_percent"},
  *      @OA\Property(
@@ -54,18 +54,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          type="string",
  *          format="date-time"
  *      )
- * 
+ *
  * )
  * @mixin IdeHelperToken
  */
 
-class Token extends Model
+class TokenPrice extends Model
 {
 //    use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'tokens';
+    public $table = 'token_prices';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';

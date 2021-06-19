@@ -2,14 +2,14 @@
 
 namespace App\Presenters;
 
-use App\Transformers\TokenTransformer;
+use App\Transformers\TokenPriceTransformer;
 
 /**
- * Class TokenPresenter.
+ * Class TokenPricePresenter.
  *
  * @package namespace App\Presenters;
  */
-class TokenPresenter extends Presenter
+class TokenPricePresenter extends Presenter
 {
     /**
      * Transformer
@@ -18,6 +18,6 @@ class TokenPresenter extends Presenter
      */
     public function getTransformer()
     {
-        return new TokenTransformer();
+        return new TokenPriceTransformer();
     }
 }

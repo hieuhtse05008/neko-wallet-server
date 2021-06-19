@@ -19,7 +19,7 @@ class SyncTokenPrice extends Command
      *
      * @var string
      */
-    protected $description = 'Sync Token Price';
+    protected $description = 'Sync TokenPrice Price';
 
     /**
      * Create a new command instance.
@@ -39,7 +39,7 @@ class SyncTokenPrice extends Command
     public function handle()
     {
         $seconds = 0;
-        while ($seconds < 60 ){
+        while ($seconds < 60) {
             $this->syncPrice();
             $this->info("Syncing!");
             $seconds += 10;
@@ -48,18 +48,19 @@ class SyncTokenPrice extends Command
         return 0;
     }
 
-    private function syncPrice(){
+    private function syncPrice()
+    {
         $httpClient = new \GuzzleHttp\Client();
         $url = 'https://api.binance.com/api/v3/ticker/24hr';
         $response = $httpClient->get($url);
         $res = json_decode($response->getBody()->getContents());
         $tokens = array_filter($res, function ($item) {
-            preg_match("/^.+USDT$/m",$item->symbol);
+            preg_match("/^.+USDT$/m", $item->symbol);
 
-            return preg_match("/^.+USDT$/m",$item->symbol) || preg_match("/^.+BVND$/m",$item->symbol);
+            return preg_match("/^.+USDT$/m", $item->symbol) || preg_match("/^.+BVND$/m", $item->symbol);
 //            return str_contains($item->symbol, 'USDT') || str_contains($item->symbol, 'BVND');
         });
-        $tokens = array_map(function ($item){
+        $tokens = array_map(function ($item) {
             return [
                 'symbol' => $item->symbol,
                 'last_price' => $item->lastPrice,
@@ -67,10 +68,10 @@ class SyncTokenPrice extends Command
             ];
         }, $tokens);
         $tokens = array_values($tokens);
-        DB::table('tokens')->upsert($tokens,['symbol'],[
-            'last_price',
-            'price_change_percent'
-        ]);
+        DB::table('token_prices')->upsert($tokens,
+            ['symbol'],
+            ['last_price', 'price_change_percent']
+        );
 
     }
 
