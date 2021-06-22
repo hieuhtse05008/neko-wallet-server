@@ -98,7 +98,7 @@ class CreateSwapTables extends Migration
         Schema::create('dex_transactions', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
             $table->foreignUuid('dex_order_request_id')->nullable()->constrained('dex_order_requests');
-            $table->foreignUuid('dex_id')->constrained('dexes');
+            $table->foreignUuid('dex_id')->nullable()->constrained('dexes');
             $table->foreignUuid('contract_id')->constrained('contracts');
             $table->string('dex_order_id');
 
@@ -114,10 +114,10 @@ class CreateSwapTables extends Migration
         Schema::create('swap_orders', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
             $table->string('status')->default('');
-            $table->foreignUuid('swap_id')->constrained('swaps');
             $table->string('fee')->default('0');
             $table->string('current_step')->default('');
 
+            $table->foreignUuid('swap_id')->constrained('swaps');
             $table->foreignUuid('from_swap_transaction_id')->nullable()->constrained('swap_transactions');
             $table->foreignUuid('from_dex_order_request_id')->nullable()->constrained('dex_order_requests');
             $table->foreignUuid('to_swap_transaction_id')->nullable()->constrained('swap_transactions');
