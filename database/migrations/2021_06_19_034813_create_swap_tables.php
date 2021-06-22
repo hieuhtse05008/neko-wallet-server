@@ -89,6 +89,7 @@ class CreateSwapTables extends Migration
             $table->uuid('id')->primary()->unique();
 
             $table->string('status');
+            $table->string('type');
             $table->string('quote');
             $table->foreignUuid('contract_id')->constrained('contracts');
             $table->string('amount')->default('0');
