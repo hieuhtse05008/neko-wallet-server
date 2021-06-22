@@ -15,7 +15,7 @@ class CreateSwapTables extends Migration
     {
         Schema::rename('tokens','token_prices');
         Schema::create('dexes', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->primary()->unique();
             $table->string('name');
             $table->string('icon_url');
 
@@ -23,7 +23,7 @@ class CreateSwapTables extends Migration
         });
 
         Schema::create('networks', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->primary()->unique();
             $table->string('name');
             $table->string('short_name')->nullable();
             $table->string('icon_url')->nullable();
@@ -35,7 +35,7 @@ class CreateSwapTables extends Migration
             $table->timestamps();
         });
         Schema::create('contracts', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->primary()->unique();
             $table->foreignUuid('network_id')->constrained('networks');
             $table->string('name');
             $table->string('symbol');
@@ -46,43 +46,47 @@ class CreateSwapTables extends Migration
 
         });
         Schema::create('swaps', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('type');
-            $table->string('network_speed')->default('');
+            $table->uuid('id')->primary()->unique();
+            $table->string('type')->nullable();
+//            $table->string('network_speed')->default('');
 
             $table->foreignUuid('from_contract_id')->constrained('contracts');
 
             $table->string('from_address')->default('');
             $table->string('from_amount')->default('0');
             $table->string('from_price')->default('');
-            $table->string('from_network_gas')->default('');
+            $table->string('from_gas_price')->default('');
+            $table->string('from_gas_limit')->default('');
 
             $table->foreignUuid('to_contract_id')->constrained('contracts');
 
             $table->string('to_address')->default('');
             $table->string('to_amount')->default('0');
             $table->string('to_price')->default('');
-            $table->string('to_network_gas')->default('');
+            $table->string('to_gas_price')->default('');
+            $table->string('to_gas_limit')->default('');
 
             $table->timestamps();
         });
         Schema::create('swap_transactions', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->primary()->unique();
+            $table->foreignUuid('contract_id')->constrained('contracts');
             $table->string('tx');
             $table->string('from');
             $table->string('to');
             $table->string('status');
             $table->string('amount')->default('0');
-            $table->string('block_number');
-            $table->string('chain_id');
-            $table->bigInteger('gas_limit');
-            $table->bigInteger('gas_price');
+            $table->string('block_number')->nullable();
+            $table->string('chain_id')->nullable();
+            $table->bigInteger('gas_limit')->nullable();
+            $table->bigInteger('gas_price')->nullable();
+            $table->bigInteger('gas_used')->nullable();
 
             $table->timestamps();
 
         });
         Schema::create('dex_order_requests', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->primary()->unique();
 
             $table->string('status');
             $table->foreignUuid('contract_id')->constrained('contracts');
@@ -91,7 +95,7 @@ class CreateSwapTables extends Migration
 
         });
         Schema::create('dex_transactions', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->primary()->unique();
             $table->foreignUuid('dex_order_request_id')->constrained('dex_order_requests');
             $table->foreignUuid('dex_id')->constrained('dexes');
             $table->foreignUuid('contract_id')->constrained('contracts');
@@ -107,7 +111,7 @@ class CreateSwapTables extends Migration
 
 
         Schema::create('swap_orders', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->primary()->unique();
             $table->string('status')->default('');
             $table->foreignUuid('swap_id')->constrained('swaps');
             $table->string('fee')->default('0');
