@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         foreach($this->toTruncate as $table) {
             DB::table($table)->truncate();
         }
-        $this->call(ContractSeeder::class);
+        $this->call(FakerDataSeeder::class);
 
 
         Model::reguard();

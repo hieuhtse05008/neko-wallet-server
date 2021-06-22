@@ -17,7 +17,7 @@ class CreateSwapTables extends Migration
         Schema::create('dexes', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
             $table->string('name');
-            $table->string('icon_url');
+            $table->string('icon_url')->nullable();
 
             $table->timestamps();
         });

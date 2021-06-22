@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class ContractSeeder extends Seeder
+class FakerDataSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -144,6 +144,19 @@ class ContractSeeder extends Seeder
                 'network_id' => $networks['KRC20']['id'],
             ],
         ];
+
         DB::table('contracts')->insertOrIgnore($contracts);
+
+        $swaps = [];
+        for($i = 0; $i < 50; $i++){
+            $ctrs = DB::table('contracts')->inRandomOrder()->limit(2)->get();
+            $swaps[] = [
+                'id' => Str::uuid(),
+                'from_contract_id' => $ctrs[0]->id,
+                'to_contract_id' => $ctrs[1]->id,
+            ];
+        }
+        DB::table('swaps')->insertOrIgnore($swaps);
+
     }
 }
