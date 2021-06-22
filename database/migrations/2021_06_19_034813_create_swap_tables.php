@@ -53,7 +53,7 @@ class CreateSwapTables extends Migration
             $table->foreignUuid('from_contract_id')->constrained('contracts');
 
             $table->string('from_address')->default('');
-            $table->string('from_amount')->default('0');
+            $table->string('from_value')->default('0');
             $table->string('from_price')->default('');
             $table->string('from_gas_price')->default('');
             $table->string('from_gas_limit')->default('');
@@ -61,7 +61,7 @@ class CreateSwapTables extends Migration
             $table->foreignUuid('to_contract_id')->constrained('contracts');
 
             $table->string('to_address')->default('');
-            $table->string('to_amount')->default('0');
+            $table->string('to_value')->default('0');
             $table->string('to_price')->default('');
             $table->string('to_gas_price')->default('');
             $table->string('to_gas_limit')->default('');
@@ -75,7 +75,7 @@ class CreateSwapTables extends Migration
             $table->string('from');
             $table->string('to');
             $table->string('status');
-            $table->string('amount')->default('0');
+            $table->string('value')->default('0');
             $table->string('block_number')->nullable();
             $table->string('chain_id')->nullable();
             $table->bigInteger('gas_limit')->nullable();
