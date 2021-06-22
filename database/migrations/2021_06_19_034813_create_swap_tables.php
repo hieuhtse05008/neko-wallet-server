@@ -97,7 +97,7 @@ class CreateSwapTables extends Migration
         });
         Schema::create('dex_transactions', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
-            $table->foreignUuid('dex_order_request_id')->constrained('dex_order_requests');
+            $table->foreignUuid('dex_order_request_id')->nullable()->constrained('dex_order_requests');
             $table->foreignUuid('dex_id')->constrained('dexes');
             $table->foreignUuid('contract_id')->constrained('contracts');
             $table->string('dex_order_id');
