@@ -69,7 +69,16 @@ class FakerDataSeeder extends Seeder
             ]
         ];
 
-        DB::table('networks')->upsert(array_values($networks),['id']);
+        foreach ($networks as $key => $network){
+            $net = DB::table('networks')
+                ->where('symbol','=',$network['symbol'])
+                ->first();
+            if($net){
+                $networks[$key]['id'] = $net->id;
+            }else{
+                DB::table('networks')->insert($network);
+            };
+        }
 
         $contracts = [
             [
@@ -155,18 +164,17 @@ class FakerDataSeeder extends Seeder
             ],
         ];
 
-        DB::table('contracts')->insertOrIgnore($contracts);
-
-        $swaps = [];
-        for($i = 0; $i < 50; $i++){
-            $ctrs = DB::table('contracts')->inRandomOrder()->limit(2)->get();
-            $swaps[] = [
-                'id' => Str::uuid(),
-                'from_contract_id' => $ctrs[0]->id,
-                'to_contract_id' => $ctrs[1]->id,
-            ];
+        foreach ($contracts as $key => $contract){
+            $obj = DB::table('contracts')
+                ->where('symbol','=',$contract['symbol'])
+                ->first();
+            if($obj){
+                $contracts[$key]['id'] = $net->id;
+            }else{
+                DB::table('contracts')->insert($contract);
+            };
         }
-        DB::table('swaps')->insertOrIgnore($swaps);
+
 
     }
 }
