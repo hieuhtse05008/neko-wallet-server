@@ -118,10 +118,10 @@ class CreateSwapTables extends Migration
             $table->string('fee')->default('0');
             $table->string('current_step')->default('');
 
-            $table->foreignUuid('from_swap_transaction_id')->constrained('swap_transactions');
-            $table->foreignUuid('from_dex_order_request_id')->constrained('dex_order_requests');
-            $table->foreignUuid('to_swap_transaction_id')->constrained('swap_transactions');
-            $table->foreignUuid('to_dex_order_request_id')->constrained('dex_order_requests');
+            $table->foreignUuid('from_swap_transaction_id')->nullable()->constrained('swap_transactions');
+            $table->foreignUuid('from_dex_order_request_id')->nullable()->constrained('dex_order_requests');
+            $table->foreignUuid('to_swap_transaction_id')->nullable()->constrained('swap_transactions');
+            $table->foreignUuid('to_dex_order_request_id')->nullable()->constrained('dex_order_requests');
 
             $table->timestamps();
         });
