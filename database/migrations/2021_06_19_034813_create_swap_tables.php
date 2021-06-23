@@ -138,7 +138,7 @@ class CreateSwapTables extends Migration
             $table->string('status')->default('');
             $table->string('tx')->nullable();
             $table->string('fee')->nullable();
-            $table->string('amount');
+            $table->string('amount')->nullable();
             $table->timestamps();
 
         });
