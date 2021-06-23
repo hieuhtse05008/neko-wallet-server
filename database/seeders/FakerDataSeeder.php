@@ -23,7 +23,16 @@ class FakerDataSeeder extends Seeder
             ]
         ];
 
-        DB::table('dexes')->insertOrIgnore($dexes);
+        foreach ($dexes as $key => $dex){
+            $dex = DB::table('dexes')
+                ->where('symbol','=',$dex['name'])
+                ->first();
+            if($dex){
+                $dexes[$key]['id'] = $dex->id;
+            }else{
+                DB::table('dexes')->insert($dex);
+            };
+        }
 
 
         $networks =  [
