@@ -25,7 +25,7 @@ class FakerDataSeeder extends Seeder
 
         foreach ($dexes as $key => $dex){
             $dex = DB::table('dexes')
-                ->where('symbol','=',$dex['name'])
+                ->where('name','=',$dex['name'])
                 ->first();
             if($dex){
                 $dexes[$key]['id'] = $dex->id;
