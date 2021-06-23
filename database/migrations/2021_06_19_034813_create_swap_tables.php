@@ -127,6 +127,20 @@ class CreateSwapTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('dex_withdraws', function (Blueprint $table) {
+            $table->uuid('id')->primary()->unique();
+            $table->foreignUuid('dex_id')->nullable()->constrained('dexes');
+            $table->foreignUuid('contract_id')->constrained('contracts');
+            $table->foreignUuid('swap_order_id')->constrained('swap_orders');
+            $table->foreignUuid('swap_transaction_id')->nullable()->constrained('swap_orders');
+            $table->string('dex_order_id');
+            $table->string('to_address')->nullable();
+            $table->string('status')->default('');
+            $table->string('tx')->nullable();
+            $table->timestamps();
+
+        });
+
     }
 
     /**
