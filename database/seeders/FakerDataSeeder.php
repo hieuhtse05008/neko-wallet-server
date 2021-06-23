@@ -24,11 +24,11 @@ class FakerDataSeeder extends Seeder
         ];
 
         foreach ($dexes as $key => $dex){
-            $dex = DB::table('dexes')
+            $obj = DB::table('dexes')
                 ->where('name','=',$dex['name'])
                 ->first();
-            if($dex){
-                $dexes[$key]['id'] = $dex->id;
+            if($obj){
+                $dexes[$key]['id'] = $obj->id;
             }else{
                 DB::table('dexes')->insert($dex);
             };
