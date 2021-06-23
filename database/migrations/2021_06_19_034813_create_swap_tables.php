@@ -101,7 +101,7 @@ class CreateSwapTables extends Migration
             $table->foreignUuid('dex_order_request_id')->nullable()->constrained('dex_order_requests');
             $table->foreignUuid('dex_id')->nullable()->constrained('dexes');
             $table->foreignUuid('contract_id')->constrained('contracts');
-            $table->string('dex_order_id');
+            $table->string('dex_order_id')->nullable();
             $table->string('type');
             $table->integer('percent')->default(0);
             $table->string('status')->default('');
