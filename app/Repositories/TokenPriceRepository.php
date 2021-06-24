@@ -18,4 +18,6 @@ interface TokenPriceRepository extends RepositoryInterface
      * @return mixed
      */
     public function list($limit, array $filter = [], $disabledRequestCriteria = false);
+
+    public function swapPreview($from, $to, $bridge = 'USDT');
 }

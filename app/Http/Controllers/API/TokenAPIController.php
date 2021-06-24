@@ -6,22 +6,24 @@ use App\Http\Requests\API\CreateTokenAPIRequest;
 use App\Http\Requests\API\UpdateTokenAPIRequest;
 use App\Models\TokenPrice;
 use App\Repositories\TokenPriceRepository;
+use Brick\Math\BigDecimal;
+use Brick\Math\BigInteger;
+use Brick\Math\RoundingMode;
 use Illuminate\Http\Request;
 
 /**
  * Class TokenController
  * @package App\Http\Controllers\API
  */
-
 class TokenAPIController extends APIController
 {
     /** @var  TokenPriceRepository */
-    private $tokenRepository;
+    private $tokenPriceRepository;
 
     public function __construct(TokenPriceRepository $tokenRepo)
     {
         parent::__construct();
-        $this->tokenRepository = $tokenRepo;
+        $this->tokenPriceRepository = $tokenRepo;
     }
 
     /**
@@ -72,7 +74,6 @@ class TokenAPIController extends APIController
      *              ),
      *          ),
      *      ),
-
      * )
      */
 
@@ -80,7 +81,7 @@ class TokenAPIController extends APIController
     {
         $filter = [];
         $limit = $request->limit;
-        $tokens = $this->tokenRepository->list($limit, $filter);
+        $tokens = $this->tokenPriceRepository->list($limit, $filter);
 
         return $this->respondSuccess([
             "tokens" => $tokens
@@ -129,7 +130,7 @@ class TokenAPIController extends APIController
     {
         $input = $request->validated();
 
-        $token = $this->tokenRepository->create($input);
+        $token = $this->tokenPriceRepository->create($input);
 
         return $this->respondSuccess([
             "token" => $token
@@ -181,11 +182,27 @@ class TokenAPIController extends APIController
     public function show(TokenPrice $token)
     {
         /** @var TokenPrice $token */
-        $token = $this->tokenRepository->find($token->id);
+        $token = $this->tokenPriceRepository->find($token->id);
 
         return $this->respondSuccess([
             "token" => $token
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function swapPreview(Request $request)
+    {
+        $from = $request->from;
+        $to = $request->to;
+        $bridge = $request->bridge ?: 'USDT';
+        $preview = $this->tokenPriceRepository->swapPreview($from, $to, $bridge);
+        return $this->respondSuccess([
+            'preview'=>$preview
+        ]);
+
     }
 
     /**
@@ -242,7 +259,7 @@ class TokenAPIController extends APIController
     {
         $input = $request->validated();
 
-        $token = $this->tokenRepository->update($input, $token->id);
+        $token = $this->tokenPriceRepository->update($input, $token->id);
 
         return $this->respondSuccess([
             "token" => $token
@@ -291,7 +308,7 @@ class TokenAPIController extends APIController
      *          ),
      *      ),
      * )
-     *@throws \Exception
+     * @throws \Exception
      *
      */
 

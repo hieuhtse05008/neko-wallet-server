@@ -55,10 +55,9 @@ class SyncTokenPrice extends Command
         $response = $httpClient->get($url);
         $res = json_decode($response->getBody()->getContents());
         $tokens = array_filter($res, function ($item) {
-            preg_match("/^.+USDT$/m", $item->symbol);
-
+//          preg_match("/^.+USDT$/m", $item->symbol);
             return preg_match("/^.+USDT$/m", $item->symbol) || preg_match("/^.+BVND$/m", $item->symbol);
-//            return str_contains($item->symbol, 'USDT') || str_contains($item->symbol, 'BVND');
+//          return str_contains($item->symbol, 'USDT') || str_contains($item->symbol, 'BVND');
         });
         $tokens = array_map(function ($item) {
             return [
