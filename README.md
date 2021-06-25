@@ -23,7 +23,7 @@
     `if (in_array($field->name,["creator_id", "updated_by", "deleted_by", "created_at", "updated_at","deleted_at"])) continue;`
 #### HOW TO USE AUTO GENERATE CODE
 1. Run generate code from database\
-   `php artisan code:api-generate <model_name> --fromDb=<database_name> --tableName=<table_name_in_database>`
+   `php artisan code:api-generate <model_name> --tableName=<table_name_in_database>`
 2. Run generate code \
    `php artisan code:api-generate <model_name>`
 3. Rollback (Not rollback Transformer, Presenter, Repository)\

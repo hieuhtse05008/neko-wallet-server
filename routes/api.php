@@ -38,3 +38,15 @@ Route::prefix("v1")->group(function(){
 //        Route::delete("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'destroy']);
     });
 });
+
+
+Route::prefix("v1")->group(function(){
+    Route::group(["prefix" => 'swaps'], function () {
+        Route::get("/address", [App\Http\Controllers\API\SwapAPIController::class, 'swapAddress']);
+        Route::get("/", [App\Http\Controllers\API\SwapAPIController::class, 'index']);
+//        Route::post("/", [App\Http\Controllers\API\SwapAPIController::class, 'store']);
+//        Route::get("{swap}", [App\Http\Controllers\API\SwapAPIController::class, 'show']);
+//        Route::put("{swap}", [App\Http\Controllers\API\SwapAPIController::class, 'update']);
+//        Route::delete("{swap}", [App\Http\Controllers\API\SwapAPIController::class, 'destroy']);
+    });
+});

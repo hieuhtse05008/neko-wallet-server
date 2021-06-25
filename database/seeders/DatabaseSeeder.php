@@ -18,16 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
-        Model::unguard();
-
-        foreach($this->toTruncate as $table) {
-            DB::table($table)->truncate();
-        }
         $this->call(FakerDataSeeder::class);
-
-
-        Model::reguard();
     }
 }
