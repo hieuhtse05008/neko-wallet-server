@@ -44,7 +44,7 @@ class SyncTokenPrice extends Command
         while ($seconds < 60) {
 
             $this->syncPriceBinance();
-//            $this->syncPriceNami();
+            $this->syncPriceNami();
             $this->info("Syncing!");
             $seconds += 10;
             sleep(10);
