@@ -47,10 +47,10 @@ class TokenPriceTransformer extends TransformerAbstract
     public function transform(TokenPrice $model)
     {
         return [
-            'id'         => (int) $model->id,
-
-            /* place your other model properties here */
-
+            'id' => (int)$model->id,
+            'symbol' => $model->symbol,
+            'last_price' => $model->last_price,
+            'price_change_percent' => $model->price_change_percent,
             'created_at' => strtotime($model->created_at),
             'updated_at' => strtotime($model->updated_at),
         ];

@@ -97,7 +97,7 @@ class FakerDataSeeder extends Seeder
                 'decimal' => 18,
                 'icon_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1622129149IZR7NaAU1G8UUfG.png',
                 'address' => '0x111111111117dc0aa78b770fa6a738034120c302',
-                'network_id' => $networks['ERC20']['id'],
+                'network_id' => $networks['BEP20']['id'],
             ],
             [
                 'id' => Str::uuid(),

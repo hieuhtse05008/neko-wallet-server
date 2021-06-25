@@ -13,6 +13,7 @@
         "goldspecdigital/laravel-eloquent-uuid": "^8.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "infyomlabs/laravel-generator": "8.0.x-dev",
+        "itsgoingd/clockwork": "^5.0",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
