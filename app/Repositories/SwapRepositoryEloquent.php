@@ -5,12 +5,12 @@ namespace App\Repositories;
 use App\Models\Swap;
 use App\Repositories\Repository;
 use App\Presenters\SwapPresenter;
+
 /**
  * Class SwapRepositoryEloquent
  * @package App\Repositories
  * @version June 25, 2021, 7:57 am UTC
-*/
-
+ */
 class SwapRepositoryEloquent extends Repository implements SwapRepository
 {
     /**
@@ -66,6 +66,13 @@ class SwapRepositoryEloquent extends Repository implements SwapRepository
     static public function queryFilter($query, $filter)
     {
 
+        if ($filter['addresses']) {
+            $addresses = $filter['addresses'];
+            $query = $query->where(function ($q) use ($addresses) {
+                return $q->whereIn('from_address', $addresses)->orWhereIn('to_address', $addresses);
+            });
+        }
+
         return $query;
     }
 
@@ -81,11 +88,14 @@ class SwapRepositoryEloquent extends Repository implements SwapRepository
         // TODO: Implement list() method.
         $this->resetCriteria();
 
-        if (!$disabledRequestCriteria){
+        if (!$disabledRequestCriteria) {
 
         }
 
         $this->scopeQuery(function ($query) use ($filter) {
+            if (!empty($filter['swap'])) {
+                $query = self::queryFilter($query, $filter['swap']);
+            }
             return $query;
         });
 

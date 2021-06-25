@@ -173,16 +173,8 @@ class FakerDataSeeder extends Seeder
             ],
         ];
 
-        foreach ($contracts as $key => $contract){
-            $obj = DB::table('contracts')
-                ->where('symbol','=',$contract['symbol'])
-                ->first();
-            if($obj){
-                $contracts[$key]['id'] = $net->id;
-            }else{
-                DB::table('contracts')->insert($contract);
-            };
-        }
+        DB::table('contracts')->insertOrIgnore($contracts);
+
 
 
     }

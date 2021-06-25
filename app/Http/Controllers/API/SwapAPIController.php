@@ -98,6 +98,16 @@ class SwapAPIController extends APIController
         return response()->json($api->depositAddress($coin, $network));
     }
 
+    public function swapHistory(Request $request){
+        $filter = [
+            'addresses' => $request->addresses,
+        ];
+
+
+        return response()->json($this->swapRepository->list(null,$filter));
+    }
+
+
     /**
      * Store a newly created Swap in storage.
      * POST /api/v1/swaps
