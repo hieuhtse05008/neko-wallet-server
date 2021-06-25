@@ -33,7 +33,7 @@ Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'token-prices'], function () {
         Route::get("/", [App\Http\Controllers\API\TokenAPIController::class, 'index']);
         Route::post("/", [App\Http\Controllers\API\TokenAPIController::class, 'store']);
-        Route::get("/swap-preview", [App\Http\Controllers\API\TokenAPIController::class, 'swapPreview']);
+        Route::get("/swap", [App\Http\Controllers\API\TokenAPIController::class, 'swapPreview']);
         Route::get("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'show']);
         Route::put("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'update']);
 //        Route::delete("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'destroy']);

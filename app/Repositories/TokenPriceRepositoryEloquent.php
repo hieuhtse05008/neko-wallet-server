@@ -98,16 +98,22 @@ class TokenPriceRepositoryEloquent extends Repository implements TokenPriceRepos
     {
         $pair1 = $from . $bridge;
         $pair2 = $to . $bridge;
+        $pair3 = $from . $to;
 
         //preg_match("/\b$bridge/g", );
 
         $token_price_from = $this->findWhere(['symbol' => $pair1]);
-        $token_price_to = $this->findWhere(['symbol' => $pair2]);
+        $token_price_to =
+            array_merge(
+                $this->findWhere(['symbol' => $pair2]),
+                $this->findWhere(['symbol' => $pair3])
+            )
+        ;
 
         if(empty($token_price_from) || empty($token_price_to)) return null;
 
         $res = [
-            'price' => BigDecimal::of('0'),
+            'price' => 0,
             'from_symbol' => null,
             'to_symbol' => null,
             'from_price' => null,
@@ -116,14 +122,12 @@ class TokenPriceRepositoryEloquent extends Repository implements TokenPriceRepos
 
         foreach ($token_price_from as $token_from)
             foreach ($token_price_to as $token_to) {
-                $price_from = BigDecimal::of($token_from['last_price'])->dividedBy('100')->multipliedBy('99');
-                $price_to = BigDecimal::of($token_to['last_price'])->dividedBy('100')->multipliedBy('101');
 
-                $price = $price_from->dividedBy(
-                    $price_to, null,
-                    RoundingMode::HALF_FLOOR);
+                $price_from = floatval($token_from['last_price']);
+                $price_to = floatval($token_to['last_price']);
+                $price = $price_from/$price_to;
 
-                if ($price->isGreaterThan($res['price'])) {
+                if ($price> $res['price']) {
                     $res = [
                         'price' => $price,
                         'from_symbol' => $token_from['symbol'],
