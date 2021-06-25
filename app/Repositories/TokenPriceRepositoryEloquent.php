@@ -123,8 +123,8 @@ class TokenPriceRepositoryEloquent extends Repository implements TokenPriceRepos
         foreach ($token_price_from as $token_from)
             foreach ($token_price_to as $token_to) {
 
-                $price_from = floatval($token_from['last_price']);
-                $price_to = floatval($token_to['last_price']);
+                $price_from = floatval($token_from['last_price'])*0.99;
+                $price_to = floatval($token_to['last_price'])*1.01;
                 $price = $price_from/$price_to;
 
                 if ($price> $res['price']) {

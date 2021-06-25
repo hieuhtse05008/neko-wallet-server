@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\SyncTokenPriceBinance;
+use App\Jobs\SyncTokenPriceNami;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -40,7 +42,9 @@ class SyncTokenPrice extends Command
     {
         $seconds = 0;
         while ($seconds < 60) {
-            $this->syncPrice();
+
+            $this->syncPriceBinance();
+//            $this->syncPriceNami();
             $this->info("Syncing!");
             $seconds += 10;
             sleep(10);
@@ -48,30 +52,16 @@ class SyncTokenPrice extends Command
         return 0;
     }
 
-    private function syncPrice()
-    {
-        $httpClient = new \GuzzleHttp\Client();
-        $url = 'https://api.binance.com/api/v3/ticker/24hr';
-        $response = $httpClient->get($url);
-        $res = json_decode($response->getBody()->getContents());
-        $tokens = array_filter($res, function ($item) {
-//          preg_match("/^.+USDT$/m", $item->symbol);
-            return preg_match("/^.+USDT$/m", $item->symbol) || preg_match("/^.+BVND$/m", $item->symbol);
-//          return str_contains($item->symbol, 'USDT') || str_contains($item->symbol, 'BVND');
-        });
-        $tokens = array_map(function ($item) {
-            return [
-                'symbol' => $item->symbol,
-                'last_price' => $item->lastPrice,
-                'price_change_percent' => $item->priceChangePercent,
-            ];
-        }, $tokens);
-        $tokens = array_values($tokens);
-        DB::table('token_prices')->upsert($tokens,
-            ['symbol'],
-            ['last_price', 'price_change_percent']
-        );
 
+
+    private function syncPriceBinance()
+    {
+        SyncTokenPriceBinance::dispatch();
+    }
+
+    private function syncPriceNami(){
+
+        SyncTokenPriceNami::dispatch();
     }
 
 }
