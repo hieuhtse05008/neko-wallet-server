@@ -92,9 +92,9 @@ class SyncTokenPriceNami implements ShouldQueue
         $TO_USDT_tokens = array_map(function ($item) use ($USDT_VNDC) {
             $last_price = $item->last_price / $USDT_VNDC->last_price;
 
-            $old_token_price = ($item->last_price * 100 / ($item->change_24h + 100));
+            $old_token_price = ($item->last_price - $item->change_24h );
 
-            $old_USDT_price = ($USDT_VNDC->last_price * 100 / ($USDT_VNDC->change_24h + 100));
+            $old_USDT_price = ($USDT_VNDC->last_price - $USDT_VNDC->change_24h);
 
             $old_price = $old_token_price/$old_USDT_price;
 
