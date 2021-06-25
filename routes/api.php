@@ -44,7 +44,9 @@ Route::prefix("v1")->group(function(){
 Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'swaps'], function () {
         Route::get("/address", [App\Http\Controllers\API\SwapAPIController::class, 'swapAddress']);
+//        Route::get("/", [App\Http\Controllers\API\SwapAPIController::class, 'indewwwwx']);
         Route::get("/", [App\Http\Controllers\API\SwapAPIController::class, 'swapHistory']);
+        Route::post("/", [App\Http\Controllers\API\SwapAPIController::class, 'store']);
 //        Route::post("/", [App\Http\Controllers\API\SwapAPIController::class, 'store']);
 //        Route::get("{swap}", [App\Http\Controllers\API\SwapAPIController::class, 'show']);
 //        Route::put("{swap}", [App\Http\Controllers\API\SwapAPIController::class, 'update']);

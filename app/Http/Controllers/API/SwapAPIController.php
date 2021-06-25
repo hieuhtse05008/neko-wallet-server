@@ -95,7 +95,7 @@ class SwapAPIController extends APIController
         $coin = $request->coin;
         $network = $request->network;
 
-        return response()->json($api->depositAddress($coin, $network));
+        return response()->json(['address' => $api->depositAddress($coin, $network)->address]);
     }
 
     public function swapHistory(Request $request){
