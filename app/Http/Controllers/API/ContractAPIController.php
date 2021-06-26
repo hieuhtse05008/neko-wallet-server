@@ -2,46 +2,47 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateSwapAPIRequest;
-use App\Http\Requests\API\UpdateSwapAPIRequest;
-use App\Models\Swap;
-use App\Repositories\SwapRepository;
+use App\Http\Requests\API\CreateContractAPIRequest;
+use App\Http\Requests\API\UpdateContractAPIRequest;
+use App\Models\Contract;
+use App\Repositories\ContractRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\APIController;
 use Response;
 
 /**
- * Class SwapController
+ * Class ContractController
  * @package App\Http\Controllers\API
  */
-class SwapAPIController extends APIController
-{
-    /** @var  SwapRepository */
-    private $swapRepository;
 
-    public function __construct(SwapRepository $swapRepo)
+class ContractAPIController extends APIController
+{
+    /** @var  ContractRepository */
+    private $contractRepository;
+
+    public function __construct(ContractRepository $contractRepo)
     {
         parent::__construct();
-        $this->swapRepository = $swapRepo;
+        $this->contractRepository = $contractRepo;
     }
 
     /**
-     * Display a listing of the Swap.
-     * GET /api/v1/swaps
+     * Display a listing of the Contract.
+     * GET /api/v1/contracts
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Get(
-     *      path="/api/v1/swaps",
-     *      summary="Get a listing of the Swap.",
-     *      tags={"Swap"},
-     *      description="Get all Swaps",
+     *      path="/api/v1/contracts",
+     *      summary="Get a listing of the Contract.",
+     *      tags={"Contract"},
+     *      description="Get all Contracts",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="limit",
      *          in="query",
-     *          description="The number of records the Swap will return. Default: 0/'empty' (get all), greater than 0 (limited by value)",
+     *          description="The number of records the Contract will return. Default: 0/'empty' (get all), greater than 0 (limited by value)",
      *          example="",
      *          @OA\Schema(
      *              type="integer",
@@ -67,59 +68,46 @@ class SwapAPIController extends APIController
      *                  type="boolean",
      *              ),
      *              @OA\Property(
-     *                  property="swaps",
+     *                  property="contracts",
      *                  type="array",
-     *                  @OA\Items(ref="#/components/schemas/SwapTransformer"),
+     *                  @OA\Items(ref="#/components/schemas/ContractTransformer"),
      *              ),
      *          ),
      *      ),
+
      * )
      */
 
     public function index(Request $request)
     {
+        $filter = [];
         $limit = $request->limit;
-
-        $filter = [
-            'addresses' => $request->addresses,
-        ];
-
-        $swaps = $this->swapRepository->list($limit, ['swap' => $filter]);
+        $contracts = $this->contractRepository->list($limit, $filter);
 
         return $this->respondSuccess([
-            "swaps" => $swaps
+            "contracts" => $contracts
         ]);
     }
 
-    public function swapAddress(Request $request)
-    {
-        $api = new \App\Dex\BinanceAPI();
-
-        $coin = $request->coin;
-        $network = $request->network;
-
-        return response()->json(['address' => $api->depositAddress($coin, $network)->address]);
-    }
-
     /**
-     * Store a newly created Swap in storage.
-     * POST /api/v1/swaps
+     * Store a newly created Contract in storage.
+     * POST /api/v1/contracts
      *
-     * @param CreateSwapAPIRequest $request
+     * @param CreateContractAPIRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Post(
-     *      path="/api/v1/swaps",
-     *      summary="Store a newly created Swap in database",
-     *      tags={"Swap"},
-     *      description="Store Swap",
+     *      path="/api/v1/contracts",
+     *      summary="Store a newly created Contract in database",
+     *      tags={"Contract"},
+     *      description="Store Contract",
      *      security={ {"bearer": {} }},
      *      @OA\RequestBody(
      *          required=true,
-     *          description="Data of Swap",
+     *          description="Data of Contract",
      *          @OA\JsonContent(
-     *              ref="#/components/schemas/CreateSwapAPIRequest",
+     *              ref="#/components/schemas/CreateContractAPIRequest",
      *          ),
      *      ),
      *      @OA\Response(
@@ -131,44 +119,44 @@ class SwapAPIController extends APIController
      *                  type="boolean",
      *              ),
      *              @OA\Property(
-     *                  property="swap",
-     *                  ref="#/components/schemas/SwapTransformer",
+     *                  property="contract",
+     *                  ref="#/components/schemas/ContractTransformer",
      *              ),
      *          ),
      *      ),
      * )
      */
 
-    public function store(CreateSwapAPIRequest $request)
+    public function store(CreateContractAPIRequest $request)
     {
         $input = $request->validated();
 
-        $swap = $this->swapRepository->create($input);
+        $contract = $this->contractRepository->create($input);
 
         return $this->respondSuccess([
-            "swap" => $swap
+            "contract" => $contract
         ]);
     }
 
     /**
-     * Display the specified Swap.
-     * GET /api/v1/swaps/id
+     * Display the specified Contract.
+     * GET /api/v1/contracts/id
      *
-     * @param Swap $swap
+     * @param Contract $contract
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Get(
-     *      path="/api/v1/swaps/{id}",
-     *      summary="Display the specified Swap",
-     *      tags={"Swap"},
-     *      description="Get Swap",
+     *      path="/api/v1/contracts/{id}",
+     *      summary="Display the specified Contract",
+     *      tags={"Contract"},
+     *      description="Get Contract",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="id",
      *          required=true,
      *          in="path",
-     *          description="id of Swap",
+     *          description="id of Contract",
      *          example="1",
      *          @OA\Schema(
      *              type="integer",
@@ -184,44 +172,44 @@ class SwapAPIController extends APIController
      *                  type="boolean",
      *              ),
      *              @OA\Property(
-     *                  property="swap",
-     *                  ref="#/components/schemas/SwapTransformer",
+     *                  property="contract",
+     *                  ref="#/components/schemas/ContractTransformer",
      *              ),
      *          ),
      *      ),
      * )
      */
 
-    public function show(Swap $swap)
+    public function show(Contract $contract)
     {
-        /** @var Swap $swap */
-        $swap = $this->swapRepository->find($swap->id);
+        /** @var Contract $contract */
+        $contract = $this->contractRepository->find($contract->id);
 
         return $this->respondSuccess([
-            "swap" => $swap
+            "contract" => $contract
         ]);
     }
 
     /**
-     * Update the specified Swap in storage.
-     * PUT /api/v1/swaps/id
+     * Update the specified Contract in storage.
+     * PUT /api/v1/contracts/id
      *
-     * @param Swap $swap
-     * @param UpdateSwapAPIRequest $request
+     * @param Contract $contract
+     * @param UpdateContractAPIRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Put(
-     *      path="/api/v1/swaps/{id}",
-     *      summary="Update the specified Swap in storage",
-     *      tags={"Swap"},
-     *      description="Update Swap",
+     *      path="/api/v1/contracts/{id}",
+     *      summary="Update the specified Contract in storage",
+     *      tags={"Contract"},
+     *      description="Update Contract",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
      *          required=true,
-     *          description="id of Swap",
+     *          description="id of Contract",
      *          example="1",
      *          @OA\Schema(
      *              type="integer",
@@ -230,9 +218,9 @@ class SwapAPIController extends APIController
      *      ),
      *      @OA\RequestBody(
      *          required=true,
-     *          description="Data of Swap",
+     *          description="Data of Contract",
      *          @OA\JsonContent(
-     *              ref="#/components/schemas/UpdateSwapAPIRequest",
+     *              ref="#/components/schemas/UpdateContractAPIRequest",
      *          ),
      *      ),
      *      @OA\Response(
@@ -244,44 +232,46 @@ class SwapAPIController extends APIController
      *                  type="boolean",
      *              ),
      *              @OA\Property(
-     *                  property="swap",
-     *                  ref="#/components/schemas/SwapTransformer",
+     *                  property="contract",
+     *                  ref="#/components/schemas/ContractTransformer",
      *              ),
      *          ),
      *      ),
      * )
      */
 
-    public function update(Swap $swap, UpdateSwapAPIRequest $request)
+    public function update(Contract $contract, UpdateContractAPIRequest $request)
     {
         $input = $request->validated();
 
-        $swap = $this->swapRepository->update($input, $swap->id);
+        $contract = $this->contractRepository->update($input, $contract->id);
 
         return $this->respondSuccess([
-            "swap" => $swap
+            "contract" => $contract
         ]);
     }
 
     /**
-     * Remove the specified Swap from database.
-     * DELETE /api/v1/swaps/id
+     * Remove the specified Contract from database.
+     * DELETE /api/v1/contracts/id
      *
-     * @param Swap $swap
+     * @param Contract $contract
+     *
+     * @throws \Exception
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Delete(
-     *      path="/api/v1/swaps/{id}",
-     *      summary="Remove the specified Swap from database",
-     *      tags={"Swap"},
-     *      description="Delete Swap",
+     *      path="/api/v1/contracts/{id}",
+     *      summary="Remove the specified Contract from database",
+     *      tags={"Contract"},
+     *      description="Delete Contract",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
      *          required=true,
-     *          description="id of Swap",
+     *          description="id of Contract",
      *          example="1",
      *          @OA\Schema(
      *              type="integer",
@@ -300,19 +290,17 @@ class SwapAPIController extends APIController
      *              @OA\Property(
      *                  property="message",
      *                  type="string",
-     *                  example="Swap deleted successfully",
+     *                  example="Contract deleted successfully",
      *              ),
      *          ),
      *      ),
      * )
-     * @throws \Exception
-     *
      */
 
-    public function destroy(Swap $swap)
+    public function destroy(Contract $contract)
     {
-        $swap->delete();
+        $contract->delete();
 
-        return $this->respondSuccessWithMessage('Swap deleted successfully');
+        return $this->respondSuccessWithMessage('Contract deleted successfully');
     }
 }

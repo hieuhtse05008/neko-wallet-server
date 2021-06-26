@@ -37,6 +37,9 @@ use App\Models\Swap;
  */
 class SwapTransformer extends TransformerAbstract
 {
+
+    protected $availableIncludes = ['from_contract', 'to_contract', 'swap_orders'];
+
     /**
      * Transform the Swap entity.
      *
@@ -47,12 +50,40 @@ class SwapTransformer extends TransformerAbstract
     public function transform(Swap $model)
     {
         return [
-            'id'         => (int) $model->id,
-
+            'id' => (int)$model->id,
+            'from_address' => $model->from_address,
+            'from_value' => $model->from_value,
+            'from_price' => $model->from_price,
+            'to_address' => $model->to_address,
+            'to_value' => $model->to_value,
+            'to_price' => $model->to_price,
             /* place your other model properties here */
 
             'created_at' => strtotime($model->created_at),
             'updated_at' => strtotime($model->updated_at),
         ];
+    }
+
+    public function includeFromContract(Swap $model)
+    {
+        if ($model->fromContract) {
+            return $this->item($model->fromContract, new ContractTransformer());
+        }
+
+        return null;
+    }
+
+    public function includeToContract(Swap $model)
+    {
+        if ($model->toContract) {
+            return $this->item($model->toContract, new ContractTransformer());
+        }
+
+        return null;
+    }
+
+    public function includeSwapOrders(Swap $model)
+    {
+        return $this->collection($model->swapOrders, new SwapOrderTransformer());
     }
 }

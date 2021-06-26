@@ -25,6 +25,8 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(\App\Repositories\TokenPriceRepository::class, \App\Repositories\TokenPriceRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\SwapRepository::class, \App\Repositories\SwapRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\ContractRepository::class, \App\Repositories\ContractRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\SwapOrderRepository::class, \App\Repositories\SwapOrderRepositoryEloquent::class);
         //:end-bindings:
     }
 }
