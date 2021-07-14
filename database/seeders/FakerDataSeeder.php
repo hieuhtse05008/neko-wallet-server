@@ -15,29 +15,35 @@ class FakerDataSeeder extends Seeder
      */
     public function run()
     {
-        $dexes =[
+        $dexes = [
             [
                 "id" => Str::uuid()->toString(),
-                'name'=>'Binance',
-                'icon_url'=>'https://',
-            ]
+                'name' => 'Binance',
+                'icon_url' => 'https://',
+            ],
+
+            [
+                "id" => Str::uuid()->toString(),
+                'name' => 'Huobi',
+                'icon_url' => 'https://',
+            ],
         ];
 
-        foreach ($dexes as $key => $dex){
+        foreach ($dexes as $key => $dex) {
             $obj = DB::table('dexes')
-                ->where('name','=',$dex['name'])
+                ->where('name', '=', $dex['name'])
                 ->first();
-            if($obj){
+            if ($obj) {
                 $dexes[$key]['id'] = $obj->id;
-            }else{
+            } else {
                 DB::table('dexes')->insert($dex);
             };
         }
 
 
-        $networks =  [
+        $networks = [
             "ERC20" => [
-                 "id" => Str::uuid()->toString(),
+                "id" => Str::uuid()->toString(),
                 "name" => "Ethereum",
                 "short_name" => "ERC20",
                 "symbol" => "ETH",
@@ -47,7 +53,7 @@ class FakerDataSeeder extends Seeder
                 "wallet_derive_path" => "m/44'/60'/0'/0/0"
             ],
             "BEP20" => [
-                 "id" => Str::uuid()->toString(),
+                "id" => Str::uuid()->toString(),
                 "name" => "Binance Smart Chain",
                 "short_name" => "BEP20 (BSC)",
                 "symbol" => "BSC",
@@ -57,7 +63,7 @@ class FakerDataSeeder extends Seeder
                 "wallet_derive_path" => "m/44'/60'/0'/0/0"
             ],
             "KRC20" => [
-                 "id" => Str::uuid()->toString(),
+                "id" => Str::uuid()->toString(),
                 "name" => "KardiaChain",
                 "short_name" => "KRC20",
                 "symbol" => "KAI",
@@ -67,7 +73,7 @@ class FakerDataSeeder extends Seeder
                 "wallet_derive_path" => "m/44'/60'/0'/0/0"
             ],
             "BEP20test" => [
-                 "id" => Str::uuid()->toString(),
+                "id" => Str::uuid()->toString(),
                 "name" => "Binance Smart Chain(Test)",
                 "short_name" => "BEP20 (BSC)",
                 "symbol" => "BSC",
@@ -78,13 +84,13 @@ class FakerDataSeeder extends Seeder
             ]
         ];
 
-        foreach ($networks as $key => $network){
+        foreach ($networks as $key => $network) {
             $net = DB::table('networks')
-                ->where('symbol','=',$network['symbol'])
+                ->where('symbol', '=', $network['symbol'])
                 ->first();
-            if($net){
+            if ($net) {
                 $networks[$key]['id'] = $net->id;
-            }else{
+            } else {
                 DB::table('networks')->insert($network);
             };
         }
@@ -108,7 +114,7 @@ class FakerDataSeeder extends Seeder
                 'address' => '',
                 'network_id' => $networks['BEP20']['id'],
             ],
-           [
+            [
                 'id' => Str::uuid(),
                 'name' => 'Ethereum',
                 'symbol' => 'ETH',
@@ -117,7 +123,7 @@ class FakerDataSeeder extends Seeder
                 'address' => '',
                 'network_id' => $networks['ERC20']['id'],
             ],
-             [
+            [
                 'id' => Str::uuid(),
                 'name' => 'Nami',
                 'symbol' => 'NAMI',
@@ -144,7 +150,7 @@ class FakerDataSeeder extends Seeder
                 'address' => '0x8249bc1dea00660d2d38df126b53c6c9a733e942',
                 'network_id' => $networks['BEP20']['id'],
             ],
-             [
+            [
                 'id' => Str::uuid(),
                 'name' => 'Ola',
                 'symbol' => 'OLA',
@@ -162,7 +168,7 @@ class FakerDataSeeder extends Seeder
                 'address' => '0xD9Ec3ff1f8be459Bb9369b4E79e9Ebcf7141C093',
                 'network_id' => $networks['KRC20']['id'],
             ],
-          [
+            [
                 'id' => Str::uuid(),
                 'name' => 'My DeFi Pet',
                 'symbol' => 'DPET',
@@ -174,7 +180,6 @@ class FakerDataSeeder extends Seeder
         ];
 
         DB::table('contracts')->insertOrIgnore($contracts);
-
 
 
     }
