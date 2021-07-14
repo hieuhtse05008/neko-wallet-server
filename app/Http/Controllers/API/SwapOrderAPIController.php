@@ -2,46 +2,47 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateSwapAPIRequest;
-use App\Http\Requests\API\UpdateSwapAPIRequest;
-use App\Models\Swap;
-use App\Repositories\SwapRepository;
+use App\Http\Requests\API\CreateSwapOrderAPIRequest;
+use App\Http\Requests\API\UpdateSwapOrderAPIRequest;
+use App\Models\SwapOrder;
+use App\Repositories\SwapOrderRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\APIController;
 use Response;
 
 /**
- * Class SwapController
+ * Class SwapOrderController
  * @package App\Http\Controllers\API
  */
-class SwapAPIController extends APIController
-{
-    /** @var  SwapRepository */
-    private $swapRepository;
 
-    public function __construct(SwapRepository $swapRepo)
+class SwapOrderAPIController extends APIController
+{
+    /** @var  SwapOrderRepository */
+    private $swapOrderRepository;
+
+    public function __construct(SwapOrderRepository $swapOrderRepo)
     {
         parent::__construct();
-        $this->swapRepository = $swapRepo;
+        $this->swapOrderRepository = $swapOrderRepo;
     }
 
     /**
-     * Display a listing of the Swap.
-     * GET /api/v1/swaps
+     * Display a listing of the SwapOrder.
+     * GET /api/v1/swap-orders
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Get(
-     *      path="/api/v1/swaps",
-     *      summary="Get a listing of the Swap.",
-     *      tags={"Swap"},
-     *      description="Get all Swaps",
+     *      path="/api/v1/swap-orders",
+     *      summary="Get a listing of the Swap Order.",
+     *      tags={"SwapOrder"},
+     *      description="Get all Swap Orders",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="limit",
      *          in="query",
-     *          description="The number of records the Swap will return. Default: 0/'empty' (get all), greater than 0 (limited by value)",
+     *          description="The number of records the Swap Order will return. Default: 0/'empty' (get all), greater than 0 (limited by value)",
      *          example="",
      *          @OA\Schema(
      *              type="integer",
@@ -67,59 +68,46 @@ class SwapAPIController extends APIController
      *                  type="boolean",
      *              ),
      *              @OA\Property(
-     *                  property="swaps",
+     *                  property="swap_orders",
      *                  type="array",
-     *                  @OA\Items(ref="#/components/schemas/SwapTransformer"),
+     *                  @OA\Items(ref="#/components/schemas/SwapOrderTransformer"),
      *              ),
      *          ),
      *      ),
+
      * )
      */
 
     public function index(Request $request)
     {
+        $filter = [];
         $limit = $request->limit;
-
-        $filter = [
-            'addresses' => $request->addresses,
-        ];
-
-        $swaps = $this->swapRepository->list($limit, ['swap' => $filter]);
+        $swapOrders = $this->swapOrderRepository->list($limit, $filter);
 
         return $this->respondSuccess([
-            "swaps" => $swaps
+            "swap_orders" => $swapOrders
         ]);
     }
 
-    public function swapAddress(Request $request)
-    {
-        $api = new \App\Dex\BinanceAPI();
-
-        $coin = $request->coin;
-        $network = $request->network;
-
-        return response()->json(['address' => $api->depositAddress($coin, $network)->address]);
-    }
-
     /**
-     * Store a newly created Swap in storage.
-     * POST /api/v1/swaps
+     * Store a newly created SwapOrder in storage.
+     * POST /api/v1/swap-orders
      *
-     * @param CreateSwapAPIRequest $request
+     * @param CreateSwapOrderAPIRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Post(
-     *      path="/api/v1/swaps",
-     *      summary="Store a newly created Swap in database",
-     *      tags={"Swap"},
-     *      description="Store Swap",
+     *      path="/api/v1/swap-orders",
+     *      summary="Store a newly created Swap Order in database",
+     *      tags={"SwapOrder"},
+     *      description="Store Swap Order",
      *      security={ {"bearer": {} }},
      *      @OA\RequestBody(
      *          required=true,
-     *          description="Data of Swap",
+     *          description="Data of Swap Order",
      *          @OA\JsonContent(
-     *              ref="#/components/schemas/CreateSwapAPIRequest",
+     *              ref="#/components/schemas/CreateSwapOrderAPIRequest",
      *          ),
      *      ),
      *      @OA\Response(
@@ -131,44 +119,44 @@ class SwapAPIController extends APIController
      *                  type="boolean",
      *              ),
      *              @OA\Property(
-     *                  property="swap",
-     *                  ref="#/components/schemas/SwapTransformer",
+     *                  property="swap_order",
+     *                  ref="#/components/schemas/SwapOrderTransformer",
      *              ),
      *          ),
      *      ),
      * )
      */
 
-    public function store(CreateSwapAPIRequest $request)
+    public function store(CreateSwapOrderAPIRequest $request)
     {
         $input = $request->validated();
 
-        $swap = $this->swapRepository->create($input);
+        $swapOrder = $this->swapOrderRepository->create($input);
 
         return $this->respondSuccess([
-            "swap" => $swap
+            "swap_order" => $swapOrder
         ]);
     }
 
     /**
-     * Display the specified Swap.
-     * GET /api/v1/swaps/id
+     * Display the specified SwapOrder.
+     * GET /api/v1/swap-orders/id
      *
-     * @param Swap $swap
+     * @param SwapOrder $swapOrder
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Get(
-     *      path="/api/v1/swaps/{id}",
-     *      summary="Display the specified Swap",
-     *      tags={"Swap"},
-     *      description="Get Swap",
+     *      path="/api/v1/swap-orders/{id}",
+     *      summary="Display the specified SwapOrder",
+     *      tags={"SwapOrder"},
+     *      description="Get SwapOrder",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="id",
      *          required=true,
      *          in="path",
-     *          description="id of Swap",
+     *          description="id of SwapOrder",
      *          example="1",
      *          @OA\Schema(
      *              type="integer",
@@ -184,44 +172,44 @@ class SwapAPIController extends APIController
      *                  type="boolean",
      *              ),
      *              @OA\Property(
-     *                  property="swap",
-     *                  ref="#/components/schemas/SwapTransformer",
+     *                  property="swap_order",
+     *                  ref="#/components/schemas/SwapOrderTransformer",
      *              ),
      *          ),
      *      ),
      * )
      */
 
-    public function show(Swap $swap)
+    public function show(SwapOrder $swapOrder)
     {
-        /** @var Swap $swap */
-        $swap = $this->swapRepository->find($swap->id);
+        /** @var SwapOrder $swapOrder */
+        $swapOrder = $this->swapOrderRepository->find($swapOrder->id);
 
         return $this->respondSuccess([
-            "swap" => $swap
+            "swap_order" => $swapOrder
         ]);
     }
 
     /**
-     * Update the specified Swap in storage.
-     * PUT /api/v1/swaps/id
+     * Update the specified SwapOrder in storage.
+     * PUT /api/v1/swap-orders/id
      *
-     * @param Swap $swap
-     * @param UpdateSwapAPIRequest $request
+     * @param SwapOrder $swapOrder
+     * @param UpdateSwapOrderAPIRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Put(
-     *      path="/api/v1/swaps/{id}",
-     *      summary="Update the specified Swap in storage",
-     *      tags={"Swap"},
-     *      description="Update Swap",
+     *      path="/api/v1/swap-orders/{id}",
+     *      summary="Update the specified SwapOrder in storage",
+     *      tags={"SwapOrder"},
+     *      description="Update SwapOrder",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
      *          required=true,
-     *          description="id of Swap",
+     *          description="id of SwapOrder",
      *          example="1",
      *          @OA\Schema(
      *              type="integer",
@@ -230,9 +218,9 @@ class SwapAPIController extends APIController
      *      ),
      *      @OA\RequestBody(
      *          required=true,
-     *          description="Data of Swap",
+     *          description="Data of Swap Order",
      *          @OA\JsonContent(
-     *              ref="#/components/schemas/UpdateSwapAPIRequest",
+     *              ref="#/components/schemas/UpdateSwapOrderAPIRequest",
      *          ),
      *      ),
      *      @OA\Response(
@@ -244,44 +232,46 @@ class SwapAPIController extends APIController
      *                  type="boolean",
      *              ),
      *              @OA\Property(
-     *                  property="swap",
-     *                  ref="#/components/schemas/SwapTransformer",
+     *                  property="swap_order",
+     *                  ref="#/components/schemas/SwapOrderTransformer",
      *              ),
      *          ),
      *      ),
      * )
      */
 
-    public function update(Swap $swap, UpdateSwapAPIRequest $request)
+    public function update(SwapOrder $swapOrder, UpdateSwapOrderAPIRequest $request)
     {
         $input = $request->validated();
 
-        $swap = $this->swapRepository->update($input, $swap->id);
+        $swapOrder = $this->swapOrderRepository->update($input, $swapOrder->id);
 
         return $this->respondSuccess([
-            "swap" => $swap
+            "swap_order" => $swapOrder
         ]);
     }
 
     /**
-     * Remove the specified Swap from database.
-     * DELETE /api/v1/swaps/id
+     * Remove the specified SwapOrder from database.
+     * DELETE /api/v1/swap-orders/id
      *
-     * @param Swap $swap
+     * @param SwapOrder $swapOrder
+     *
+     * @throws \Exception
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Delete(
-     *      path="/api/v1/swaps/{id}",
-     *      summary="Remove the specified Swap from database",
-     *      tags={"Swap"},
-     *      description="Delete Swap",
+     *      path="/api/v1/swap-orders/{id}",
+     *      summary="Remove the specified SwapOrder from database",
+     *      tags={"SwapOrder"},
+     *      description="Delete SwapOrder",
      *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
      *          required=true,
-     *          description="id of Swap",
+     *          description="id of SwapOrder",
      *          example="1",
      *          @OA\Schema(
      *              type="integer",
@@ -300,19 +290,17 @@ class SwapAPIController extends APIController
      *              @OA\Property(
      *                  property="message",
      *                  type="string",
-     *                  example="Swap deleted successfully",
+     *                  example="Swap Order deleted successfully",
      *              ),
      *          ),
      *      ),
      * )
-     * @throws \Exception
-     *
      */
 
-    public function destroy(Swap $swap)
+    public function destroy(SwapOrder $swapOrder)
     {
-        $swap->delete();
+        $swapOrder->delete();
 
-        return $this->respondSuccessWithMessage('Swap deleted successfully');
+        return $this->respondSuccessWithMessage('Swap Order deleted successfully');
     }
 }
