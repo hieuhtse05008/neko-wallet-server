@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\SyncTokenPriceBinance;
+use App\Jobs\SyncTokenPriceHoubi;
 use App\Jobs\SyncTokenPriceNami;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -45,6 +46,7 @@ class SyncTokenPrice extends Command
 
             $this->syncPriceBinance();
             $this->syncPriceNami();
+            $this->syncPriceHoubi();
             $this->info("Syncing!");
             $seconds += 10;
             sleep(10);
@@ -53,6 +55,11 @@ class SyncTokenPrice extends Command
     }
 
 
+
+    private function syncPriceHoubi()
+    {
+        SyncTokenPriceHoubi::dispatch();
+    }
 
     private function syncPriceBinance()
     {
