@@ -49,7 +49,7 @@ class SyncTokenPriceHoubi implements ShouldQueue
 
         $tokens = array_map(function ($item) {
             return [
-                'symbol' => $item->symbol,
+                'symbol' => strtoupper($item->symbol),
                 'last_price' => $item->close,
                 'price_change_percent' => ($item->close/$item->open - 1) * 100,
             ];
