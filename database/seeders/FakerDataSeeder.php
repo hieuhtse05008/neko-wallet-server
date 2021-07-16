@@ -177,10 +177,27 @@ class FakerDataSeeder extends Seeder
                 'address' => '0xfb62AE373acA027177D1c18Ee0862817f9080d08',
                 'network_id' => $networks['KRC20']['id'],
             ],
+            [
+                'id' => Str::uuid(),
+                'name' => "Wootrade Network",
+                'symbol' => "WOO",
+                'decimal' => 18,
+                'iconURL' => "https://d1j8r0kxyu9tj8.cloudfront.net/files/1626354609vk3fAwSQl6hrKRU.jpeg",
+                'address' => "0x4691937a7508860f876c9c0a2a617e7d9e945d4b",
+                'network' => $networks['ERC20']['id'],
+            ],
         ];
 
-        DB::table('contracts')->insertOrIgnore($contracts);
-
+        foreach ($contracts as $key => $contract) {
+            $item = DB::table('contracts')
+                ->where('symbol', '=', $contract['symbol'])
+                ->first();
+            if ($item) {
+                $contracts[$key]['id'] = $item->id;
+            } else {
+                DB::table('contracts')->insert($contract);
+            };
+        }
 
     }
 }
