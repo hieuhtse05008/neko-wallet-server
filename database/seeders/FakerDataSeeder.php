@@ -184,7 +184,7 @@ class FakerDataSeeder extends Seeder
                 'decimal' => 18,
                 'icon_url' => "https://d1j8r0kxyu9tj8.cloudfront.net/files/1626354609vk3fAwSQl6hrKRU.jpeg",
                 'address' => "0x4691937a7508860f876c9c0a2a617e7d9e945d4b",
-                'network' => $networks['ERC20']['id'],
+                'network_id' => $networks['ERC20']['id'],
             ],
         ];
 
