@@ -29,6 +29,8 @@ Route::get('/test', function () {
     return response()->json($api->depositAddress('BNB', 'BSC'));
 });
 
+Route::get('/telegram', [App\Http\Controllers\API\TelegramAPIController::class, 'index']);
+
 Route::prefix("v1")->group(function () {
     Route::group(["prefix" => 'token-prices'], function () {
         Route::get("/", [App\Http\Controllers\API\TokenAPIController::class, 'index']);
