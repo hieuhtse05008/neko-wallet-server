@@ -18,13 +18,13 @@ class FakerDataSeeder extends Seeder
         $dexes = [
             [
                 "id" => Str::uuid()->toString(),
-                'name' => 'Binance',
+                'name' => 'binance',
                 'icon_url' => 'https://',
             ],
 
             [
                 "id" => Str::uuid()->toString(),
-                'name' => 'Huobi',
+                'name' => 'huobi',
                 'icon_url' => 'https://',
             ],
         ];

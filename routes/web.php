@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', [AuthController::class,'test']);
+Route::get('/surf-news', [PublicController::class,'surfNews']);
+Route::get('/load-cors', [PublicController::class,'loadCors']);
+Route::post('/push-news-telegram', [PublicController::class,'pushNewsTelegram']);
 //Route::post('/login', [AuthController::class,'login']);

@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\SyncTokenPriceBinance;
-use App\Jobs\SyncTokenPriceHoubi;
+use App\Jobs\SyncTokenPriceHuobi;
 use App\Jobs\SyncTokenPriceNami;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -46,7 +46,7 @@ class SyncTokenPrice extends Command
 
             $this->syncPriceBinance();
             $this->syncPriceNami();
-            $this->syncPriceHoubi();
+            $this->syncPriceHuobi();
             $this->info("Syncing!");
             $seconds += 10;
             sleep(10);
@@ -56,9 +56,9 @@ class SyncTokenPrice extends Command
 
 
 
-    private function syncPriceHoubi()
+    private function syncPriceHuobi()
     {
-        SyncTokenPriceHoubi::dispatch();
+        SyncTokenPriceHuobi::dispatch();
     }
 
     private function syncPriceBinance()

@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 
-class SyncTokenPriceHoubi implements ShouldQueue
+class SyncTokenPriceHuobi implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -31,10 +31,10 @@ class SyncTokenPriceHoubi implements ShouldQueue
      */
     public function handle()
     {
-        $this->syncPriceHoubi();
+        $this->syncPriceHuobi();
     }
 
-    private function syncPriceHoubi()
+    private function syncPriceHuobi()
     {
         $httpClient = new \GuzzleHttp\Client();
         $url = 'https://api.huobi.pro/market/tickers';
