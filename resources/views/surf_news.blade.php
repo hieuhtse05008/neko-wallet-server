@@ -16,6 +16,11 @@
 
     <title>News</title>
     <style>
+
+        body{
+            background-color: lightgrey;
+        }
+
         .spinner-main {
             position: fixed;
             top: calc(50vh - 2rem);
@@ -33,23 +38,26 @@
 
 </head>
 <body>
-<div id="main" v-cloak class="w-100 h-100 container pb-5">
+<div id="main" v-cloak>
+    <div class="sticky-top bg-white p-3">
+        <div class="d-flex justify-content-end">
+            Total: @{{pagination.count}}
+        </div>
+    </div>
 {{--    <div class="spinner-border spinner-main" role="status" v-if="isLoading">--}}
 {{--        <span class="visually-hidden">Loading...</span>--}}
 {{--    </div>--}}
-    <div>
-        <div class="sticky-top bg-white">
-            Total: @{{pagination.count}}
-        </div>
+    <div class="w-100 h-100 container pb-5">
+
         <div>
-            <div v-for="item in news" class="card w-100 mb-2">
+            <div v-for="item in news" class="card w-100 my-2">
                 <div class="card-body">
-                    <h3 class="card-title">@{{ item.title }}</h3>
+                    <h3 class="card-title">[@{{ item.id }}] @{{ item.title }}</h3>
 
                     <p class="card-text">
                     <div class="d-flex justify-content-between">
                         <div><b>Original url:</b></div>
-                        <a v-bind:href="`//www.${item.domain}/${item.slug}`" target="_blank" class="text-truncate w-50">@{{
+                        <a v-bind:href="`https://cryptopanic.com/news/${item.id}/click/`" target="_blank" class="text-truncate w-50">@{{
                             `${item.domain}/${item.slug}` }}</a>
                     </div>
                     <div class="d-flex justify-content-between">
@@ -85,7 +93,7 @@
 
                 </div>
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center my-3">
                 <button type="button" class="btn btn-primary btn-sm" v-on:click="loadNews(pagination.page + 1)"
                         :disabled="isLoading">
                     <div class="spinner-border btn-spin" role="status" v-if="isLoading">
@@ -132,7 +140,7 @@
         },
         methods: {
             buildTelegramMessage: function(item){
-                return `<a href="https://www.${item.domain}/${item.slug}">${item.title}</a>`;
+                return `<a href="https://cryptopanic.com/news/${item.id}/click/">${item.title}</a>`;
             },
             sendToTelegram: function (item) {
                 this.isSendingTelegram = true;
@@ -183,6 +191,13 @@
         },
         mounted: function () {
             this.loadNews(1);
+        }
+    });
+
+    $(window).scroll(function() {
+        buffer = 40 // # of pixels from bottom of scroll to fire your function. Can be 0
+        if ($(".myDiv").prop('scrollHeight') - $(".myDiv").scrollTop() <= $(".myDiv").height() + buffer )   {
+
         }
     });
 </script>
