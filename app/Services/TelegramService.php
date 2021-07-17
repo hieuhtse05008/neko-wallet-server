@@ -16,6 +16,7 @@ class TelegramService
 
     public static function sendMessageToChat($chat_id, $message, $parse_mode='html')
     {
+
         if (empty($chat_id)) return null;
         $httpClient = new \GuzzleHttp\Client();
 

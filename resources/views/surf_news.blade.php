@@ -138,7 +138,7 @@
                 this.isSendingTelegram = true;
                 console.log(item);
                 const encoded_text = this.buildTelegramMessage(item);
-                const url = `${window.location.origin}/push-news-telegram`;
+                const url = `http://${window.location.host}/push-news-telegram`;
 
                 $.post(url,{
                     encoded_text,
