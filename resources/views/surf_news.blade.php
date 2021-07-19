@@ -151,7 +151,7 @@
     var main = new Vue({
         el: '#main',
         data: {
-            isLoading: true,
+            isLoading: false,
             isSendingTelegram: false,
             kinds: [
                 {key: '', name: 'All kind'},
