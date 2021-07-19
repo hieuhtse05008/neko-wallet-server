@@ -73,7 +73,7 @@
 
             </div>
             <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
-                Total: @{{pagination.count}}
+{{--                Total: @{{pagination.count}}--}}
             </div>
         </div>
 
@@ -682,7 +682,7 @@
             filter:{
                 type:{key: null, name: 'All type'},
                 kind:{key: '', name: 'All kind'},
-                currency:{key: '', name: 'All currency',
+                currency:{key: '', name: 'All currency'},
             },
             search: '{!! isset($search) ?: '' !!}',
             news: [],
@@ -755,7 +755,7 @@
             this.loadNews(1);
             const _this = this;
             $(window).scroll(function () {
-                console.log($(window).scrollTop() + $(window).innerHeight(), $('#scoll-pivot').position().top)
+                // console.log($(window).scrollTop() + $(window).innerHeight(), $('#scoll-pivot').position().top)
                 if ($(window).scrollTop() + $(window).innerHeight() >= $('#scoll-pivot').position().top - 100) {
                     console.log(123);
                     _this.loadNews(_this.pagination.page + 1);
