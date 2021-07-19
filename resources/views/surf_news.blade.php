@@ -55,14 +55,22 @@
                 <div class="dropdown me-2 mb-2">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown button
+                        @{{ filter.kind.name }}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" v-for="kind in kinds" href="#" v-on:click="changeFilter('kind', kind)">@{{ kind.name }}</a></li>
                     </ul>
                 </div>
+                <div class="dropdown me-2 mb-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        @{{ filter.currency.name }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" v-for="currency in currencies" href="#" v-on:click="changeFilter('currency', currency)">@{{ currency.name }}</a></li>
+                    </ul>
+                </div>
+
             </div>
             <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
                 Total: @{{pagination.count}}
@@ -145,6 +153,510 @@
         data: {
             isLoading: true,
             isSendingTelegram: false,
+            kinds: [
+                {key: '', name: 'All kind'},
+                {key: 'news', name: 'News'},
+                {key: 'media', name: 'Media'},
+        ],
+            currencies:[
+                {key: '', name: 'All currency'},
+                {
+                    "key": "BTC",
+                    "name": "BTC"
+                },
+                {
+                    "key": "ETH",
+                    "name": "ETH"
+                },
+                {
+                    "key": "USDT",
+                    "name": "USDT"
+                },
+                {
+                    "key": "TOMO",
+                    "name": "TOMO"
+                },
+                {
+                    "key": "LINK",
+                    "name": "LINK"
+                },
+                {
+                    "key": "CHI",
+                    "name": "CHI"
+                },
+                {
+                    "key": "BNB",
+                    "name": "BNB"
+                },
+                {
+                    "key": "UNI",
+                    "name": "UNI"
+                },
+                {
+                    "key": "TRX",
+                    "name": "TRX"
+                },
+                {
+                    "key": "FLM",
+                    "name": "FLM"
+                },
+                {
+                    "key": "KNC",
+                    "name": "KNC"
+                },
+                {
+                    "key": "BCH",
+                    "name": "BCH"
+                },
+                {
+                    "key": "BTT",
+                    "name": "BTT"
+                },
+                {
+                    "key": "SOL",
+                    "name": "SOL"
+                },
+                {
+                    "key": "DOGE",
+                    "name": "DOGE"
+                },
+                {
+                    "key": "SUSHI",
+                    "name": "SUSHI"
+                },
+                {
+                    "key": "SRM",
+                    "name": "SRM"
+                },
+                {
+                    "key": "YFI",
+                    "name": "YFI"
+                },
+                {
+                    "key": "VET",
+                    "name": "VET"
+                },
+                {
+                    "key": "YFII",
+                    "name": "YFII"
+                },
+                {
+                    "key": "SXP",
+                    "name": "SXP"
+                },
+                {
+                    "key": "ONT",
+                    "name": "ONT"
+                },
+                {
+                    "key": "BZRX",
+                    "name": "BZRX"
+                },
+                {
+                    "key": "IOST",
+                    "name": "IOST"
+                },
+                {
+                    "key": "WAVES",
+                    "name": "WAVES"
+                },
+                {
+                    "key": "COMP",
+                    "name": "COMP"
+                },
+                {
+                    "key": "DASH",
+                    "name": "DASH"
+                },
+                {
+                    "key": "ATOM",
+                    "name": "ATOM"
+                },
+                {
+                    "key": "NAMI",
+                    "name": "NAMI"
+                },
+                {
+                    "key": "DAM",
+                    "name": "DAM"
+                },
+                {
+                    "key": "TDC",
+                    "name": "TDC"
+                },
+                {
+                    "key": "XRP",
+                    "name": "XRP"
+                },
+                {
+                    "key": "EOS",
+                    "name": "EOS"
+                },
+                {
+                    "key": "LTC",
+                    "name": "LTC"
+                },
+                {
+                    "key": "NEXO",
+                    "name": "NEXO"
+                },
+                {
+                    "key": "USDC",
+                    "name": "USDC"
+                },
+                {
+                    "key": "USDS",
+                    "name": "USDS"
+                },
+                {
+                    "key": "DAI",
+                    "name": "DAI"
+                },
+                {
+                    "key": "PAX",
+                    "name": "PAX"
+                },
+                {
+                    "key": "LUA",
+                    "name": "LUA"
+                },
+                {
+                    "key": "AAVE",
+                    "name": "AAVE"
+                },
+                {
+                    "key": "AAPL",
+                    "name": "AAPL"
+                },
+                {
+                    "key": "AMZN",
+                    "name": "AMZN"
+                },
+                {
+                    "key": "FB",
+                    "name": "FB"
+                },
+                {
+                    "key": "GOOGL",
+                    "name": "GOOGL"
+                },
+                {
+                    "key": "NFLX",
+                    "name": "NFLX"
+                },
+                {
+                    "key": "TSLA",
+                    "name": "TSLA"
+                },
+                {
+                    "key": "OLC",
+                    "name": "OLC"
+                },
+                {
+                    "key": "VIDB",
+                    "name": "VIDB"
+                },
+                {
+                    "key": "KAI",
+                    "name": "KAI"
+                },
+                {
+                    "key": "WHC",
+                    "name": "WHC"
+                },
+                {
+                    "key": "OMG",
+                    "name": "OMG"
+                },
+                {
+                    "key": "XLM",
+                    "name": "XLM"
+                },
+                {
+                    "key": "ADA",
+                    "name": "ADA"
+                },
+                {
+                    "key": "NEO",
+                    "name": "NEO"
+                },
+                {
+                    "key": "DOT",
+                    "name": "DOT"
+                },
+                {
+                    "key": "BDS",
+                    "name": "BDS"
+                },
+                {
+                    "key": "CAKE",
+                    "name": "CAKE"
+                },
+                {
+                    "key": "BAKE",
+                    "name": "BAKE"
+                },
+                {
+                    "key": "DIA",
+                    "name": "DIA"
+                },
+                {
+                    "key": "ALGO",
+                    "name": "ALGO"
+                },
+                {
+                    "key": "NKN",
+                    "name": "NKN"
+                },
+                {
+                    "key": "XVS",
+                    "name": "XVS"
+                },
+                {
+                    "key": "THETA",
+                    "name": "THETA"
+                },
+                {
+                    "key": "MATIC",
+                    "name": "MATIC"
+                },
+                {
+                    "key": "RVN",
+                    "name": "RVN"
+                },
+                {
+                    "key": "MANA",
+                    "name": "MANA"
+                },
+                {
+                    "key": "CHR",
+                    "name": "CHR"
+                },
+                {
+                    "key": "LIT",
+                    "name": "LIT"
+                },
+                {
+                    "key": "XTZ",
+                    "name": "XTZ"
+                },
+                {
+                    "key": "OGN",
+                    "name": "OGN"
+                },
+                {
+                    "key": "FIL",
+                    "name": "FIL"
+                },
+                {
+                    "key": "ALPHA",
+                    "name": "ALPHA"
+                },
+                {
+                    "key": "AVAX",
+                    "name": "AVAX"
+                },
+                {
+                    "key": "FTM",
+                    "name": "FTM"
+                },
+                {
+                    "key": "1INCH",
+                    "name": "1INCH"
+                },
+                {
+                    "key": "GRT",
+                    "name": "GRT"
+                },
+                {
+                    "key": "REEF",
+                    "name": "REEF"
+                },
+                {
+                    "key": "FIO",
+                    "name": "FIO"
+                },
+                {
+                    "key": "BEL",
+                    "name": "BEL"
+                },
+                {
+                    "key": "ZRX",
+                    "name": "ZRX"
+                },
+                {
+                    "key": "CVC",
+                    "name": "CVC"
+                },
+                {
+                    "key": "LTO",
+                    "name": "LTO"
+                },
+                {
+                    "key": "NANO",
+                    "name": "NANO"
+                },
+                {
+                    "key": "SFP",
+                    "name": "SFP"
+                },
+                {
+                    "key": "BAT",
+                    "name": "BAT"
+                },
+                {
+                    "key": "KSM",
+                    "name": "KSM"
+                },
+                {
+                    "key": "ZEC",
+                    "name": "ZEC"
+                },
+                {
+                    "key": "AXS",
+                    "name": "AXS"
+                },
+                {
+                    "key": "ROSE",
+                    "name": "ROSE"
+                },
+                {
+                    "key": "BNT",
+                    "name": "BNT"
+                },
+                {
+                    "key": "CRV",
+                    "name": "CRV"
+                },
+                {
+                    "key": "ENJ",
+                    "name": "ENJ"
+                },
+                {
+                    "key": "CHZ",
+                    "name": "CHZ"
+                },
+                {
+                    "key": "OCEAN",
+                    "name": "OCEAN"
+                },
+                {
+                    "key": "XEM",
+                    "name": "XEM"
+                },
+                {
+                    "key": "EUR",
+                    "name": "EUR"
+                },
+                {
+                    "key": "COTI",
+                    "name": "COTI"
+                },
+                {
+                    "key": "SUN",
+                    "name": "SUN"
+                },
+                {
+                    "key": "LUNA",
+                    "name": "LUNA"
+                },
+                {
+                    "key": "SAND",
+                    "name": "SAND"
+                },
+                {
+                    "key": "ATS",
+                    "name": "ATS"
+                },
+                {
+                    "key": "VNCT",
+                    "name": "VNCT"
+                },
+                {
+                    "key": "BAMI",
+                    "name": "BAMI"
+                },
+                {
+                    "key": "BABA",
+                    "name": "BABA"
+                },
+                {
+                    "key": "NVDA",
+                    "name": "NVDA"
+                },
+                {
+                    "key": "NIO",
+                    "name": "NIO"
+                },
+                {
+                    "key": "DPET",
+                    "name": "DPET"
+                },
+                {
+                    "key": "TFUEL",
+                    "name": "TFUEL"
+                },
+                {
+                    "key": "SFO",
+                    "name": "SFO"
+                },
+                {
+                    "key": "SHC",
+                    "name": "SHC"
+                },
+                {
+                    "key": "SHIB1000",
+                    "name": "SHIB1000"
+                },
+                {
+                    "key": "FIO",
+                    "name": "FIO"
+                },
+                {
+                    "key": "ENJ",
+                    "name": "ENJ"
+                },
+                {
+                    "key": "AQUAGOAT1M",
+                    "name": "AQUAGOAT1M"
+                },
+                {
+                    "key": "CORGIB10K",
+                    "name": "CORGIB10K"
+                },
+                {
+                    "key": "TPH",
+                    "name": "TPH"
+                },
+                {
+                    "key": "MAN",
+                    "name": "MAN"
+                },
+                {
+                    "key": "KCS",
+                    "name": "KCS"
+                },
+                {
+                    "key": "LTD",
+                    "name": "LTD"
+                },
+                {
+                    "key": "SLP",
+                    "name": "SLP"
+                },
+                {
+                    "key": "DEGO",
+                    "name": "DEGO"
+                },
+                {
+                    "key": "FARA",
+                    "name": "FARA"
+                },
+                {
+                    "key": "ERN",
+                    "name": "ERN"
+                }
+            ],
             types: [
                 {key: null, name: 'All type'},
                 {key: 'rising', name: 'Rising'},
@@ -169,6 +681,8 @@
             ],
             filter:{
                 type:{key: null, name: 'All type'},
+                kind:{key: '', name: 'All kind'},
+                currency:{key: '', name: 'All currency',
             },
             search: '{!! isset($search) ?: '' !!}',
             news: [],
@@ -207,17 +721,15 @@
             loadNews: function (page) {
                 // let url = 'https://cors-anywhere.herokuapp.com/https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648';
                 // let api_url = 'https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648&currencies=BTC,ETH&page=2';
-                let url = `https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648&page=${page}`;
+                let url = `https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648&page=${page}&filter=${this.filter.type.key}&kind=${this.filter.kind.key}&currencies=${this.filter.currency.key}`;
+
                 const api_url = `${window.location.origin}/load-cors`;
 
                 this.isLoading = true;
                 if(page == 1){
                     this.news = [];
                 }
-                $.get(api_url, {
-                    url,
-                    type: this.filter.type.key,
-                }).then(
+                $.get(api_url, {url}).then(
                     (res) => {
                         const data = JSON.parse(res);
                         console.log(data);
@@ -239,6 +751,7 @@
             },
         },
         mounted: function () {
+
             this.loadNews(1);
             const _this = this;
             $(window).scroll(function () {

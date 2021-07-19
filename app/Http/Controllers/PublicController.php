@@ -22,6 +22,7 @@ class PublicController extends Controller
     public function loadCors(Request $request){
         $httpClient = new \GuzzleHttp\Client();
         $url = $request->url;
+
         $response = $httpClient->get($url);
         $res = ($response->getBody()->getContents());
         return response($res);
