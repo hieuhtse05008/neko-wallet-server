@@ -17,7 +17,7 @@
     <title>News</title>
     <style>
 
-        body{
+        body {
             background-color: lightgrey;
         }
 
@@ -31,7 +31,8 @@
             width: 14px;
             height: 14px;
         }
-        .vote-item{
+
+        .vote-item {
             line-height: 14px;
         }
     </style>
@@ -40,15 +41,40 @@
 <body>
 <div id="main" v-cloak>
     <div class="sticky-top bg-white p-3">
-        <div class="d-flex justify-content-end">
-            Total: @{{pagination.count}}
+        <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
+            <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
+                <div class="dropdown me-2 mb-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        @{{ filter.type.name }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" v-for="type in types" href="#" v-on:click="changeFilter('type', type)">@{{ type.name }}</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown me-2 mb-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown button
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
+                Total: @{{pagination.count}}
+            </div>
         </div>
-    </div>
-{{--    <div class="spinner-border spinner-main" role="status" v-if="isLoading">--}}
-{{--        <span class="visually-hidden">Loading...</span>--}}
-{{--    </div>--}}
-    <div class="w-100 h-100 container pb-5">
 
+    </div>
+    {{--    <div class="spinner-border spinner-main" role="status" v-if="isLoading">--}}
+    {{--        <span class="visually-hidden">Loading...</span>--}}
+    {{--    </div>--}}
+    <div class="w-100 h-100 container pb-5">
+        <div></div>
         <div>
             <div v-for="item in news" class="card w-100 my-2">
                 <div class="card-body">
@@ -57,7 +83,8 @@
                     <p class="card-text">
                     <div class="d-flex justify-content-between">
                         <div><b>Original url:</b></div>
-                        <a v-bind:href="`https://cryptopanic.com/news/${item.id}/click/`" target="_blank" class="text-truncate w-50">@{{
+                        <a v-bind:href="`https://cryptopanic.com/news/${item.id}/click/`" target="_blank"
+                           class="text-truncate w-50">@{{
                             `${item.domain}/${item.slug}` }}</a>
                     </div>
                     <div class="d-flex justify-content-between">
@@ -68,26 +95,27 @@
                     </p>
                     <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
                         <div class="d-flex flex-row justify-content-start align-items-center flex-wrap mb-2">
-                            <div class="d-flex align-items-center vote-item me-2" v-for="vote in votes" v-bind:style="{color:  vote.color} ">
+                            <div class="d-flex align-items-center vote-item me-2" v-for="vote in votes"
+                                 v-bind:style="{color:  vote.color} ">
                                 <i v-bind:class=" vote.icon" v-bind:style="{color:  vote.color} "></i>
                                 &nbsp;@{{ item.votes[vote.key] }}
                             </div>
                         </div>
                         <div class="d-flex flex-row justify-content-start align-items-center flex-wrap mb-2">
-                        <button type="button" class="btn btn-primary btn-sm" v-on:click="sendToTelegram(item)"
-                                :disabled="isSendingTelegram">
-                            <div class="d-flex align-items-center">
-                                <i v-if="!isSendingTelegram" class="bi bi-telegram"></i>
-                                <div v-if="isSendingTelegram" class="spinner-border btn-spin" role="status"
-                                     >
-                                    <span class="visually-hidden">Loading...</span>
-                                </div
-                                <div>
-                                    <div class="ms-2">Forward to test group</div>
+                            <button type="button" class="btn btn-primary btn-sm" v-on:click="sendToTelegram(item)"
+                                    :disabled="isSendingTelegram">
+                                <div class="d-flex align-items-center">
+                                    <i v-if="!isSendingTelegram" class="bi bi-telegram"></i>
+                                    <div v-if="isSendingTelegram" class="spinner-border btn-spin" role="status"
+                                    >
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div
+                                    <div>
+                                        <div class="ms-2">Forward to test group</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </button>
-                    </div>
+                            </button>
+                        </div>
                     </div>
 
 
@@ -95,7 +123,7 @@
             </div>
             <div class="d-flex justify-content-center my-3">
                 <button type="button" class="btn btn-primary btn-sm" v-on:click="loadNews(pagination.page + 1)"
-                        :disabled="isLoading">
+                        :disabled="isLoading" id="scoll-pivot">
                     <div class="spinner-border btn-spin" role="status" v-if="isLoading">
                         <span class="visually-hidden">Loading...</span>
                     </div>
@@ -117,19 +145,32 @@
         data: {
             isLoading: true,
             isSendingTelegram: false,
-            votes:[
-                {key: 'positive', icon:'bi bi-arrow-up-circle-fill', color: 'green'},
-                {key: 'important', icon:'bi bi-exclamation-triangle-fill', color: '#FFBC34'},
-                {key: 'comments', icon:'bi bi-chat-dots-fill', color: '#3aa2c6'},
-                {key: 'negative', icon:'bi bi-arrow-down-circle-fill', color: '#FF001C'},
-                {key: 'liked', icon:'bi bi-hand-thumbs-up-fill', color: '#12a47b'},
-                {key: 'disliked', icon:'bi bi-hand-thumbs-down-fill', color: '#a42d12'},
-                {key: 'saved', icon:'bi bi-bookmark-star-fill', color: 'black'},
-                {key: 'toxic', icon:'bi bi-x-circle-fill', color: 'purple'},
-                {key: 'lol', icon:'bi bi-emoji-laughing-fill', color: '#ffd84a'},
+            types: [
+                {key: null, name: 'All type'},
+                {key: 'rising', name: 'Rising'},
+                {key: 'hot', name: 'Hot'},
+                {key: 'bullish', name: 'Bullish'},
+                {key: 'bearish', name: 'Bearish'},
+                {key: 'important', name: 'Important'},
+                {key: 'saved', name: 'Saved'},
+                {key: 'lol', name: 'LOL'},
+            ],
+            votes: [
+                {key: 'positive', icon: 'bi bi-arrow-up-circle-fill', color: 'green'},
+                {key: 'important', icon: 'bi bi-exclamation-triangle-fill', color: '#FFBC34'},
+                {key: 'comments', icon: 'bi bi-chat-dots-fill', color: '#3aa2c6'},
+                {key: 'negative', icon: 'bi bi-arrow-down-circle-fill', color: '#FF001C'},
+                {key: 'liked', icon: 'bi bi-hand-thumbs-up-fill', color: '#12a47b'},
+                {key: 'disliked', icon: 'bi bi-hand-thumbs-down-fill', color: '#a42d12'},
+                {key: 'saved', icon: 'bi bi-bookmark-star-fill', color: 'black'},
+                {key: 'toxic', icon: 'bi bi-x-circle-fill', color: 'purple'},
+                {key: 'lol', icon: 'bi bi-emoji-laughing-fill', color: '#ffd84a'},
 
             ],
-            search: '{!! isset($search) ? $search : '' !!}',
+            filter:{
+                type:{key: null, name: 'All type'},
+            },
+            search: '{!! isset($search) ?: '' !!}',
             news: [],
             pagination: {
                 count: 0,
@@ -139,7 +180,7 @@
             }
         },
         methods: {
-            buildTelegramMessage: function(item){
+            buildTelegramMessage: function (item) {
                 return `<a href="https://cryptopanic.com/news/${item.id}/click/">${item.title}</a>`;
             },
             sendToTelegram: function (item) {
@@ -148,7 +189,7 @@
                 const encoded_text = this.buildTelegramMessage(item);
                 const url = `https://${window.location.host}/push-news-telegram`;
 
-                $.post(url,{
+                $.post(url, {
                     encoded_text,
                     "_token": "{{ csrf_token() }}",
                 }).then(
@@ -159,6 +200,10 @@
                     }
                 );
             },
+            changeFilter: function (key,val){
+                this.filter[key] = val;
+                this.loadNews(1);
+            } ,
             loadNews: function (page) {
                 // let url = 'https://cors-anywhere.herokuapp.com/https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648';
                 // let api_url = 'https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648&currencies=BTC,ETH&page=2';
@@ -166,8 +211,12 @@
                 const api_url = `${window.location.origin}/load-cors`;
 
                 this.isLoading = true;
-                $.get(api_url,{
-                    url
+                if(page == 1){
+                    this.news = [];
+                }
+                $.get(api_url, {
+                    url,
+                    type: this.filter.type.key,
                 }).then(
                     (res) => {
                         const data = JSON.parse(res);
@@ -191,15 +240,18 @@
         },
         mounted: function () {
             this.loadNews(1);
+            const _this = this;
+            $(window).scroll(function () {
+                console.log($(window).scrollTop() + $(window).innerHeight(), $('#scoll-pivot').position().top)
+                if ($(window).scrollTop() + $(window).innerHeight() >= $('#scoll-pivot').position().top - 100) {
+                    console.log(123);
+                    _this.loadNews(_this.pagination.page + 1);
+                }
+            });
         }
     });
 
-    $(window).scroll(function() {
-        buffer = 40 // # of pixels from bottom of scroll to fire your function. Can be 0
-        if ($(".myDiv").prop('scrollHeight') - $(".myDiv").scrollTop() <= $(".myDiv").height() + buffer )   {
 
-        }
-    });
 </script>
 
 </body>
