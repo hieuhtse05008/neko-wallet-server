@@ -35,6 +35,33 @@
         .vote-item {
             line-height: 14px;
         }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+            cursor: pointer;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #eaeaea;
+            border-radius: 100px;
+
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            cursor: pointer;
+            background: #adadad;
+            border-radius: 100px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9e9e9e;
+        }
+
     </style>
 
 </head>
@@ -49,7 +76,11 @@
                         @{{ filter.type.name }}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" v-for="type in types" href="#" v-on:click="changeFilter('type', type)">@{{ type.name }}</a></li>
+                        <li>
+                            <a class="dropdown-item" v-for="item in types" href="#"
+                               v-bind:class="{active: item.key == filter.type.key}"
+                               v-on:click="changeFilter('type', item)">@{{ item.name }}</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="dropdown me-2 mb-2">
@@ -58,7 +89,11 @@
                         @{{ filter.kind.name }}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" v-for="kind in kinds" href="#" v-on:click="changeFilter('kind', kind)">@{{ kind.name }}</a></li>
+                        <li>
+                            <a class="dropdown-item" v-for="item in kinds" href="#"
+                               v-bind:class="{active: item.key == filter.kind.key}"
+                               v-on:click="changeFilter('kind', item)">@{{ item.name }}</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="dropdown me-2 mb-2">
@@ -66,14 +101,22 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                         @{{ filter.currency.name }}
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" v-for="currency in currencies" href="#" v-on:click="changeFilter('currency', currency)">@{{ currency.name }}</a></li>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+                        style="max-height: 60vh;overflow-y: scroll;padding-top:0;">
+                        <li class="bg-white sticky-top">
+                            <div class="dropdown-item"><input type="tex" placeholder="Search" v-model="search"></div>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" v-bind:class="{active: item.key == filter.currency.key}"
+                               v-for="item in _currencies" href="#" v-on:click="changeFilter('currency', item)">@{{
+                                item.name }}</a>
+                        </li>
                     </ul>
                 </div>
 
             </div>
             <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
-{{--                Total: @{{pagination.count}}--}}
+                {{--                Total: @{{pagination.count}}--}}
             </div>
         </div>
 
@@ -157,8 +200,8 @@
                 {key: '', name: 'All kind'},
                 {key: 'news', name: 'News'},
                 {key: 'media', name: 'Media'},
-        ],
-            currencies:[
+            ],
+            currencies: [
                 {key: '', name: 'All currency'},
                 {
                     "key": "BTC",
@@ -679,12 +722,12 @@
                 {key: 'lol', icon: 'bi bi-emoji-laughing-fill', color: '#ffd84a'},
 
             ],
-            filter:{
-                type:{key: null, name: 'All type'},
-                kind:{key: '', name: 'All kind'},
-                currency:{key: '', name: 'All currency'},
+            filter: {
+                type: {key: null, name: 'All type'},
+                kind: {key: '', name: 'All kind'},
+                currency: {key: '', name: 'All currency'},
             },
-            search: '{!! isset($search) ?: '' !!}',
+            search: '',
             news: [],
             pagination: {
                 count: 0,
@@ -714,12 +757,13 @@
                     }
                 );
             },
-            changeFilter: function (key,val){
+            changeFilter: function (key, val) {
                 this.filter[key] = val;
                 this.loadNews(1);
-            } ,
+                this.search = '';
+            },
             loadNews: function (page) {
-                if(this.isLoading) return;
+                if (this.isLoading) return;
                 // let url = 'https://cors-anywhere.herokuapp.com/https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648';
                 // let api_url = 'https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648&currencies=BTC,ETH&page=2';
                 let url = `https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648&page=${page}&filter=${this.filter.type.key}&kind=${this.filter.kind.key}&currencies=${this.filter.currency.key}`;
@@ -727,7 +771,7 @@
                 const api_url = `${window.location.origin}/load-cors`;
 
                 this.isLoading = true;
-                if(page == 1){
+                if (page == 1) {
                     this.news = [];
                 }
                 $.get(api_url, {url}).then(
@@ -749,6 +793,15 @@
                 // Http.onreadystatechange = (e) => {
                 //     console.log(e,Http.responseText)
                 // }
+            },
+        },
+        computed: {
+            _currencies: function () {
+                const _search = this.search.trim().toLowerCase();
+                return this.currencies.filter(c => {
+                    const s = c.name.trim().toLowerCase();
+                    return _search.includes(s) || s.includes(_search);
+                });
             },
         },
         mounted: function () {
