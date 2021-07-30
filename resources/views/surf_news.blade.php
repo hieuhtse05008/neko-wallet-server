@@ -791,10 +791,6 @@
             },
             loadNews: function (page) {
                 if (this.isLoading) return;
-                // let url = 'https://cors-anywhere.herokuapp.com/https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648';
-                // let api_url = 'https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648&currencies=BTC,ETH&page=2';
-                // let url = `https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648
-                // &page=${page}&filter=${this.filter.type.key}&kind=${this.filter.kind.key}&currencies=${this.filter.currency.key}`;
 
                 const api_url = `${window.location.origin}/load-news`;
 
