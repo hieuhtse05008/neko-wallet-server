@@ -13,6 +13,11 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        _token = "{{ csrf_token() }}"
+    </script>
+    <script src="/js/surf_news.js?123"></script>
 
     <title>News</title>
     <style>
@@ -199,12 +204,7 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    _token = "{{ csrf_token() }}"
-</script>
-<script src="/js/surf_news.js?123"></script>
 
 </body>
 </html>
