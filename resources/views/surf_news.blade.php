@@ -204,7 +204,7 @@
 <script>
     _token = "{{ csrf_token() }}"
 </script>
-<script src="{{asset('/public/js/surf_news.js')}}"></script>
+<script src="{{asset('/js/surf_news.js')}}"></script>
 
 </body>
 </html>
