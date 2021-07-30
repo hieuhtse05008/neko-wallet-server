@@ -550,11 +550,13 @@ var main = new Vue({
             const href = `https://cryptopanic.com/news/${item.id}/click/`;
             const title = `<a href="${href}">${item.title}</a>`;
             let votes = ``;
-            this.votes.filter(v=>item.votes[v.key]).forEach(v=>{
-                votes = `${votes} ${v.icon}${item.votes[v.key]}`;
-            });
+            if(item.votes){
+                this.votes.filter(v=>item.votes[v.key]).forEach(v=>{
+                    votes = `${votes} ${v.icon}${item.votes[v.key]}`;
+                });
+            }
             const vote = `<a>${votes}</a>`;
-            return `${title}\n\n${vote}\n\n<a>.</a>`;
+            return `${title}\n\n${vote}`;
         },
         sendToTelegram: function (chat_id = '-535769292',item) {
             //neko terminal -1001548803112
