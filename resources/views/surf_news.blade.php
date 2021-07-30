@@ -154,7 +154,7 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row justify-content-end align-items-center flex-wrap mb-2">
-                            <button type="button" class="btn btn-primary btn-sm" v-on:click="sendToTelegram(item)"
+                            <button type="button" class="btn btn-primary btn-sm me-2 mb-2" v-on:click="sendToTelegram('-1001548803112',item)"
                                     :disabled="isSendingTelegram">
                                 <div class="d-flex align-items-center">
                                     <i v-if="!isSendingTelegram" class="bi bi-telegram"></i>
@@ -162,7 +162,19 @@
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
                                     <div>
-                                        <div class="ms-2">Forward to test group</div>
+                                        <div class="ms-2">Forward to NEKO Terminal</div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm mb-2" v-on:click="sendToTelegram('-535769292',item)"
+                                    :disabled="isSendingTelegram">
+                                <div class="d-flex align-items-center">
+                                    <i v-if="!isSendingTelegram" class="bi bi-telegram"></i>
+                                    <div v-if="isSendingTelegram" class="spinner-border btn-spin" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div>
+                                        <div class="ms-2">Forward to NekoTestSignal</div>
                                     </div>
                                 </div>
                             </button>

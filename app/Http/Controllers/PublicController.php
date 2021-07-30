@@ -15,8 +15,9 @@ class PublicController extends Controller
     }
 
     public function pushNewsTelegram(Request $request){
+        $chat_id = $request->chat_id;
         $text  = urlencode($request->encoded_text);
-        $res = TelegramService::sendMessageToChat('-535769292', $text);
+        $res = TelegramService::sendMessageToChat($chat_id, $text);
         return $res;
     }
     public function loadCors(Request $request){

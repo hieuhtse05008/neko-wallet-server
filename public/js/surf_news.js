@@ -556,13 +556,15 @@ var main = new Vue({
             const vote = `<a>${votes}</a>`;
             return `${title}\n\n${vote}\n\n<a>.</a>`;
         },
-        sendToTelegram: function (item) {
+        sendToTelegram: function (chat_id = '-535769292',item) {
+            //neko terminal -1001548803112
             this.isSendingTelegram = true;
-            console.log(item);
+            console.log(chat_id,item);
             const encoded_text = this.buildTelegramMessage(item);
             const url = `${window.location.origin}/push-news-telegram`;
 
             $.post(url, {
+                chat_id,
                 encoded_text,
                 _token: this._token,
             }).then(
