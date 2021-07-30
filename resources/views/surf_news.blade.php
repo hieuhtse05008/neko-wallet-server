@@ -17,7 +17,7 @@
     <script>
         _token = "{{ csrf_token() }}"
     </script>
-    <script src="/js/surf_news.js?123"></script>
+    <script src="/js/surf_news.js?asdk2"></script>
 
     <title>News</title>
     <style>
