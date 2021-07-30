@@ -154,7 +154,7 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row justify-content-end align-items-center flex-wrap mb-2">
-                            <button type="button" class="btn btn-primary btn-sm me-2 mb-2" v-on:click="sendToTelegram('-1001548803112',item)"
+                            <button type="button" class="btn btn-primary btn-sm ms-2 mb-2" v-on:click="sendToTelegram('-1001548803112',item)"
                                     :disabled="isSendingTelegram">
                                 <div class="d-flex align-items-center">
                                     <i v-if="!isSendingTelegram" class="bi bi-telegram"></i>
@@ -166,7 +166,7 @@
                                     </div>
                                 </div>
                             </button>
-                            <button type="button" class="btn btn-primary btn-sm mb-2" v-on:click="sendToTelegram('-535769292',item)"
+                            <button type="button" class="btn btn-primary btn-sm ms-2 mb-2" v-on:click="sendToTelegram('-535769292',item)"
                                     :disabled="isSendingTelegram">
                                 <div class="d-flex align-items-center">
                                     <i v-if="!isSendingTelegram" class="bi bi-telegram"></i>
