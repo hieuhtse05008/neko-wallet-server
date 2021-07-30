@@ -21,6 +21,6 @@ Route::get('/', function () {
 
 Route::get('/test', [AuthController::class,'test']);
 Route::get('/surf-news', [PublicController::class,'surfNews']);
-Route::get('/load-cors', [PublicController::class,'loadCors']);
+Route::get('/load-news', [PublicController::class,'loadNews']);
 Route::post('/push-news-telegram', [PublicController::class,'pushNewsTelegram']);
 //Route::post('/login', [AuthController::class,'login']);

@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Services\CryptoPanicService;
 use App\Services\TelegramService;
 use Illuminate\Http\Request;
 
@@ -20,12 +21,13 @@ class PublicController extends Controller
         $res = TelegramService::sendMessageToChat($chat_id, $text);
         return $res;
     }
-    public function loadCors(Request $request){
-        $httpClient = new \GuzzleHttp\Client();
-        $url = $request->url;
 
-        $response = $httpClient->get($url);
-        $res = ($response->getBody()->getContents());
+    public function loadNews(Request $request){
+        $page = $request->page;
+        $type=$request->type;
+        $kind=$request->kind;
+        $currencies=$request->currencies;
+        $res = CryptoPanicService::loadNews($page,$type,$kind,$currencies);
         return response($res);
     }
 }

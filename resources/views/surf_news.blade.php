@@ -793,15 +793,23 @@
                 if (this.isLoading) return;
                 // let url = 'https://cors-anywhere.herokuapp.com/https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648';
                 // let api_url = 'https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648&currencies=BTC,ETH&page=2';
-                let url = `https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648&page=${page}&filter=${this.filter.type.key}&kind=${this.filter.kind.key}&currencies=${this.filter.currency.key}`;
+                // let url = `https://cryptopanic.com/api/v1/posts/?auth_token=01bfba8038c9eab12a673ee05045072b3906a648
+                // &page=${page}&filter=${this.filter.type.key}&kind=${this.filter.kind.key}&currencies=${this.filter.currency.key}`;
 
-                const api_url = `${window.location.origin}/load-cors`;
+                const api_url = `${window.location.origin}/load-news`;
 
                 this.isLoading = true;
                 if (page == 1) {
                     this.news = [];
                 }
-                $.get(api_url, {url}).then(
+
+                $.get(api_url, {
+                    page,
+                    type: this.filter.type.key,
+                    kind: this.filter.kind.key,
+                    currencies: this.filter.currency.key,
+
+                }).then(
                     (res) => {
                         const data = JSON.parse(res);
                         console.log(data);
@@ -837,7 +845,7 @@
             const _this = this;
             $(window).scroll(function () {
                 // console.log($(window).scrollTop() + $(window).innerHeight(), $('#scoll-pivot').position().top)
-                if ($(window).scrollTop() + $(window).innerHeight() >= $('#scoll-pivot').position().top - 100) {
+                if ($(window).scrollTop() + $(window).innerHeight() >= $('#scoll-pivot').position().top - Math.max(500,$(window).innerHeight())) {
                     console.log(123);
                     _this.loadNews(_this.pagination.page + 1);
                 }
