@@ -147,7 +147,7 @@
                     </div>
                     <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
                         <div class="d-flex flex-row justify-content-start align-items-center flex-wrap mb-3">
-                            <div class="d-flex align-items-center vote-item me-2" v-for="vote in votes"
+                            <div class="d-flex align-items-center vote-item me-2 mb-2" v-for="vote in votes"
                             >
                                 {{--                                <i v-bind:class=" vote.icon" v-bind:style="{color:  vote.color} "></i>--}}
                                 @{{ vote.icon }}@{{ item.votes[vote.key] }}
