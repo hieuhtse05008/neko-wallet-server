@@ -564,7 +564,7 @@ var main = new Vue({
             console.log(chat_id,item);
             const encoded_text = this.buildTelegramMessage(item);
             const url = `${window.location.origin}/push-news-telegram`;
-
+return;
             $.post(url, {
                 chat_id,
                 encoded_text,
