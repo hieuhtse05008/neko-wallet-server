@@ -12,7 +12,6 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <script src="/js/surf_news.js?2345tgrwgf"></script>
 
 
     <title>News</title>
@@ -205,6 +204,7 @@
 <script>
     _token = "{{ csrf_token() }}"
 </script>
+<script src="/js/surf_news.js?123"></script>
 
 </body>
 </html>
