@@ -756,7 +756,8 @@
         methods: {
             buildTelegramMessage: function (item) {
                 const href = `https://cryptopanic.com/news/${item.id}/click/`;
-                const title = `<a href="${href}">${item.title}</a>`;
+                const title = `${item.title}`;
+                const link = ` - <a href="${href}">Link</a>`;
                 let votes = ``;
                 if(item.votes){
                     this.votes.filter(v=>item.votes[v.key]).forEach(v=>{
@@ -764,7 +765,7 @@
                     });
                 }
                 const vote = `<a>${votes}</a>`;
-                return `${title}\n\n${vote}`;
+                return `${title}${link}\n\n${vote}`;
             },
             sendToTelegram: function (chat_id = '-535769292',item) {
                 //neko terminal -1001548803112
