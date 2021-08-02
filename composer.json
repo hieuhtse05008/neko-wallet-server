@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "codenix-sv/coingecko-api": "^1.0",
         "darkaonline/l5-swagger": "^8.0",
         "doctrine/dbal": "~2.3",
         "fideloper/proxy": "^4.4",

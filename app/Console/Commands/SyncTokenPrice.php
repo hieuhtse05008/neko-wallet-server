@@ -15,7 +15,7 @@ class SyncTokenPrice extends Command
      *
      * @var string
      */
-    protected $signature = 'command:syncTokenPrice';
+    protected $signature = 'sync:token_prices';
 
     /**
      * The console command description.

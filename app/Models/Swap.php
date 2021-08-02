@@ -8,115 +8,115 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Swap
+ *
  * @package App\Models
  * @version June 25, 2021, 7:57 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="Swap",
  *     @OA\Xml(
  *         name="Swap"
  *     ),
  *     required={"from_contract_id", "from_address", "from_value", "from_price", "from_gas_price", "from_gas_limit", "to_contract_id", "to_address", "to_value", "to_price", "to_gas_price", "to_gas_limit"},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="type",
  *          description="type",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="from_contract_id",
  *          description="from_contract_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="from_address",
  *          description="from_address",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="from_value",
  *          description="from_value",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="from_price",
  *          description="from_price",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="from_gas_price",
  *          description="from_gas_price",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="from_gas_limit",
  *          description="from_gas_limit",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="to_contract_id",
  *          description="to_contract_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="to_address",
  *          description="to_address",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="to_value",
  *          description="to_value",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="to_price",
  *          description="to_price",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="to_gas_price",
  *          description="to_gas_price",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="to_gas_limit",
  *          description="to_gas_limit",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
  *          type="string",
  *          format="date-time"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperSwap
  */
 
 class Swap extends Model

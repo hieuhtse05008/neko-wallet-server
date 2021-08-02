@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Contract
+ *
  * @package App\Models
  * @version June 26, 2021, 3:17 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="Contract",
  *     @OA\Xml(
  *         name="Contract"
@@ -22,51 +21,51 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          description="id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="network_id",
  *          description="network_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="name",
  *          description="name",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="symbol",
  *          description="symbol",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="icon_url",
  *          description="icon_url",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="decimal",
  *          description="decimal",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="address",
  *          description="address",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
@@ -74,6 +73,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          format="date-time"
  *      )
  * )
+ * @mixin IdeHelperContract
  */
 class Contract extends Model
 {

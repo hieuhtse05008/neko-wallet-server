@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class SwapOrder
+ *
  * @package App\Models
  * @version June 26, 2021, 3:18 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="SwapOrder",
  *     @OA\Xml(
  *         name="SwapOrder"
@@ -22,62 +21,62 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          description="id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="status",
  *          description="status",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="fee",
  *          description="fee",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="current_step",
  *          description="current_step",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="swap_id",
  *          description="swap_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="from_swap_transaction_id",
  *          description="from_swap_transaction_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="from_dex_order_request_id",
  *          description="from_dex_order_request_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="to_swap_transaction_id",
  *          description="to_swap_transaction_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="to_dex_order_request_id",
  *          description="to_dex_order_request_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
@@ -85,6 +84,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          format="date-time"
  *      )
  * )
+ * @mixin IdeHelperSwapOrder
  */
 class SwapOrder extends Model
 {
