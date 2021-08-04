@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Connector\DatabaseConnector;
 use App\Connector\MerchantConnector;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CodeAPIGenerate
@@ -19,7 +20,8 @@ class CodeAPIGenerate extends Command
      */
     protected $signature = 'code:api-generate
                             {name : Name of table}
-                            {--tableName= : Name of table to get info}';
+                            {--tableName= : Name of table to get info}
+                            {--dbName= : Name of database to connect}';
 
     /**
      * The console command description.
@@ -45,6 +47,10 @@ class CodeAPIGenerate extends Command
     public function handle()
     {
         $name = $this->argument('name');
+
+        config(['database.connections.pgsql.database' => $this->option('dbName')]);
+        DB::purge('pgsql');
+        DB::reconnect('pgsql');
 
         $this->call('make:transformer', [
             'name' => $name,
