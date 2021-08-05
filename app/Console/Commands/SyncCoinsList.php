@@ -16,7 +16,7 @@ class SyncCoinsList extends Command
     protected $signature = 'sync:coins';
 
     /**
-     * The console command description.
+     * The console command descwription.
      *
      * @var string
      */

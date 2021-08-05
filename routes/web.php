@@ -20,7 +20,9 @@ Route::get('/', function () {
 });
 
 Route::get('/test', [AuthController::class,'test']);
-Route::get('/surf-news', [PublicController::class,'surfNews']);
+Route::get('/surf-news', [PublicController::class,'surfNewsView']);
+Route::get('/dashboard', [PublicController::class,'dashboardView']);
+
 Route::get('/load-news', [PublicController::class,'loadNews']);
 Route::post('/push-news-telegram', [PublicController::class,'pushNewsTelegram']);
 //Route::post('/login', [AuthController::class,'login']);

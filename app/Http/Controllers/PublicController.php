@@ -4,15 +4,22 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Coin;
 use App\Services\CryptoPanicService;
 use App\Services\TelegramService;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
-    public function surfNews(){
+    public function surfNewsView(){
 
         return view('surf_news');
+    }
+    public function dashboardView(){
+        $all_coins = Coin::all();
+        return view('dashboard',[
+            'all_coins' =>$all_coins
+        ]);
     }
 
     public function pushNewsTelegram(Request $request){
