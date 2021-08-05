@@ -12,7 +12,7 @@
                     </button>
                     <ul class="dropdown-menu" id="dropdownCaps">
                         <li v-for="item in caps">
-                            <div class="dropdown-item" @click="changeCap('market_caps',item.key,'dropdownCaps')">
+                            <div class="dropdown-item" @click="changeFilterArray('market_caps',item.key)">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value=""
                                            :checked="filter.market_caps.includes(item.key)">
@@ -50,11 +50,20 @@
             </div>
             <div class="col-md-3">
                 <label class="form-label"><b>Symbols</b></label>
-                <div class="dropdown me-2 mb-2">
-                    <button class="btn btn-secondary dropdown-toggle" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                        Select symbols
-                    </button>
+                <div class="dropdown me-2 mb-2 w-100">
+                    <div class="btn btn-outline-secondary  w-100" type="button"
+                         data-bs-toggle="dropdown" aria-expanded="false">
+                        <template v-if="!filter.symbols.length">Select symbols</template>
+                        <div v-else>
+                            <div class="d-flex flex-wrap">
+                                <button v-for="item in filter.symbols"
+                                        @click="changeFilterArray('symbols',item)"
+                                        class="btn  btn-dark btn-sm me-2 mb-2">
+                                    @{{ item }} <i class="bi bi-x-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <ul class="dropdown-menu w-100" id="dropdownSymbols"
                         style="max-height: 60vh;overflow-y: scroll;padding-top:0;">
                         <li class="bg-white sticky-top">
@@ -62,7 +71,7 @@
                             </div>
                         </li>
                         <li v-for="item in _symbols">
-                            <div class="dropdown-item" @click="changeFilterArray('symbols',item,'dropdownSymbols')">
+                            <div class="dropdown-item" @click="changeFilterArray('symbols',item)">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value=""
                                            :checked="filter.symbols.includes(item)">
@@ -153,8 +162,8 @@
             el: '#dashboardVue',
             data: {
                 isLoading: true,
-                search:'',
-                symbols:allCoins.map(i=>i.symbol),
+                search: '',
+                symbols: allCoins.map(i => i.symbol),
                 coins: [],
                 caps: [
                     {label: 'Nano caps', key: 'nano_caps', low: -1, high: 10000},
@@ -165,35 +174,32 @@
                     {label: 'Mega caps', key: 'mega_caps', low: 1000000000, high: 0},
                 ],
                 filter: {
-                    symbols:[],
+                    symbols: [],
                     market_caps: ["nano_caps", "micro_caps", "small_caps", "mid_caps", "large_caps", "mega_caps"],
                     price_change_percentage_24h: {high: 100, low: -100,},
                     alt_change_percentage: {high: 100, low: -100,},
                 },
             },
             methods: {
-                changeFilterArray: function (field,key, id) {
+                changeFilterArray: function (field, key) {
                     if (this.filter[field].includes(key)) {
                         this.filter[field] = this.filter[field].filter(i => i != key);
                     } else {
                         this.filter[field].push(key);
                     }
-                    setTimeout(() => {
-                        document.getElementById(id).classList.add("show");
-                    }, 200);
                 },
                 loadCoins: function (page = 1) {
                     this.isLoading = true;
                     $.get(`/api/v1/coins?include=last_market&page=${page}`).then(
                         (res) => {
                             console.log(res);
-                            this.coins = res.coins.filter(i=>i.last_market);
+                            this.coins = res.coins.filter(i => i.last_market);
                             this.filter = {
                                 ...this.filter,
                                 ...this.pivots
                             };
-                            if(!this.symbols.length){
-                                this.symbols = this.coins.map(i=>i.symbol);
+                            if (!this.symbols.length) {
+                                this.symbols = this.coins.map(i => i.symbol);
                             }
                             this.isLoading = false;
                         }
@@ -201,7 +207,7 @@
                 },
             },
             computed: {
-                _symbols: function (){
+                _symbols: function () {
                     const _search = this.search.trim().toLowerCase();
                     return this.symbols.filter(c => {
                         const s = c.trim().toLowerCase();
@@ -225,7 +231,7 @@
                 },
             },
             created() {
-                this.loadCoins();
+                // this.loadCoins();
             },
         });
     </script>
