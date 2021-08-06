@@ -45,7 +45,9 @@ class AlertCoinSignals extends Command
 //            })
 
             ->where('market_cap','<', 100000000)
-            ->where('created_at', '>=', $stamp->subMinutes(30))->first();
+            ->where('created_at', '>=', $stamp->subMinutes(30))
+            ->orderBy('created_at', 'desc')
+            ->first();
 
         if ($market == null) return;
         $now = Carbon::parse($market->created_at);
@@ -68,9 +70,9 @@ class AlertCoinSignals extends Command
 
         $last_market_1h = CoinMarketsData::where('coin_id', '=', $coin->coin_id)
             ->whereBetween('created_at', [$now->subHour()->subMinutes(5), $now->subHour()->addMinutes(5),])
+            ->orderBy('created_at', 'desc')
             ->first();
         if ($last_market_1h && $last_market_1h->total_volume) {
-            Log::info($market->created_at);
             Log::info($last_market_1h->created_at);
             $volume_change_percentage = ($market->total_volume / $last_market_1h->total_volume - 1) * 100;
             $volume_change_percentage = number_format($volume_change_percentage, 2, '.', '');
@@ -82,9 +84,9 @@ class AlertCoinSignals extends Command
         }
         $last_market_24h = CoinMarketsData::where('coin_id', '=', $market->id)
             ->whereBetween('created_at', [$now->subDay()->subMinutes(5), $now->subDay()->addMinutes(5),])
+            ->orderBy('created_at', 'desc')
             ->first();
         if ($last_market_24h && $last_market_24h->total_volume) {
-            Log::info($market->created_at);
             Log::info($last_market_24h->created_at);
             $volume_change_percentage = ($market->total_volume / $last_market_24h->total_volume - 1) * 100;
             $volume_change_percentage = number_format($volume_change_percentage, 2, '.', '');
@@ -96,6 +98,7 @@ class AlertCoinSignals extends Command
         }
         if ($should_send_message) {
             Log::info("$message");
+            Log::info($market->created_at);
             TelegramService::sendMessageToChat('-1001334835359', $message);
 
         }
