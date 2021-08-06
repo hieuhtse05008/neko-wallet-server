@@ -21,14 +21,16 @@ class CoinGeckoService
         return ($response);
     }
 
-    public static function getMarkets($page=1,$vs_currency = 'usd', $per_page = 250){
+    public static function getMarkets($vs_currency='usd',$filter=[]){
 
+        $filter = array_replace([
+            'per_page'=>250,
+            'page'=>1,
+            'price_change_percentage'=>'',
+        ],$filter);
 
         $client = self::getClient();
-        $response = $client->coins()->getMarkets($vs_currency,[
-            'per_page'=>$per_page,
-            'page'=>$page,
-        ]);
+        $response = $client->coins()->getMarkets($vs_currency,$filter);
         return ($response);
     }
 }

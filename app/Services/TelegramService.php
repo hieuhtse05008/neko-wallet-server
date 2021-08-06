@@ -24,10 +24,7 @@ class TelegramService
 
         $response = $httpClient->post($url);
 //        $url = 'https://api.telegram.org/bot1811979499:AAFONyW26hIRGhndGLmERDuaLz-9MkKImzs/getMe';
-//        $response = $httpClient->get($url);
-        $res =
-//            json_decode
-            ($response->getBody()->getContents());
+        $res = ($response->getBody()->getContents());
 
 
         return ($res);

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Services\CoinGeckoService;
+use App\Services\TelegramService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -35,7 +36,9 @@ class SyncCoinMarketsData extends Command
 
     private function getPage($page = 1,$stamp){
         $connection = config('database.connections.warehouse.database');
-        $data = CoinGeckoService::getMarkets($page);
+        $data = CoinGeckoService::getMarkets('usd',[
+            'price_change_percentage'=>'1h,7d,30d,1y'
+        ]);
 
         $markets = [];
         foreach($data as $item){
@@ -59,10 +62,20 @@ class SyncCoinMarketsData extends Command
                 'atl'=>(string)$item['atl'],
                 'atl_change_percentage'=>(string)$item['atl_change_percentage'],
                 'atl_date'=>(string)$item['atl_date'],
+                'price_change_percentage_1h_in_currency'=>(string)$item['price_change_percentage_1h_in_currency'],
+                'price_change_percentage_7d_in_currency'=>(string)$item['price_change_percentage_7d_in_currency'],
+                'price_change_percentage_30d_in_currency'=>(string)$item['price_change_percentage_30d_in_currency'],
+                'price_change_percentage_1y_in_currency'=>(string)$item['price_change_percentage_1y_in_currency'],
                 'last_updated'=>$item['last_updated'],
                 'created_at'=>$stamp,
                 'updated_at'=>$stamp,
             ];
+            if($item['price_change_percentage_1h_in_currency']>15){
+                $name =$item['name'];
+                $change =$item['price_change_percentage_1h_in_currency'];
+                Log::info("$name $change%");
+                TelegramService::sendMessageToChat('-1001334835359',"$name's price increased $change% in 1 hour.");
+            }
         };
         DB::connection($connection)->table('coin_markets_data')->insert($markets);
         return count($data);

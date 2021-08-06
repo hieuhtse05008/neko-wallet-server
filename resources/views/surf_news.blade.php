@@ -727,7 +727,9 @@
                     return `${title}${link}\n\n${vote}`;
                 },
                 sendToTelegram: function (chat_id = '-535769292', item) {
+                    //neko test -535769292
                     //neko terminal -1001548803112
+                    //neko internal -1001334835359
                     this.isSendingTelegram = true;
                     console.log(chat_id, item);
                     const encoded_text = this.buildTelegramMessage(item);
