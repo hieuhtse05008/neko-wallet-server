@@ -109,8 +109,9 @@ class AlertCoinSignals extends Command
     {
         $coins = Coin::all();
         $stamp = now();
-        foreach ($coins as $coin) {
+        foreach ($coins as $key=>$coin) {
             $this->checkSignal($coin, $stamp);
+            sleep(2);
         }
     }
 
