@@ -100,7 +100,7 @@ class AlertCoinSignals extends Command
             Log::info("$message");
             Log::info($market->created_at);
             TelegramService::sendMessageToChat('-1001334835359', $message);
-            sleep(2);
+            sleep(3);
         }
 
     }
