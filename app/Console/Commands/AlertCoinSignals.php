@@ -100,7 +100,7 @@ class AlertCoinSignals extends Command
             Log::info("$message");
             Log::info($market->created_at);
             TelegramService::sendMessageToChat('-1001334835359', $message);
-
+            sleep(2);
         }
 
     }
@@ -109,9 +109,9 @@ class AlertCoinSignals extends Command
     {
         $coins = Coin::all();
         $stamp = now();
-        foreach ($coins as $key=>$coin) {
+        foreach ($coins as $coin) {
             $this->checkSignal($coin, $stamp);
-            sleep(2);
+
         }
     }
 
