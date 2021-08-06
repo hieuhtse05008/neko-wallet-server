@@ -43,7 +43,7 @@ class AlertCoinSignals extends Command
         $now = Carbon::parse($market->created_at);
         $should_send_message = false;
         $symbol = strtoupper($coin->symbol);
-        $name = strtoupper($coin->name);
+        $name = ($coin->name);
         $percent_1h = number_format((float)$market->price_change_percentage_1h_in_currency, 2, '.', '');
         $percent_24h = number_format((float)$market->price_change_percentage_24h, 2, '.', '');
 
