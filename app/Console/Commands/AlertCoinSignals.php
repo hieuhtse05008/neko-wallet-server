@@ -4,10 +4,9 @@ namespace App\Console\Commands;
 
 use App\Models\Coin;
 use App\Models\CoinMarketsData;
-use App\Services\CoinGeckoService;
+use App\Services\TelegramService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class AlertCoinSignals extends Command
@@ -36,11 +35,11 @@ class AlertCoinSignals extends Command
         parent::__construct();
     }
 
-    private function checkSignal(Coin $coin,$stamp)
+    private function checkSignal(Coin $coin, $stamp)
     {
-        $market = $coin->markets()->where('created_at','>=',$stamp->subMinutes(30))->first();
+        $market = $coin->markets()->where('created_at', '>=', $stamp->subMinutes(30))->first();
 
-        if($market == null) return;
+        if ($market == null) return;
         $now = Carbon::parse($market->created_at);
         $should_send_message = false;
         $symbol = strtoupper($coin->symbol);
@@ -60,26 +59,28 @@ class AlertCoinSignals extends Command
         }
 
         $last_market_1h = CoinMarketsData::where('coin_id', '=', $coin->coin_id)
-            ->whereBetween('created_at', [$now->subHour()->subMinutes(5),$now->subHour()->addMinutes(5),])
+            ->whereBetween('created_at', [$now->subHour()->subMinutes(5), $now->subHour()->addMinutes(5),])
             ->first();
         if ($last_market_1h && $last_market_1h->total_volume) {
-            Log::info($market->created_at);Log::info($last_market_1h->created_at);
-            $volume_change_percentage =($market->total_volume/$last_market_1h->total_volume -1)*100;
+            Log::info($market->created_at);
+            Log::info($last_market_1h->created_at);
+            $volume_change_percentage = ($market->total_volume / $last_market_1h->total_volume - 1) * 100;
             $volume_change_percentage = number_format($volume_change_percentage, 2, '.', '');
-            if($volume_change_percentage > 50){
+            if ($volume_change_percentage > 50) {
 
                 $should_send_message = true;
                 $message = $message . "<a>Volume change 1h: $volume_change_percentage(%)</a>\n";
             }
         }
         $last_market_24h = CoinMarketsData::where('coin_id', '=', $market->id)
-            ->whereBetween('created_at', [$now->subDay()->subMinutes(5),$now->subDay()->addMinutes(5),])
+            ->whereBetween('created_at', [$now->subDay()->subMinutes(5), $now->subDay()->addMinutes(5),])
             ->first();
         if ($last_market_24h && $last_market_24h->total_volume) {
-            Log::info($market->created_at);   Log::info($last_market_24h->created_at);
-            $volume_change_percentage =($market->total_volume/$last_market_24h->total_volume - 1)*100;
+            Log::info($market->created_at);
+            Log::info($last_market_24h->created_at);
+            $volume_change_percentage = ($market->total_volume / $last_market_24h->total_volume - 1) * 100;
             $volume_change_percentage = number_format($volume_change_percentage, 2, '.', '');
-            if($volume_change_percentage > 100){
+            if ($volume_change_percentage > 100) {
 
                 $should_send_message = true;
                 $message = $message . "<a>Volume change 24h: $volume_change_percentage(%)</a>\n";
@@ -87,16 +88,17 @@ class AlertCoinSignals extends Command
         }
         if ($should_send_message) {
             Log::info("$message");
+            TelegramService::sendMessageToChat('-1001334835359', $message);
 
         }
 
-//        TelegramService::sendMessageToChat('-1001334835359',$message);
     }
 
-    private function checkSignals(){
-        $coins=Coin::all();
+    private function checkSignals()
+    {
+        $coins = Coin::all();
         $stamp = now();
-        foreach ($coins as $coin){
+        foreach ($coins as $coin) {
             $this->checkSignal($coin, $stamp);
         }
     }
