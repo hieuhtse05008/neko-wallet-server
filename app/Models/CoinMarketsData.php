@@ -201,7 +201,11 @@ class CoinMarketsData extends Model
         'low_24h',
         'atl',
         'atl_change_percentage',
-        'atl_date'
+        'atl_date',
+        'price_change_percentage_1h_in_currency',
+        'price_change_percentage_7d_in_currency',
+        'price_change_percentage_30d_in_currency',
+        'price_change_percentage_1y_in_currency',
     ];
 
     /**
@@ -262,7 +266,6 @@ class CoinMarketsData extends Model
         'atl_change_percentage' => 'nullable|string',
         'atl_date' => 'nullable|string'
     ];
-
     public function coin(){
         return $this->belongsTo(Coin::class,'coin_id','coin_id');
     }

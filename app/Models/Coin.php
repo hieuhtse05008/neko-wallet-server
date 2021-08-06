@@ -107,6 +107,7 @@ class Coin extends Model
     ];
 
 
+
     public function markets(){
         return $this->hasMany(CoinMarketsData::class, 'coin_id','coin_id');
     }
