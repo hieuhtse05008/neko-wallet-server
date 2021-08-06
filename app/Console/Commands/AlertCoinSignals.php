@@ -37,7 +37,15 @@ class AlertCoinSignals extends Command
 
     private function checkSignal(Coin $coin, $stamp)
     {
-        $market = $coin->markets()->where('created_at', '>=', $stamp->subMinutes(30))->first();
+        $market = $coin->markets()
+//            ->where(function ($q){
+//                return $q->where('market_cap','<', 10000)->orWhere(function ($q2){
+//                   return
+//                });
+//            })
+
+            ->where('market_cap','<', 100000000)
+            ->where('created_at', '>=', $stamp->subMinutes(30))->first();
 
         if ($market == null) return;
         $now = Carbon::parse($market->created_at);
