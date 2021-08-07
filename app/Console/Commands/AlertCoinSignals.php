@@ -58,7 +58,7 @@ class AlertCoinSignals extends Command
         $message = "<a>Symbol: $symbol</a>\n<a>Name: $name</a>\n";
 
         $percent_1h = number_format((float)$market->price_change_percentage_1h_in_currency, 2, '.', '');
-        if ($percent_1h > 100) {
+        if ($percent_1h > 15) {
             $should_send_message = true;
             $message = $message . "<a>Price change 1h: $percent_1h(%)</a>\n";
         }
