@@ -54,19 +54,21 @@ class AlertCoinSignals extends Command
         $should_send_message = false;
         $symbol = strtoupper($coin->symbol);
         $name = ($coin->name);
-        $percent_1h = number_format((float)$market->price_change_percentage_1h_in_currency, 2, '.', '');
-        $percent_24h = number_format((float)$market->price_change_percentage_24h, 2, '.', '');
 
         $message = "<a>Symbol: $symbol</a>\n<a>Name: $name</a>\n";
 
-        if ($percent_1h > 15) {
+        $percent_1h = number_format((float)$market->price_change_percentage_1h_in_currency, 2, '.', '');
+        if ($percent_1h > 100) {
             $should_send_message = true;
             $message = $message . "<a>Price change 1h: $percent_1h(%)</a>\n";
         }
-        if ($percent_24h > 100) {
-            $should_send_message = true;
-            $message = $message . "<a>Price change 24h: $percent_24h(%)</a>\n";
-        }
+
+
+//        $percent_24h = number_format((float)$market->price_change_percentage_24h, 2, '.', '');
+//        if ($percent_24h > 100) {
+//            $should_send_message = true;
+//            $message = $message . "<a>Price change 24h: $percent_24h(%)</a>\n";
+//        }
 
         $last_market_1h = CoinMarketsData::where('coin_id', '=', $coin->coin_id)
             ->whereBetween('created_at', [$now->subHour()->subMinutes(5), $now->subHour()->addMinutes(5),])
