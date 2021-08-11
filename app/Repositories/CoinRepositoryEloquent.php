@@ -55,7 +55,24 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
      */
     static public function queryFilter($query, $filter)
     {
-
+        if(!empty($filter['market_caps'])){
+            $query = $query->whereIn();
+        }
+        if(!empty($filter['symbols'])){
+            $query = $query->whereIn('');
+        }
+        if(!empty($filter['price_change_24h_low'])){
+            $query = $query->where();
+        }
+        if(!empty($filter['price_change_24h_high'])){
+            $query = $query->where();
+        }
+        if(!empty($filter['ath_change_percentage_low'])){
+            $query = $query->where();
+        }
+        if(!empty($filter['ath_change_percentage_high'])){
+            $query = $query->where();
+        }
         return $query;
     }
 
@@ -76,6 +93,9 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
         }
 
         $this->scopeQuery(function ($query) use ($filter) {
+            if(!empty($filter['market'])){
+                $query = self::queryFilter($query, $filter['market']);
+            }
             return $query;
         });
 
@@ -85,4 +105,6 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
         return $this->get();
 
     }
+
+
 }
