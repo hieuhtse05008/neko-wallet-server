@@ -93,7 +93,7 @@ class SyncCoinMarketsData extends Command
 
         }
         Log::info('end SyncCoinMarketsData');
-//        $this->call('alert:signals');
+        $this->call('alert:signals');
         return 0;
     }
 }
