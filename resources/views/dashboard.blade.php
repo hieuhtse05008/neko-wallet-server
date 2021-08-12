@@ -1,8 +1,8 @@
 @extends('layout.master')
 
 @section('content')
-    <div class="container pt-5" id="dashboardVue">
-        <div class="row mb-5">
+    <div class="container pt-5" id="dashboardVue" v-cloak>
+        <div class="row mb-2">
             <div class="col-md-3">
                 <label class="form-label"><b>Market Caps Segment</b></label>
                 <div class="dropdown mb-3">
@@ -40,10 +40,10 @@
             <div class=" col-md-3">
                 <label class="form-label"><b>All time low change percentage</b></label>
                 <div class="input-group mb-3">
-                    <input v-model="filter.alt_change_percentage_low" type="number" class="form-control"
+                    <input v-model="filter.atl_change_percentage_low" type="number" class="form-control"
                            placeholder="from">
                     <span class="input-group-text"> → </span>
-                    <input v-model="filter.alt_change_percentage_high" type="number" class="form-control"
+                    <input v-model="filter.atl_change_percentage_high" type="number" class="form-control"
                            placeholder="to">
                 </div>
 
@@ -76,7 +76,14 @@
                 </div>
             </div>
         </div>
-        <div class="table-responsive tableFixHead" v-on:scroll="handleScroll">
+        <div class="d-flex justify-content-end mb-5">
+            <button class="btn btn-success" @click="apply" :disabled="isLoading">Apply</button>
+        </div>
+        <div class="d-flex justify-content-end">
+            <div>Page: @{{ meta.current_page }}/@{{ meta.total_pages }}</div>
+        </div>
+
+        <div id="table-market" class="table-responsive tableFixHead" v-on:scroll="handleScroll">
             <table class="table  table-sm table-striped">
                 <thead>
                 <tr class="table-danger">
@@ -163,26 +170,37 @@
                     {label: 'Small caps', key: 'small_caps', low: 1000000, high: 1000000},
                     {label: 'Mid caps', key: 'mid_caps', low: 10000000, high: 100000000},
                     {label: 'Large caps', key: 'large_caps', low: 100000000, high: 1000000000},
-                    {label: 'Mega caps', key: 'mega_caps', low: 1000000000, high: 0},
+                    {label: 'Mega caps', key: 'mega_caps', low: 1000000000, high: -1},
                 ],
                 filter: {
                     symbols: [],
                     market_caps: ["nano_caps", "micro_caps", "small_caps", "mid_caps", "large_caps", "mega_caps"],
                     price_change_percentage_24h_high: 100,
                     price_change_percentage_24h_low: -100,
-                    alt_change_percentage_high: 100,
-                    alt_change_percentage_low: -100,
+                    atl_change_percentage_high: 100,
+                    atl_change_percentage_low: -100,
                 },
+                meta:{
+                    current_page: 1,
+                    total_pages: 0,
+                }
             },
             methods: {
+                apply: function (){
+                    document.getElementById("table-market").scrollTop = 0;
+                    this.coins = [];
+                    this.loadCoins(1);
+                },
                 handleScroll: function ({target}){
+                    const {current_page,total_pages,} = this.meta;
+                    if(current_page == total_pages) return;
                     // console.log(e)
                     const {scrollHeight, scrollTop,offsetHeight} = target;
-                    if(scrollHeight <= scrollTop +  offsetHeight + 33*150){
+                    if(scrollTop +  offsetHeight >= scrollHeight - 800 ){
                         console.log('==============================')
-                        this.loadCoins(this.page+1);
+                        this.loadCoins(current_page+1);
                     }
-                    console.log(scrollHeight , scrollTop +  offsetHeight)
+                    console.log(scrollHeight , scrollTop , offsetHeight)
 
                 },
                 changeFilterArray: function (field, key) {
@@ -193,24 +211,27 @@
                     }
                 },
                 loadCoins: function (page = 1) {
-                    if(this.isLoading) return;
+                    if(this.isLoading || (page > 1 && this.page == page)) return;
                     this.isLoading = true;
                     const {
                         price_change_percentage_24h_high,
                         price_change_percentage_24h_low,
-                        alt_change_percentage_high,
-                        alt_change_percentage_low,
+                        atl_change_percentage_high,
+                        atl_change_percentage_low,
                         market_caps,
                         symbols,
                     } = this.filter;
+
                     $.get(`/api/v1/coins?include=last_market`,{
                         page,
                         limit:200,
-                        price_change_percentage_24h_high,
-                        price_change_percentage_24h_low,
-                        alt_change_percentage_high,
-                        alt_change_percentage_low,
-                        market_caps,
+                        last_market:{
+                            price_change_percentage_24h_high,
+                            price_change_percentage_24h_low,
+                            atl_change_percentage_high,
+                            atl_change_percentage_low,
+                            market_caps,
+                        },
                         symbols,
                     }).then(
                         (res) => {
@@ -219,6 +240,7 @@
                                 ...this.coins,
                                 ...res.coins.items.filter(i => i.last_market),
                             ];
+                            this.meta = res.coins.meta;
                             if (!this.symbols.length) {
                                 this.symbols = this.coins.map(i => i.symbol);
                             }
@@ -247,8 +269,8 @@
     <style>
         .table-responsive {
             overflow-y: auto;
-            max-height: calc(100vh - 10rem);
-            min-height: calc(100vh - 10rem);
+            max-height: calc(100vh);
+            min-height: 650px;
             transform: translate3d(0, 0, 0);
         }
 

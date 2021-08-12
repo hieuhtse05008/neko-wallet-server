@@ -82,14 +82,8 @@ class CoinAPIController extends APIController
     {
         $filter = [
             'include'=>$request->include,
-            'market'=>[
-                'market_caps' =>   $request->market_caps,
-                'price_change_24h_low' =>   $request->price_change_24h_low,
-                'price_change_24h_high' =>   $request->price_change_24h_high,
-                'ath_change_percentage_low' =>   $request->ath_change_percentage_low,
-                'ath_change_percentage_high' =>   $request->ath_change_percentage_high,
-                'symbols' =>   $request->symbols,
-            ],
+            'symbols' =>   $request->symbols,
+            'last_market'=> $request->last_market,
         ];
         $limit = $request->limit ?: 20;
 //        $limit = $request->limit;

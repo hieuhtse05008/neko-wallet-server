@@ -2,15 +2,17 @@
 
 namespace App\Repositories;
 
+use App\Criteria\CoinJoinMarketCriteria;
 use App\Models\Coin;
-use App\Repositories\Repository;
 use App\Presenters\CoinPresenter;
+use Illuminate\Support\Facades\DB;
+use Prettus\Repository\Criteria\RequestCriteria;
+
 /**
  * Class CoinRepositoryEloquent
  * @package App\Repositories
  * @version August 4, 2021, 3:50 pm UTC
-*/
-
+ */
 class CoinRepositoryEloquent extends Repository implements CoinRepository
 {
     /**
@@ -55,24 +57,72 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
      */
     static public function queryFilter($query, $filter)
     {
-        if(!empty($filter['market_caps'])){
-            $query = $query->whereIn();
+        if (!empty($filter['symbols'])) {
+            $query = $query->whereIn('symbol', $filter['symbols']);
         }
-        if(!empty($filter['symbols'])){
-            $query = $query->whereIn('');
+
+        return $query;
+    }
+
+    /**
+     * @param $query
+     * @param $filter
+     * @return mixed
+     */
+    static public function queryFilterLastMarket($query, $filter)
+    {
+        $connection = config('database.connections.warehouse.database');
+        $last_market_ids = collect(DB::connection($connection)
+            ->select("SELECT MAX(id) AS id, coin_markets_data.coin_id
+                      FROM coin_markets_data GROUP BY coin_markets_data.coin_id "))
+            ->pluck('id')->toArray();
+        $query = $query->whereIn('coin_markets_data.id', $last_market_ids);
+
+        if (!empty($filter['market_caps'])) {
+            $query = $query->where(function ($q) use ($filter) {
+                foreach ($filter['market_caps'] as $cap_key) {
+                    $caps = array_values(array_filter(\App\Enum\Coin::MARKET_CAPS, function ($c) use ($cap_key) {
+                        return $c['key'] == $cap_key;
+                    }));
+                    if (count($caps) > 0) {
+                        $cap = $caps[0];
+                        $q = $q->orWhere(function ($qq) use ($cap) {
+                            if (isset($cap['low'])) {
+//                                $qq = $qq->where('market_cap', '>=', $cap['low']);
+                                $qq->whereRaw("(CASE WHEN market_cap = '' then null else market_cap end)::DOUBLE PRECISION >=" . $cap['low']);
+
+                            }
+                            if (isset($cap['high'])) {
+//                                $qq = $qq->where('market_cap', '<=', $cap['high']);
+                                $qq->whereRaw("(CASE WHEN market_cap = '' then null else market_cap end)::DOUBLE PRECISION <=" . $cap['high']);
+
+                            }
+                            return $qq;
+                        });
+
+                    }
+                }
+                return $q;
+            });
         }
-        if(!empty($filter['price_change_24h_low'])){
-            $query = $query->where();
+
+        if (!empty($filter['price_change_percentage_24h_high'])) {
+            $query->whereRaw("(CASE WHEN price_change_percentage_24h = '' then null else price_change_percentage_24h end)::DOUBLE PRECISION <=" . $filter['price_change_percentage_24h_high']);
+
         }
-        if(!empty($filter['price_change_24h_high'])){
-            $query = $query->where();
+        if (!empty($filter['price_change_percentage_24h_low'])) {
+            $query->whereRaw("(CASE WHEN price_change_percentage_24h = '' then null else price_change_percentage_24h end)::DOUBLE PRECISION >=" . $filter['price_change_percentage_24h_low']);
+
         }
-        if(!empty($filter['ath_change_percentage_low'])){
-            $query = $query->where();
+        if (!empty($filter['atl_change_percentage_high'])) {
+            $query->whereRaw("(CASE WHEN atl_change_percentage = '' then null else atl_change_percentage end)::DOUBLE PRECISION <=" . $filter['atl_change_percentage_high']);
+
         }
-        if(!empty($filter['ath_change_percentage_high'])){
-            $query = $query->where();
+        if (!empty($filter['atl_change_percentage_low'])) {
+            $query->whereRaw("(CASE WHEN atl_change_percentage = '' then null else atl_change_percentage end)::DOUBLE PRECISION >=" . $filter['atl_change_percentage_low']);
+
         }
+
         return $query;
     }
 
@@ -88,14 +138,29 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
         // TODO: Implement list() method.
         $this->resetCriteria();
 
-        if (!$disabledRequestCriteria){
+        if (!$disabledRequestCriteria) {
+            $this->pushCriteria(app(RequestCriteria::class));
 
         }
 
-        $this->scopeQuery(function ($query) use ($filter) {
-            if(!empty($filter['market'])){
-                $query = self::queryFilter($query, $filter['market']);
+        if (!empty($filter['last_market'])) {
+            $this->pushCriteria(CoinJoinMarketCriteria::class);
+
+
+        }
+            $this->scopeQuery(function ($query) use ($filter) {
+            $query = self::queryFilter($query, $filter);
+
+            if (!empty($filter['last_market'])) {
+
+
+
+//                $this->whereHas('last_market', function ($query) use ($filter_last_market) {
+                $query = self::queryFilterLastMarket($query, $filter['last_market']);
+//                    return $query;
+//                });
             }
+                $query->select('coins.*');
             return $query;
         });
 
