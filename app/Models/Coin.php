@@ -113,7 +113,7 @@ class Coin extends Model
     }
 
     public function last_market(){
-        return $this->hasOne(CoinMarketsData::class, 'coin_id','coin_id')->latestOfMany();
+        return $this->hasOne(CoinMarketsData::class, 'coin_id','coin_id')->latest();
 
     }
 }
