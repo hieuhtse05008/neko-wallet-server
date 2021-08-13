@@ -41,10 +41,11 @@ class SyncTokenPrice extends Command
      */
     public function handle()
     {
+        $this->syncPriceCoinGecko();
+
         $seconds = 0;
         while ($seconds < 60) {
 
-            $this->syncPriceCoinGecko();
 //            $this->syncPriceBinance();
             $this->syncPriceNami();
 //            $this->syncPriceHuobi();
