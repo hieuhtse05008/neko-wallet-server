@@ -3,10 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Jobs\SyncTokenPriceBinance;
+use App\Jobs\SyncTokenPriceCoinGecko;
 use App\Jobs\SyncTokenPriceHuobi;
 use App\Jobs\SyncTokenPriceNami;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 
 class SyncTokenPrice extends Command
 {
@@ -44,9 +44,10 @@ class SyncTokenPrice extends Command
         $seconds = 0;
         while ($seconds < 60) {
 
-            $this->syncPriceBinance();
+            $this->syncPriceCoinGecko();
+//            $this->syncPriceBinance();
             $this->syncPriceNami();
-            $this->syncPriceHuobi();
+//            $this->syncPriceHuobi();
             $this->info("Syncing!");
             $seconds += 10;
             sleep(10);
@@ -55,6 +56,10 @@ class SyncTokenPrice extends Command
     }
 
 
+    private function syncPriceCoinGecko()
+    {
+        SyncTokenPriceCoinGecko::dispatch();
+    }
 
     private function syncPriceHuobi()
     {
@@ -66,7 +71,8 @@ class SyncTokenPrice extends Command
         SyncTokenPriceBinance::dispatch();
     }
 
-    private function syncPriceNami(){
+    private function syncPriceNami()
+    {
 
         SyncTokenPriceNami::dispatch();
     }

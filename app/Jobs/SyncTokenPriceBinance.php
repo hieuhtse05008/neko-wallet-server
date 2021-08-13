@@ -41,6 +41,7 @@ class SyncTokenPriceBinance implements ShouldQueue
         $url = 'https://api.binance.com/api/v3/ticker/24hr';
         $response = $httpClient->get($url);
         $res = json_decode($response->getBody()->getContents());
+
         $tokens = array_filter($res, function ($item) {
 //          preg_match("/^.+USDT$/m", $item->symbol);
             return preg_match("/^.+USDT$/m", $item->symbol) || preg_match("/^.+BVND$/m", $item->symbol);

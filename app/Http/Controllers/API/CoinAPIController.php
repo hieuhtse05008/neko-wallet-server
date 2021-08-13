@@ -81,7 +81,6 @@ class CoinAPIController extends APIController
 
     public function index(Request $request)
     {
-        DB::enableQueryLog();
         $filter = [
             'include'=>$request->include,
             'symbols' =>   $request->symbols,
@@ -91,7 +90,6 @@ class CoinAPIController extends APIController
 //        $limit = $request->limit;
         $this->coinRepository->with($request->include);
         $coins = $this->coinRepository->list($limit, $filter);
-        DB::disableQueryLog();
 
         return $this->respondSuccess([
             "coins" => $coins
