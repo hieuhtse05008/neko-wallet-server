@@ -89,7 +89,7 @@ class CoinAPIController extends APIController
         $limit = $request->limit ?: 20;
 //        $limit = $request->limit;
         $this->coinRepository->with($request->include);
-        dd($request->all());
+//        dd($request->all());
         $coins = $this->coinRepository->list($limit, $filter);
 
         return $this->respondSuccess([
