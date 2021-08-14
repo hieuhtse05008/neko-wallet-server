@@ -139,12 +139,12 @@
                         <td scope="row" class="text-nowrap">@{{coin.last_market.high_24h}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.ath}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.ath_change_percentage}}</td>
-                        <td scope="row" class="text-nowrap">@{{coin.last_market.ath_date}}</td>
+                        <td scope="row" class="text-nowrap">@{{new Date(coin.last_market.ath_date*1000).toLocaleString() }}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.low_24h}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.atl}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.atl_change_percentage}}</td>
-                        <td scope="row" class="text-nowrap">@{{coin.last_market.atl_date}}</td>
-                        <td scope="row" class="text-nowrap">@{{coin.last_market.last_updated}}</td>
+                        <td scope="row" class="text-nowrap">@{{new Date(coin.last_market.atl_date*1000).toLocaleString() }}</td>
+                        <td scope="row" class="text-nowrap">@{{new Date(coin.last_market.last_updated*1000).toLocaleString() }}</td>
                     </tr>
                 </template>
                 </tbody>
