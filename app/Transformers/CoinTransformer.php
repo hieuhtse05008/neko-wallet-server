@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use Illuminate\Support\Facades\Log;
 use League\Fractal\TransformerAbstract;
 use App\Models\Coin;
 
@@ -65,7 +66,9 @@ class CoinTransformer extends TransformerAbstract
     }
     public function includeLastMarket(Coin $model){
         if($model->last_market){
-            return $this->item($model->last_market, new CoinMarketsDataTransformer());
+            $item = $this->item($model->last_market, new CoinMarketsDataTransformer());
+//            dd($item);
+            return $item;
         }
     }
 }

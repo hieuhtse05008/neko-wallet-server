@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Criteria\CoinJoinMarketCriteria;
+use App\Criteria\CoinJoinLastMarketCriteria;
 use App\Models\Coin;
 use App\Presenters\CoinPresenter;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -137,16 +137,13 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
         }
 
         if (!empty($filter['last_market'])) {
-            $this->pushCriteria(CoinJoinMarketCriteria::class);
+            $this->pushCriteria(CoinJoinLastMarketCriteria::class);
         }
         $this->scopeQuery(function ($query) use ($filter) {
             $query = self::queryFilter($query, $filter);
 
             if (!empty($filter['last_market'])) {
-
-
                 $query = self::queryFilterLastMarket($query, $filter['last_market']);
-
             }
             $query->select('coins.*');
             return $query;

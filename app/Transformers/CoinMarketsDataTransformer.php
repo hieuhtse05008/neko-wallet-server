@@ -67,7 +67,6 @@ class CoinMarketsDataTransformer extends TransformerAbstract
             'atl'=>(string)$model->atl,
             'atl_change_percentage'=>(string)$model->atl_change_percentage,
             /* place your other model properties here */
-            'created_at_2' => ($model->created_at),
 
             'ath_date' => strtotime($model->ath_date),
             'atl_date' => strtotime($model->atl_date),
