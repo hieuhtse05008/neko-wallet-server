@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Criteria\CoinJoinMarketCriteria;
 use App\Models\Coin;
 use App\Presenters\CoinPresenter;
-use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
@@ -71,12 +70,6 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
      */
     static public function queryFilterLastMarket($query, $filter)
     {
-        $connection = config('database.connections.warehouse.database');
-        $last_market_ids = collect(DB::connection($connection)
-            ->select("SELECT MAX(id) AS id, coin_markets_data.coin_id
-                      FROM coin_markets_data GROUP BY coin_markets_data.coin_id "))
-            ->pluck('id')->toArray();
-        $query = $query->whereIn('coin_markets_data.id', $last_market_ids);
 
         if (!empty($filter['market_caps'])) {
             $query = $query->where(function ($q) use ($filter) {
@@ -145,22 +138,17 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
 
         if (!empty($filter['last_market'])) {
             $this->pushCriteria(CoinJoinMarketCriteria::class);
-
-
         }
-            $this->scopeQuery(function ($query) use ($filter) {
+        $this->scopeQuery(function ($query) use ($filter) {
             $query = self::queryFilter($query, $filter);
 
             if (!empty($filter['last_market'])) {
 
 
-
-//                $this->whereHas('last_market', function ($query) use ($filter_last_market) {
                 $query = self::queryFilterLastMarket($query, $filter['last_market']);
-//                    return $query;
-//                });
+
             }
-                $query->select('coins.*');
+            $query->select('coins.*');
             return $query;
         });
 

@@ -74,6 +74,7 @@ class SyncCoinMarketsData extends Command
             ];
         };
         DB::connection($connection)->table('coin_markets_data')->insert($markets);
+        DB::connection($connection)->table('last_coin_markets_data')->upsert($markets,'coin_id');
         return count($data);
     }
 
@@ -93,7 +94,7 @@ class SyncCoinMarketsData extends Command
 
         }
         Log::info('end SyncCoinMarketsData');
-        $this->call('alert:signals');
+//        $this->call('alert:signals');
         return 0;
     }
 }

@@ -75,7 +75,7 @@ class AlertCoinSignals extends Command
             ->orderBy('created_at', 'desc')
             ->first();
         if ($last_market_1h && $last_market_1h->total_volume) {
-            Log::info($last_market_1h->created_at);
+//            Log::info($last_market_1h->created_at);
             $volume_change_percentage = ($market->total_volume / $last_market_1h->total_volume - 1) * 100;
             $volume_change_percentage = number_format($volume_change_percentage, 2, '.', '');
             if ($volume_change_percentage > 50) {
