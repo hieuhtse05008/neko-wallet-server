@@ -151,7 +151,7 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
             $query->select('coins.*');
             return $query;
         });
-
+        dd($limit);
         if ($limit) {
             return $this->paginate($limit);
         }
