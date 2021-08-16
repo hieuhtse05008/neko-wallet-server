@@ -100,6 +100,7 @@ class SyncCoinsList extends Command
      */
     public function handle()
     {
+        $this->handleCoinGecko();
         $this->handleCoinMarketCaps();
 
         return 0;
