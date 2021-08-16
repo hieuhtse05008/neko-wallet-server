@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 //         $schedule->command('inspire')->hourly();
-        $schedule->command("sync:token_prices")->everyMinute();
-        $schedule->command("sync:coins")->everySixHours();
+        $schedule->command("sync:token_prices")->everyMinute()->withoutOverlapping();
+        $schedule->command("sync:coins")->everySixHours()->withoutOverlapping();
 //        $schedule->command("sync:markets")->hourly();
     }
 
