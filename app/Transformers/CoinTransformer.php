@@ -53,6 +53,8 @@ class CoinTransformer extends TransformerAbstract
             'coin_id'=>$model->coin_id,
             'symbol'=>$model->symbol,
             'name'=>$model->name,
+            'coin_market_cap_id'=>$model->coin_market_cap_id,
+            'holder_count'=>$model->holder_count,
 
             'created_at' => strtotime($model->created_at),
             'updated_at' => strtotime($model->updated_at),

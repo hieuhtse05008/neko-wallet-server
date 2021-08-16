@@ -58,7 +58,8 @@
                     <ul class="dropdown-menu w-100" id="dropdownSymbols"
                         style="max-height: 60vh;overflow-y: scroll;padding-top:0;">
                         <li class="bg-white sticky-top">
-                            <div class="dropdown-item"><input class="w-100" type="text" placeholder="Search" v-model="search">
+                            <div class="dropdown-item"><input class="w-100" type="text" placeholder="Search"
+                                                              v-model="search">
                             </div>
                         </li>
                         <li v-for="item in _symbols">
@@ -87,45 +88,31 @@
             <table class="table  table-sm table-striped">
                 <thead>
                 <tr class="table-danger">
-                    <th scope="col" class="text-nowrap">ID</th>
-                    <th scope="col" class="text-nowrap">Symbol</th>
-                    <th scope="col" class="text-nowrap">Name</th>
-                    <th scope="col" class="text-nowrap">Current price</th>
-                    <th scope="col" class="text-nowrap">Market cap</th>
-                    <th scope="col" class="text-nowrap">Total volume</th>
-                    <th scope="col" class="text-nowrap">Price change 24h</th>
-                    <th scope="col" class="text-nowrap">Price change percentage 24h</th>
-                    <th scope="col" class="text-nowrap">Circulating supply</th>
-                    <th scope="col" class="text-nowrap">Total supply</th>
-                    <th scope="col" class="text-nowrap">Max supply</th>
-                    <th scope="col" class="text-nowrap">Market cap rank</th>
-                    <th scope="col" class="text-nowrap">Fully diluted valuation</th>
-                    <th scope="col" class="text-nowrap">High 24h</th>
-                    <th scope="col" class="text-nowrap">Ath</th>
-                    <th scope="col" class="text-nowrap">Ath change percentage</th>
-                    <th scope="col" class="text-nowrap">Ath date</th>
-                    <th scope="col" class="text-nowrap">Low 24h</th>
-                    <th scope="col" class="text-nowrap">Atl</th>
-                    <th scope="col" class="text-nowrap">Atl change percentage</th>
-                    <th scope="col" class="text-nowrap">Atl date</th>
-                    <th scope="col" class="text-nowrap">Last updated</th>
+                    <th v-for="field in fields" scope="col" class="text-nowrap pointer"
+                        :id="`head-${field.key}`"
+                        @click="onChangeSort(field.key)">@{{ field.name }}
+
+                        <i v-if="sort.orderBy === field.key && sort.sortedBy == 'desc'" class="bi bi-caret-down-fill"></i>
+                        <i v-if="sort.orderBy === field.key && sort.sortedBy == 'asc'" class="bi bi-caret-up-fill"></i>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
-                                    <tr v-if="isLoading && coins.length == 0">
-                                        <td colspan="22">
-                                            <div class="w-100 d-flex align-items-center justify-content-center" style="height: 80vh;">
-                                                <div class="spinner-grow" role="status">
-                                                    <span class="visually-hidden">Loading...</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                <tr v-if="isLoading && coins.length == 0">
+                    <td colspan="22">
+                        <div class="w-100 d-flex align-items-center justify-content-center" style="height: 80vh;">
+                            <div class="spinner-grow" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
                 <template v-for="coin in coins">
                     <tr v-if="coin.last_market">
                         <th scope="row" class="text-nowrap">@{{coin.id}}</th>
                         <td scope="row" class="text-nowrap">@{{coin.symbol}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.name}}</td>
+                        <td scope="row" class="text-nowrap">@{{coin.holder_count}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.current_price}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.market_cap}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.total_volume}}</td>
@@ -139,12 +126,18 @@
                         <td scope="row" class="text-nowrap">@{{coin.last_market.high_24h}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.ath}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.ath_change_percentage}}</td>
-                        <td scope="row" class="text-nowrap">@{{new Date(coin.last_market.ath_date*1000).toLocaleString() }}</td>
+                        <td scope="row" class="text-nowrap">@{{new Date(coin.last_market.ath_date*1000).toLocaleString()
+                            }}
+                        </td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.low_24h}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.atl}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.atl_change_percentage}}</td>
-                        <td scope="row" class="text-nowrap">@{{new Date(coin.last_market.atl_date*1000).toLocaleString() }}</td>
-                        <td scope="row" class="text-nowrap">@{{new Date(coin.last_market.last_updated*1000).toLocaleString() }}</td>
+                        <td scope="row" class="text-nowrap">@{{new Date(coin.last_market.atl_date*1000).toLocaleString()
+                            }}
+                        </td>
+                        <td scope="row" class="text-nowrap">@{{new
+                            Date(coin.last_market.last_updated*1000).toLocaleString() }}
+                        </td>
                     </tr>
                 </template>
                 </tbody>
@@ -180,27 +173,70 @@
                     atl_change_percentage_high: 100,
                     atl_change_percentage_low: -100,
                 },
-                meta:{
+                sort: {
+                    // orderBy:'symbol',
+                    sortedBy: '',
+                },
+                meta: {
                     current_page: 1,
                     total_pages: 0,
-                }
+                },
+                fields: [
+                    {key: 'id', name: 'ID',},
+                    {key: 'symbol', name: 'Symbol',},
+                    {key: 'name', name: 'Name',},
+                    {key: 'holder_count', name: 'Holders',},
+                    {key: 'current_price', name: 'Current price',},
+                    {key: 'market_cap', name: 'Market cap',},
+                    {key: 'total_volume', name: 'Total volume',},
+                    {key: 'price_change_24h', name: 'Price change 24h',},
+                    {key: 'price_change_percentage_24h', name: 'Price change percentage 24h',},
+                    {key: 'circulating_supply', name: 'Circulating supply',},
+                    {key: 'total_supply', name: 'Total supply',},
+                    {key: 'max_supply', name: 'Max supply',},
+                    {key: 'market_cap_rank', name: 'Market cap rank',},
+                    {key: 'fully_diluted_valuation', name: 'Fully diluted valuation',},
+                    {key: 'high_24h', name: 'High 24h',},
+                    {key: 'ath', name: 'Ath',},
+                    {key: 'ath_change_percentage', name: 'Ath change percentage',},
+                    {key: 'ath_date', name: 'Ath date',},
+                    {key: 'low_24h', name: 'Low 24h',},
+                    {key: 'atl', name: 'Atl',},
+                    {key: 'atl_change_percentage', name: 'Atl change percentage',},
+                    {key: 'atl_date', name: 'Atl date',},
+                    {key: 'last_updated', name: 'Last updated',},
+                ]
             },
             methods: {
-                apply: function (){
+                onChangeSort: function (orderBy) {
+                    const sortedBy = orderBy == this.sort.orderBy ? {
+                        '': 'asc',
+                        'asc': 'desc',
+                        'desc': '',
+                    }[this.sort.sortedBy] : 'asc';
+                    this.sort = {
+                        orderBy: sortedBy === '' ? '' : orderBy,
+                        sortedBy
+                    }
+                    this.apply();
+                },
+                apply: function () {
                     document.getElementById("table-market").scrollTop = 0;
                     this.coins = [];
                     this.loadCoins(1);
                 },
-                handleScroll: function ({target}){
-                    const {current_page,total_pages,} = this.meta;
-                    if(current_page == total_pages) return;
+                handleScroll: function (e) {
+                    console.log(e)
+                    const {target}  = e;
+                    const {current_page, total_pages,} = this.meta;
+                    if (current_page == total_pages) return;
                     // console.log(e)
-                    const {scrollHeight, scrollTop,offsetHeight} = target;
-                    if(scrollTop +  offsetHeight >= scrollHeight - 800 ){
+                    const {scrollHeight, scrollTop, offsetHeight} = target;
+                    if (scrollTop + offsetHeight >= scrollHeight - 800) {
                         console.log('==============================')
-                        this.loadCoins(current_page+1);
+                        this.loadCoins(current_page + 1);
                     }
-                    console.log(scrollHeight , scrollTop , offsetHeight)
+                    console.log(scrollHeight, scrollTop, offsetHeight)
 
                 },
                 changeFilterArray: function (field, key) {
@@ -211,7 +247,7 @@
                     }
                 },
                 loadCoins: function (page = 1) {
-                    if(this.isLoading || (page > 1 && this.page == page)) return;
+                    if (this.isLoading || (page > 1 && this.page == page)) return;
                     this.isLoading = true;
                     const {
                         price_change_percentage_24h_high,
@@ -222,10 +258,10 @@
                         symbols,
                     } = this.filter;
 
-                    $.get(`/api/v1/coins?include=last_market`,{
+                    $.get(`/api/v1/coins?include=last_market`, {
                         page,
-                        limit:200,
-                        last_market:{
+                        limit: 200,
+                        last_market: {
                             price_change_percentage_24h_high,
                             price_change_percentage_24h_low,
                             atl_change_percentage_high,
@@ -233,6 +269,7 @@
                             market_caps,
                         },
                         symbols,
+                        ...this.sort
                     }).then(
                         (res) => {
                             console.log(res);
@@ -245,6 +282,13 @@
                                 this.symbols = this.coins.map(i => i.symbol);
                             }
                             this.isLoading = false;
+
+                            setTimeout(function (){
+                                const head = document.getElementById(`head-${dashboardVue.sort.orderBy}`);
+                                if(head){
+                                    document.getElementById("table-market").scrollLeft = head.offsetLeft;
+                                }
+                            },100)
                         }
                     );
                 },
@@ -283,6 +327,10 @@
             position: sticky;
             top: 0;
             z-index: 1;
+        }
+
+        .pointer{
+            cursor: pointer;
         }
     </style>
 @endsection

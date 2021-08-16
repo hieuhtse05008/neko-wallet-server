@@ -69,7 +69,10 @@ class SyncTokenPriceCoinGecko implements ShouldQueue
             ['symbol'],
             ['last_price', 'price_change_percent']
         );
-        return count($tokens);
+        $count =  count($tokens);
+        unset($tokens);
+        return $count;
+
     }
 
     private function syncPriceCoinGecko()

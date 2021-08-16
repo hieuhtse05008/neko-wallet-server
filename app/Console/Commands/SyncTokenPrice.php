@@ -42,7 +42,6 @@ class SyncTokenPrice extends Command
     public function handle()
     {
         $this->syncPriceCoinGecko();
-
         $seconds = 0;
         while ($seconds < 60) {
 

@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Criteria\CoinJoinLastMarketCriteria;
+use App\Criteria\RequestCriteria;
 use App\Models\Coin;
 use App\Presenters\CoinPresenter;
-use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
  * Class CoinRepositoryEloquent
