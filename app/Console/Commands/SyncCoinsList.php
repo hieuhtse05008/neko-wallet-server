@@ -63,6 +63,7 @@ class SyncCoinsList extends Command
         $holder_count = 0;
         if(count($data) > 0){
             $holder_count = $data[0];
+            Log::info("".strtolower($coin->symbol)." ".$holder_count);
         }
         DB::connection($connection)->table('coins')
             ->where('symbol','=', strtolower($coin->symbol))
@@ -71,7 +72,6 @@ class SyncCoinsList extends Command
                 'coin_market_cap_id'=>$coin->id,
                 'holder_count'=>$holder_count,
             ]);
-        Log::info("".strtolower($coin->symbol).$holder_count);
 
     }
 
