@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use Codenixsv\CoinGeckoApi\CoinGeckoClient;
+use Illuminate\Support\Facades\Log;
 
 class CoinGeckoService
 {
@@ -15,6 +16,24 @@ class CoinGeckoService
         return $client;
     }
 
+    public static function getCoinById($coin_id, $filter=[
+        'localization'=>'false',
+        'tickers'=>'false',
+        'market_data'=>'false',
+        'community_data'=>'false',
+        'developer_data'=>'false',
+        'sparkline'=>'false'
+    ]): ?array
+    {
+        try {
+            $client = self::getClient();
+            $response = $client->coins()->getCoin($coin_id, $filter);
+            return ($response);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
+        return null;
+    }
     public static function getListCoins(){
         $client = self::getClient();
         $response = $client->coins()->getList();

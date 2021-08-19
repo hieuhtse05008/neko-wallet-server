@@ -33,57 +33,100 @@ class SyncCoinsList extends Command
         parent::__construct();
     }
 
-    private function handleCoinGecko(){
+    private $coin_gecko_list = [];
+
+    private function handleCoinGecko()
+    {
         Log::info("Begin handleCoinGecko");
         $connection = config('database.connections.warehouse.database');
         $data = CoinGeckoService::getListCoins();
         $coins = [];
-        foreach($data as $item){
+        foreach ($data as $item) {
             $coins[] = [
-              'coin_id'=>$item['id'],
-              'symbol'=>$item['symbol'],
-              'name'=>$item['name'],
+                'coin_id' => $item['id'],
+                'symbol' => $item['symbol'],
+                'name' => $item['name'],
             ];
-        };
-        DB::connection($connection)->table('coins')->upsert($coins,'coin_id');
+        }
+        DB::connection($connection)->table('coins')->upsert($coins, 'coin_id');
+        $this->coin_gecko_list = $coins;
+
+
+
         Log::info("End handleCoinGecko");
     }
 
 
-    private function handleCoinMarketCap($coin){
+    private function handleCoinGeckoPlatform()
+    {
+        Log::info("Begin handleCoinGeckoPlatform");
         $connection = config('database.connections.warehouse.database');
 
+        foreach ($this->coin_gecko_list as $coin) {
+            $data = CoinGeckoService::getCoinById($coin['coin_id']);
+            if (is_array($data)) {
+
+                $update_data = [
+                    'asset_platform_id' => '',
+                    'platforms' => '',
+                    'categories' => '',
+                ];
+                if (!empty($data['asset_platform_id'])) {
+                    $update_data['asset_platform_id'] = $data['asset_platform_id'];
+                }
+                if (!empty($data['platforms'])) {
+                    $update_data['platforms'] = json_encode($data['platforms']);
+                }
+                if (!empty($data['categories'])) {
+                    Log::info(json_encode(array_values($data['categories'])));
+                    $update_data['categories'] = join(',', $data['categories']);
+                }
+                DB::connection($connection)->table('coins')
+                    ->where('coin_id', '=', strtolower($coin['coin_id']))
+                    ->update($update_data);
+            }
+            usleep(900000);
+        }
+
+        Log::info("End handleCoinGeckoPlatform");
+    }
+
+
+    private function handleCoinMarketCap($coin)
+    {
+        $connection = config('database.connections.warehouse.database');
+        Log::info(json_encode($coin));
+        $update_data = [
+            'coin_market_cap_id' => $coin->id,
+            'holder_count' => 0,
+        ];
+        //get holders count
         $httpClient = new \GuzzleHttp\Client();
-
-        $url ="https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/holders/count?id=$coin->id&range=1d";
-
+        $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/holders/count?id=$coin->id&range=1d";
         $response = $httpClient->get($url);
         $res = json_decode($response->getBody()->getContents());
         $data = array_values(get_object_vars($res->data->points));
-        $holder_count = 0;
-        if(count($data) > 0){
-            $holder_count = $data[0];
-            Log::info("".strtolower($coin->symbol)." ".$holder_count);
+        if (count($data) > 0) {
+            $update_data['holder_count'] = $data[0];
         }
+
+        //update data
         DB::connection($connection)->table('coins')
-            ->where('symbol','=', strtolower($coin->symbol))
-            ->update( [
-                'symbol'=>strtolower($coin->symbol),
-                'coin_market_cap_id'=>$coin->id,
-                'holder_count'=>$holder_count,
-            ]);
+            ->where('symbol', '=', strtolower($coin->symbol))
+            ->update($update_data);
 
     }
 
-    private function handleCoinMarketCaps(){
+    private function handleCoinMarketCaps()
+    {
         Log::info("Begin handleCoinMarketCaps");
         $httpClient = new \GuzzleHttp\Client();
 
-        $url ="https://api.coinmarketcap.com/data-api/v3/map/all?cryptoAux=is_active,status&exchangeAux=is_active,status&listing_status=active,untracked";
+        $url = "https://api.coinmarketcap.com/data-api/v3/map/all?cryptoAux=is_active,status&exchangeAux=is_active,status&listing_status=active,untracked";
 
         $response = $httpClient->get($url);
         $data = json_decode($response->getBody()->getContents());
-        collect($data->data->cryptoCurrencyMap)->each(function ($coin){
+        collect($data->data->cryptoCurrencyMap)->each(function ($coin) {
 
             $this->handleCoinMarketCap($coin);
 
@@ -102,6 +145,7 @@ class SyncCoinsList extends Command
     {
         $this->handleCoinGecko();
         $this->handleCoinMarketCaps();
+        $this->handleCoinGeckoPlatform();
 
         return 0;
     }

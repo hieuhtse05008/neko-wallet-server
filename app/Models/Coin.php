@@ -78,6 +78,12 @@ class Coin extends Model
     public $fillable = [
         'coin_id',
         'symbol',
+        'holder_count',
+        'asset_platform_id',
+        'platforms',
+        'categories',
+        'coin_market_cap_id',
+        'symbol',
         'name'
     ];
 
