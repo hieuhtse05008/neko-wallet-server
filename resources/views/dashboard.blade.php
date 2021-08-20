@@ -92,7 +92,8 @@
                         :id="`head-${field.key}`"
                         @click="onChangeSort(field.key)">@{{ field.name }}
 
-                        <i v-if="sort.orderBy === field.key && sort.sortedBy == 'desc'" class="bi bi-caret-down-fill"></i>
+                        <i v-if="sort.orderBy === field.key && sort.sortedBy == 'desc'"
+                           class="bi bi-caret-down-fill"></i>
                         <i v-if="sort.orderBy === field.key && sort.sortedBy == 'asc'" class="bi bi-caret-up-fill"></i>
                     </th>
                 </tr>
@@ -123,6 +124,12 @@
                         <td scope="row" class="text-nowrap">@{{coin.last_market.max_supply}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.market_cap_rank}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.fully_diluted_valuation}}</td>
+                        <td scope="row" class="text-nowrap">@{{coin.asset_platform_id}}</td>
+                        <td scope="row" class="text-nowrap">@{{
+                            Object.keys(JSON.parse(coin.platforms||'{}')).join(', ')
+                            }}
+                        </td>
+                        <td scope="row" class="text-nowrap">@{{coin.categories}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.high_24h}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.ath}}</td>
                         <td scope="row" class="text-nowrap">@{{coin.last_market.ath_change_percentage}}</td>
@@ -196,6 +203,9 @@
                     {key: 'max_supply', name: 'Max supply',},
                     {key: 'market_cap_rank', name: 'Market cap rank',},
                     {key: 'fully_diluted_valuation', name: 'Fully diluted valuation',},
+                    {key: 'asset_platform_id', name: 'Asset platform',},
+                    {key: 'platforms', name: 'Platforms',},
+                    {key: 'categories', name: 'Categories',},
                     {key: 'high_24h', name: 'High 24h',},
                     {key: 'ath', name: 'Ath',},
                     {key: 'ath_change_percentage', name: 'Ath change percentage',},
@@ -210,10 +220,10 @@
             methods: {
                 onChangeSort: function (orderBy) {
                     const sortedBy = orderBy == this.sort.orderBy ? {
-                        '': 'asc',
-                        'asc': 'desc',
-                        'desc': '',
-                    }[this.sort.sortedBy] : 'asc';
+                        '': 'desc',
+                        'desc': 'asc',
+                        'asc': '',
+                    }[this.sort.sortedBy] : 'desc';
                     this.sort = {
                         orderBy: sortedBy === '' ? '' : orderBy,
                         sortedBy
@@ -227,7 +237,7 @@
                 },
                 handleScroll: function (e) {
                     console.log(e)
-                    const {target}  = e;
+                    const {target} = e;
                     const {current_page, total_pages,} = this.meta;
                     if (current_page == total_pages) return;
                     // console.log(e)
@@ -283,12 +293,12 @@
                             }
                             this.isLoading = false;
 
-                            setTimeout(function (){
+                            setTimeout(function () {
                                 const head = document.getElementById(`head-${dashboardVue.sort.orderBy}`);
-                                if(head){
+                                if (head) {
                                     document.getElementById("table-market").scrollLeft = head.offsetLeft;
                                 }
-                            },100)
+                            }, 100)
                         }
                     );
                 },
@@ -329,7 +339,7 @@
             z-index: 1;
         }
 
-        .pointer{
+        .pointer {
             cursor: pointer;
         }
     </style>
