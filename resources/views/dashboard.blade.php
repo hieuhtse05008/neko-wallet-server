@@ -10,14 +10,14 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                         Select market caps
                     </button>
-                    <ul class="dropdown-menu" id="dropdownCaps">
+                    <ul class="dropdown-menu">
                         <li v-for="item in caps">
                             <div class="dropdown-item" @click="changeFilterArray('market_caps',item.key)">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value=""
                                            :checked="filter.market_caps.includes(item.key)">
                                     <label class="form-check-label">
-                                        @{{ item.label }}@{{ filter.market_caps.includes(item.key) }}
+                                        @{{ item.label }}
                                     </label>
                                 </div>
                             </div>
@@ -26,6 +26,94 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="col-md-3">
+                <label class="form-label"><b>Categories</b></label>
+                <div class="dropdown mb-3">
+                    <button class="btn btn-secondary dropdown-toggle w-100" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        Select categories
+                    </button>
+                    <ul class="dropdown-menu" style="max-height: 60vh;overflow-y: scroll;padding-top:0;">
+                        <li class="bg-white sticky-top">
+                            <div class="dropdown-item">
+                                <input class="w-100" type="text" placeholder="Search"
+                                       v-model="search.categories">
+                            </div>
+                        </li>
+                        <li v-for="category in _categories">
+                            <div class="dropdown-item" @click="changeFilterArray('categories',category.name)">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           :checked="filter.categories.includes(category.name)">
+                                    <label class="form-check-label">
+                                        @{{ category.name }}
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label"><b>Platforms</b></label>
+                <div class="dropdown mb-3">
+                    <button class="btn btn-secondary dropdown-toggle w-100" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        Select platforms
+                    </button>
+                    <ul class="dropdown-menu" style="max-height: 60vh;overflow-y: scroll;padding-top:0;">
+                        <li class="bg-white sticky-top">
+                            <div class="dropdown-item">
+                                <input class="w-100" type="text" placeholder="Search"
+                                       v-model="search.platforms">
+                            </div>
+                        </li>
+                        <li v-for="platform in _platforms">
+                            <div class="dropdown-item"
+                                 @click="changeFilterArray('platforms',platform.asset_platform_id)">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           :checked="filter.platforms.includes(platform.asset_platform_id)">
+                                    <label class="form-check-label">
+                                        @{{ platform.name }}
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class=" col-md-3">
+                <label class="form-label"><b>Symbols</b></label>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle w-100" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        Select symbols
+                    </button>
+                    <ul class="dropdown-menu w-100" id="dropdownSymbols"
+                        style="max-height: 60vh;overflow-y: scroll;padding-top:0;">
+                        <li class="bg-white sticky-top">
+                            <div class="dropdown-item"><input class="w-100" type="text" placeholder="Search"
+                                                              v-model="search.symbols">
+                            </div>
+                        </li>
+                        <li v-for="item in _symbols">
+                            <div class="dropdown-item" @click="changeFilterArray('symbols',item)">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           :checked="filter.symbols.includes(item)">
+                                    <label class="form-check-label text-truncate w-100">
+                                        @{{ item }}
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
             <div class=" col-md-3">
                 <label class="form-label"><b>Price change percentage 24h</b></label>
                 <div class="input-group mb-3">
@@ -47,34 +135,6 @@
                            placeholder="to">
                 </div>
 
-            </div>
-            <div class=" col-md-3">
-                <label class="form-label"><b>Symbols</b></label>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle w-100" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                        Select symbols
-                    </button>
-                    <ul class="dropdown-menu w-100" id="dropdownSymbols"
-                        style="max-height: 60vh;overflow-y: scroll;padding-top:0;">
-                        <li class="bg-white sticky-top">
-                            <div class="dropdown-item"><input class="w-100" type="text" placeholder="Search"
-                                                              v-model="search">
-                            </div>
-                        </li>
-                        <li v-for="item in _symbols">
-                            <div class="dropdown-item" @click="changeFilterArray('symbols',item)">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           :checked="filter.symbols.includes(item)">
-                                    <label class="form-check-label text-truncate w-100">
-                                        @{{ item }}
-                                    </label>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
         <div class="d-flex justify-content-end mb-5">
@@ -161,8 +221,14 @@
             data: {
                 isLoading: false,
                 page: 1,
-                search: '',
+                search: {
+                    symbols: '',
+                    categories: '',
+                    platforms: '',
+                },
                 symbols: {!! collect($all_coins) !!}.map(i => i.symbol),
+                categories: {!! collect($categories) !!},
+                platforms: {!! collect($platforms) !!},
                 coins: [],
                 caps: [
                     {label: 'Nano caps', key: 'nano_caps', low: -1, high: 10000},
@@ -174,6 +240,8 @@
                 ],
                 filter: {
                     symbols: [],
+                    categories: [],
+                    platforms: [],
                     market_caps: ["nano_caps", "micro_caps", "small_caps", "mid_caps", "large_caps", "mega_caps"],
                     price_change_percentage_24h_high: 100,
                     price_change_percentage_24h_low: -100,
@@ -266,6 +334,8 @@
                         atl_change_percentage_low,
                         market_caps,
                         symbols,
+                        platforms,
+                        categories,
                     } = this.filter;
 
                     $.get(`/api/v1/coins?include=last_market`, {
@@ -278,6 +348,8 @@
                             atl_change_percentage_low,
                             market_caps,
                         },
+                        platforms,
+                        categories,
                         symbols,
                         ...this.sort
                     }).then(
@@ -305,9 +377,23 @@
             },
             computed: {
                 _symbols: function () {
-                    const _search = this.search.trim().toLowerCase();
+                    const _search = this.search.symbols.trim().toLowerCase();
                     return this.symbols.filter(c => {
                         const s = c.trim().toLowerCase();
+                        return _search.includes(s) || s.includes(_search);
+                    });
+                },
+                _categories: function () {
+                    const _search = this.search.categories.trim().toLowerCase();
+                    return this.categories.filter(c => {
+                        const s = c.name.trim().toLowerCase();
+                        return _search.includes(s) || s.includes(_search);
+                    });
+                },
+                _platforms: function () {
+                    const _search = this.search.platforms.trim().toLowerCase();
+                    return this.platforms.filter(c => {
+                        const s = c.name.trim().toLowerCase();
                         return _search.includes(s) || s.includes(_search);
                     });
                 },

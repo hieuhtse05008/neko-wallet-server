@@ -84,6 +84,8 @@ class CoinAPIController extends APIController
         $filter = [
             'include'=>$request->include,
             'symbols' =>   $request->symbols,
+            'categories' =>   $request->categories,
+            'platforms' =>   $request->platforms,
             'last_market'=> $request->last_market,
         ];
         $limit = $request->limit ?: 20;

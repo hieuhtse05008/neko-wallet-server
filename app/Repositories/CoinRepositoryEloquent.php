@@ -59,6 +59,14 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
         if (!empty($filter['symbols'])) {
             $query = $query->whereIn('symbol', $filter['symbols']);
         }
+        if (!empty($filter['categories']) && is_array($filter['categories'])) {
+            $categories ='"%'. join('%","%', $filter['categories']).'%"';
+            $query = $query->whereRaw("categories like any ('{{$categories}}')");
+        }
+        if (!empty($filter['platforms']) && is_array($filter['platforms'])) {
+            $platforms = '"%'. join('%","%', $filter['platforms']).'%"';
+            $query = $query->whereRaw("platforms like any ('{{$platforms}}')");
+        }
 
         return $query;
     }

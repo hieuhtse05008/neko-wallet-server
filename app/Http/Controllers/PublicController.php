@@ -8,6 +8,7 @@ use App\Models\Coin;
 use App\Services\CryptoPanicService;
 use App\Services\TelegramService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
 {
@@ -16,9 +17,14 @@ class PublicController extends Controller
         return view('surf_news');
     }
     public function dashboardView(){
+        $connection = config('database.connections.warehouse.database');
         $all_coins = Coin::all();
+        $categories = DB::connection($connection)->table('coin_categories')->get();
+        $platforms = DB::connection($connection)->table('asset_platforms')->get();
         return view('dashboard',[
-            'all_coins' =>$all_coins
+            'all_coins' =>$all_coins,
+            'categories' =>$categories,
+            'platforms' =>$platforms,
         ]);
     }
 

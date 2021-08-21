@@ -52,4 +52,20 @@ class CoinGeckoService
         $response = $client->coins()->getMarkets($vs_currency,$filter);
         return ($response);
     }
+    public static function getAssetPlatforms(){
+        $httpClient = new \GuzzleHttp\Client();
+        $url = "https://api.coingecko.com/api/v3/asset_platforms";
+
+        $response = $httpClient->get($url);
+        $data = json_decode($response->getBody()->getContents());
+        return ($data);
+    }
+    public static function getCategories(){
+        $httpClient = new \GuzzleHttp\Client();
+        $url = "https://api.coingecko.com/api/v3/coins/categories/list";
+
+        $response = $httpClient->get($url);
+        $data = json_decode($response->getBody()->getContents());
+        return ($data);
+    }
 }
