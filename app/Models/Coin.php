@@ -84,6 +84,8 @@ class Coin extends Model
         'categories',
         'coin_market_cap_id',
         'symbol',
+        'image_url',
+        'description',
         'name'
     ];
 

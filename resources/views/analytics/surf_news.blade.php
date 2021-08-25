@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('analytics.layout.master')
 
 @section('styles')
     <style>

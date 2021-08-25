@@ -39,11 +39,16 @@ class SyncCoinMarketsData extends Command
         $connection = config('database.connections.warehouse.database');
         $data = CoinGeckoService::getMarkets('usd', [
             'page' => $page,
-            'price_change_percentage' => '1h,7d,30d,1y'
+            'price_change_percentage' => '1h,7d,30d,1y',
+            'sparkline'=> 'true'
         ]);
 
         $markets = [];
         foreach ($data as $item) {
+//            if(isset($item['sparkline_in_7d']['price'])){
+//                dd($item);
+//            }
+            $sparkline_7d = isset($item['sparkline_in_7d']['price']) ? json_encode($item['sparkline_in_7d']['price']) : null;
             $markets[] = [
                 'coin_id' => $item['id'],
                 'current_price' => (string)$item['current_price'],
@@ -69,11 +74,12 @@ class SyncCoinMarketsData extends Command
                 'price_change_percentage_30d_in_currency' => (string)$item['price_change_percentage_30d_in_currency'],
                 'price_change_percentage_1y_in_currency' => (string)$item['price_change_percentage_1y_in_currency'],
                 'last_updated' => $item['last_updated'],
+                'sparkline_7d' => $sparkline_7d,
                 'created_at' => $stamp,
                 'updated_at' => $stamp,
             ];
         };
-        DB::connection($connection)->table('coin_markets_data')->insert($markets);
+//        DB::connection($connection)->table('coin_markets_data')->insert($markets);
         DB::connection($connection)->table('last_coin_markets_data')->upsert($markets,'coin_id');
         return count($data);
     }

@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('analytics.layout.master')
 
 @section('content')
     <div class="container pt-5" id="dashboardVue" v-cloak>

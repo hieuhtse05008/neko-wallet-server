@@ -70,7 +70,20 @@ class SyncCoinsList extends Command
                     'asset_platform_id' => '',
                     'platforms' => '',
                     'categories' => '',
+                    'description' => '',
+                    'image_url' => '',
                 ];
+                if(!empty($data['description'])){
+                    $key = array_key_first($data['description']);
+                    if(!empty($data['description'][$key]))
+                    $update_data['description'] = $data['description'][$key];
+                }
+                if(!empty($data['image'])){
+                    $keys = array_keys($data['image']);
+                    $key = end($keys);
+                    if(!empty($data['image'][$key]))
+                    $update_data['image_url'] = $data['image'][$key];
+                }
                 if (!empty($data['asset_platform_id'])) {
                     $update_data['asset_platform_id'] = $data['asset_platform_id'];
                 }
@@ -144,7 +157,7 @@ class SyncCoinsList extends Command
     public function handle()
     {
         $this->handleCoinGecko();
-        $this->handleCoinMarketCaps();
+//        $this->handleCoinMarketCaps();
         $this->handleCoinGeckoPlatform();
 
         return 0;

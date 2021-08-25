@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PublicController::class, 'homeView']);
 
 Route::get('/test', [AuthController::class,'test']);
 Route::get('/surf-news', [PublicController::class,'surfNewsView']);
