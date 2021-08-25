@@ -302,11 +302,13 @@ SOFTWARE.
             $('body').removeClass('active-light-mode').addClass('active-dark-mode');
             $('.table').removeClass('table-light').addClass('table-dark');
             $('th').removeClass('table-light').addClass('table-dark');
+            document.querySelector("link[rel~='icon']").href = "/images/logo_dark.png";
         } else if(activeStyle == "light"){
             $('#my_switcher').find('.setColor.light').addClass('active');
             $('body').removeClass('active-dark-mode').addClass('active-light-mode');
             $('.table').removeClass('table-dark').addClass('table-light');
             $('th').removeClass('table-dark').addClass('table-light');
+            document.querySelector("link[rel~='icon']").href = "/images/logo_light.png";
         } else {
             // Swicher Active Class Baseon Body Class
             if($("body").hasClass("active-dark-mode")){
@@ -329,12 +331,14 @@ SOFTWARE.
             $('body').removeClass('active-light-mode').addClass('active-dark-mode');
             $('.table').removeClass('table-light').addClass('table-dark');
             $('th').removeClass('table-light').addClass('table-dark');
+            document.querySelector("link[rel~='icon']").href = "/images/logo_dark.png";
             setStyleCookie();
         });
         $('#my_switcher .setColor.light').on('click', function() {
             $('body').removeClass('active-dark-mode').addClass('active-light-mode');
             $('.table').removeClass('table-dark').addClass('table-light');
             $('th').removeClass('table-dark').addClass('table-light');
+            document.querySelector("link[rel~='icon']").href = "/images/logo_light.png";
             setStyleCookie();
         });
 
