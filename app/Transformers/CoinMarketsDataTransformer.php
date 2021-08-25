@@ -66,6 +66,8 @@ class CoinMarketsDataTransformer extends TransformerAbstract
             'low_24h'=>(string)$model->low_24h,
             'atl'=>(string)$model->atl,
             'atl_change_percentage'=>(string)$model->atl_change_percentage,
+            'price_change_percentage_7d_in_currency'=>(string)$model->price_change_percentage_7d_in_currency,
+            'sparkline_7d'=>(string)$model->sparkline_7d,
             /* place your other model properties here */
 
             'ath_date' => strtotime($model->ath_date),
