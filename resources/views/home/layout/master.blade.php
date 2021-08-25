@@ -12,19 +12,19 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/logo_light.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/logo_light.png">
 
     <!-- CSS
     ============================================ -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
-    <link rel="stylesheet" href="{{asset('css/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('css/slick-theme.css')}}">
-    <link rel="stylesheet" href="{{asset('css/base.css')}}">
-    <link rel="stylesheet" href="{{asset('css/plugins.css')}}">
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/slick.css">
+    <link rel="stylesheet" href="/css/slick-theme.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/plugins.css">
+    <link rel="stylesheet" href="/css/style.css">
     <style>
 
 
@@ -80,11 +80,11 @@
         <div class="inner">
             <div class="mobile-menu-top">
                 <div class="logo">
-                    <a href="http://axilthemes.com/demo/template/blogar/index.html">
-                        <img class="dark-logo" src="./Tech Blog __ Blogar - Personal Blog Template_files/logo-black.png"
+                    <a href="#">
+                        <img class="dark-logo" src="/logo_dark.png"
                              alt="Logo Images">
                         <img class="light-logo"
-                             src="./Tech Blog __ Blogar - Personal Blog Template_files/logo-white2.png"
+                             src="/images/logo_light.png"
                              alt="Logo Images">
                     </a>
                 </div>
@@ -98,7 +98,7 @@
                 <li class="menu-item-has-children"><a
                         href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">Home</a>
                     <ul class="axil-submenu">
-                        <li><a href="http://axilthemes.com/demo/template/blogar/index.html">Home Default</a></li>
+                        <li><a href="#">Home Default</a></li>
                         <li><a href="http://axilthemes.com/demo/template/blogar/home-creative-blog.html">Home Creative
                                 Blog</a></li>
                         <li><a href="http://axilthemes.com/demo/template/blogar/home-seo-blog.html">Home Seo Blog</a>
@@ -170,8 +170,8 @@
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-12" style="margin-right: -100px;">
                     <div class="logo">
                         <a href="/">
-                            <img class="dark-logo" src="{{asset('images/logo_light.png')}}" alt="Logo Images">
-                            <img class="light-logo" src="{{asset('images/logo_dark.png')}}" alt="Logo Images">
+                            <img class="dark-logo" src="/images/logo_light.png" alt="Logo Images">
+                            <img class="light-logo" src="/images/logo_dark.png" alt="Logo Images">
                         </a>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                                 <li class="menu-item-has-children"><a href="http://axilthemes.com/demo/template/blogar/post-layout-1.html#">Home</a>
                                     <ul class="axil-submenu">
                                         <li>
-                                            <a class="hover-flip-item-wrapper" href="http://axilthemes.com/demo/template/blogar/index.html">
+                                            <a class="hover-flip-item-wrapper" href="#">
                                                     <span class="hover-flip-item">
                         <span data-text="Home Default">Home Default</span>
                                                     </span>
@@ -854,21 +854,21 @@
 <!-- JS
 ============================================ -->
 <!-- Modernizer JS -->
-<script src="{{asset('js/modernizr.min.js')}}"></script>
+<script src="/js/modernizr.min.js"></script>
 <!-- jQuery JS -->
-<script src="{{asset('js/jquery.js')}}"></script>
+<script src="/js/jquery.js"></script>
 <!-- Bootstrap JS -->
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="{{asset('js/slick.min.js')}}"></script>
-<script src="{{asset('js/tweenmax.min.js')}}"></script>
-<script src="{{asset('js/js.cookie.js')}}"></script>
-<script src="{{asset('js/jquery.style.switcher.js')}}"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/tweenmax.min.js"></script>
+<script src="/js/js.cookie.js"></script>
+<script src="/js/jquery.style.switcher.js"></script>
 
 
 <!-- Main JS -->
-<script src="{{asset('js/main.js')}}"></script>
-<script src="{{asset('js/jquery.js')}}"></script>
-<script src="{{asset('js/vue.js')}}"></script>
+<script src="/js/main.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/vue.js"></script>
 @stack('scripts')
 
 </body>

@@ -287,7 +287,7 @@
                                        class="inner">
                                         <div class="thumbnail">
                                             <img
-                                                src="./Tech Blog __ Blogar - Personal Blog Template_files/category-image-01.jpg"
+                                                src="./category-image-01.jpg"
                                                 alt="">
                                         </div>
                                         <div class="content">
@@ -300,7 +300,7 @@
                                        class="inner">
                                         <div class="thumbnail">
                                             <img
-                                                src="./Tech Blog __ Blogar - Personal Blog Template_files/category-image-02.jpg"
+                                                src="./category-image-02.jpg"
                                                 alt="">
                                         </div>
                                         <div class="content">
@@ -313,7 +313,7 @@
                                        class="inner">
                                         <div class="thumbnail">
                                             <img
-                                                src="./Tech Blog __ Blogar - Personal Blog Template_files/category-image-03.jpg"
+                                                src="./category-image-03.jpg"
                                                 alt="">
                                         </div>
                                         <div class="content">
@@ -326,7 +326,7 @@
                                        class="inner">
                                         <div class="thumbnail">
                                             <img
-                                                src="./Tech Blog __ Blogar - Personal Blog Template_files/category-image-04.jpg"
+                                                src="./category-image-04.jpg"
                                                 alt="">
                                         </div>
                                         <div class="content">
@@ -361,7 +361,7 @@
                                     <div class="post-thumbnail">
                                         <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
                                             <img
-                                                src="./Tech Blog __ Blogar - Personal Blog Template_files/blog-sm-01.jpg"
+                                                src="./blog-sm-01.jpg"
                                                 alt="Post Images">
                                         </a>
                                     </div>
@@ -385,7 +385,7 @@
                                     <div class="post-thumbnail">
                                         <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
                                             <img
-                                                src="./Tech Blog __ Blogar - Personal Blog Template_files/blog-sm-02.jpg"
+                                                src="./blog-sm-02.jpg"
                                                 alt="Post Images">
                                         </a>
                                     </div>
@@ -409,7 +409,7 @@
                                     <div class="post-thumbnail">
                                         <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
                                             <img
-                                                src="./Tech Blog __ Blogar - Personal Blog Template_files/blog-sm-03.jpg"
+                                                src="./blog-sm-03.jpg"
                                                 alt="Post Images">
                                         </a>
                                     </div>
@@ -461,37 +461,37 @@
                             <ul class="instagram-post-list-wrapper">
                                 <li class="instagram-post-list">
                                     <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./Tech Blog __ Blogar - Personal Blog Template_files/instagram-01.jpg"
+                                        <img src="./instagram-01.jpg"
                                              alt="Instagram Images">
                                     </a>
                                 </li>
                                 <li class="instagram-post-list">
                                     <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./Tech Blog __ Blogar - Personal Blog Template_files/instagram-02.jpg"
+                                        <img src="./instagram-02.jpg"
                                              alt="Instagram Images">
                                     </a>
                                 </li>
                                 <li class="instagram-post-list">
                                     <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./Tech Blog __ Blogar - Personal Blog Template_files/instagram-03.jpg"
+                                        <img src="./instagram-03.jpg"
                                              alt="Instagram Images">
                                     </a>
                                 </li>
                                 <li class="instagram-post-list">
                                     <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./Tech Blog __ Blogar - Personal Blog Template_files/instagram-04.jpg"
+                                        <img src="./instagram-04.jpg"
                                              alt="Instagram Images">
                                     </a>
                                 </li>
                                 <li class="instagram-post-list">
                                     <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./Tech Blog __ Blogar - Personal Blog Template_files/instagram-05.jpg"
+                                        <img src="./instagram-05.jpg"
                                              alt="Instagram Images">
                                     </a>
                                 </li>
                                 <li class="instagram-post-list">
                                     <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./Tech Blog __ Blogar - Personal Blog Template_files/instagram-06.jpg"
+                                        <img src="./instagram-06.jpg"
                                              alt="Instagram Images">
                                     </a>
                                 </li>
@@ -544,12 +544,12 @@
                     <div class="col-lg-9 col-md-12">
                         <div class="copyright-left">
                             <div class="logo">
-                                <a href="http://axilthemes.com/demo/template/blogar/index.html">
+                                <a href="#">
                                     <img class="dark-logo"
-                                         src="./Tech Blog __ Blogar - Personal Blog Template_files/logo-black.png"
+                                         src="./logo-black.png"
                                          alt="Logo Images">
                                     <img class="light-logo"
-                                         src="./Tech Blog __ Blogar - Personal Blog Template_files/logo-white2.png"
+                                         src="./logo-white2.png"
                                          alt="Logo Images">
                                 </a>
                             </div>
