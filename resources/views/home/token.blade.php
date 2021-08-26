@@ -31,7 +31,7 @@
                                             <div class="post-meta-wrapper">
                                                 <div class="post-meta">
                                                     <div class="post-author-avatar border-rounded">
-                                                        <img src="{{$coin->image_url}}" alt="Token Images">
+                                                        <img src="{{$coin->image_url ?: 'http://d1j8r0kxyu9tj8.cloudfront.net/files/16299992038gk3icP7NaLivXU.png'}}" alt="Token Images">
                                                     </div>
                                                     <div class="content">
                                                         <h6 class="post-author-name">
@@ -78,7 +78,7 @@
                     <div class="axil-post-details">
 
                         <h2>What is {{strtoupper($coin->symbol)}}</h2>
-                        <p>{{$coin->description}}</p>
+                        <p>{!! $coin->description !!}</p>
 
                         @if(is_array($platforms) && count($platforms) > 0)
                             <h2>Contract Addresses</h2>
@@ -273,4 +273,12 @@
     </div>
     <!-- End Post Single Wrapper  -->
 
+@endsection
+
+@section('styles')
+<style>
+    .axil-post-details a {
+        color: var(--color-primary)!important;
+    }
+</style>
 @endsection

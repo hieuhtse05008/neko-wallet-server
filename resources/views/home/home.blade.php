@@ -4,621 +4,117 @@
 
 
 
-<div id="home-vue">
-    <!-- Start home table -->
-    <div class="container-fluid">
-    <div class="container">
-        <div class="axil-single-widget widget widget_search mb--30">
-            <div class="axil-search form-group">
-                <button type="submit" class="search-button"><i class="fal fa-search"></i></button>
-                <input type="text" class="form-control" placeholder="Search" v-model="search.symbols">
-            </div>
-        </div>
-        <div id="table-home" class="table-responsive tableFixHead" v-on:scroll="handleScroll">
-            <table class="table table-dark table-sm table-striped table-borderless ">
-                <thead>
-                <tr>
-                    <th v-for="field in fields" scope="col" class="text-nowrap pointer "
-                        :id="`head-${field.key}`"
-                        @click="onChangeSort(field)">@{{ field.name }}
-
-                        <i v-if="sort.orderBy === field.key && sort.sortedBy == 'desc'"
-                           class="bi bi-caret-down-fill"></i>
-                        <i v-if="sort.orderBy === field.key && sort.sortedBy == 'asc'" class="bi bi-caret-up-fill"></i>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-if="isLoading && coins.length == 0">
-                    <td colspan="22">
-                        <div class="w-100 d-flex align-items-center justify-content-center" style="height: 80vh;">
-                            <div class="spinner-grow" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <template v-for="coin in coins">
-                    <tr v-if="coin.last_market">
-                        <td scope="row" class="text-nowrap align-middle">@{{coin.last_market.market_cap_rank}}</td>
-                        <td scope="row" class="text-wrap align-middle">@{{coin.symbol}}-@{{coin.name}}</td>
-                        <td scope="row" class="text-nowrap align-middle">@{{parseNumber(coin.last_market.current_price)}}</td>
-                        <td scope="row" class="text-nowrap align-middle">@{{parseNumber(coin.last_market.price_change_percentage_24h)}}</td>
-                        <td scope="row" class="text-nowrap align-middle">@{{parseNumber(coin.last_market.price_change_percentage_7d_in_currency)}}</td>
-                        <td scope="row" class="text-nowrap align-middle">@{{coin.last_market.market_cap}}</td>
-                        <td scope="row" class="text-nowrap align-middle">@{{coin.last_market.total_volume}}</td>
-                        <td scope="row" class="text-nowrap align-middle">@{{coin.last_market.circulating_supply}}</td>
-                        <td scope="row" class="text-nowrap align-middle">
-                            <div :class="{increasing: coin.last_market.price_change_percentage_7d_in_currency[0] != '-', decreasing: coin.last_market.price_change_percentage_7d_in_currency[0] == '-'}">
-                            <img v-if="coin.coin_market_cap_id"
-                                 :data-backup-src="`https://chart.googleapis.com/chart?cht=ls&chf=bg,s,00000000&chd=t:${coin.last_market.sparkline_7d.substr(1,coin.last_market.sparkline_7d.length-2)}&chs=164x48`"
-                                 onerror="this.src = $(this).attr('data-backup-src');"
-                                 :src="`https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/${coin.coin_market_cap_id}.png`">
-                            <img v-else="coin.last_market.sparkline_7d"
-                                 :src="`https://chart.googleapis.com/chart?cht=ls&chf=bg,s,00000000&chd=t:${coin.last_market.sparkline_7d.substr(1,coin.last_market.sparkline_7d.length-2)}&chs=164x48`"
-                                 >
-
-                            </div>
-                        </td>
-                    </tr>
-                </template>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-    </div>
-    <!-- End home table -->
-
-@if(false)
-    <h1 class="d-none">Home Tech Blog</h1>
-    <div class="axil-tech-post-banner pt--30 bg-color-grey">
-        <div class="container">
-            <div class="row">
+    <div id="home-vue" class="py-5" v-cloak>
+        <!-- Start home table -->
+        <div class="container-fluid">
+            <div class="container-lg">
                 <div class="row">
-                    <div class="col-xl-6 col-md-12 col-12">
-                        <!-- Start Post Grid  -->
-                        <div class="content-block post-grid post-grid-transparent">
-                            <div class="post-thumbnail">
-                                <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
-                                    <img src="{{$coins[0]->image_url}}" alt="Post Images">
-                                </a>
-                            </div>
-                            <div class="post-grid-content">
-                                <div class="post-content">
-                                    <div class="post-cat">
-                                        <div class="post-cat-list">
-                                            <a class="hover-flip-item-wrapper"
-                                               href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                                    <span class="hover-flip-item">
-                                                        <span data-text="FEATURED POST">FEATURED POST</span>
-                                                    </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <h3 class="title"><a
-                                            href="http://axilthemes.com/demo/template/blogar/post-details.html">Beauty
-                                            of deep space. Billions of
-                                            galaxies in the universe.</a></h3>
+                    <div class="col-0 col-lg-8 col-md-6"></div>
+                    <div class="col-12 col-lg-4 col-md-6">
+                        <div class="axil-single-widget widget widget_search mb--30 p-3 content">
+                            <div class="axil-search form-group dropdown">
+                                <button type="submit" class="search-button">
+                                    <i class="fal fa-search"></i></button>
+                                <input type="text" class="form-control dropdown-toggle" placeholder="Search"
+                                       role="button" id="search-token" data-toggle="dropdown" aria-haspopup="true"
+                                       @keyup.enter="enterClicked"
+                                       v-model="search.hint_coins">
+                                <div class="dropdown-menu shadow  border-0 w-100 mt-3" aria-labelledby="dropdownMenuLink">
+                                    <a v-for="coin in _hint_coins" class="pointer dropdown-item px-5 py-4 text-wrap"
+                                       :href="`/token/${coin.name}`" target="_blank">
+                                        <img :src="coin.image_url" class="table-token-image mr-2 mb-3">
+                                        <b class="mr-2 mb-3">@{{coin.name}}</b> <span><b class="text-secondary mb-3">@{{coin.symbol.toUpperCase()}}</b></span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <!-- Start Post Grid  -->
-                    </div>
-
-                    <div class="col-xl-3 col-md-6 mt_lg--30 mt_md--30 mt_sm--30 col-12">
-                        <!-- Start Single Post  -->
-                        <div class="content-block image-rounded">
-                            <div class="post-thumbnail">
-                                <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
-                                    <img src="{{$coins[1]->image_url}}" alt="Post Images">
-                                </a>
-                            </div>
-                            <div class="post-content pt--20">
-                                <div class="post-cat">
-                                    <div class="post-cat-list">
-                                        <a class="hover-flip-item-wrapper"
-                                           href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                                <span class="hover-flip-item">
-                                                    <span data-text="LEADERSHIP">LEADERSHIP</span>
-                                                </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <h5 class="title"><a
-                                        href="http://axilthemes.com/demo/template/blogar/post-details.html">Rocket Lab
-                                        mission fails shortly after
-                                        launch</a></h5>
-                            </div>
-                        </div>
-                        <!-- End Single Post  -->
-                        <!-- Start Single Post  -->
-                        <div class="content-block image-rounded mt--30">
-                            <div class="post-thumbnail">
-                                <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
-                                    <img src="{{$coins[2]->image_url}}" alt="Post Images">
-                                </a>
-                            </div>
-                            <div class="post-content pt--20">
-                                <div class="post-cat">
-                                    <div class="post-cat-list">
-                                        <a class="hover-flip-item-wrapper"
-                                           href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                                <span class="hover-flip-item">
-                                                    <span data-text="TECHNOLOGY">TECHNOLOGY</span>
-                                                </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <h5 class="title"><a
-                                        href="http://axilthemes.com/demo/template/blogar/post-details.html">Virtual
-                                        Reality or Artificial
-                                        Intelligence Technology</a></h5>
-                            </div>
-                        </div>
-                        <!-- End Single Post  -->
-                    </div>
-
-                    <div class="col-xl-3 col-md-6 mt_lg--30 mt_md--30 mt_sm--30 col-12">
-                        <!-- Start Single Post  -->
-                        <div class="content-block image-rounded">
-                            <div class="post-thumbnail">
-                                <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
-                                    <img src="{{$coins[3]->image_url}}" alt="Post Images">
-                                </a>
-                            </div>
-                            <div class="post-content pt--20">
-                                <div class="post-cat">
-                                    <div class="post-cat-list">
-                                        <a class="hover-flip-item-wrapper"
-                                           href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                                <span class="hover-flip-item">
-                                                    <span data-text="PRODUCT UPDATES">PRODUCT UPDATES</span>
-                                                </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <h5 class="title"><a
-                                        href="http://axilthemes.com/demo/template/blogar/post-details.html">The Morning
-                                        After: Uber sets its
-                                        sights on Postmates</a></h5>
-                            </div>
-                        </div>
-                        <!-- End Single Post  -->
-                        <!-- Start Single Post  -->
-                        <div class="content-block image-rounded mt--30">
-                            <div class="post-thumbnail">
-                                <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
-                                    <img src="{{$coins[4]->image_url}}" alt="Post Images">
-                                </a>
-                            </div>
-                            <div class="post-content pt--20">
-                                <div class="post-cat">
-                                    <div class="post-cat-list">
-                                        <a class="hover-flip-item-wrapper"
-                                           href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                                <span class="hover-flip-item">
-                                                    <span data-text="GADGET">GADGET</span>
-                                                </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <h5 class="title"><a
-                                        href="http://axilthemes.com/demo/template/blogar/post-details.html">Air Pods Pro
-                                        with Wireless Charging
-                                        Case.</a></h5>
-                            </div>
-                        </div>
-                        <!-- End Single Post  -->
                     </div>
                 </div>
+                <div id="table-home" class="table-responsive tableFixHead" v-on:scroll="handleScroll">
+                    <table class="table table-dark table-sm table-striped table-borderless ">
+                        <thead>
+                        <tr>
+                            <th v-for="(field,key) in fields" scope="col" class="text-nowrap pointer text-uppercase p-4"
+                                :id="`head-${field.key}`"
+                                :class="{'text-right':key>1 && key < fields.length - 1, 'text-center' : key == 0}"
+                                :style="{width: key == 0 ?  '50px' : '' }"
+                                @click="onChangeSort(field)">@{{ field.name }}
+
+                                <i v-if="sort.orderBy === field.key && sort.sortedBy == 'desc'"
+                                   class="bi bi-caret-down-fill"></i>
+                                <i v-if="sort.orderBy === field.key && sort.sortedBy == 'asc'"
+                                   class="bi bi-caret-up-fill"></i>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-if="isLoading && coins.length == 0">
+                            <td colspan="22">
+                                <div class="w-100 d-flex align-items-center justify-content-center"
+                                     style="height: 80vh;">
+                                    <div class="spinner-grow" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <template v-for="coin in coins">
+                            <tr v-if="coin.last_market">
+                                <td scope="row" class="text-nowrap align-middle text-center">
+                                    @{{coin.last_market.market_cap_rank}}
+                                </td>
+                                <td scope="row" class="p-4 text-wrap align-middle">
+                                    <a class="pointer" :href="`/token/${coin.name}`" target="_blank">
+                                        <img :src="coin.image_url" class="table-token-image mr-2">
+                                        <b class="mr-2">@{{coin.name}}</b> <span><b class="text-secondary">@{{coin.symbol.toUpperCase()}}</b></span>
+                                    </a>
+                                </td>
+                                <td scope="row" class="p-4 text-nowrap align-middle text-right">
+                                    @{{parseNumber(coin.last_market.current_price)}}
+                                </td>
+                                <td scope="row" class="p-4 text-nowrap align-middle text-right"
+                                    :class="{'text-danger':coin.bool_24h,'text-success':!coin.bool_24h}">
+                                    @{{parseNumber(coin.last_market.price_change_percentage_24h)}}
+                                </td>
+                                <td scope="row" class="p-4 text-nowrap align-middle text-right"
+                                    :class="{'text-danger':coin.bool_7d,'text-success':!coin.bool_7d}">
+                                    @{{parseNumber(coin.last_market.price_change_percentage_7d_in_currency)}}
+                                </td>
+                                <td scope="row" class="p-4 text-nowrap align-middle text-right">
+                                    @{{coin.last_market.market_cap}}
+                                </td>
+                                <td scope="row" class="p-4 text-nowrap align-middle text-right">
+                                    @{{coin.last_market.total_volume}}
+                                </td>
+                                <td scope="row" class="p-4 text-nowrap align-middle text-right">
+                                    @{{coin.last_market.circulating_supply}}
+                                </td>
+                                <td scope="row" class="text-nowrap align-middle">
+                                    <div :class="{increasing: coin.bool_7d, decreasing: !coin.bool_7d}">
+                                        <img v-if="coin.coin_market_cap_id"
+                                             :data-backup-src="`https://chart.googleapis.com/chart?cht=ls&chf=bg,s,00000000&chd=t:${coin.last_market.sparkline_7d.substr(1,coin.last_market.sparkline_7d.length-2)}&chs=164x48`"
+                                             onerror="this.src = $(this).attr('data-backup-src');"
+                                             :src="`https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/${coin.coin_market_cap_id}.png`">
+                                        <img v-else="coin.last_market.sparkline_7d"
+                                             :src="`https://chart.googleapis.com/chart?cht=ls&chf=bg,s,00000000&chd=t:${coin.last_market.sparkline_7d.substr(1,coin.last_market.sparkline_7d.length-2)}&chs=164x48`"
+                                        >
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
+        <!-- End home table -->
+
+        <!-- Start Back To Top  -->
+        <a id="backto-top" class=""></a>
+        <!-- End Back To Top  -->
     </div>
-
-
-    <!-- Start Post List Wrapper  -->
-    <div class="axil-post-list-area post-listview-visible-color axil-section-gap bg-color-white is-active">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-xl-8">
-
-                @foreach($coins->slice(5) as $coin)
-                    <!-- Start Post List  -->
-                        <div class="content-block post-list-view mt--30 axil-control">
-                            <div class="post-thumbnail">
-                                <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
-                                    <img src="{{$coin->image_url}}" alt="Post Images">
-                                </a>
-                            </div>
-                            <div class="post-content">
-                                <div class="post-cat">
-                                    <div class="post-cat-list">
-                                        <a class="hover-flip-item-wrapper"
-                                           href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                            <span class="hover-flip-item">
-                                                <span data-text="DESIGN">{{strtoupper($coin->symbol)}}</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <h4 class="title">
-                                    <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
-                                        {{ explode('.',$coin->description)[0]}}
-                                    </a>
-                                </h4>
-                                <div class="post-meta-wrapper">
-                                    <div class="post-meta">
-                                        <div class="content">
-                                            <h6 class="post-author-name">
-                                                <a class="hover-flip-item-wrapper"
-                                                   href="http://axilthemes.com/demo/template/blogar/author.html">
-                                                    <span class="hover-flip-item">
-                                                        <span data-text="Nusrat Ara">{{$coin->name}}</span>
-                                                    </span>
-                                                </a>
-                                            </h6>
-                                            <ul class="post-meta-list">
-                                                <li>Feb 17, 2019</li>
-                                                <li>3 min read</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <ul class="social-share-transparent justify-content-end">
-                                        <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                                    class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                                    class="fab fa-instagram"></i></a></li>
-                                        <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                                    class="fab fa-twitter"></i></a></li>
-                                        <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                                    class="fas fa-link"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Post List  -->
-                    @endforeach
-
-                </div>
-                <div class="col-lg-4 col-xl-4 mt_md--40 mt_sm--40">
-                    <!-- Start Sidebar Area  -->
-                    <div class="sidebar-inner">
-
-                        <!-- Start Single Widget  -->
-                        <div class="axil-single-widget widget widget_categories mb--30">
-                            <ul>
-                                <li class="cat-item">
-                                    <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"
-                                       class="inner">
-                                        <div class="thumbnail">
-                                            <img
-                                                src="./category-image-01.jpg"
-                                                alt="">
-                                        </div>
-                                        <div class="content">
-                                            <h5 class="title">Tech</h5>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="cat-item">
-                                    <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"
-                                       class="inner">
-                                        <div class="thumbnail">
-                                            <img
-                                                src="./category-image-02.jpg"
-                                                alt="">
-                                        </div>
-                                        <div class="content">
-                                            <h5 class="title">Style</h5>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="cat-item">
-                                    <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"
-                                       class="inner">
-                                        <div class="thumbnail">
-                                            <img
-                                                src="./category-image-03.jpg"
-                                                alt="">
-                                        </div>
-                                        <div class="content">
-                                            <h5 class="title">Travel</h5>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="cat-item">
-                                    <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"
-                                       class="inner">
-                                        <div class="thumbnail">
-                                            <img
-                                                src="./category-image-04.jpg"
-                                                alt="">
-                                        </div>
-                                        <div class="content">
-                                            <h5 class="title">Food</h5>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- End Single Widget  -->
-
-                        <!-- Start Single Widget  -->
-                        <div class="axil-single-widget widget widget_search mb--30">
-                            <h5 class="widget-title">Search</h5>
-                            <form action="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                <div class="axil-search form-group">
-                                    <button type="submit" class="search-button"><i class="fal fa-search"></i></button>
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                            </form>
-                        </div>
-                        <!-- End Single Widget  -->
-
-                        <!-- Start Single Widget  -->
-                        <div class="axil-single-widget widget widget_postlist mb--30">
-                            <h5 class="widget-title">Popular on Blogar</h5>
-                            <!-- Start Post List  -->
-                            <div class="post-medium-block">
-
-                                <!-- Start Single Post  -->
-                                <div class="content-block post-medium mb--20">
-                                    <div class="post-thumbnail">
-                                        <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
-                                            <img
-                                                src="./blog-sm-01.jpg"
-                                                alt="Post Images">
-                                        </a>
-                                    </div>
-                                    <div class="post-content">
-                                        <h6 class="title"><a
-                                                href="http://axilthemes.com/demo/template/blogar/post-details.html">The
-                                                underrated design book that transformed the way I
-                                                work </a></h6>
-                                        <div class="post-meta">
-                                            <ul class="post-meta-list">
-                                                <li>Feb 17, 2019</li>
-                                                <li>300k Views</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Post  -->
-
-                                <!-- Start Single Post  -->
-                                <div class="content-block post-medium mb--20">
-                                    <div class="post-thumbnail">
-                                        <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
-                                            <img
-                                                src="./blog-sm-02.jpg"
-                                                alt="Post Images">
-                                        </a>
-                                    </div>
-                                    <div class="post-content">
-                                        <h6 class="title"><a
-                                                href="http://axilthemes.com/demo/template/blogar/post-details.html">Here’s
-                                                what you should (and shouldn’t) do when</a>
-                                        </h6>
-                                        <div class="post-meta">
-                                            <ul class="post-meta-list">
-                                                <li>Feb 17, 2019</li>
-                                                <li>300k Views</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Post  -->
-
-                                <!-- Start Single Post  -->
-                                <div class="content-block post-medium mb--20">
-                                    <div class="post-thumbnail">
-                                        <a href="http://axilthemes.com/demo/template/blogar/post-details.html">
-                                            <img
-                                                src="./blog-sm-03.jpg"
-                                                alt="Post Images">
-                                        </a>
-                                    </div>
-                                    <div class="post-content">
-                                        <h6 class="title"><a
-                                                href="http://axilthemes.com/demo/template/blogar/post-details.html">How
-                                                a developer and designer duo at Deutsche Bank keep
-                                                remote</a></h6>
-                                        <div class="post-meta">
-                                            <ul class="post-meta-list">
-                                                <li>Feb 17, 2019</li>
-                                                <li>300k Views</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Post  -->
-
-                            </div>
-                            <!-- End Post List  -->
-
-                        </div>
-                        <!-- End Single Widget  -->
-
-                        <!-- Start Single Widget  -->
-                        <div class="axil-single-widget widget widget_social mb--30">
-                            <h5 class="widget-title">Stay In Touch</h5>
-                            <!-- Start Post List  -->
-                            <ul class="social-icon md-size justify-content-center">
-                                <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                            class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                            class="fab fa-instagram"></i></a></li>
-                                <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                            class="fab fa-twitter"></i></a></li>
-                                <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                            class="fab fa-slack"></i></a></li>
-                                <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                            class="fab fa-linkedin-in"></i></a></li>
-                            </ul>
-                            <!-- End Post List  -->
-                        </div>
-                        <!-- End Single Widget  -->
-
-                        <!-- Start Single Widget  -->
-                        <div class="axil-single-widget widget widget_instagram mb--30">
-                            <h5 class="widget-title">Instagram</h5>
-                            <!-- Start Post List  -->
-                            <ul class="instagram-post-list-wrapper">
-                                <li class="instagram-post-list">
-                                    <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./instagram-01.jpg"
-                                             alt="Instagram Images">
-                                    </a>
-                                </li>
-                                <li class="instagram-post-list">
-                                    <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./instagram-02.jpg"
-                                             alt="Instagram Images">
-                                    </a>
-                                </li>
-                                <li class="instagram-post-list">
-                                    <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./instagram-03.jpg"
-                                             alt="Instagram Images">
-                                    </a>
-                                </li>
-                                <li class="instagram-post-list">
-                                    <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./instagram-04.jpg"
-                                             alt="Instagram Images">
-                                    </a>
-                                </li>
-                                <li class="instagram-post-list">
-                                    <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./instagram-05.jpg"
-                                             alt="Instagram Images">
-                                    </a>
-                                </li>
-                                <li class="instagram-post-list">
-                                    <a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                        <img src="./instagram-06.jpg"
-                                             alt="Instagram Images">
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- End Post List  -->
-                        </div>
-                        <!-- End Single Widget  -->
-                    </div>
-                    <!-- End Sidebar Area  -->
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Post List Wrapper  -->
-
-    <!-- Start Footer Area  -->
-    <div class="axil-footer-area axil-footer-style-1 bg-color-white">
-        <!-- Start Footer Top Area  -->
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Start Post List  -->
-                        <div class="inner d-flex align-items-center flex-wrap">
-                            <h5 class="follow-title mb--0 mr--20">Follow Us</h5>
-                            <ul class="social-icon color-tertiary md-size justify-content-start">
-                                <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                            class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                            class="fab fa-instagram"></i></a></li>
-                                <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                            class="fab fa-twitter"></i></a></li>
-                                <li><a href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#"><i
-                                            class="fab fa-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
-                        <!-- End Post List  -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Footer Top Area  -->
-
-        <!-- Start Copyright Area  -->
-        <div class="copyright-area">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-9 col-md-12">
-                        <div class="copyright-left">
-                            <div class="logo">
-                                <a href="#">
-                                    <img class="dark-logo"
-                                         src="./logo-black.png"
-                                         alt="Logo Images">
-                                    <img class="light-logo"
-                                         src="./logo-white2.png"
-                                         alt="Logo Images">
-                                </a>
-                            </div>
-                            <ul class="mainmenu justify-content-start">
-                                <li>
-                                    <a class="hover-flip-item-wrapper"
-                                       href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                            <span class="hover-flip-item">
-                                        <span data-text="Contact Us">Contact Us</span>
-                                            </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="hover-flip-item-wrapper"
-                                       href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                            <span class="hover-flip-item">
-                                        <span data-text="Terms of Use">Terms of Use</span>
-                                            </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="hover-flip-item-wrapper"
-                                       href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                            <span class="hover-flip-item">
-                                        <span data-text="AdChoices">AdChoices</span>
-                                            </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="hover-flip-item-wrapper"
-                                       href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                            <span class="hover-flip-item">
-                                        <span data-text="Advertise with Us">Advertise with Us</span>
-                                            </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="hover-flip-item-wrapper"
-                                       href="http://axilthemes.com/demo/template/blogar/home-tech-blog.html#">
-                                            <span class="hover-flip-item">
-                                        <span data-text="Blogar Store">Blogar Store</span>
-                                            </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="copyright-right text-left text-lg-right mt_md--20 mt_sm--20">
-                            <p class="b3">All Rights Reserved © 2020</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Copyright Area  -->
-    </div>
-    <!-- End Footer Area  -->
-@endif
-    <!-- Start Back To Top  -->
-    <a id="backto-top" class=""></a>
-    <!-- End Back To Top  -->
-</div>
 
 @endsection
 
@@ -630,11 +126,11 @@
                 isLoading: false,
                 page: 1,
                 search: {
-                    symbols: '',
+                    hint_coins: '',
                     categories: '',
                     platforms: '',
                 },
-                symbols: {!! collect($symbols) !!},
+                hint_coins: ({!! collect($coins) !!}),
                 categories: {!! collect($categories) !!},
                 platforms: {!! collect($platforms) !!},
                 coins: [],
@@ -657,7 +153,7 @@
                     atl_change_percentage_low: '',
                 },
                 sort: {
-                    orderBy:'market_cap_rank',
+                    orderBy: 'market_cap_rank',
                     sortedBy: 'asc',
                 },
                 meta: {
@@ -673,20 +169,17 @@
                     {key: 'market_cap', name: 'Market cap',},
                     {key: 'total_volume', name: 'Total volume',},
                     {key: 'circulating_supply', name: 'Circulating supply',},
-                    {key: 'sparkline_7d', name: 'Last 7 days',disableSort:true,},
+                    {key: 'sparkline_7d', name: 'Last 7 days', disableSort: true,},
 
                 ]
             },
             methods: {
-                imageError: (coin)=>{
-                    console.log('imageError',coin, this);
-                    this.src=`https://chart.googleapis.com/chart?cht=ls&chf=bg,s,00000000&chd=t:${coin.last_market.sparkline_7d.substr(1,coin.last_market.sparkline_7d.length-2)}&chs=164x48`;
+                parseNumber: function (str) {
+                    if (str.indexOf(".") == -1) return str;
+                    return str.substr(0, str.indexOf(".") + 3);
                 },
-                parseNumber: function (str){
-                    return str.substr(0,str.indexOf(".") + 3);
-                },
-                onChangeSort: function ({disableSort,orderBy}) {
-                    if(disableSort) return;
+                onChangeSort: function ({disableSort, orderBy}) {
+                    if (disableSort) return;
                     const sortedBy = orderBy == this.sort.orderBy ? {
                         '': 'desc',
                         'desc': 'asc',
@@ -724,6 +217,13 @@
                         this.filter[field].push(key);
                     }
                 },
+                enterClicked: function () {
+                    console.log(this.search.hint_coins)
+                    // if (this.search.symbols) {
+                    //     this.filter.symbols = [this.search.symbols];
+                    //     setTimeout(this.apply, 200);
+                    // }
+                },
                 loadCoins: function (page = 1) {
                     if (this.isLoading || (page > 1 && this.page == page)) return;
                     this.isLoading = true;
@@ -757,12 +257,9 @@
                             console.log(res);
                             this.coins = [
                                 ...this.coins,
-                                ...res.coins.items.filter(i => i.last_market),
+                                ...this.solveCoinsInfo(res.coins.items),
                             ];
                             this.meta = res.coins.meta;
-                            if (!this.symbols.length) {
-                                this.symbols = this.coins.map(i => i.symbol);
-                            }
                             this.isLoading = false;
 
                             setTimeout(function () {
@@ -774,14 +271,47 @@
                         }
                     );
                 },
+                solveCoinsInfo: function (coins) {
+                    return coins.map(c => {
+                        let bool_7d = true;
+                        let bool_24h = true;
+                        if (c.last_market) {
+                            bool_7d = c.last_market.price_change_percentage_7d_in_currency[0] != '-';
+                            bool_24h = c.last_market.current_price[0] != '-';
+                        }
+
+                        let image_url = 'http://d1j8r0kxyu9tj8.cloudfront.net/files/16299992038gk3icP7NaLivXU.png';
+                        if (c.image_url) {
+                            image_url = c.image_url;
+                        } else if (c.coin_market_cap_id) {
+                            image_url = `https://s2.coinmarketcap.com/static/img/coins/64x64/${c.coin_market_cap_id}.png`;
+                        }
+                        return {
+                            ...c,
+                            image_url,
+                            bool_7d,
+                            bool_24h,
+                        };
+                    })
+                    //https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png
+                },
             },
             computed: {
-                _symbols: function () {
-                    const _search = this.search.symbols.trim().toLowerCase();
-                    return this.symbols.filter(c => {
-                        const s = c.trim().toLowerCase();
-                        return _search.includes(s) || s.includes(_search);
+                _hint_coins: function () {
+                    const _search = this.search.hint_coins.trim().toLowerCase();
+                    let res = this.hint_coins.filter(c => {
+                        const name = c.name.trim().toLowerCase();
+                        const symbol = c.symbol.trim().toLowerCase();
+                        return (
+                            _search.includes(name) || name.includes(_search)
+                            ||
+                            _search.includes(symbol) || symbol.includes(_search)
+                        );
                     });
+                    if (_search.length < 3) {
+                        res = res.slice(0, Math.min(res.length, 5));
+                    }
+                    return res;
                 },
                 _categories: function () {
                     const _search = this.search.categories.trim().toLowerCase();
@@ -800,6 +330,7 @@
             },
             created() {
                 this.loadCoins();
+                this.hint_coins = this.solveCoinsInfo(this.hint_coins);
             },
         });
     </script>
@@ -811,7 +342,7 @@
         .table-responsive {
             overflow-y: auto;
             max-height: calc(100vh);
-            min-height: 80vh;
+            min-height: 75vh;
             transform: translate3d(0, 0, 0);
         }
 
@@ -830,18 +361,40 @@
             cursor: pointer;
         }
 
-        .increasing{
+        .increasing {
             filter: hue-rotate(
                 85deg
             ) saturate(80%) brightness(0.85);
         }
-        .decreasing{
+
+        .decreasing {
             filter: hue-rotate(
                 300deg
             ) saturate(210%) brightness(0.7) contrast(170%);
         }
-        table{
+
+        table {
             font-size: var(--font-size-b3);
+        }
+
+        .table-token-image {
+            width: 30px;
+        }
+
+        body.active-dark-mode .dropdown-menu {
+            background-color: var(--color-body);
+        }
+
+        .dropdown-menu {
+            font-size: var(--font-size-b3);
+            border-radius: 5px;
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+
+        #search-token {
+            /*max-width: 250px;*/
+            height: 30px;
         }
     </style>
 @endsection

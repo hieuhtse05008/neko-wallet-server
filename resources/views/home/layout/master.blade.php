@@ -80,7 +80,7 @@
             <div class="mobile-menu-top">
                 <div class="logo">
                     <a href="#">
-                        <img class="dark-logo" src="/logo_light.png"
+                        <img class="dark-logo" src="/images/logo_light.png"
                              alt="Logo Images">
                         <img class="light-logo"
                              src="/images/logo_dark.png"
@@ -159,10 +159,7 @@
     <!-- Start Header -->
 
 </div>
-<div class="py-5">
-
     @yield('content')
-</div>
 
 <!-- Start Footer Area  -->
 <div class="axil-footer-area axil-footer-style-1 bg-color-white">

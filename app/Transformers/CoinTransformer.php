@@ -58,6 +58,7 @@ class CoinTransformer extends TransformerAbstract
             'asset_platform_id'=>$model->asset_platform_id,
             'platforms'=>$model->platforms,
             'categories'=>$model->categories,
+            'image_url'=>$model->image_url,
 
             'created_at' => strtotime($model->created_at),
             'updated_at' => strtotime($model->updated_at),

@@ -25,12 +25,12 @@ class PublicController extends Controller
 
 //        ======================================================
         $connection = config('database.connections.warehouse.database');
-        $symbols = Coin::all()->pluck('symbol');
+        $coins = Coin::all();
         $categories = DB::connection($connection)->table('coin_categories')->get();
         $platforms = DB::connection($connection)->table('asset_platforms')->get();
 
         return view('home.home', [
-            'symbols' => $symbols,
+            'coins' => $coins,
             'categories' => $categories,
             'platforms' => $platforms,
         ]);
