@@ -7,7 +7,13 @@
 <div id="home-vue">
     <!-- Start home table -->
     <div class="container-fluid">
-    <div class="container pt-5">
+    <div class="container">
+        <div class="axil-single-widget widget widget_search mb--30">
+            <div class="axil-search form-group">
+                <button type="submit" class="search-button"><i class="fal fa-search"></i></button>
+                <input type="text" class="form-control" placeholder="Search" v-model="search.symbols">
+            </div>
+        </div>
         <div id="table-home" class="table-responsive tableFixHead" v-on:scroll="handleScroll">
             <table class="table table-dark table-sm table-striped table-borderless ">
                 <thead>
@@ -805,7 +811,7 @@
         .table-responsive {
             overflow-y: auto;
             max-height: calc(100vh);
-            min-height: 650px;
+            min-height: 80vh;
             transform: translate3d(0, 0, 0);
         }
 

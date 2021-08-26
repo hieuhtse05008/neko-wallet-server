@@ -31,4 +31,3 @@ RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
 USER $user
-

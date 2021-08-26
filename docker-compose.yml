@@ -12,6 +12,7 @@ services:
     restart: unless-stopped
     volumes:
       - .:/var/www/code
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/docker-php-memlimit.ini
     networks:
       - neko-network
 

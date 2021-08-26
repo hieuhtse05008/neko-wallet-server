@@ -63,7 +63,7 @@ class SyncCoinsList extends Command
         $connection = config('database.connections.warehouse.database');
 
         foreach ($this->coin_gecko_list as $coin) {
-            $data = CoinGeckoService::getCoinById($coin['coin_id']);
+            $data = CoinGeckoService::getCoinById($coin['coin_id'],['market_data'=>'true','tickers'=>'true',]);
             if (is_array($data)) {
 
                 $update_data = [
@@ -72,6 +72,8 @@ class SyncCoinsList extends Command
                     'categories' => '',
                     'description' => '',
                     'image_url' => '',
+                    'links' => '',
+                    'tickers' => '',
                 ];
                 if(!empty($data['description'])){
                     $key = array_key_first($data['description']);
@@ -91,8 +93,13 @@ class SyncCoinsList extends Command
                     $update_data['platforms'] = json_encode($data['platforms']);
                 }
                 if (!empty($data['categories'])) {
-                    Log::info(json_encode(array_values($data['categories'])));
                     $update_data['categories'] = join(',', $data['categories']);
+                }
+                if (!empty($data['tickers'])) {
+                    $update_data['tickers'] = json_encode($data['tickers']);
+                }
+                if (!empty($data['links'])) {
+                    $update_data['links'] = json_encode($data['links']);
                 }
                 DB::connection($connection)->table('coins')
                     ->where('coin_id', '=', strtolower($coin['coin_id']))

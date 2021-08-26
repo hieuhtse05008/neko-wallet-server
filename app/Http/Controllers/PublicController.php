@@ -36,6 +36,29 @@ class PublicController extends Controller
         ]);
     }
 
+    public function tokenView(Coin $coin){
+        $coin->views +=1;
+        $coin->save();
+        //
+        $connection = config('database.connections.warehouse.database');
+        //get platforms
+        $coin->platforms = json_decode($coin->platforms ?: '{}');
+        $platform_ids = get_object_vars($coin->platforms);
+        $platform_ids = array_keys($platform_ids);
+        $platforms = DB::connection($connection)->table('asset_platforms')->whereIn('asset_platform_id',$platform_ids)->get();
+        $asset_platform = DB::connection($connection)->table('asset_platforms')->where('asset_platform_id','=',$coin->asset_platform_id)->first();
+        //get links data
+        $coin->links = json_decode($coin->links ?: '{}');
+        //get tickers data
+        $coin->tickers = json_decode($coin->tickers ?: '{}');
+        //return view with data
+        return view('home.token', [
+            'coin' => $coin,
+            'asset_platform' => $asset_platform,
+            'platforms' => $platforms,
+        ]);
+    }
+
     public function surfNewsView()
     {
 
