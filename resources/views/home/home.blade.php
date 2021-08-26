@@ -300,14 +300,19 @@
                 _hint_coins: function () {
                     const _search = this.search.hint_coins.trim().toLowerCase();
                     let res = this.hint_coins.filter(c => {
-                        const name = c.name.trim().toLowerCase();
                         const symbol = c.symbol.trim().toLowerCase();
                         return (
-                            _search.includes(name) || name.includes(_search)
-                            ||
                             _search.includes(symbol) || symbol.includes(_search)
                         );
                     });
+                    if(res.length == 0){
+                        res = this.hint_coins.filter(c => {
+                            const name = c.name.trim().toLowerCase();
+                            return (
+                                _search.includes(name) || name.includes(_search)
+                            );
+                        });
+                    }
                     if (_search.length < 3) {
                         res = res.slice(0, Math.min(res.length, 5));
                     }
