@@ -4,7 +4,7 @@
 
 
 
-    <div id="home-vue" class="py-5" v-cloak>
+    <div id="home-vue" class="py-5" >
         <!-- Start home table -->
         <div class="container-fluid">
             <div class="container-lg">
@@ -30,9 +30,9 @@
                         </div>
                     </div>
                 </div>
-                <div id="table-home" class="table-responsive tableFixHead" v-on:scroll="handleScroll">
+                <div id="table-home"  class="table-responsive tableFixHead" v-on:scroll="handleScroll">
                     <table class="table table-dark table-sm table-striped table-borderless ">
-                        <thead>
+                        <thead v-cloak>
                         <tr>
                             <th v-for="(field,key) in fields" scope="col" class="text-nowrap pointer text-uppercase p-4"
                                 :id="`head-${field.key}`"
@@ -73,12 +73,12 @@
                                     @{{parseNumber(coin.last_market.current_price)}}
                                 </td>
                                 <td scope="row" class="p-4 text-nowrap align-middle text-right"
-                                    :class="{'text-danger':coin.bool_24h,'text-success':!coin.bool_24h}">
+                                    :class="{'text-danger':!coin.bool_24h,'text-success':coin.bool_24h}">
                                     @{{parseNumber(coin.last_market.price_change_percentage_24h)}}
                                 </td>
                                 <td scope="row" class="p-4 text-nowrap align-middle text-right"
-                                    :class="{'text-danger':coin.bool_7d,'text-success':!coin.bool_7d}">
-                                    @{{parseNumber(coin.last_market.price_change_percentage_7d_in_currency)}}
+                                    :class="{'text-danger':!coin.bool_7d,'text-success':coin.bool_7d}">
+                                    @{{ coin.bool_7d }}@{{parseNumber(coin.last_market.price_change_percentage_7d_in_currency)}}
                                 </td>
                                 <td scope="row" class="p-4 text-nowrap align-middle text-right">
                                     @{{coin.last_market.market_cap}}
@@ -276,8 +276,8 @@
                         let bool_7d = true;
                         let bool_24h = true;
                         if (c.last_market) {
-                            bool_7d = c.last_market.price_change_percentage_7d_in_currency[0] != '-';
-                            bool_24h = c.last_market.current_price[0] != '-';
+                            bool_7d = c.last_market.price_change_percentage_7d_in_currency.trim()[0] != '-';
+                            bool_24h = c.last_market.price_change_percentage_24h[0].trim() != '-';
                         }
 
                         let image_url = 'http://d1j8r0kxyu9tj8.cloudfront.net/files/16299992038gk3icP7NaLivXU.png';
@@ -401,5 +401,7 @@
             /*max-width: 250px;*/
             height: 30px;
         }
+
+        [v-cloak] > * { display:none }
     </style>
 @endsection
