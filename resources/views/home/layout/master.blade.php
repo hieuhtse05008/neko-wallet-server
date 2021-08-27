@@ -173,10 +173,10 @@
                         <h5 class="follow-title mb--0 mr--20">Follow Us</h5>
 
                         <ul class="social-icon color-tertiary md-size justify-content-start">
-                            <li><a target="_blank" href="twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a>
+                            <li><a target="_blank" href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a>
                             </li>
-                            <li><a target="_blank" href="t.me/nekoinvest"><i class="fab fa-telegram"></i></a></li>
-                            <li><a target="_blank" href="discord.gg/nekoinvest"><i class="fab fa-discord"></i></a>
+                            <li><a target="_blank" href="https://t.me/nekoinvest"><i class="fab fa-telegram"></i></a></li>
+                            <li><a target="_blank" href="https://discord.gg/nekoinvest"><i class="fab fa-discord"></i></a>
                             </li>
                         </ul>
                     </div>

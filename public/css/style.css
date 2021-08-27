@@ -11351,7 +11351,7 @@ blockquote p {
 }
 
 .tagcloud a:hover {
-  background-color: var(--color-primary);
+  /*background-color: var(--color-primary);*/
   color: #ffffff;
   border-color: var(--color-primary);
 }

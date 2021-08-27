@@ -49,17 +49,17 @@
                                                 </div>
                                                 <ul class="social-share-transparent justify-content-end">
                                                     <li>
-                                                        <a target="_blank" href="twitter.com/Neko_Invest">
+                                                        <a target="_blank" href="https://twitter.com/Neko_Invest">
                                                             <i class="fab fa-twitter"></i>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a target="_blank" href="t.me/nekoinvest">
+                                                        <a target="_blank" href="https://t.me/nekoinvest">
                                                             <i class="fab fa-telegram"></i>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a target="_blank" href="discord.gg/nekoinvest">
+                                                        <a target="_blank" href="https://discord.gg/nekoinvest">
                                                             <i class="fab fa-discord"></i>
                                                         </a>
                                                     </li>
@@ -227,7 +227,7 @@
                             <li>
                                 <div class="d-flex">
                                     <span>Discord:</span>&nbsp;&nbsp;
-                                    <a target="_blank" href="discord.gg/nekoinvest">
+                                    <a target="_blank" href="https://discord.gg/nekoinvest">
                                         https://discord.gg/nekoinvest
                                     </a>
                                 </div>
@@ -235,8 +235,8 @@
                             <li>
                                 <div class="d-flex">
                                     <span>Telegram:</span>&nbsp;&nbsp;
-                                    <a target="_blank" href="t.me/nekoinvest">
-                                        t.me/nekoinvest
+                                    <a target="_blank" href="https://t.me/nekoinvest">
+                                        https://t.me/nekoinvest
                                     </a>
                                 </div>
                             </li>
@@ -256,10 +256,10 @@
                                 <a target="_blank" href="#"><span>2.2k Like</span></a>
                             </div>
                             <ul class="social-icon icon-rounded-transparent md-size">
-                                <li><a target="_blank" href="twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a>
+                                <li><a target="_blank" href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a>
                                 </li>
-                                <li><a target="_blank" href="t.me/nekoinvest"><i class="fab fa-telegram"></i></a></li>
-                                <li><a target="_blank" href="discord.gg/nekoinvest"><i class="fab fa-discord"></i></a>
+                                <li><a target="_blank" href="https://t.me/nekoinvest"><i class="fab fa-telegram"></i></a></li>
+                                <li><a target="_blank" href="https://discord.gg/nekoinvest"><i class="fab fa-discord"></i></a>
                                 </li>
                             </ul>
                         </div>
