@@ -4,7 +4,7 @@
 
 
 
-    <div id="home-vue" class="py-5" >
+    <div id="home-vue" class="py-5">
         <!-- Start home table -->
         <div class="container-fluid">
             <div class="container-lg">
@@ -19,13 +19,17 @@
                                        role="button" id="search-token" data-toggle="dropdown" aria-haspopup="true"
                                        @keyup="enterClicked"
                                        v-model="search.hint_coins">
-                                <div class="dropdown-menu shadow  border-0 w-100 mt-3" aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-menu shadow  border-0 w-100 mt-3"
+                                     aria-labelledby="dropdownMenuLink">
                                     <a v-if="hint_coins.length == 0" class="pointer dropdown-item px-5 py-4 text-wrap">
-                                        <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/16299992038gk3icP7NaLivXU.png" class="table-token-image mr-2 mb-3">
+                                        <img
+                                            src="http://d1j8r0kxyu9tj8.cloudfront.net/files/16299992038gk3icP7NaLivXU.png"
+                                            class="table-token-image mr-2 mb-3">
                                         <span class="mr-2 mb-3"><b>No result</b></span>
                                         <span><b class="text-secondary mb-3"></b></span>
                                     </a>
-                                    <a v-for="coin in hint_coins" v-else class="pointer dropdown-item px-5 py-4 text-wrap"
+                                    <a v-for="coin in hint_coins" v-else
+                                       class="pointer dropdown-item px-5 py-4 text-wrap"
                                        :href="`/token/${coin.name}`" target="_blank">
                                         <img :src="coin.image_url" class="table-token-image mr-2 mb-3">
                                         <span class="mr-2 mb-3"><b>@{{coin.name}}</b></span>
@@ -36,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="table-home"  class="table-responsive tableFixHead" v-on:scroll="handleScroll">
+                <div id="table-home" class="table-responsive tableFixHead" v-on:scroll="handleScroll">
                     <table class="table table-dark table-sm table-striped table-borderless ">
                         <thead v-cloak>
                         <tr>
@@ -224,23 +228,22 @@
                         this.filter[field].push(key);
                     }
                 },
-                loadHintCoins:function (search){
+                loadHintCoins: function (search) {
                     $.get(`/search-coin`, {
                         search
-                    }).then(res=>{
+                    }).then(res => {
                         console.log(res)
                         this.hint_coins = res.items;
                         this.timeout = null;
-                        if(!$('.dropdown-menu').hasClass('show')){
+                        if (!$('.dropdown-menu').hasClass('show')) {
                             $('.dropdown-toggle').click();
                         }
                     });
                 },
                 enterClicked: function () {
-                    if(this.timeout || this.search.hint_coins.length < 3) return;
+                    if (this.timeout || this.search.hint_coins.length < 3) return;
                     this.timeout = 500;
-                    console.log(this.search.hint_coins)
-                        setTimeout(()=>this.loadHintCoins(this.search.hint_coins), this.timeout);
+                    setTimeout(() => this.loadHintCoins(this.search.hint_coins), this.timeout);
                 },
                 loadCoins: function (page = 1) {
                     if (this.isLoading || (page > 1 && this.page == page)) return;
@@ -420,6 +423,8 @@
             height: 30px;
         }
 
-        [v-cloak] > * { display:none }
+        [v-cloak] > * {
+            display: none
+        }
     </style>
 @endsection
