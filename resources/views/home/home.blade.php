@@ -78,7 +78,7 @@
                                 </td>
                                 <td scope="row" class="p-4 text-nowrap align-middle text-right"
                                     :class="{'text-danger':!coin.bool_7d,'text-success':coin.bool_7d}">
-                                    @{{ coin.bool_7d }}@{{parseNumber(coin.last_market.price_change_percentage_7d_in_currency)}}
+                                    @{{parseNumber(coin.last_market.price_change_percentage_7d_in_currency)}}
                                 </td>
                                 <td scope="row" class="p-4 text-nowrap align-middle text-right">
                                     @{{coin.last_market.market_cap}}
