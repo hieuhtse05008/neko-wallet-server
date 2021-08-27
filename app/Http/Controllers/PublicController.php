@@ -20,12 +20,10 @@ class PublicController extends Controller
     }
 
     public function searchCoin(Request $request){
-        $filter = [
-            'symbols' =>   $request->symbols,
-        ];
+
         $limit = $request->limit ?: 20;
 
-        $coins = $this->coinRepository->list($limit, $filter);
+        $coins = $this->coinRepository->list($limit);
 
         return  $coins;
     }

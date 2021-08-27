@@ -20,10 +20,16 @@
                                        @keyup="enterClicked"
                                        v-model="search.hint_coins">
                                 <div class="dropdown-menu shadow  border-0 w-100 mt-3" aria-labelledby="dropdownMenuLink">
-                                    <a v-for="coin in hint_coins" class="pointer dropdown-item px-5 py-4 text-wrap"
+                                    <a v-if="hint_coins.length == 0" class="pointer dropdown-item px-5 py-4 text-wrap">
+                                        <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/16299992038gk3icP7NaLivXU.png" class="table-token-image mr-2 mb-3">
+                                        <span class="mr-2 mb-3"><b>No result</b></span>
+                                        <span><b class="text-secondary mb-3"></b></span>
+                                    </a>
+                                    <a v-for="coin in hint_coins" v-else class="pointer dropdown-item px-5 py-4 text-wrap"
                                        :href="`/token/${coin.name}`" target="_blank">
                                         <img :src="coin.image_url" class="table-token-image mr-2 mb-3">
-                                        <b class="mr-2 mb-3">@{{coin.name}}</b> <span><b class="text-secondary mb-3">@{{coin.symbol.toUpperCase()}}</b></span>
+                                        <span class="mr-2 mb-3"><b>@{{coin.name}}</b></span>
+                                        <span class="text-secondary mb-3"><b>@{{coin.symbol.toUpperCase()}}</b></span>
                                     </a>
                                 </div>
                             </div>
@@ -225,15 +231,16 @@
                         console.log(res)
                         this.hint_coins = res.items;
                         this.timeout = null;
+                        if(!$('.dropdown-menu').hasClass('show')){
+                            $('.dropdown-toggle').click();
+                        }
                     });
                 },
                 enterClicked: function () {
-                    if(this.timeout) return;
+                    if(this.timeout || this.search.hint_coins.length < 3) return;
                     this.timeout = 500;
                     console.log(this.search.hint_coins)
-                    if (this.search.hint_coins) {
                         setTimeout(()=>this.loadHintCoins(this.search.hint_coins), this.timeout);
-                    }
                 },
                 loadCoins: function (page = 1) {
                     if (this.isLoading || (page > 1 && this.page == page)) return;
