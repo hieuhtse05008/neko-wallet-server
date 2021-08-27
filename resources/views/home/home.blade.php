@@ -53,7 +53,7 @@
                                 <div class="w-100 d-flex align-items-center justify-content-center"
                                      style="height: 80vh;">
                                     <div class="spinner-grow" role="status">
-                                        <span class="visually-hidden">Loading...</span>
+                                        <span class="visually-hidden"></span>
                                     </div>
                                 </div>
                             </td>
