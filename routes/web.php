@@ -23,5 +23,6 @@ Route::get('/dashboard', [PublicController::class,'dashboardView']);
 
 Route::get('/load-news', [PublicController::class,'loadNews']);
 Route::post('/push-news-telegram', [PublicController::class,'pushNewsTelegram']);
+Route::get('/search-coin', [PublicController::class,'searchCoin']);
 Route::get('/token/{coin:name}', [PublicController::class,'tokenView']);
 //Route::post('/login', [AuthController::class,'login']);

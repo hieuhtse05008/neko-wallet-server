@@ -17,10 +17,10 @@
                                     <i class="fal fa-search"></i></button>
                                 <input type="text" class="form-control dropdown-toggle" placeholder="Search"
                                        role="button" id="search-token" data-toggle="dropdown" aria-haspopup="true"
-                                       @keyup.enter="enterClicked"
+                                       @keyup="enterClicked"
                                        v-model="search.hint_coins">
                                 <div class="dropdown-menu shadow  border-0 w-100 mt-3" aria-labelledby="dropdownMenuLink">
-                                    <a v-for="coin in _hint_coins" class="pointer dropdown-item px-5 py-4 text-wrap"
+                                    <a v-for="coin in hint_coins" class="pointer dropdown-item px-5 py-4 text-wrap"
                                        :href="`/token/${coin.name}`" target="_blank">
                                         <img :src="coin.image_url" class="table-token-image mr-2 mb-3">
                                         <b class="mr-2 mb-3">@{{coin.name}}</b> <span><b class="text-secondary mb-3">@{{coin.symbol.toUpperCase()}}</b></span>
@@ -171,7 +171,8 @@
                     {key: 'circulating_supply', name: 'Circulating supply',},
                     {key: 'sparkline_7d', name: 'Last 7 days', disableSort: true,},
 
-                ]
+                ],
+                timeout: null,
             },
             methods: {
                 parseNumber: function (str) {
@@ -217,12 +218,22 @@
                         this.filter[field].push(key);
                     }
                 },
+                loadHintCoins:function (search){
+                    $.get(`/search-coin`, {
+                        search
+                    }).then(res=>{
+                        console.log(res)
+                        this.hint_coins = res.items;
+                        this.timeout = null;
+                    });
+                },
                 enterClicked: function () {
+                    if(this.timeout) return;
+                    this.timeout = 500;
                     console.log(this.search.hint_coins)
-                    // if (this.search.symbols) {
-                    //     this.filter.symbols = [this.search.symbols];
-                    //     setTimeout(this.apply, 200);
-                    // }
+                    if (this.search.hint_coins) {
+                        setTimeout(()=>this.loadHintCoins(this.search.hint_coins), this.timeout);
+                    }
                 },
                 loadCoins: function (page = 1) {
                     if (this.isLoading || (page > 1 && this.page == page)) return;
@@ -297,27 +308,27 @@
                 },
             },
             computed: {
-                _hint_coins: function () {
-                    const _search = this.search.hint_coins.trim().toLowerCase();
-                    let res = this.hint_coins.filter(c => {
-                        const symbol = c.symbol.trim().toLowerCase();
-                        return (
-                            _search.includes(symbol) || symbol.includes(_search)
-                        );
-                    });
-                    if(res.length == 0){
-                        res = this.hint_coins.filter(c => {
-                            const name = c.name.trim().toLowerCase();
-                            return (
-                                _search.includes(name) || name.includes(_search)
-                            );
-                        });
-                    }
-                    if (_search.length < 3) {
-                        res = res.slice(0, Math.min(res.length, 5));
-                    }
-                    return res;
-                },
+                // _hint_coins: function () {
+                //     const _search = this.search.hint_coins.trim().toLowerCase();
+                //     let res = this.hint_coins.filter(c => {
+                //         const symbol = c.symbol.trim().toLowerCase();
+                //         return (
+                //             _search.includes(symbol) || symbol.includes(_search)
+                //         );
+                //     });
+                //     if(res.length == 0){
+                //         res = this.hint_coins.filter(c => {
+                //             const name = c.name.trim().toLowerCase();
+                //             return (
+                //                 _search.includes(name) || name.includes(_search)
+                //             );
+                //         });
+                //     }
+                //     if (_search.length < 3) {
+                //         res = res.slice(0, Math.min(res.length, 5));
+                //     }
+                //     return res;
+                // },
                 _categories: function () {
                     const _search = this.search.categories.trim().toLowerCase();
                     return this.categories.filter(c => {

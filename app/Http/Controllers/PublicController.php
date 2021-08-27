@@ -19,13 +19,23 @@ class PublicController extends Controller
         $this->coinRepository = $coinRepository;
     }
 
+    public function searchCoin(Request $request){
+        $filter = [
+            'symbols' =>   $request->symbols,
+        ];
+        $limit = $request->limit ?: 20;
+
+        $coins = $this->coinRepository->list($limit, $filter);
+
+        return  $coins;
+    }
 
     public function homeView(Request $request)
     {
 
 //        ======================================================
         $connection = config('database.connections.warehouse.database');
-        $coins = Coin::all();
+        $coins = Coin::limit(5)->get();
         $categories = DB::connection($connection)->table('coin_categories')->get();
         $platforms = DB::connection($connection)->table('asset_platforms')->get();
 
