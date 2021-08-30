@@ -53,7 +53,7 @@ class SyncCoinHistory extends Command
 
         Log::info('start handleCoinMarketCaps');
         $data = [];
-        for ($i = 1; $i <= 12000; $i++) {
+        for ($i = 1; $i <= 5000; $i++) {
             $item = $this->handleCoinMarketCap($i);
             if (!empty($item)) {
                 $data[] = $item;
