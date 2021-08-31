@@ -17,7 +17,7 @@
                                     <i class="fal fa-search"></i></button>
                                 <input type="text" class="form-control dropdown-toggle" placeholder="Search"
                                        role="button" id="search-token" data-toggle="dropdown" aria-haspopup="true"
-                                       @keyup="enterClicked"
+                                       @keyup="onChangeSearch"
                                        v-model="search.hint_coins">
                                 <div class="dropdown-menu shadow  border-0 w-100 mt-3"
                                      aria-labelledby="dropdownMenuLink">
@@ -28,7 +28,7 @@
                                         <span class="mr-2 mb-3"><b>No result</b></span>
                                         <span><b class="text-secondary mb-3"></b></span>
                                     </a>
-                                    <a v-for="coin in hint_coins" v-else
+                                    <a v-for="coin in hint_coins" v-else  v-cloak
                                        class="pointer dropdown-item px-5 py-4 text-wrap"
                                        :href="`/token/${coin.name}`" target="_blank">
                                         <img :src="coin.image_url" class="table-token-image mr-2 mb-3">
@@ -68,8 +68,8 @@
                                 </div>
                             </td>
                         </tr>
-                        <template v-for="coin in coins">
-                            <tr v-if="coin.last_market">
+                        <template v-else v-for="(coin,key) in coins">
+                            <tr :id="`tr-${key}`" v-if="coin.last_market">
                                 <td scope="row" class="text-nowrap align-middle text-center">
                                     @{{coin.last_market.market_cap_rank}}
                                 </td>
@@ -240,7 +240,7 @@
                         }
                     });
                 },
-                enterClicked: function () {
+                onChangeSearch: function () {
                     if (this.timeout || this.search.hint_coins.length < 3) return;
                     this.timeout = 500;
                     setTimeout(() => this.loadHintCoins(this.search.hint_coins), this.timeout);
@@ -318,27 +318,7 @@
                 },
             },
             computed: {
-                // _hint_coins: function () {
-                //     const _search = this.search.hint_coins.trim().toLowerCase();
-                //     let res = this.hint_coins.filter(c => {
-                //         const symbol = c.symbol.trim().toLowerCase();
-                //         return (
-                //             _search.includes(symbol) || symbol.includes(_search)
-                //         );
-                //     });
-                //     if(res.length == 0){
-                //         res = this.hint_coins.filter(c => {
-                //             const name = c.name.trim().toLowerCase();
-                //             return (
-                //                 _search.includes(name) || name.includes(_search)
-                //             );
-                //         });
-                //     }
-                //     if (_search.length < 3) {
-                //         res = res.slice(0, Math.min(res.length, 5));
-                //     }
-                //     return res;
-                // },
+
                 _categories: function () {
                     const _search = this.search.categories.trim().toLowerCase();
                     return this.categories.filter(c => {

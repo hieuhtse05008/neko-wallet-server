@@ -53,12 +53,14 @@ class SyncCoinHistory extends Command
 
         Log::info('start handleCoinMarketCaps');
         $data = [];
-        for ($i = 1; $i <= 5000; $i++) {
+        for ($i = 1; $i <= 12000; $i++) {
+//        foreach ([] as $i) {
             $item = $this->handleCoinMarketCap($i);
             if (!empty($item)) {
                 $data[] = $item;
             }
-            usleep(900000);
+            sleep(1);
+//            usleep(900000);
         }
         $f = fopen("coins.json", "w") or die("Unable to open file!");
         $txt = json_encode($data);
@@ -70,7 +72,6 @@ class SyncCoinHistory extends Command
 
     private function handleCoinMarketCap($id)
     {
-        echo "Id: $id" . "\xA";
         Log::info("start handleCoinMarketCap $id");
         try {
             //get slug
@@ -88,7 +89,14 @@ class SyncCoinHistory extends Command
 
 
             //get info
-            $content = (file_get_contents("https://coinmarketcap.com/currencies/$slug"));
+            $context = stream_context_create(
+                array(
+                    "http" => array(
+                        "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
+                    )
+                )
+            );
+            $content = (file_get_contents("https://coinmarketcap.com/currencies/$slug", false,$context));
             preg_match("/<script id=\"__NEXT_DATA__\" type=\"application\/json\">(.*)<\/script>/", $content, $json, PREG_OFFSET_CAPTURE);
             $text = (($json[0])[0]);
             $dom = new \DOMDocument();
@@ -100,14 +108,17 @@ class SyncCoinHistory extends Command
             $obj = json_decode($json_text);
             $platforms = object_get($obj, 'props.initialProps.pageProps.info.platforms');
             $explorers = object_get($obj, 'props.initialProps.pageProps.info.urls.explorer');
+            $rank = object_get($obj, 'props.initialProps.pageProps.info.statistics.rank');
 
             echo json_encode([
                 'coin_market_cap_id' => $id,
                 'coin_market_cap_slug' => $slug,
+                'name' => $res->name,
                 'symbol' => $res->symbol,
                 'logo' => "https://s2.coinmarketcap.com/static/img/coins/200x200/$id",
                 'platforms' => $platforms,
                 'explorers' => $explorers,
+                'rank' => $rank,
             ]). "\xA";
         } catch (\Exception $e) {
             Log::error($e);
@@ -116,10 +127,12 @@ class SyncCoinHistory extends Command
         return [
             'coin_market_cap_id' => $id,
             'coin_market_cap_slug' => $slug,
+            'name' => $res->name,
             'symbol' => $res->symbol,
             'logo' => "https://s2.coinmarketcap.com/static/img/coins/200x200/$id",
             'platforms' => $platforms,
             'explorers' => $explorers,
+            'rank' => $rank,
         ];
     }
 
