@@ -13,15 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware(["api"])->group(function (){
-//    Route::get('/tokens', [TokenAPIController::class,'index']);
-//    Route::post('/login', [AuthController::class,'login']);
-//});
-//
-//Route::middleware(['auth:sanctum'])->group(function () {
-//    Route::get('/users', 'UserController@index');
-//});
-
 Route::get('/test', function () {
     $api = new \App\Dex\BinanceAPI();
 //    dd($api->depositAddress('BNB'));
@@ -30,57 +21,6 @@ Route::get('/test', function () {
 });
 
 Route::get('/telegram', [App\Http\Controllers\API\TelegramAPIController::class, 'index']);
-
-Route::prefix("v1")->group(function () {
-    Route::group(["prefix" => 'token-prices'], function () {
-        Route::get("/", [App\Http\Controllers\API\TokenAPIController::class, 'index']);
-        Route::post("/", [App\Http\Controllers\API\TokenAPIController::class, 'store']);
-        Route::get("/swap", [App\Http\Controllers\API\TokenAPIController::class, 'swapPreview']);
-        Route::get("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'show']);
-        Route::put("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'update']);
-//        Route::delete("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'destroy']);
-    });
-});
-
-
-Route::prefix("v1")->group(function () {
-    Route::group(["prefix" => 'swaps'], function () {
-        Route::get("/address", [App\Http\Controllers\API\SwapAPIController::class, 'swapAddress']);
-        Route::get("/", [App\Http\Controllers\API\SwapAPIController::class, 'index'])->middleware("include:from_contract,to_contract,swap_orders");
-        Route::post("/", [App\Http\Controllers\API\SwapAPIController::class, 'store']);
-//        Route::post("/", [App\Http\Controllers\API\SwapAPIController::class, 'store']);
-//        Route::get("{swap}", [App\Http\Controllers\API\SwapAPIController::class, 'show']);
-//        Route::put("{swap}", [App\Http\Controllers\API\SwapAPIController::class, 'update']);
-//        Route::delete("{swap}", [App\Http\Controllers\API\SwapAPIController::class, 'destroy']);
-    });
-});
-
-
-Route::prefix("v1")->group(function () {
-    Route::group(["prefix" => 'contracts'], function () {
-        Route::get("/", [App\Http\Controllers\API\ContractAPIController::class, 'index']);
-        Route::post("/", [App\Http\Controllers\API\ContractAPIController::class, 'store']);
-        Route::get("{contract}", [App\Http\Controllers\API\ContractAPIController::class, 'show']);
-        Route::put("{contract}", [App\Http\Controllers\API\ContractAPIController::class, 'update']);
-        Route::delete("{contract}", [App\Http\Controllers\API\ContractAPIController::class, 'destroy']);
-    });
-});
-
-
-Route::prefix("v1")->group(function () {
-    Route::group(["prefix" => 'swap-orders'], function () {
-        Route::get("/", [App\Http\Controllers\API\SwapOrderAPIController::class, 'index']);
-        Route::post("/", [App\Http\Controllers\API\SwapOrderAPIController::class, 'store']);
-        Route::get("{swapOrder}", [App\Http\Controllers\API\SwapOrderAPIController::class, 'show']);
-        Route::put("{swapOrder}", [App\Http\Controllers\API\SwapOrderAPIController::class, 'update']);
-        Route::delete("{swapOrder}", [App\Http\Controllers\API\SwapOrderAPIController::class, 'destroy']);
-    });
-});
-
-
-
-
-
 
 Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'coin-markets-data'], function () {

@@ -1,1 +1,2 @@
 CREATE DATABASE neko;
+CREATE DATABASE warehouse;

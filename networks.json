@@ -1,0 +1,230 @@
+[
+    {
+        "id": 1,
+        "name": "Ethereum",
+        "cmc_id": 1,
+        "chain_id": 1,
+        "explorer_url": "https://etherscan.io",
+        "wallet_derive_path": "m/44'/60'/0'/0/0",
+        "short_name": "ERC20",
+        "symbol": "ETH",
+        "icon_url": "https://d1j8r0kxyu9tj8.cloudfront.net/files/1630079333cqnQQ1ZWlu0U5dD.png",
+        "is_active": true
+    },
+    {
+        "id": 2,
+        "name": "Binance Smart Chain",
+        "cmc_id": 14,
+        "chain_id": 56,
+        "explorer_url": "https://bscscan.com",
+        "wallet_derive_path": "m/44'/60'/0'/0/0",
+        "icon_url": "https://d1j8r0kxyu9tj8.cloudfront.net/files/16300793165gXeMDHB9uhQuHt.png",
+        "short_name": "BEP20 (BSC)",
+        "symbol": "BSC",
+        "is_active": true
+    },
+    {
+        "id": 3,
+        "name": "Binance Chain",
+        "cmc_id": 15,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 4,
+        "name": "Solana",
+        "cmc_id": 16,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 5,
+        "name": "Tron10",
+        "cmc_id": 2,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 6,
+        "name": "Tron20",
+        "cmc_id": 47,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 7,
+        "name": "EOS",
+        "cmc_id": 3,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 8,
+        "name": "Neo",
+        "cmc_id": 4,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 9,
+        "name": "IOST",
+        "cmc_id": 5,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 10,
+        "name": "Chiliz",
+        "cmc_id": 8,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 11,
+        "name": "ICON",
+        "cmc_id": 9,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 12,
+        "name": "TomoChain",
+        "cmc_id": 12,
+        "chain_id": 88,
+        "explorer_url": ""
+    },
+    {
+        "id": 13,
+        "name": "Algorand",
+        "cmc_id": 17,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 14,
+        "name": "Avalanche",
+        "cmc_id": 18,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 15,
+        "name": "Heco",
+        "cmc_id": 19,
+        "chain_id": 128,
+        "explorer_url": "https://hecoinfo.com"
+    },
+    {
+        "id": 16,
+        "name": "Xdai chain",
+        "cmc_id": 20,
+        "chain_id": 100,
+        "explorer_url": "https://blockscout.com/xdai/mainnet"
+    },
+    {
+        "id": 17,
+        "name": "Wanchain",
+        "cmc_id": 21,
+        "chain_id": 888,
+        "explorer_url": ""
+    },
+    {
+        "id": 18,
+        "name": "Terra",
+        "cmc_id": 22,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 19,
+        "name": "Waves",
+        "cmc_id": 23,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 20,
+        "name": "Fantom",
+        "cmc_id": 24,
+        "chain_id": 250,
+        "explorer_url": "https://ftmscan.com"
+    },
+    {
+        "id": 21,
+        "name": "Polygon",
+        "cmc_id": 25,
+        "chain_id": 137,
+        "explorer_url": "https://polygonscan.com"
+    },
+    {
+        "id": 22,
+        "name": "Klaytn",
+        "cmc_id": 26,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 23,
+        "name": "Stellar",
+        "cmc_id": 27,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 24,
+        "name": "Avalanche Contract Chain",
+        "cmc_id": 28,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 25,
+        "name": "Cardano",
+        "cmc_id": 29,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 26,
+        "name": "OKExChain",
+        "cmc_id": 31,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 27,
+        "name": "VeChain",
+        "cmc_id": 32,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 28,
+        "name": "Celo",
+        "cmc_id": 35,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 29,
+        "name": "Bitcoin Cash",
+        "cmc_id": 39,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 30,
+        "name": "ONT",
+        "cmc_id": 40,
+        "chain_id": -1,
+        "explorer_url": ""
+    },
+    {
+        "id": 31,
+        "name": "KCC",
+        "cmc_id": 43,
+        "chain_id": -1,
+        "explorer_url": ""
+    }
+   
+]

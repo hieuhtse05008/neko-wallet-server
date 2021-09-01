@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class FakerDataSeeder extends Seeder
 {
@@ -15,189 +14,73 @@ class FakerDataSeeder extends Seeder
      */
     public function run()
     {
-        $dexes = [
-            [
-                "id" => Str::uuid()->toString(),
-                'name' => 'binance',
-                'icon_url' => 'https://',
-            ],
+        $coins = json_decode(file_get_contents('coins.json'));
+        $cryptocurrencies = json_decode(file_get_contents('crytocurrencies.json'));
+        $networks = json_decode(file_get_contents('networks.json'));
+        $tokens = json_decode(file_get_contents('tokens.json'));
+        echo count($coins);
+        echo PHP_EOL;
+        echo count($cryptocurrencies);
+        echo PHP_EOL;
+        echo count($networks);
+        echo PHP_EOL;
+        echo count($tokens);
+        echo PHP_EOL;
 
-            [
-                "id" => Str::uuid()->toString(),
-                'name' => 'huobi',
-                'icon_url' => 'https://',
-            ],
-        ];
+//        dd($networks[1]->symbol);
+//        dd(object_get($networks[1],'symbol'));
 
-        foreach ($dexes as $key => $dex) {
-            $obj = DB::table('dexes')
-                ->where('name', '=', $dex['name'])
-                ->first();
-            if ($obj) {
-                $dexes[$key]['id'] = $obj->id;
-            } else {
-                DB::table('dexes')->insert($dex);
-            };
+        foreach ($networks as $i) {
+            DB::table('networks')->insert([
+                'id' => object_get($i, 'id'),
+                'name' => object_get($i, 'name'),
+                'chain_id' => object_get($i, 'chain_id'),
+                'icon_url' => object_get($i, 'icon_url'),
+                'short_name' => object_get($i, 'short_name'),
+                'symbol' => object_get($i, 'symbol'),
+                'wallet_derive_path' => object_get($i, 'wallet_derive_path'),
+                'is_active' => object_get($i, 'is_active', false),
+            ]);
+            DB::table('networks_mapping')->insert([
+                'network_id' => object_get($i, 'id'),
+                'cmc_id' => object_get($i, 'cmc_id'),
+            ]);
         }
 
+        foreach ($cryptocurrencies as $i) {
+            DB::table('cryptocurrencies')->insert([
+                'id' => object_get($i, 'id'),
+                'name' => object_get($i, 'name'),
+                'symbol' => object_get($i, 'symbol'),
+                'slug' => object_get($i, 'slug'),
+                'icon_url' => object_get($i, 'icon_url'),
+                'rank' => object_get($i, 'rank'),
+                'verified' => object_get($i, 'verified', false),
+            ]);
 
-        $networks = [
-            "ERC20" => [
-                "id" => Str::uuid()->toString(),
-                "name" => "Ethereum",
-                "short_name" => "ERC20",
-                "symbol" => "ETH",
-                "chain_id" => 60,
-                "rpc_url" => "https://api.etherscan.io",
-                "explorer_url" => "https://etherscan.io/",
-                "wallet_derive_path" => "m/44'/60'/0'/0/0"
-            ],
-            "BEP20" => [
-                "id" => Str::uuid()->toString(),
-                "name" => "Binance Smart Chain",
-                "short_name" => "BEP20 (BSC)",
-                "symbol" => "BSC",
-                "chain_id" => 56,
-                "rpc_url" => "https://bsc-dataseed.binance.org/",
-                "explorer_url" => "https://bscscan.com",
-                "wallet_derive_path" => "m/44'/60'/0'/0/0"
-            ],
-            "KRC20" => [
-                "id" => Str::uuid()->toString(),
-                "name" => "KardiaChain",
-                "short_name" => "KRC20",
-                "symbol" => "KAI",
-                "chain_id" => 1,
-                "rpc_url" => "https://rpc.kardiachain.io",
-                "explorer_url" => "https://explorer.kardiachain.io/",
-                "wallet_derive_path" => "m/44'/60'/0'/0/0"
-            ],
-            "BEP20test" => [
-                "id" => Str::uuid()->toString(),
-                "name" => "Binance Smart Chain(Test)",
-                "short_name" => "BEP20 (BSC)",
-                "symbol" => "BSC",
-                "chain_id" => 97,
-                "rpc_url" => "https://data-seed-prebsc-1-s1.binance.org:8545/",
-                "explorer_url" => "https://testnet.bscscan.com",
-                "wallet_derive_path" => "m/44'/60'/0'/0/0"
-            ]
-        ];
 
-        foreach ($networks as $key => $network) {
-            $net = DB::table('networks')
-                ->where('symbol', '=', $network['symbol'])
-                ->first();
-            if ($net) {
-                $networks[$key]['id'] = $net->id;
-            } else {
-                DB::table('networks')->insert($network);
-            };
+            DB::table('cryptocurrencies_mapping')->insert([
+                "cryptocurrency_id" => object_get($i, 'id'),
+                'cmc_id' => object_get($i, 'cmc_id'),
+            ]);
+
+        }
+//        dd(DB::getDefaultConnection());
+        foreach ($tokens as $i) {
+            DB::table('tokens')->insert([
+                'name' => object_get($i, 'name'),
+                'symbol' => object_get($i, 'symbol'),
+                'decimals' => object_get($i, 'decimals'),
+                'address' => object_get($i, 'address'),
+                'icon_url' => object_get($i, 'icon_url'),
+                'cryptocurrency_id' => object_get($i, 'cryptocurrency_id'),
+                'network_id' => object_get($i, 'network_id'),
+                'verified' => object_get($i, 'verified', false),
+                'active_wallet' => object_get($i, 'active_wallet', false),
+            ]);
+
         }
 
-        $contracts = [
-            [
-                'id' => Str::uuid(),
-                'name' => '1INCH',
-                'symbol' => '1INCH',
-                'decimal' => 18,
-                'icon_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1622129149IZR7NaAU1G8UUfG.png',
-                'address' => '0x111111111117dc0aa78b770fa6a738034120c302',
-                'network_id' => $networks['BEP20']['id'],
-            ],
-            [
-                'id' => Str::uuid(),
-                'name' => 'Binance',
-                'symbol' => 'BNB',
-                'decimal' => 18,
-                'icon_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/16221290772bs1foHrDTqNXei.png',
-                'address' => '',
-                'network_id' => $networks['BEP20']['id'],
-            ],
-            [
-                'id' => Str::uuid(),
-                'name' => 'Ethereum',
-                'symbol' => 'ETH',
-                'decimal' => 18,
-                'icon_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1622129114F0zZG66jYbSd3AT.png',
-                'address' => '',
-                'network_id' => $networks['ERC20']['id'],
-            ],
-            [
-                'id' => Str::uuid(),
-                'name' => 'Nami',
-                'symbol' => 'NAMI',
-                'decimal' => 18,
-                'icon_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1622124259bigVDhNIqQkwLOw.png',
-                'address' => '0x2f7b618993cc3848d6c7ed9cdd5e835e4fe22b98',
-                'network_id' => $networks['ERC20']['id'],
-            ],
-            [
-                'id' => Str::uuid(),
-                'name' => 'Attlas',
-                'symbol' => 'ATS',
-                'decimal' => 8,
-                'icon_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/16221272798VlaMrrGypPIw45.png',
-                'address' => '0xb9a6644bef37286fc08e703ecd15e9dedf78d3eb',
-                'network_id' => $networks['ERC20']['id'],
-            ],
-            [
-                'id' => Str::uuid(),
-                'name' => 'Bami',
-                'symbol' => 'BAMI',
-                'decimal' => 18,
-                'icon_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1622129030nEQ30bKMIb0thmR.png',
-                'address' => '0x8249bc1dea00660d2d38df126b53c6c9a733e942',
-                'network_id' => $networks['BEP20']['id'],
-            ],
-            [
-                'id' => Str::uuid(),
-                'name' => 'Ola',
-                'symbol' => 'OLA',
-                'decimal' => 8,
-                'icon_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1622131725ELXs4viY5fRCM7f.jpeg',
-                'address' => '0x47d0f6195911e93fe2b9b456289b6769aa47268f',
-                'network_id' => $networks['BEP20']['id'],
-            ],
-            [
-                'id' => Str::uuid(),
-                'name' => 'KardiaChain',
-                'symbol' => 'KAI',
-                'decimal' => 18,
-                'icon_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1622212725ldYL7Vr38F2Gt0B.png',
-                'address' => '0xD9Ec3ff1f8be459Bb9369b4E79e9Ebcf7141C093',
-                'network_id' => $networks['KRC20']['id'],
-            ],
-            [
-                'id' => Str::uuid(),
-                'name' => 'My DeFi Pet',
-                'symbol' => 'DPET',
-                'decimal' => 18,
-                'icon_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1622285168YJTaqdbhtfi0bNo.png',
-                'address' => '0xfb62AE373acA027177D1c18Ee0862817f9080d08',
-                'network_id' => $networks['KRC20']['id'],
-            ],
-            [
-                'id' => Str::uuid(),
-                'name' => "Wootrade Network",
-                'symbol' => "WOO",
-                'decimal' => 18,
-                'icon_url' => "https://d1j8r0kxyu9tj8.cloudfront.net/files/1626354609vk3fAwSQl6hrKRU.jpeg",
-                'address' => "0x4691937a7508860f876c9c0a2a617e7d9e945d4b",
-                'network_id' => $networks['ERC20']['id'],
-            ],
-        ];
-
-        foreach ($contracts as $key => $contract) {
-            $item = DB::table('contracts')
-                ->where('symbol', '=', $contract['symbol'])
-                ->first();
-            if ($item) {
-                $contracts[$key]['id'] = $item->id;
-            } else {
-                DB::table('contracts')->insert($contract);
-            };
-        }
 
     }
 }
