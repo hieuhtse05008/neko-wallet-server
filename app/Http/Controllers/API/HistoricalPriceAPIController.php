@@ -80,7 +80,7 @@ class HistoricalPriceAPIController extends APIController
         $cryptocurrencies = $this->historicalPriceRepository->latest($limit, $filter);
 
         return $this->respondSuccess([
-            "cryptocurrencies" => $cryptocurrencies
+            "cryptocurrencies" => $cryptocurrencies->toArray()
         ]);
     }
 }
