@@ -91,13 +91,13 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
         $this->skipPresenter(true);
         $prices = $this->get(['cryptocurrency_id', DB::raw('last(price, time) AS price')])->pluck('price', 'cryptocurrency_id');
         $this->skipPresenter(false);
-        foreach ($cryptocurrencies as &$cryptocurrency) {
-            $cryptocurrency['price'] = $prices[$cryptocurrency['id']] ?? 0;
-        }
-
-        $cryptocurrencies = array_filter($cryptocurrencies, function ($item) {
-            return $item['price'] > 0;
-        });
+//        foreach ($cryptocurrencies as &$cryptocurrency) {
+//            $cryptocurrency['price'] = $prices[$cryptocurrency['id']] ?? 0;
+//        }
+//
+//        $cryptocurrencies = array_filter($cryptocurrencies, function ($item) {
+//            return $item['price'] > 0;
+//        });
 
         return $cryptocurrencies;
     }
