@@ -82,7 +82,7 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
         $this->cryptocurrencyRepository->skipPresenter(false);
 
         $this->scopeQuery(function ($query) use ($filter) {
-            $query = $query->whereRaw("time > NOW() - interval '3m'")
+            $query = $query->whereRaw("time > NOW() - interval '3d'")
                 ->groupBy('cryptocurrency_id')
                 ->orderBy('cryptocurrency_id', 'asc');
             return $query;
@@ -91,14 +91,12 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
         $this->skipPresenter(true);
         $prices = $this->get(['cryptocurrency_id', DB::raw('last(price, time) AS price')])->pluck('price', 'cryptocurrency_id');
         $this->skipPresenter(false);
-        foreach ($cryptocurrencies as &$cryptocurrency) {
-            $cryptocurrency['price'] = $prices[$cryptocurrency['id']] ?? 0;
-        }
 
-        $cryptocurrencies = $cryptocurrencies->filter(function ($item) {
-            return $item['price'] > 0;
-        });
-
+        $cryptocurrencies = $cryptocurrencies->map(function ($cryptocurrency) use ($prices) {
+            $cryptocurrency->price = $prices[$cryptocurrency['id']] ?? 0;
+            return $cryptocurrency;
+        })->where('price', '>', 0)->values();
+//        dd($cryptocurrencies);
         return $cryptocurrencies;
     }
 }
