@@ -48,7 +48,7 @@ Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'cryptocurrencies'], function () {
 
         Route::group(['prefix' => 'prices'], function () {
-            Route::get("/latest", [App\Http\Controllers\API\HistoricalPriceAPIController::class, 'index']);
+            Route::get("/latest", [App\Http\Controllers\API\HistoricalPriceAPIController::class, 'latest']);
         });
 
         Route::get("/", [App\Http\Controllers\API\CryptocurrencyAPIController::class, 'index']);

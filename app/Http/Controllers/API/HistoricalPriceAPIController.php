@@ -23,7 +23,7 @@ class HistoricalPriceAPIController extends APIController
     }
 
     /**
-     * Display a listing of the HistoricalPrice.
+     * Get the latest of cryptocurrencies.
      * GET /api/v1/cryptocurrencies/prices/latest
      *
      * @param Request $request
@@ -73,14 +73,14 @@ class HistoricalPriceAPIController extends APIController
      * )
      */
 
-    public function index(Request $request)
+    public function latest(Request $request)
     {
         $filter = [];
         $limit = $request->limit;
-        $historicalPrices = $this->historicalPriceRepository->list($limit, $filter);
+        $cryptocurrencies = $this->historicalPriceRepository->latest($limit, $filter);
 
         return $this->respondSuccess([
-            "historical_prices" => $historicalPrices
+            "cryptocurrencies" => $cryptocurrencies
         ]);
     }
 }
