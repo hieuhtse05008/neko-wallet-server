@@ -89,7 +89,7 @@ return [
             'prefix_indexes' => true,
             'sslmode' => 'prefer',
         ],
-        'timescale_prices' => [
+        'timescale_price' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_PRICE_HOST', '127.0.0.1'),

@@ -31,6 +31,12 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\CoinMarketsDataRepository::class, \App\Repositories\CoinMarketsDataRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\CoinsRepository::class, \App\Repositories\CoinsRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\CoinRepository::class, \App\Repositories\CoinRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\HistoricalPriceRepository::class, \App\Repositories\HistoricalPriceRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\CryptocurrencyRepository::class, \App\Repositories\CryptocurrencyRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\CryptocurrencyMappingRepository::class, \App\Repositories\CryptocurrencyMappingRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\NetworkRepository::class, \App\Repositories\NetworkRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\NetworkMappingRepository::class, \App\Repositories\NetworkMappingRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\TokenRepository::class, \App\Repositories\TokenRepositoryEloquent::class);
         //:end-bindings:
     }
 }

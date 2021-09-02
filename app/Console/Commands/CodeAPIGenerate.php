@@ -21,6 +21,7 @@ class CodeAPIGenerate extends Command
     protected $signature = 'code:api-generate
                             {name : Name of table}
                             {--tableName= : Name of table to get info}
+                            {--plural : plural of table to get info}
                             {--dbName= : Name of database to connect}';
 
     /**
@@ -48,9 +49,12 @@ class CodeAPIGenerate extends Command
     {
         $name = $this->argument('name');
 
-        config(['database.connections.pgsql.database' => $this->option('dbName')]);
-        DB::purge('pgsql');
-        DB::reconnect('pgsql');
+//        if ($this->option('dbName')) {
+//
+//            config(['database.connections.pgsql.database' => $this->option('dbName')]);
+//            DB::purge('pgsql');
+//            DB::reconnect('pgsql');
+//        }
 
         $this->call('make:transformer', [
             'name' => $name,

@@ -21,13 +21,8 @@ class BaseModel extends Model
 {
     use HasFactory;
 
-    public const CREATOR_ID = 'creator_id';
-    public const disabledCreator = false;
-    public const disabledUpdatedBy = false;
-    public const disabledDeletedBy = false;
     public const enabledRestoreRelation = false;
     public const rangeTimeDelete = 5;
-
 
     /**
      * @param $model
@@ -71,45 +66,8 @@ class BaseModel extends Model
     protected static function boot()
     {
         parent::boot();
-        static::creating(function ($model) {
-            if (static::disabledCreator) {
-                return;
-            }
-            $user = Auth::user();
 
-            if (empty($model[static::CREATOR_ID])) {
-                if (!empty($user)) {
-                    $model[static::CREATOR_ID] = $user->id;
-                }
-
-                if (!empty($user) && !static::disabledUpdatedBy) {
-                    $model->updated_by = $user->id;
-                }
-            }
-        });
-        static::updating(function ($model) {
-            if (static::disabledUpdatedBy) {
-                return;
-            }
-            $user = Auth::user();
-
-            if ($model->deleted_by) {
-                return;
-            }
-            if (!empty($user)) {
-                $model->updated_by = $user->id;
-            }
-
-        });
         static::deleting(function ($model) {
-            if (static::disabledDeletedBy) {
-                return;
-            }
-            $user = Auth::user();
-            if (!empty($user)) {
-                $model->deleted_by = $user->id;
-            }
-            $model->save();
             static::deleteRelation($model);
         });
 
