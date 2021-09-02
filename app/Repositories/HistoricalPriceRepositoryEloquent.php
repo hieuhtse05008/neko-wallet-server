@@ -95,6 +95,10 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
             $cryptocurrency['price'] = $prices[$cryptocurrency['id']] ?? 0;
         }
 
+        $cryptocurrencies = collect($cryptocurrencies)->filter(function ($item) {
+            return $item['price'] > 0;
+        });
+
         return $cryptocurrencies;
     }
 }
