@@ -47,10 +47,29 @@ services:
     networks:
       - neko-network
 
+  database_price:
+    container_name: timescale-neko-price
+    image: timescale/timescaledb:latest-pg12
+    restart: unless-stopped
+    volumes:
+      - neko-price-database:/var/lib/postgres
+      #      - ./sourcefiles/postgres:/var/lib/postgresql/data
+      - ./docker/postgres/databasePrice:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_DB: neko
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - 54321:5432
+    networks:
+      - neko-network
+
 networks:
   neko-network:
     driver: bridge
 
 volumes:
   neko-database:
+    driver: local
+  neko-price-database:
     driver: local

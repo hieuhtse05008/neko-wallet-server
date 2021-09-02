@@ -14,28 +14,28 @@ class CreateTablesWarehouse extends Migration
      */
     public function up()
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
 
         Schema::connection($connection)
-        ->create('coins', function (Blueprint $table) {
-            $table->id();
-            $table->text('coin_id')->unique();
-            $table->text('symbol');
-            $table->text('name');
-            $table->timestamps();
-        });
+            ->create('coins', function (Blueprint $table) {
+                $table->id();
+                $table->text('coin_id')->unique();
+                $table->text('symbol');
+                $table->text('name');
+                $table->timestamps();
+            });
         Schema::connection($connection)
             ->create('coin_markets_data', function (Blueprint $table) {
-            $table->id();
-            $table->text('coin_id');
-            $table->text('current_price');
-            $table->text('market_cap');
-            $table->text('total_volume');
-            $table->text('price_change_24h');
-            $table->text('price_change_percentage_24h');
-            $table->dateTime('last_updated')->nullable();
-            $table->timestamps();
-        });
+                $table->id();
+                $table->text('coin_id');
+                $table->text('current_price');
+                $table->text('market_cap');
+                $table->text('total_volume');
+                $table->text('price_change_24h');
+                $table->text('price_change_percentage_24h');
+                $table->dateTime('last_updated')->nullable();
+                $table->timestamps();
+            });
     }
 
     /**
