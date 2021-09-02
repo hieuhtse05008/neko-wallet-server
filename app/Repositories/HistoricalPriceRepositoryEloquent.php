@@ -77,6 +77,8 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
         // TODO: Implement list() method.
         $this->resetCriteria();
 
+        $this->skipPresenter(true);
+
         $cryptocurrencies = $this->cryptocurrencyRepository->all();
 
         $this->scopeQuery(function ($query) use ($filter) {
