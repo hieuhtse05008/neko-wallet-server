@@ -82,7 +82,7 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
         $this->cryptocurrencyRepository->skipPresenter(false);
 
         $this->scopeQuery(function ($query) use ($filter) {
-            $query = $query->whereRaw("time > NOW() - interval '3d'")
+            $query = $query->whereRaw("time > NOW() - interval '3m'")
                 ->groupBy('cryptocurrency_id')
                 ->orderBy('cryptocurrency_id', 'asc');
             return $query;
