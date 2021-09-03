@@ -111,7 +111,7 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
             $cryptocurrency->percent_change_24h = 0;
             $yesterdayPrice = $yesterdayPrices[$cryptocurrency['id']] ?? 0;
             if ($cryptocurrency->price && $yesterdayPrice) {
-                $cryptocurrency->percent_change_24h = $cryptocurrency->price * 100 / $yesterdayPrice - 100;
+                $cryptocurrency->percent_change_24h = round($cryptocurrency->price * 100 / $yesterdayPrice - 100, 2);
             }
             return $cryptocurrency;
         })->where('price', '>', 0)->values();
