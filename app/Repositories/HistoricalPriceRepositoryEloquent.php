@@ -84,7 +84,7 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
 
         //get latest price
         $this->scopeQuery(function ($query) use ($filter) {
-            $query = $query->whereRaw("time > NOW() - interval '3m'")
+            $query = $query->whereRaw("time >= NOW() - interval '3m'")
                 ->groupBy('cryptocurrency_id')
                 ->orderBy('cryptocurrency_id', 'asc');
             return $query;
@@ -96,7 +96,7 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
 
         //get yesterday price
         $this->scopeQuery(function ($query) use ($filter) {
-            $query = $query->whereRaw("time > NOW() - interval '3m'")
+            $query = $query->whereRaw("time >= NOW() - interval '1d 3m' and time <= NOW() - interval '1d'")
                 ->groupBy('cryptocurrency_id')
                 ->orderBy('cryptocurrency_id', 'asc');
             return $query;
