@@ -81,6 +81,8 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
         $cryptocurrencies = $this->cryptocurrencyRepository->all(['id', 'name', 'symbol', 'icon_url']);
         $this->cryptocurrencyRepository->skipPresenter(false);
 
+
+        //get latest price
         $this->scopeQuery(function ($query) use ($filter) {
             $query = $query->whereRaw("time > NOW() - interval '3m'")
                 ->groupBy('cryptocurrency_id')
@@ -92,11 +94,28 @@ class HistoricalPriceRepositoryEloquent extends Repository implements Historical
         $prices = $this->get(['cryptocurrency_id', DB::raw('last(price, time) AS price')])->pluck('price', 'cryptocurrency_id');
         $this->skipPresenter(false);
 
-        $cryptocurrencies = $cryptocurrencies->map(function ($cryptocurrency) use ($prices) {
+        //get yesterday price
+        $this->scopeQuery(function ($query) use ($filter) {
+            $query = $query->whereRaw("time > NOW() - interval '3m'")
+                ->groupBy('cryptocurrency_id')
+                ->orderBy('cryptocurrency_id', 'asc');
+            return $query;
+        });
+
+        $this->skipPresenter(true);
+        $yesterdayPrices = $this->get(['cryptocurrency_id', DB::raw('last(price, time) AS price')])->pluck('price', 'cryptocurrency_id');
+        $this->skipPresenter(false);
+
+        $cryptocurrencies = $cryptocurrencies->map(function ($cryptocurrency) use ($prices, $yesterdayPrices) {
             $cryptocurrency->price = $prices[$cryptocurrency['id']] ?? 0;
+            $cryptocurrency->percent_change_24h = 0;
+            $yesterdayPrice = $yesterdayPrices[$cryptocurrency['id']] ?? 0;
+            if ($cryptocurrency->price && $yesterdayPrice) {
+                $cryptocurrency->percent_change_24h = $cryptocurrency->price * 100 / $yesterdayPrice - 100;
+            }
             return $cryptocurrency;
         })->where('price', '>', 0)->values();
-//        dd($cryptocurrencies);
+
         return $cryptocurrencies;
     }
 }
