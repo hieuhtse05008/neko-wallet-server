@@ -54,7 +54,7 @@
 
     <div class="text-white d-flex justify-content-center">
         <div class="me-5"><a>Blog</a></div>
-        <div class="me-5"><a href="/how-to-buy">How to buy</a></div>
+        <div class="me-5"><a>How to buy</a></div>
         <div class="me-5"><a>Check my spot</a></div>
     </div>
     <div class="text-white d-flex justify-content-end">
