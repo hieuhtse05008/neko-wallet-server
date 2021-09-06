@@ -182,7 +182,7 @@
             max-width: 100vw;
         }
         .benefits-items {
-            display: flex;
+            /*display: flex;*/
         }
 
         .benefits-item {
