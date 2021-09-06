@@ -2,8 +2,8 @@
 
 namespace App\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use App\Models\Cryptocurrency;
+use League\Fractal\TransformerAbstract;
 
 /**
  * Class CryptocurrencyTransformer.
@@ -47,12 +47,12 @@ class CryptocurrencyTransformer extends TransformerAbstract
     public function transform(Cryptocurrency $model)
     {
         return [
-            'id'         => (int) $model->id,
-
-            /* place your other model properties here */
-
-            'created_at' => strtotime($model->created_at),
-            'updated_at' => strtotime($model->updated_at),
+            'id' => (int)$model->id,
+            'name' => $model->name,
+            'symbol' => $model->symbol,
+            'slug' => $model->slug,
+            'icon_url' => $model->icon_url,
+            'rank' => $model->rank,
         ];
     }
 }
