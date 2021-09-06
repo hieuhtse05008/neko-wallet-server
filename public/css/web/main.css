@@ -1,0 +1,70 @@
+@font-face {
+    font-family: Montserrat;
+    src: url('/fonts/montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: Montserrat;
+    font-weight: 500;
+    src: url('/fonts/montserrat/Montserrat-Bold.ttf');
+}
+
+:root {
+    --main-color: #FC7819;
+    --gray-color: #F7F7FA;
+}
+
+.text-main {
+    color: var(--main-color, #FC7819);;
+}
+
+footer {
+    background: #0E0928;
+    min-height: 154px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+body {
+    font-family: Montserrat;
+    background-color: #F7F7FA;
+}
+
+.btn-main {
+    background-color: var(--main-color, #FC7819);;
+    color: white;
+}
+
+.inp-main {
+    border: 1px solid #DCDEE3;
+    box-sizing: border-box;
+    padding: 13px 16px;
+    height: 48px;
+
+}
+
+.btn-main:hover {
+    color: white;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.bg-gray {
+    background-color: var(--gray-color);
+}
+
+/*rounded radius*/
+.rounded-7 {
+    border-radius: .7rem;
+}
+
+/*font sizes*/
+.fs-36 {
+    font-size: 36px !important;
+}
+
+.fs-24 {
+    font-size: 24px !important;
+}

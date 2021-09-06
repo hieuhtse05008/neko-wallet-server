@@ -13,7 +13,7 @@ class CreateLastMarketsDataTable extends Migration
      */
     public function up()
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         Schema::connection($connection)
             ->create('last_coin_markets_data', function (Blueprint $table) {
                 $table->id();

@@ -38,7 +38,7 @@ class SyncCoinsList extends Command
     private function handleCoinGecko()
     {
         Log::info("Begin handleCoinGecko");
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         $data = CoinGeckoService::getListCoins();
         $coins = [];
         foreach ($data as $item) {
@@ -60,7 +60,7 @@ class SyncCoinsList extends Command
     private function handleCoinGeckoPlatform()
     {
         Log::info("Begin handleCoinGeckoPlatform");
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
 
         foreach ($this->coin_gecko_list as $coin) {
             $data = CoinGeckoService::getCoinById($coin['coin_id'],['market_data'=>'true','tickers'=>'true',]);
@@ -114,7 +114,7 @@ class SyncCoinsList extends Command
 
     private function handleCoinMarketCap($coin)
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         Log::info(json_encode($coin));
         $update_data = [
             'coin_market_cap_id' => $coin->id,

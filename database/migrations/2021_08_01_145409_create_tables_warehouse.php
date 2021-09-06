@@ -45,7 +45,7 @@ class CreateTablesWarehouse extends Migration
      */
     public function down()
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         Schema::connection($connection)
             ->dropIfExists('coins');
         Schema::connection($connection)

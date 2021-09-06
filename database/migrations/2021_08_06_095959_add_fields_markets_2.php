@@ -13,7 +13,7 @@ class AddFieldsMarkets2 extends Migration
      */
     public function up()
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         Schema::connection($connection)
             ->table('coin_markets_data', function (Blueprint $table) {
                 $table->text('price_change_percentage_1h_in_currency')->nullable();

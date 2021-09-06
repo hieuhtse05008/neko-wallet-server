@@ -36,7 +36,7 @@ class SyncCoinMarketsData extends Command
 
     private function getPage($page, $stamp)
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         $data = CoinGeckoService::getMarkets('usd', [
             'page' => $page,
             'price_change_percentage' => '1h,7d,30d,1y',

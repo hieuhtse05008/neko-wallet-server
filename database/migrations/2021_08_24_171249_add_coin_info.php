@@ -13,7 +13,7 @@ class AddCoinInfo extends Migration
      */
     public function up()
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         Schema::connection($connection)
             ->table('coins', function (Blueprint $table) {
                 $table->text('image_url')->nullable();

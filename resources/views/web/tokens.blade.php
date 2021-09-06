@@ -1,142 +1,49 @@
-@extends('home.layout.master')
+@extends('web.layout.master')
 
 @section('content')
-
-
-
-    <div id="home-vue" class="py-5">
-        <!-- Start home table -->
-        <div class="container-fluid">
-            <div class="container-lg">
-                <div class="row">
-                    <div class="col-0 col-lg-8 col-md-6"></div>
-                    <div class="col-12 col-lg-4 col-md-6">
-                        <div class="axil-single-widget widget widget_search mb--30 p-3 content">
-                            <div class="axil-search form-group dropdown">
-                                <button type="submit" class="search-button">
-                                    <i class="fal fa-search"></i></button>
-                                <input type="text" class="form-control dropdown-toggle" placeholder="Search"
-                                       role="button" id="search-token" data-toggle="dropdown" aria-haspopup="true"
-                                       @keyup="onChangeSearch"
-                                       v-model="search.hint_coins">
-                                <div class="dropdown-menu shadow  border-0 w-100 mt-3"
-                                     aria-labelledby="dropdownMenuLink">
-                                    <a v-if="hint_coins.length == 0" class="pointer dropdown-item px-5 py-4 text-wrap">
-                                        <img
-                                            src="http://d1j8r0kxyu9tj8.cloudfront.net/files/16299992038gk3icP7NaLivXU.png"
-                                            class="table-token-image mr-2 mb-3">
-                                        <span class="mr-2 mb-3"><b>No result</b></span>
-                                        <span><b class="text-secondary mb-3"></b></span>
-                                    </a>
-                                    <a v-for="coin in hint_coins" v-else  v-cloak
-                                       class="pointer dropdown-item px-5 py-4 text-wrap"
-                                       :href="`/token/${coin.name}`" target="_blank">
-                                        <img :src="coin.image_url" class="table-token-image mr-2 mb-3">
-                                        <span class="mr-2 mb-3"><b>@{{coin.name}}</b></span>
-                                        <span class="text-secondary mb-3"><b>@{{coin.symbol.toUpperCase()}}</b></span>
-                                    </a>
-                                </div>
+    <div id="vue-tokens" class="container" style="min-height: 100vh;">
+        <div class="my-5 d-flex justify-content-center flex-column align-items-center">
+            <h1>How to buy</h1>
+            <div class="mt-3">
+                <input placeholder="Search" v-model="search.symbols" @change="onChangeSearch" class="me-3 rounded"
+                       type="text" style="">
+            </div>
+        </div>
+        <div class="row">
+            <div v-if="isLoading" class="w-100 d-flex align-items-center justify-content-center"
+                 style="height: 80vh;">
+                <div class="spinner-grow" role="status">
+                    <span class="visually-hidden"></span>
+                </div>
+            </div>
+            <div v-for="(coin,key) in coins"  v-if="!isLoading" class="col-md-3 col-sm-4 col-lg-2 pointer" @click="openTokenPage(coin)">
+                <div class="coin-item mb-3 shadow p-3 bg-white">
+                    <div class="">
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <img :src="coin.image_url" class="table-token-image mr-2 mb-3" style="width: 36px;">
+                            <div>
+                                <span class="mr-2 mb-3"><b>@{{coin.name}}</b></span>
+                            </div>
+                            <div>
+                                <span class="text-secondary mb-3"><b>@{{coin.symbol.toUpperCase()}}</b></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="table-home" class="table-responsive tableFixHead" v-on:scroll="handleScroll">
-                    <table class="table table-dark table-sm table-striped table-borderless ">
-                        <thead v-cloak>
-                        <tr>
-                            <th v-for="(field,key) in fields" scope="col" class="text-nowrap pointer text-uppercase p-4"
-                                :id="`head-${field.key}`"
-                                :class="{'text-right':key>1 && key < fields.length - 1, 'text-center' : key == 0}"
-                                :style="{width: key == 0 ?  '50px' : '' }"
-                                @click="onChangeSort(field)">@{{ field.name }}
-
-                                <i v-if="sort.orderBy === field.key && sort.sortedBy == 'desc'"
-                                   class="bi bi-caret-down-fill"></i>
-                                <i v-if="sort.orderBy === field.key && sort.sortedBy == 'asc'"
-                                   class="bi bi-caret-up-fill"></i>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-if="isLoading && coins.length == 0">
-                            <td colspan="22">
-                                <div class="w-100 d-flex align-items-center justify-content-center"
-                                     style="height: 80vh;">
-                                    <div class="spinner-grow" role="status">
-                                        <span class="visually-hidden"></span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <template v-else v-for="(coin,key) in coins">
-                            <tr :id="`tr-${key}`" v-if="coin.last_market">
-                                <td scope="row" class="text-nowrap align-middle text-center">
-                                    @{{coin.last_market.market_cap_rank}}
-                                </td>
-                                <td scope="row" class="p-4 text-wrap align-middle">
-                                    <a class="pointer" :href="`/token/${coin.name}`" target="_blank">
-                                        <img :src="coin.image_url" class="table-token-image mr-2">
-                                        <b class="mr-2">@{{coin.name}}</b> <span><b class="text-secondary">@{{coin.symbol.toUpperCase()}}</b></span>
-                                    </a>
-                                </td>
-                                <td scope="row" class="p-4 text-nowrap align-middle text-right">
-                                    @{{parseNumber(coin.last_market.current_price)}}
-                                </td>
-                                <td scope="row" class="p-4 text-nowrap align-middle text-right"
-                                    :class="{'text-danger':!coin.bool_24h,'text-success':coin.bool_24h}">
-                                    @{{parseNumber(coin.last_market.price_change_percentage_24h)}}
-                                </td>
-                                <td scope="row" class="p-4 text-nowrap align-middle text-right"
-                                    :class="{'text-danger':!coin.bool_7d,'text-success':coin.bool_7d}">
-                                    @{{parseNumber(coin.last_market.price_change_percentage_7d_in_currency)}}
-                                </td>
-                                <td scope="row" class="p-4 text-nowrap align-middle text-right">
-                                    @{{coin.last_market.market_cap}}
-                                </td>
-                                <td scope="row" class="p-4 text-nowrap align-middle text-right">
-                                    @{{coin.last_market.total_volume}}
-                                </td>
-                                <td scope="row" class="p-4 text-nowrap align-middle text-right">
-                                    @{{coin.last_market.circulating_supply}}
-                                </td>
-                                <td scope="row" class="text-nowrap align-middle">
-                                    <div :class="{increasing: coin.bool_7d, decreasing: !coin.bool_7d}">
-                                        <img v-if="coin.coin_market_cap_id"
-                                             :data-backup-src="`https://chart.googleapis.com/chart?cht=ls&chf=bg,s,00000000&chd=t:${coin.last_market.sparkline_7d.substr(1,coin.last_market.sparkline_7d.length-2)}&chs=164x48`"
-                                             onerror="this.src = $(this).attr('data-backup-src');"
-                                             :src="`https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/${coin.coin_market_cap_id}.png`">
-                                        <img v-else="coin.last_market.sparkline_7d"
-                                             :src="`https://chart.googleapis.com/chart?cht=ls&chf=bg,s,00000000&chd=t:${coin.last_market.sparkline_7d.substr(1,coin.last_market.sparkline_7d.length-2)}&chs=164x48`"
-                                        >
-
-                                    </div>
-                                </td>
-                            </tr>
-                        </template>
-                        </tbody>
-                    </table>
-                </div>
-
             </div>
         </div>
-        <!-- End home table -->
-
-        <!-- Start Back To Top  -->
-        <a id="backto-top" class=""></a>
-        <!-- End Back To Top  -->
     </div>
-
 @endsection
 
 @push('scripts')
     <script>
         var homeVue = new Vue({
-            el: '#home-vue',
+            el: '#vue-tokens',
             data: {
                 isLoading: false,
                 page: 1,
                 search: {
-                    hint_coins: '',
+                    symbols:'',
                     categories: '',
                     platforms: '',
                 },
@@ -185,6 +92,9 @@
                 timeout: null,
             },
             methods: {
+                openTokenPage: function (coin){
+                    window.location.href = `/token/${coin.name}`;
+                },
                 parseNumber: function (str) {
                     if (str.indexOf(".") == -1) return str;
                     return str.substr(0, str.indexOf(".") + 3);
@@ -228,22 +138,17 @@
                         this.filter[field].push(key);
                     }
                 },
-                loadHintCoins: function (search) {
-                    $.get(`/search-coin`, {
-                        search
-                    }).then(res => {
-                        console.log(res)
-                        this.hint_coins = res.items;
-                        this.timeout = null;
-                        if (!$('.dropdown-menu').hasClass('show')) {
-                            $('.dropdown-toggle').click();
-                        }
-                    });
-                },
                 onChangeSearch: function () {
-                    if (this.timeout || this.search.hint_coins.length < 3) return;
-                    this.timeout = 500;
-                    setTimeout(() => this.loadHintCoins(this.search.hint_coins), this.timeout);
+                    if (this.timeout || this.isLoading) return;
+                    if (this.search.symbols.length < 3) {
+                        this.filter.symbols = [];
+
+                    }else {
+                        this.filter.symbols = [this.search.symbols.toLowerCase()];
+
+                    }
+                    this.timeout = 300;
+                    setTimeout(() => this.loadCoins(), this.timeout);
                 },
                 loadCoins: function (page = 1) {
                     if (this.isLoading || (page > 1 && this.page == page)) return;
@@ -275,10 +180,11 @@
                         ...this.sort
                     }).then(
                         (res) => {
+                            this.timeout = null;
                             console.log(res);
                             this.coins = [
-                                ...this.coins,
-                                ...this.solveCoinsInfo(res.coins.items),
+                                // ...this.coins,
+                                ...this.solveCoinsInfo(res.coins.items || res.coins),
                             ];
                             this.meta = res.coins.meta;
                             this.isLoading = false;
@@ -345,7 +251,17 @@
 
 @section('styles')
     <style>
+        .coin-item {
+            border-radius: 12px;
+        }
 
+        input {
+            border: 1px solid #DCDEE3;
+            box-sizing: border-box;
+            padding: 13px 16px;
+            width: 620px;
+            height: 48px;
+        }
 
         .dropdown-menu {
             border-radius: 5px;

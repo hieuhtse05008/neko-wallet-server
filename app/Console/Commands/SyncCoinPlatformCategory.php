@@ -36,7 +36,7 @@ class SyncCoinPlatformCategory extends Command
 
     private function handleAssetPlatforms()
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         $data = CoinGeckoService::getAssetPlatforms();
         $platforms = [];
         foreach ($data as $platform){
@@ -52,7 +52,7 @@ class SyncCoinPlatformCategory extends Command
     }
     private function handleCategories()
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         $data = CoinGeckoService::getCategories();
         $categories = [];
         foreach ($data as $category){

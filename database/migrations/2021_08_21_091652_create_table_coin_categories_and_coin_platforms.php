@@ -13,7 +13,7 @@ class CreateTableCoinCategoriesAndCoinPlatforms extends Migration
      */
     public function up()
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         Schema::connection($connection)
             ->create('coin_categories', function (Blueprint $table) {
             $table->id();

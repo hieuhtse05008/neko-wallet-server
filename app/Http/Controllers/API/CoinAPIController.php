@@ -83,10 +83,10 @@ class CoinAPIController extends APIController
     {
         $filter = [
             'include'=>$request->include,
-            'symbols' =>   $request->symbols,
-            'categories' =>   $request->categories,
-            'platforms' =>   $request->platforms,
-            'last_market'=> $request->last_market,
+            'symbols' =>   $request->symbols ?: null,
+            'categories' =>   $request->categories ?: null,
+            'platforms' =>   $request->platforms ?: null,
+            'last_market'=> $request->last_market ?: null,
         ];
         $limit = $request->limit ?: 20;
 //        $limit = $request->limit;

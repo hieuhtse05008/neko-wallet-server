@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Coin;
+use App\Models\EarlyAccessEmail;
 use App\Repositories\CoinRepository;
 use App\Services\CryptoPanicService;
 use App\Services\TelegramService;
@@ -20,6 +21,27 @@ class PublicController extends Controller
         $this->coinRepository = $coinRepository;
     }
 
+    public function registerEarlyAccessWithEmail(Request $request){
+//        dd($request->email, $request->ref);
+//        $object = EarlyAccessEmail::where('email','=',$request->email)->first();
+        $object = EarlyAccessEmail::firstOrNew([
+            'email'=>$request->email,
+        ],[
+
+            'ref'=>$request->ref,
+        ]);
+//        dd($object);
+        if(empty(object_get($object,'id'))){
+            $object->save();
+            $object->code = substr(md5($object->id), 0, 8);
+            $object->save();
+        }
+        return [
+            'info'=>$object,
+
+        ];
+    }
+
     public function searchCoin(Request $request)
     {
 
@@ -33,13 +55,19 @@ class PublicController extends Controller
     public function homeView(Request $request)
     {
 
-//        ======================================================
+        return view('web.home', [
+        ]);
+    }
+
+    public function tokensView()
+    {
+        //======================================================
         $connection = config('database.connections.warehouse.database');
         $coins = Coin::limit(5)->get();
         $categories = DB::connection($connection)->table('coin_categories')->get();
         $platforms = DB::connection($connection)->table('asset_platforms')->get();
 
-        return view('home.home', [
+        return view('web.tokens', [
             'coins' => $coins,
             'categories' => $categories,
             'platforms' => $platforms,
@@ -51,7 +79,7 @@ class PublicController extends Controller
         $coin->views += 1;
         $coin->save();
         //
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         //get platforms
         $coin->platforms = json_decode($coin->platforms ?: '{}');
         $platform_ids = get_object_vars($coin->platforms);
@@ -78,7 +106,7 @@ class PublicController extends Controller
 
     public function dashboardView()
     {
-        $connection = config('database.connections.warehouse.database');
+        $connection = 'warehouse';
         $all_coins = Coin::all();
         $categories = DB::connection($connection)->table('coin_categories')->get();
         $platforms = DB::connection($connection)->table('asset_platforms')->get();

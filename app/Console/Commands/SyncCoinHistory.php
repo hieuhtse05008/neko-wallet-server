@@ -44,8 +44,8 @@ class SyncCoinHistory extends Command
      */
     public function handle()
     {
-        $this->handleCoinMarketCaps();
-//        $this->handleCoinHistory();
+//        $this->handleCoinMarketCaps();
+        $this->handleCoinHistory();
     }
 
     private function handleCoinMarketCaps()
@@ -96,7 +96,7 @@ class SyncCoinHistory extends Command
                     )
                 )
             );
-            $content = (file_get_contents("https://coinmarketcap.com/currencies/$slug", false,$context));
+            $content = (file_get_contents("https://coinmarketcap.com/currencies/$slug", false, $context));
             preg_match("/<script id=\"__NEXT_DATA__\" type=\"application\/json\">(.*)<\/script>/", $content, $json, PREG_OFFSET_CAPTURE);
             $text = (($json[0])[0]);
             $dom = new \DOMDocument();
@@ -111,15 +111,15 @@ class SyncCoinHistory extends Command
             $rank = object_get($obj, 'props.initialProps.pageProps.info.statistics.rank');
 
             echo json_encode([
-                'coin_market_cap_id' => $id,
-                'coin_market_cap_slug' => $slug,
-                'name' => $res->name,
-                'symbol' => $res->symbol,
-                'logo' => "https://s2.coinmarketcap.com/static/img/coins/200x200/$id",
-                'platforms' => $platforms,
-                'explorers' => $explorers,
-                'rank' => $rank,
-            ]). "\xA";
+                    'coin_market_cap_id' => $id,
+                    'coin_market_cap_slug' => $slug,
+                    'name' => $res->name,
+                    'symbol' => $res->symbol,
+                    'logo' => "https://s2.coinmarketcap.com/static/img/coins/200x200/$id",
+                    'platforms' => $platforms,
+                    'explorers' => $explorers,
+                    'rank' => $rank,
+                ]) . "\xA";
         } catch (\Exception $e) {
             Log::error($e);
             return null;
@@ -140,8 +140,9 @@ class SyncCoinHistory extends Command
     private function handleCoinHistory()
     {
         Log::info('start SyncCoinHistory');
-        $connection = config('database.connections.warehouse.database');
-        for ($i = 1; $i <= 12000; $i++) {
+//        dd(config('database.connections.timescale_price'));
+        $connection = 'timescale_price';
+        for ($i = 3; $i <= 12000; $i++) {
             $this->handleCoin($i, $connection);
         }
         Log::info('end SyncCoinHistory');
@@ -151,38 +152,43 @@ class SyncCoinHistory extends Command
     private function handleCoin($id, $connection)
     {
         try {
+            $map = DB::table('cryptocurrencies_mapping')->where('cmc_id', '=', $id)->first();
+            if (empty($map)) return;
+
+
             $httpClient = new \GuzzleHttp\Client();
             $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=ALL";
             $response = $httpClient->get($url);
             $res = json_decode($response->getBody()->getContents())->data;
+
+            if (!property_exists($res, 'points')) {
+                Log::info("FAIL $id SyncCoinHistory");
+                return;
+            }
+            Log::info("$id SyncCoinHistory");
+
+            $res = $res->points;
+            $timestamps = array_keys(get_object_vars($res));
+            sort($timestamps);
+            $data = [];
+            foreach ($timestamps as $timestamp) {
+                $v = $res->{$timestamp}->v;
+//            dd($timestamp);
+//            dd($map->cryptocurrency_id);
+                $data[] = [
+                    'cryptocurrency_id' => $map->cryptocurrency_id,
+                    'price' => $v[0],
+                    'volume_24h' => $v[1],
+                    'market_cap' => $v[2],
+                    'time' => Carbon::createFromTimestamp($timestamp),
+                ];
+            }
+//        dd($id, $connection,$data);
+            DB::connection($connection)->table('historical_prices')->insert($data);
         } catch (\Exception $e) {
             Log::error($e);
             return;
         }
-        if (!property_exists($res, 'points')) {
-            Log::info("FAIL $id SyncCoinHistory");
-            return;
-        }
-        Log::info("$id SyncCoinHistory");
-
-        $res = $res->points;
-        $timestamps = array_keys(get_object_vars($res));
-        sort($timestamps);
-        $data = [];
-        foreach ($timestamps as $timestamp) {
-            $v = $res->{$timestamp}->v;
-            $data[] = [
-                'coin_market_cap_id' => $id,
-                'price' => $v[0],
-                'volume_24h' => $v[1],
-                'market_cap' => $v[2],
-                'coin_count' => $v[4],
-                'created_at' => Carbon::createFromTimestamp($timestamp)->toDateTimeString(),
-                'updated_at' => Carbon::createFromTimestamp($timestamp)->toDateTimeString(),
-            ];
-        }
-        DB::connection($connection)->table('temp_prices')->insert($data);
-
     }
 
 
