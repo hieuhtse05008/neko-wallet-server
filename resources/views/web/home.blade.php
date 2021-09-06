@@ -143,6 +143,8 @@
 @endpush
 @section('styles')
     <style>
+
+
         .navbar {
             background-color: transparent !important;
         }
@@ -223,6 +225,28 @@
             /* Brand/Black */
 
             color: #0E0928;
+
+        }
+
+        @media (min-width:0) {
+
+            .text-spotlight {
+                font-size: 24px;
+            }
+
+        }
+        @media (min-width: 576px) {
+
+            .text-spotlight {
+                font-size: 24px;
+            }
+
+        }
+        @media (min-width: 768px) {
+
+            .text-spotlight {
+                font-size: 36px;
+            }
 
         }
     </style>

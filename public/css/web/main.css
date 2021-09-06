@@ -12,6 +12,12 @@
 :root {
     --main-color: #FC7819;
     --gray-color: #F7F7FA;
+    --xs: 0;
+    --sm: 576px;
+    --md: 768px;
+    --lg: 992px;
+    --xl: 1200px;
+    --xxl: 1400px;
 }
 
 .text-main {
@@ -23,6 +29,30 @@ footer {
     min-height: 154px;
     padding-left: 80px;
     padding-right: 80px;
+}
+footer #footer-wrap{
+    min-height: 154px;
+}
+@media (min-width:0) {
+    footer{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+}
+@media (min-width: 576px) {
+    footer{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+}
+@media (min-width: 768px) {
+    footer{
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
 }
 
 body {

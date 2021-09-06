@@ -24,7 +24,8 @@
         <a class="navbar-brand" href="#">
             <img src="/images/logo_text_dark.png" alt="">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button hidden class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,24 +45,24 @@
 </nav>
 @yield('content')
 <footer>
-    <div  class="d-flex justify-content-between align-items-center flex-wrap p-3">
-    <div class="">
-        <img src="/images/logo_text_light.png" alt="">
-        <div class="mt-2 text-white">
-            © 2021 Neko, All Rights Reserved.
+    <div id="footer-wrap" class="d-flex justify-content-between align-items-center flex-wrap px-3">
+        <div class="my-3">
+            <img src="/images/logo_text_light.png" alt="">
+            <div class="mt-2 text-white">
+                © 2021 Neko, All Rights Reserved.
+            </div>
         </div>
-    </div>
 
-    <div class="text-white d-flex justify-content-center">
-        <div class="me-5"><a>Blog</a></div>
-        <div class="me-5"><a>How to buy</a></div>
-        <div class="me-5"><a>Check my spot</a></div>
-    </div>
-    <div class="text-white d-flex justify-content-end">
-        <div class="me-5"><a href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a></div>
-        <div class="me-5"><a href="https://t.me/nekoinvest"><i class="fab fa-telegram-plane"></i></a></div>
-        <div><a href="https://discord.gg/DfRF5uFf"><i class="fab fa-discord"></i></a></div>
-    </div>
+        <div class="text-white d-flex justify-content-center my-3">
+            <div class="me-5"><a>Blog</a></div>
+            <div class="me-5"><a>How to buy</a></div>
+            <div class="me-5 me-sm-0"><a>Check my spot</a></div>
+        </div>
+        <div class="text-white d-flex justify-content-end my-3">
+            <div class="me-5"><a href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a></div>
+            <div class="me-5"><a href="https://t.me/nekoinvest"><i class="fab fa-telegram-plane"></i></a></div>
+            <div><a href="https://discord.gg/DfRF5uFf"><i class="fab fa-discord"></i></a></div>
+        </div>
     </div>
 </footer>
 </body>
