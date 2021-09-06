@@ -20,7 +20,7 @@
             </form>
             <div class="mb-auto"><i class="fas fa-play-circle"></i> See how it works</div>
         </div>
-        <div class="benefits bg-white py-5">
+        <div class="benefits bg-white py-5 px-sm-0 px-md-4 px-lg-5">
             <div class="benefits-title mb-5">Take your crypto to the next level with Neko</div>
             <div class="benefits-items row">
                 <div class="col-md-4">
@@ -49,10 +49,6 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                data-bs-target="#modal-register-early-access-success">
-            Launch demo modal
-        </button>
         <div class="modal fade" id="modal-register-early-access-success" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content border-0 rounded-7">
@@ -176,10 +172,13 @@
         .benefits {
             min-height: 613px;
 
-            padding-left: 140px;
-            padding-right: 140px;
+            /*padding-left: 140px;*/
+            /*padding-right: 140px;*/
         }
 
+        .benefits-items img{
+            max-width: 100vw;
+        }
         .benefits-items {
             display: flex;
         }
