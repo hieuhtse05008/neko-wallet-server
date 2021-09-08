@@ -87,11 +87,19 @@ class PublicController extends Controller
         $coin->links = json_decode($coin->links ?: '{}');
         //get tickers data
         $coin->tickers = json_decode($coin->tickers ?: '{}');
+
+        $markets = [];
+        foreach ($coin->tickers as $ticker){
+                if(!in_array($ticker->market, $markets)){
+                    $markets[] = $ticker->market;
+                }
+        }
         //return view with data
         return view('web.token', [
             'coin' => $coin,
             'asset_platform' => $asset_platform,
             'platforms' => $platforms,
+            'markets' => $markets,
         ]);
     }
 

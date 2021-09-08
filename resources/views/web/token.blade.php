@@ -41,17 +41,29 @@
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">Purchase on</div>
                         <div class="pg-content">
-                            @foreach($coin->tickers as $ticker)
-                                <div class="d-flex">
-                                    <a target="_blank" class="text-main" href="{{$ticker->trade_url}}">
-                                        {{$ticker->market->name}}
 
 
-                                    </a>&nbsp;-&nbsp;
-                                    <span style="max-width: 200px;"
-                                          class="d-block text-truncate">{{$ticker->base}}</span>/
-                                    <span style="max-width: 200px;"
-                                          class="d-block text-truncate">{{$ticker->target}}</span>
+                            @foreach($markets as $market)
+                                <div class="">
+                                    <div target="_blank" class="fw-bold">
+                                        {{$market->name}}
+
+
+                                    </div>
+                                    <ul>
+                                        @foreach($coin->tickers as $ticker)
+                                            @if($ticker->market->identifier == $market->identifier)
+                                                <li>
+                                                    <a href="{{$ticker->trade_url}}" class="d-flex text-main">
+                                            <span style="max-width: 200px;"
+                                                  class="d-block text-truncate">{{$ticker->base}}</span>/
+                                                        <span style="max-width: 200px;"
+                                                              class="d-block text-truncate">{{$ticker->target}}</span>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 </div>
                             @endforeach
                         </div>
