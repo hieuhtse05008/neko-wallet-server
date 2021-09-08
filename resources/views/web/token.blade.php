@@ -172,11 +172,15 @@
                 </div>
                 @if(is_string($coin->categories) && count(explode(',',$coin->categories)) > 0)
                     <div class="mb-5">
-                        @foreach(explode(',',$coin->categories) as $category)
-                            @if(!empty($category))
-                                <a class="bg-main border-0 btn btn-sm btn-xs mb-2 me-2 rounded shadow-sm text-white" target="_blank" href="#">{{$category}}</a>
-                            @endif
-                        @endforeach
+                        <div class="text-main pg-title mb-4">Tags</div>
+                        <div class="pg-content">
+                            @foreach(explode(',',$coin->categories) as $category)
+                                @if(!empty($category))
+                                    <a class="bg-main border-0 btn btn-sm btn-xs mb-2 me-2 rounded shadow-sm text-white"
+                                       target="_blank" href="#">{{$category}}</a>
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
                 @endif
             </div>
