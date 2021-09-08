@@ -11,7 +11,7 @@
                 {{$coin->updated_at}}
             </div>
             <div class="token-title mb-5">
-                How to purchase {{empty($asset_platform) ? '': $asset_platform->name}} {{strtoupper($coin->symbol)}}
+                How to purchase {{$coin->name}} {{strtoupper($coin->symbol)}}
             </div>
             <hr>
             <div class="pt-5">
