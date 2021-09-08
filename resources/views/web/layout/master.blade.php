@@ -22,7 +22,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="/images/logo_text_dark.png" alt="">
+            <img width="100" height="28" src="/images/logo/long-orange-text-black-neko.svg" alt="">
         </a>
         <button hidden class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
@@ -40,6 +40,9 @@
             {{--                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--}}
             {{--                <button class="btn btn-outline-success" type="submit">Search</button>--}}
             {{--            </form>--}}
+            <div class="ms-auto">
+                <a  href="/#input-early-access-email" class="hide-from-home btn btn-sm rounded btn-main ">Get early access</a>
+            </div>
         </div>
     </div>
 </nav>
@@ -47,7 +50,7 @@
 <footer>
     <div id="footer-wrap" class="d-flex justify-content-between align-items-center flex-wrap px-3">
         <div class="my-3">
-            <img src="/images/logo_text_light.png" alt="">
+            <img width="100" height="28" src="/images/logo/long-orange-text-white-neko.svg" alt="">
             <div class="mt-2 text-white">
                 © 2021 Neko, All Rights Reserved.
             </div>

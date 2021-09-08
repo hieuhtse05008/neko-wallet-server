@@ -14,7 +14,7 @@ class AddFirstHistoricalDataCryptocurrencies extends Migration
     public function up()
     {
         Schema::table('cryptocurrencies', function (Blueprint $table){
-//            $table->dateTime('first_historical_data')->nullable();
+            $table->dateTime('first_historical_data')->nullable();
             $table->timestamps();
         });
     }

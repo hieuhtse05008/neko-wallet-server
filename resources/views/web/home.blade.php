@@ -143,7 +143,9 @@
 @endpush
 @section('styles')
     <style>
-
+        .hide-from-home{
+            display: none;
+        }
 
         .navbar {
             background-color: transparent !important;
