@@ -5,19 +5,30 @@
         <div class="my-5 d-flex justify-content-center flex-column align-items-center">
             <h1>How to buy</h1>
             <div class="mt-3">
-                <input placeholder="Search" v-model="search.symbols" @change="onChangeSearch" class="me-3 rounded"
+            <div class=" search-wrap">
+                <input placeholder="Search"
+
+                       v-model="search.symbols" @change="onChangeSearch" class="rounded"
                        type="text" style="">
             </div>
+            </div>
         </div>
-        <div class="row">
+        <div
+            class="d-flex flex-wrap justify-content-center"
+{{--            class="row  g-5"--}}
+        >
             <div v-if="isLoading" class="w-100 d-flex align-items-center justify-content-center"
                  style="height: 80vh;">
                 <div class="spinner-grow" role="status">
                     <span class="visually-hidden"></span>
                 </div>
             </div>
-            <div v-for="(coin,key) in coins"  v-if="!isLoading" class="col-md-3 col-sm-4 col-lg-2 pointer" @click="openTokenPage(coin)">
-                <div class="coin-item mb-3 shadow p-3 bg-white">
+{{--            <div v-for="(coin,key) in coins"  v-if="!isLoading" class="pointer"--}}
+{{--                 class="col-md-3 col-sm-4 col-lg-2 pointer"--}}
+
+{{--                 @click="openTokenPage(coin)">--}}
+                <div  v-for="(coin,key) in coins"  v-if="!isLoading" @click="openTokenPage(coin)"
+                      class="coin-item shadow p-3 bg-white pointer">
                     <div class="">
                         <div class="d-flex justify-content-center align-items-center flex-column">
                             <img :src="coin.image_url" class="table-token-image mr-2 mb-3" style="width: 36px;">
@@ -30,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+{{--            </div>--}}
         </div>
     </div>
 @endsection
@@ -93,7 +104,7 @@
             },
             methods: {
                 openTokenPage: function (coin){
-                    window.location.href = `/token/${coin.name}`;
+                    window.location.href = `/cryptocurrency/${coin.name}`;
                 },
                 parseNumber: function (str) {
                     if (str.indexOf(".") == -1) return str;
@@ -253,6 +264,11 @@
     <style>
         .coin-item {
             border-radius: 12px;
+            width: calc(20% - 40px);
+            min-width: 180px;
+            margin-right: 20px;
+            margin-left: 20px;
+            margin-bottom: 40px;
         }
 
         input {
@@ -261,6 +277,7 @@
             padding: 13px 16px;
             width: 620px;
             height: 48px;
+            max-width: 80vw;
         }
 
         .dropdown-menu {
@@ -274,8 +291,6 @@
             height: 30px;
         }
 
-        [v-cloak] > * {
-            display: none
-        }
+
     </style>
 @endsection

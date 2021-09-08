@@ -164,7 +164,7 @@ class SyncCoinsList extends Command
     public function handle()
     {
         $this->handleCoinGecko();
-        $this->handleCoinMarketCaps();
+//        $this->handleCoinMarketCaps();
         $this->handleCoinGeckoPlatform();
 
         return 0;

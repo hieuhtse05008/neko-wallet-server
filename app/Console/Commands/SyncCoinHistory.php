@@ -142,8 +142,9 @@ class SyncCoinHistory extends Command
         Log::info('start SyncCoinHistory');
 //        dd(config('database.connections.timescale_price'));
         $connection = 'timescale_price';
-        for ($i = 3; $i <= 12000; $i++) {
+        for ($i = 4210; $i <= 13000; $i++) {
             $this->handleCoin($i, $connection);
+            usleep(900000);
         }
         Log::info('end SyncCoinHistory');
         return 0;
@@ -165,7 +166,6 @@ class SyncCoinHistory extends Command
                 Log::info("FAIL $id SyncCoinHistory");
                 return;
             }
-            Log::info("$id SyncCoinHistory");
 
             $res = $res->points;
             $timestamps = array_keys(get_object_vars($res));
@@ -183,8 +183,11 @@ class SyncCoinHistory extends Command
                     'time' => Carbon::createFromTimestamp($timestamp),
                 ];
             }
+            $count = count($data);
+            Log::info("$id SyncCoinHistory $count");
+
 //        dd($id, $connection,$data);
-            DB::connection($connection)->table('historical_prices')->insert($data);
+            DB::connection($connection)->table('historical_prices_date')->insert($data);
         } catch (\Exception $e) {
             Log::error($e);
             return;

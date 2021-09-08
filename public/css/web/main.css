@@ -8,7 +8,9 @@
     font-weight: 500;
     src: url('/fonts/montserrat/Montserrat-Bold.ttf');
 }
-
+[v-cloak] > * {
+    display: none
+}
 :root {
     --main-color: #FC7819;
     --gray-color: #F7F7FA;

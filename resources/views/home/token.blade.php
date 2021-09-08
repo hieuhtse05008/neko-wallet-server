@@ -277,8 +277,5 @@
 
 @section('styles')
 <style>
-    .axil-post-details a {
-        color: var(--color-primary)!important;
-    }
 </style>
 @endsection

@@ -55,7 +55,7 @@
 
         <div class="text-white d-flex justify-content-center my-3">
             <div class="me-5"><a>Blog</a></div>
-            <div class="me-5"><a>How to buy</a></div>
+            <div class="me-5"><a href="/cryptocurrencies">How to buy</a></div>
             <div class="me-5 me-sm-0"><a>Check my spot</a></div>
         </div>
         <div class="text-white d-flex justify-content-end my-3">

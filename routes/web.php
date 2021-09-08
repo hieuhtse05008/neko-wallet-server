@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicController::class, 'homeView']);
 
-Route::get('/tokens',[PublicController::class,'tokensView']);
+Route::get('/cryptocurrencies',[PublicController::class,'tokensView']);
 
 Route::get('/test', [AuthController::class,'test']);
 Route::get('/surf-news', [PublicController::class,'surfNewsView']);
@@ -27,5 +27,5 @@ Route::get('/load-news', [PublicController::class,'loadNews']);
 Route::post('/push-news-telegram', [PublicController::class,'pushNewsTelegram']);
 Route::post('/register-early-access', [PublicController::class,'registerEarlyAccessWithEmail']);
 Route::get('/search-coin', [PublicController::class,'searchCoin']);
-Route::get('/token/{coin:name}', [PublicController::class,'tokenView']);
+Route::get('/cryptocurrency/{coin:name}', [PublicController::class,'tokenView']);
 //Route::post('/login', [AuthController::class,'login']);

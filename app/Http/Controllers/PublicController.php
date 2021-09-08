@@ -22,15 +22,11 @@ class PublicController extends Controller
     }
 
     public function registerEarlyAccessWithEmail(Request $request){
-//        dd($request->email, $request->ref);
-//        $object = EarlyAccessEmail::where('email','=',$request->email)->first();
         $object = EarlyAccessEmail::firstOrNew([
             'email'=>$request->email,
         ],[
-
             'ref'=>$request->ref,
         ]);
-//        dd($object);
         if(empty(object_get($object,'id'))){
             $object->save();
             $object->code = substr(md5($object->id), 0, 8);
@@ -76,6 +72,7 @@ class PublicController extends Controller
 
     public function tokenView(Coin $coin)
     {
+//        dd($coin);
         $coin->views += 1;
         $coin->save();
         //
@@ -91,7 +88,7 @@ class PublicController extends Controller
         //get tickers data
         $coin->tickers = json_decode($coin->tickers ?: '{}');
         //return view with data
-        return view('home.token', [
+        return view('web.token', [
             'coin' => $coin,
             'asset_platform' => $asset_platform,
             'platforms' => $platforms,
