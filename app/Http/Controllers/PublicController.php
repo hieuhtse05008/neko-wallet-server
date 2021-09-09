@@ -82,6 +82,7 @@ class PublicController extends Controller
         $platform_ids = get_object_vars($coin->platforms);
         $platform_ids = array_keys($platform_ids);
         $platforms = DB::connection($connection)->table('asset_platforms')->whereIn('asset_platform_id', $platform_ids)->get();
+
         $asset_platform = DB::connection($connection)->table('asset_platforms')->where('asset_platform_id', '=', $coin->asset_platform_id)->first();
         //get links data
         $coin->links = json_decode($coin->links ?: '{}');

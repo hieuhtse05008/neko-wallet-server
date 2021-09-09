@@ -19,9 +19,10 @@
         >
             <div v-if="isLoading" class="w-100 d-flex align-items-center justify-content-center"
                  style="height: 80vh;">
-                <div class="spinner-grow" role="status">
-                    <span class="visually-hidden"></span>
-                </div>
+                <img width="250" height="250" src="/images/loading.svg">
+{{--                <div class="spinner-grow" role="status">--}}
+{{--                    <span class="visually-hidden"></span>--}}
+{{--                </div>--}}
             </div>
 {{--            <div v-for="(coin,key) in coins"  v-if="!isLoading" class="pointer"--}}
 {{--                 class="col-md-3 col-sm-4 col-lg-2 pointer"--}}

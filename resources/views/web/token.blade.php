@@ -21,22 +21,24 @@
                         <div class="pg-content">{!! $coin->description !!}</div>
                     </div>
                 @endif
-                @if(is_array($platforms) && count($platforms) > 0)
+                @if(count($platforms) > 0)
+
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">Contract Addresses</div>
                         <div class="pg-content">
                             @foreach($platforms as $platform)
-                                @if(!empty($coin->platforms->{$platform->asset_platform_id}))
+                            @if(!empty($coin->platforms->{strtolower($platform->asset_platform_id)}))
                                     <div>
-                                        <a target="_blank" href="#" class="text-main">{{$platform->name}}
+                                        <span class="text-main">{{$platform->name}}</span>
                                             : {!! $coin->platforms->{$platform->asset_platform_id} !!}
-                                        </a>
+
                                     </div>
-                                @endif
+                            @endif
                             @endforeach
                         </div>
                     </div>
                 @endif
+
                 @if(is_array($coin->tickers) && count($coin->tickers) > 0)
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">Purchase on</div>
@@ -54,7 +56,7 @@
                                         @foreach($coin->tickers as $ticker)
                                             @if($ticker->market->identifier == $market->identifier)
                                                 <li>
-                                                    <a href="{{$ticker->trade_url}}" class="d-flex text-main">
+                                                    <a href="{{$ticker->trade_url}}" target="_blank" class="d-flex text-main">
                                             <span style="max-width: 200px;"
                                                   class="d-block text-truncate">{{$ticker->base}}</span>/
                                                         <span style="max-width: 200px;"

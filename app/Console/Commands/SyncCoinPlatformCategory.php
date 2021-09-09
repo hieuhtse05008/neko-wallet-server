@@ -40,15 +40,17 @@ class SyncCoinPlatformCategory extends Command
         $data = CoinGeckoService::getAssetPlatforms();
         $platforms = [];
         foreach ($data as $platform){
-            $platforms[] = [
+            $p = [
                 'asset_platform_id'    =>$platform->id,
                 'chain_identifier'    =>$platform->chain_identifier,
                 'name'    =>$platform->name,
                 'short_name'    =>$platform->shortname,
             ];
+            if(!in_array($p,$platforms)){
+                $platforms[] = $p;
+            }
         }
-
-        DB::connection($connection)->table('asset_platforms')->upsert($platforms,'asset_platform_id');
+        DB::connection($connection)->table('asset_platforms')->insertOrIgnore($platforms,'asset_platform_id');
     }
     private function handleCategories()
     {

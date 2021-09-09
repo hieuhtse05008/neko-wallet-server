@@ -4,7 +4,7 @@
     <div class="">
         <div class="spotlight d-flex flex-column justify-content-center align-items-center">
             <div class="text-spotlight text-center mt-auto">
-                <div>Invest in <span class="text-main">more than 6,000 tokens</span> from all exchanges.</div>
+                <div>Invest in <span class="text-main">more than 6,000 cryptocurrencies </span> from all exchanges.</div>
                 <div>Secured. Hassle-free. 0% fee for private beta.</div>
 
             </div>

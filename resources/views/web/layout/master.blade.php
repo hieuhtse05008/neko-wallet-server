@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/images/logo_light.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/logo/neko-logo-orange.svg">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/web/main.css">
     <style>
@@ -21,7 +21,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img width="100" height="28" src="/images/logo/long-orange-text-black-neko.svg" alt="">
         </a>
         <button hidden class="navbar-toggler" type="button" data-bs-toggle="collapse"
