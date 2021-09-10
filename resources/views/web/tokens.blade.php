@@ -59,7 +59,7 @@
                     categories: '',
                     platforms: '',
                 },
-                hint_coins: ({!! collect($coins) !!}),
+                hint_coins: [],
                 categories: {!! collect($categories) !!},
                 platforms: {!! collect($platforms) !!},
                 coins: [],
@@ -178,7 +178,7 @@
 
                     $.get(`/api/v1/coins?include=last_market`, {
                         page,
-                        limit: 200,
+                        limit: 30,
                         last_market: {
                             price_change_percentage_24h_high,
                             price_change_percentage_24h_low,
@@ -254,7 +254,7 @@
             },
             created() {
                 this.loadCoins();
-                this.hint_coins = this.solveCoinsInfo(this.hint_coins);
+                // this.hint_coins = this.solveCoinsInfo(this.hint_coins);
             },
         });
     </script>

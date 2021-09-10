@@ -27,13 +27,13 @@
                         <div class="text-main pg-title mb-4">Contract Addresses</div>
                         <div class="pg-content">
                             @foreach($platforms as $platform)
-                            @if(!empty($coin->platforms->{strtolower($platform->asset_platform_id)}))
-                                    <div>
+                                @if(!empty($coin->platforms->{strtolower($platform->asset_platform_id)}))
+                                    <div class=" text-truncate">
                                         <span class="text-main">{{$platform->name}}</span>
-                                            : {!! $coin->platforms->{$platform->asset_platform_id} !!}
+                                        : {!! $coin->platforms->{$platform->asset_platform_id} !!}
 
                                     </div>
-                            @endif
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -56,7 +56,8 @@
                                         @foreach($coin->tickers as $ticker)
                                             @if($ticker->market->identifier == $market->identifier)
                                                 <li>
-                                                    <a href="{{$ticker->trade_url}}" target="_blank" class="d-flex text-main">
+                                                    <a href="{{$ticker->trade_url}}" target="_blank"
+                                                       class="d-flex text-main">
                                             <span style="max-width: 200px;"
                                                   class="d-block text-truncate">{{$ticker->base}}</span>/
                                                         <span style="max-width: 200px;"
@@ -191,12 +192,38 @@
                             @foreach(explode(',',$coin->categories) as $category)
                                 @if(!empty($category))
                                     <a class="bg-main border-0 btn btn-sm btn-xs mb-2 me-2 rounded shadow-sm text-white"
-                                       target="_blank" href="#">{{$category}}</a>
+                                       target="_blank" href="">{{$category}}</a>
                                 @endif
                             @endforeach
                         </div>
                     </div>
                 @endif
+            </div>
+
+        </div>
+
+        <div class="related-coins">
+            <div class="text-main pg-title mb-4 ps-3 ps-md-0">Recommended</div>
+            <div class="row">
+                @foreach($related_coins as $coin)
+                    <div class="col-12 col-md-3 col-lg-2">
+                    <div class="rounded-7 shadow p-3 mb-3 bg-white pointer">
+
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <img src="{{$coin->image_url}}" class="table-token-image mr-2 mb-3" style="width: 36px;">
+                            <div>
+                                <span class="mr-2 mb-3"><b>{{$coin->name}}</b></span>
+                            </div>
+                            <div>
+                                <span class="text-secondary mb-3"><b>{{strtoupper($coin->symbol)}}</b></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    </div>
+                @endforeach
+            </div>
             </div>
         </div>
     </div>
@@ -234,6 +261,32 @@
             padding-bottom: 120px;
             padding-left: min(110px, max(100vw - 576px, 20px));
             padding-right: min(110px, max(100vw - 576px, 20px));
+        }
+
+        .related-coins-wrap {
+            margin-left: max(-20px, min(576px - 100vw, 0px));
+            margin-right: max(-20px, min(576px - 100vw, 0px));
+            /*margin-right: -20px;*/
+        }
+
+        .related-coins {
+
+            max-width: clamp(74vw, 576px, 100vw);
+
+            margin-bottom: 120px;
+            margin-left: auto;
+            margin-right: auto;
+
+
+        }
+
+        .coin-item {
+            border-radius: 12px;
+            width: calc(20% - 40px);
+            min-width: 180px;
+            margin-right: 20px;
+            margin-left: 20px;
+            margin-bottom: 40px;
         }
 
         .token-cover {

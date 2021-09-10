@@ -56,6 +56,9 @@ class CoinRepositoryEloquent extends Repository implements CoinRepository
      */
     static public function queryFilter($query, $filter)
     {
+        if (!empty($filter['exclude_ids'])) {
+            $query = $query->whereNotIn('id', $filter['exclude_ids']);
+        }
         if (!empty($filter['symbols'])) {
             $query = $query->whereIn('symbol', $filter['symbols']);
         }

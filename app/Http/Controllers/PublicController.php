@@ -58,13 +58,13 @@ class PublicController extends Controller
     public function tokensView()
     {
         //======================================================
-        $connection = config('database.connections.warehouse.database');
-        $coins = Coin::limit(5)->get();
+        $connection = 'warehouse';
+//        $coins = Coin::limit(5)->get();
         $categories = DB::connection($connection)->table('coin_categories')->get();
         $platforms = DB::connection($connection)->table('asset_platforms')->get();
 
         return view('web.tokens', [
-            'coins' => $coins,
+//            'coins' => $coins,
             'categories' => $categories,
             'platforms' => $platforms,
         ]);
@@ -72,7 +72,14 @@ class PublicController extends Controller
 
     public function tokenView(Coin $coin)
     {
-//        dd($coin);
+//        dd($coin->categories);
+
+        $this->coinRepository->skipPresenter(true);
+        $related_coins = $this->coinRepository->list(12,[
+            'exclude_ids' => [$coin->id],
+            'categories' => explode(',',$coin->categories),
+        ]);
+//        dd($related_coins);
         $coin->views += 1;
         $coin->save();
         //
@@ -101,6 +108,7 @@ class PublicController extends Controller
             'asset_platform' => $asset_platform,
             'platforms' => $platforms,
             'markets' => $markets,
+            'related_coins' => $related_coins,
         ]);
     }
 

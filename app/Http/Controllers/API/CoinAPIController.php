@@ -82,6 +82,7 @@ class CoinAPIController extends APIController
     public function index(Request $request)
     {
         $filter = [
+            'exclude_ids'=>$request->exclude_ids ?: null,
             'include'=>$request->include,
             'symbols' =>   $request->symbols ?: null,
             'categories' =>   $request->categories ?: null,
