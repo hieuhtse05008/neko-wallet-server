@@ -3,6 +3,7 @@
         "id": 1,
         "name": "Ethereum",
         "cmc_id": 1,
+        "coingecko_id": "ethereum",
         "chain_id": 1,
         "explorer_url": "https://etherscan.io",
         "wallet_derive_path": "m/44'/60'/0'/0/0",
@@ -15,6 +16,7 @@
         "id": 2,
         "name": "Binance Smart Chain",
         "cmc_id": 14,
+        "coingecko_id":"binance-smart-chain",
         "chain_id": 56,
         "explorer_url": "https://bscscan.com",
         "wallet_derive_path": "m/44'/60'/0'/0/0",
@@ -27,6 +29,7 @@
         "id": 3,
         "name": "Binance Chain",
         "cmc_id": 15,
+        "coingecko_id": null,
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -34,6 +37,7 @@
         "id": 4,
         "name": "Solana",
         "cmc_id": 16,
+        "coingecko_id":"solana",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -41,6 +45,7 @@
         "id": 5,
         "name": "Tron10",
         "cmc_id": 2,
+        "coingecko_id":null,
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -48,6 +53,7 @@
         "id": 6,
         "name": "Tron20",
         "cmc_id": 47,
+        "coingecko_id":null,
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -55,6 +61,7 @@
         "id": 7,
         "name": "EOS",
         "cmc_id": 3,
+        "coingecko_id":"eos",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -62,6 +69,7 @@
         "id": 8,
         "name": "Neo",
         "cmc_id": 4,
+        "coingecko_id":"neo",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -69,6 +77,7 @@
         "id": 9,
         "name": "IOST",
         "cmc_id": 5,
+        "coingecko_id":null,
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -76,6 +85,7 @@
         "id": 10,
         "name": "Chiliz",
         "cmc_id": 8,
+        "coingecko_id":"chiliz",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -83,6 +93,7 @@
         "id": 11,
         "name": "ICON",
         "cmc_id": 9,
+        "coingecko_id":"icon",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -90,6 +101,7 @@
         "id": 12,
         "name": "TomoChain",
         "cmc_id": 12,
+        "coingecko_id":"tomochain",
         "chain_id": 88,
         "explorer_url": ""
     },
@@ -97,6 +109,7 @@
         "id": 13,
         "name": "Algorand",
         "cmc_id": 17,
+        "coingecko_id":"algorand",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -104,6 +117,7 @@
         "id": 14,
         "name": "Avalanche",
         "cmc_id": 18,
+        "coingecko_id":"avalanche",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -111,6 +125,7 @@
         "id": 15,
         "name": "Heco",
         "cmc_id": 19,
+        "coingecko_id":"huobi-token",
         "chain_id": 128,
         "explorer_url": "https://hecoinfo.com"
     },
@@ -118,6 +133,7 @@
         "id": 16,
         "name": "Xdai chain",
         "cmc_id": 20,
+        "coingecko_id":"xdai",
         "chain_id": 100,
         "explorer_url": "https://blockscout.com/xdai/mainnet"
     },
@@ -125,6 +141,7 @@
         "id": 17,
         "name": "Wanchain",
         "cmc_id": 21,
+        "coingecko_id":"wanchain",
         "chain_id": 888,
         "explorer_url": ""
     },
@@ -132,6 +149,7 @@
         "id": 18,
         "name": "Terra",
         "cmc_id": 22,
+        "coingecko_id":"terra",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -139,6 +157,7 @@
         "id": 19,
         "name": "Waves",
         "cmc_id": 23,
+        "coingecko_id":"waves",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -146,6 +165,7 @@
         "id": 20,
         "name": "Fantom",
         "cmc_id": 24,
+        "coingecko_id":"fantom",
         "chain_id": 250,
         "explorer_url": "https://ftmscan.com"
     },
@@ -153,6 +173,7 @@
         "id": 21,
         "name": "Polygon",
         "cmc_id": 25,
+        "coingecko_id":"polygon-pos",
         "chain_id": 137,
         "explorer_url": "https://polygonscan.com"
     },
@@ -160,6 +181,7 @@
         "id": 22,
         "name": "Klaytn",
         "cmc_id": 26,
+        "coingecko_id":"klay-token",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -167,6 +189,7 @@
         "id": 23,
         "name": "Stellar",
         "cmc_id": 27,
+        "coingecko_id":"stellar",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -174,6 +197,7 @@
         "id": 24,
         "name": "Avalanche Contract Chain",
         "cmc_id": 28,
+        "coingecko_id":null,
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -181,6 +205,7 @@
         "id": 25,
         "name": "Cardano",
         "cmc_id": 29,
+        "coingecko_id":"cardano",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -188,6 +213,7 @@
         "id": 26,
         "name": "OKExChain",
         "cmc_id": 31,
+        "coingecko_id":"okex-chain",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -195,6 +221,7 @@
         "id": 27,
         "name": "VeChain",
         "cmc_id": 32,
+        "coingecko_id":"vechain",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -202,6 +229,7 @@
         "id": 28,
         "name": "Celo",
         "cmc_id": 35,
+        "coingecko_id":"celo",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -209,6 +237,7 @@
         "id": 29,
         "name": "Bitcoin Cash",
         "cmc_id": 39,
+        "coingecko_id":"bitcoin-cash",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -216,6 +245,7 @@
         "id": 30,
         "name": "ONT",
         "cmc_id": 40,
+        "coingecko_id":"ontology",
         "chain_id": -1,
         "explorer_url": ""
     },
@@ -223,8 +253,9 @@
         "id": 31,
         "name": "KCC",
         "cmc_id": 43,
+        "coingecko_id":"kucoin-community-chain",
         "chain_id": -1,
         "explorer_url": ""
     }
-   
+
 ]
