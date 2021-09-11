@@ -12,6 +12,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/images/logo/neko-logo-orange.svg">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/web/main.css">
+
     <style>
         @import "/css/fontawesome/fontawesome.css";
     </style>
@@ -57,7 +58,7 @@
         </div>
 
         <div class="text-white d-flex justify-content-center my-3">
-            <div class="me-5"><a>Blog</a></div>
+            <div class="me-5"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
             <div class="me-5"><a href="/cryptocurrencies">How to buy</a></div>
             <div class="me-5 me-sm-0"><a>Check my spot</a></div>
         </div>
@@ -76,6 +77,16 @@
 <script src="/js/jquery.min.js"></script>
 <script>
     _token = "{{ csrf_token() }}"
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q091EE5SJE"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Q091EE5SJE');
 </script>
 @stack('scripts')
 
