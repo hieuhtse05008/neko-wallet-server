@@ -132,7 +132,7 @@
                 console.log(res);
                 if(res.info){
                     $('#input-share-ref').val(`https://www.nekoinvest.io/?ref=${res.info.code}`);
-                    $('#early-access-email').val(`${email}`);
+                    $('#early-access-email').text(`${email}`);
                     $('#count-all').text((`${res.info.id}`).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#modal-register-early-access-success').modal('show');
 
