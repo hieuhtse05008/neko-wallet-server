@@ -62,7 +62,7 @@
                         </div>
                         <div class="text-center bg-gray p-3 mb-4 rounded-7">
                             <div class="text-center mb-3">
-                                We have added your email <span class="text-main">(benedict.strange@gmail.com)</span>
+                                We have added your email <span class="text-main" id="early-access-email">(benedict.strange@gmail.com)</span>
                                 to the signup queue.
                             </div>
                             <div class="fw-bold" style="font-size: 24px;">You’re the <span id="count-all"></span>!</div>
@@ -132,6 +132,7 @@
                 console.log(res);
                 if(res.info){
                     $('#input-share-ref').val(`https://www.nekoinvest.io/?ref=${res.info.code}`);
+                    $('#early-access-email').val(`${email}`);
                     $('#count-all').text((`${res.info.id}`).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#modal-register-early-access-success').modal('show');
 
