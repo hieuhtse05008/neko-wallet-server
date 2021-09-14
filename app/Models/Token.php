@@ -92,7 +92,10 @@ class Token extends Model
     use HasFactory;
 
     public $table = 'tokens';
-    
+
+    public const disabledDeletedBy = true;
+    public const disabledUpdatedBy = true;
+    public const disabledCreator = true;
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 

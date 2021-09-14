@@ -82,7 +82,7 @@ class SyncCoinsList extends Command
                 }
                 if(!empty($data['image'])){
                     $keys = array_keys($data['image']);
-                    $key = end($keys);
+                    $key = $keys[0];
                     if(!empty($data['image'][$key]))
                     $update_data['image_url'] = $data['image'][$key];
                 }

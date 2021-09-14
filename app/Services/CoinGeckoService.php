@@ -68,4 +68,11 @@ class CoinGeckoService
         $data = json_decode($response->getBody()->getContents());
         return ($data);
     }
+
+    public static function getExchange($id){
+
+        $client = self::getClient();
+        $response = $client->exchanges()->getExchange($id);
+        return ($response);
+    }
 }

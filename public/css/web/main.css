@@ -21,7 +21,9 @@
     --xl: 1200px;
     --xxl: 1400px;
 }
-
+a:hover{
+    color: #ff3c00;
+}
 .text-main {
     color: var(--main-color, #FC7819);;
 }
