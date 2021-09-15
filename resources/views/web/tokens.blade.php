@@ -6,8 +6,8 @@
             <h1>How to buy</h1>
             <div class="mt-3">
             <div class=" search-wrap">
-                <input placeholder="Search"
-eêwvvv
+                <input placeholder="Search in ~6,000 cryptocurrencies "
+
                        v-model="search.symbols" @change="onChangeSearch" class="rounded"
                        type="text" style="">
             </div>
@@ -15,20 +15,14 @@ eêwvvv
         </div>
         <div
             class="d-flex flex-wrap justify-content-center"
-{{--            class="row  g-5"--}}
         >
             <div v-if="isLoading" class="w-100 d-flex align-items-center justify-content-center"
                  style="height: 80vh;">
                 <img width="250" height="250" src="/images/loading.svg">
-{{--                <div class="spinner-grow" role="status">--}}
-{{--                    <span class="visually-hidden"></span>--}}
-{{--                </div>--}}
-            </div>
-{{--            <div v-for="(coin,key) in cryptocurrencies"  v-if="!isLoading" class="pointer"--}}
-{{--                 class="col-md-3 col-sm-4 col-lg-2 pointer"--}}
 
-{{--                 @click="openTokenPage(coin)">--}}
-                <div  v-for="(coin,key) in cryptocurrencies"  v-if="!isLoading" @click="openTokenPage(coin)"
+            </div>
+                <a :href="`/cryptocurrency/${coin.name}`"
+                   v-for="(coin,key) in cryptocurrencies"  v-if="!isLoading" @click="openTokenPage(coin)"
                       class="coin-item shadow p-3 bg-white pointer">
                     <div class="">
                         <div class="d-flex justify-content-center align-items-center text-center flex-column">
@@ -41,7 +35,7 @@ eêwvvv
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
 {{--            </div>--}}
         </div>
     </div>
@@ -72,11 +66,11 @@ eêwvvv
                     {label: 'Mega caps', key: 'mega_caps', low: 1000000000, high: -1},
                 ],
                 filter: {
-
+                    from_rank: 1,
                 },
                 sort: {
-                    orderBy: '',
-                    sortedBy: '',
+                    orderBy: 'rank',
+                    sortedBy: 'asc',
                 },
                 meta: {
                     current_page: 1,
@@ -109,7 +103,6 @@ eêwvvv
                     if (this.timeout || this.isLoading) return;
                     if (this.search.symbols.length < 3) {
                         this.filter.symbols = [];
-
                     }else {
                         this.filter.symbols = [this.search.symbols.toLowerCase()];
 
@@ -121,12 +114,16 @@ eêwvvv
                     if (this.isLoading || (page > 1 && this.page == page)) return;
                     this.isLoading = true;
                     const {
+                        symbols,
+                        from_rank,
                     } = this.filter;
 
                     $.get(`/api/v1/cryptocurrencies?include=last_market`, {
                         page,
                         limit: 30,
-
+                        cryptocurrency_info: true,
+                        symbols,
+                        from_rank,
                         ...this.sort
                     }).then(
                         (res) => {

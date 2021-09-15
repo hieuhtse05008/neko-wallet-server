@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Coin;
 use App\Models\Cryptocurrency;
 use App\Models\EarlyAccessEmail;
 use App\Models\ExchangeGuide;
@@ -74,8 +75,10 @@ class PublicController extends Controller
     public function tokenView(Cryptocurrency $coin)
     {
 
+        $related_coins = Cryptocurrency::where('cryptocurrencies.id','>', $coin->id)
+            ->join('cryptocurrency_info','cryptocurrencies.id','=','cryptocurrency_info.cryptocurrency_id')
 
-        $related_coins = [];
+            ->limit(12)->get();
 //        dd($related_coins);
 
         return view('web.token', [

@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Criteria\CryptocurrencyJoinInfo;
+use App\Criteria\RequestCriteria;
 use App\Models\Cryptocurrency;
 use App\Repositories\Repository;
 use App\Presenters\CryptocurrencyPresenter;
@@ -75,11 +77,19 @@ class CryptocurrencyRepositoryEloquent extends Repository implements Cryptocurre
         $this->resetCriteria();
 
         if (!$disabledRequestCriteria){
+            $this->pushCriteria(app(RequestCriteria::class));
 
         }
 
+        if(!empty($filter['cryptocurrency_info'])){
+            $this->pushCriteria(CryptocurrencyJoinInfo::class);
+        }
+
         $this->scopeQuery(function ($query) use ($filter) {
-            return $query;
+            if(!empty($filter['from_rank'])){
+                $query = $query->where('rank','>=',$filter['from_rank']);
+            }
+            return $query->select('cryptocurrencies.*');
         });
 
         if ($limit) {

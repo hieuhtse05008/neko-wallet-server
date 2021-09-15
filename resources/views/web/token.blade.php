@@ -221,7 +221,7 @@
                         </div>
                     </div>
                 </div>
-                @if(!empty($coin->categories))
+                @if(!empty($coin->categories) && count($coin->categories) > 0)
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">Tags</div>
                         <div class="pg-content">
@@ -245,8 +245,8 @@
                     <div class="col-12 col-md-3 col-lg-2">
                         <div class="rounded-7 shadow p-3 mb-3 bg-white pointer">
 
-                            <div class="d-flex justify-content-center align-items-center flex-column">
-                                <img src="{{$coin->image_url}}" class="table-token-image mr-2 mb-3"
+                            <a href="/cryptocurrency/{{$coin->name}}" class="d-flex justify-content-center align-items-center flex-column">
+                                <img src="{{$coin->icon_url}}" class="table-token-image mr-2 mb-3"
                                      style="width: 36px;">
                                 <div>
                                     <span class="mr-2 mb-3"><b>{{$coin->name}}</b></span>
@@ -254,7 +254,7 @@
                                 <div>
                                     <span class="text-secondary mb-3"><b>{{strtoupper($coin->symbol)}}</b></span>
                                 </div>
-                            </div>
+                            </a>
 
 
                         </div>

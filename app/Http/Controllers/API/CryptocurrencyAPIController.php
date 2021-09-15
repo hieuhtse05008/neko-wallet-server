@@ -80,7 +80,10 @@ class CryptocurrencyAPIController extends APIController
 
     public function index(Request $request)
     {
-        $filter = [];
+        $filter = [
+            'cryptocurrency_info'=> $request->cryptocurrency_info,
+            'from_rank'=> $request->from_rank,
+        ];
         $limit = $request->limit;
         $cryptocurrencies = $this->cryptocurrencyRepository->list($limit, $filter);
 

@@ -128,6 +128,9 @@ class Cryptocurrency extends Model
     public function cryptocurrency_info(){
         return $this->hasOne(CryptocurrencyInfo::class,'cryptocurrency_id');
     }
+    public function cryptocurrency_categories(){
+        return $this->hasMany('cryptocurrency_category', 'cryptocurrency_id');
+    }
     public function categories(){
         return $this->belongsToMany(Category::class,
             'cryptocurrency_category',
@@ -150,4 +153,5 @@ class Cryptocurrency extends Model
         return ExchangeGuide::whereIn('id',$this->exchange_pairs()
             ->distinct('exchange_guide_id')->pluck('exchange_guide_id'));
     }
+
 }
