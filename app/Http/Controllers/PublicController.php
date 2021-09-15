@@ -82,11 +82,11 @@ class PublicController extends Controller
             ->get();
 //        $related_coins = [];
 //        dd($related_coins);
-dd([
-    'coin' => $coin,
-    'exchange_guides' => $coin->exchange_guides()->get(),
-    'related_coins' => $related_coins,
-]);
+//dd([
+//    'coin' => $coin,
+//    'exchange_guides' => $coin->exchange_guides()->get(),
+//    'related_coins' => $related_coins,
+//]);
         return view('web.token', [
             'coin' => $coin,
             'exchange_guides' => $coin->exchange_guides()->get(),
