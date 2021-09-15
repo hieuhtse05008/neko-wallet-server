@@ -80,7 +80,7 @@ class PublicController extends Controller
             ->select('cryptocurrencies.*')->limit(12)->get();
 //        $related_coins = [];
 //        dd($related_coins);
-
+return $related_coins;
         return view('web.token', [
             'coin' => $coin,
             'exchange_guides' => $coin->exchange_guides()->get(),
