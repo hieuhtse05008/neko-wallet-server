@@ -77,7 +77,9 @@ class PublicController extends Controller
 
         $related_coins = Cryptocurrency::where('cryptocurrencies.id','>', $coin->id)
             ->join('cryptocurrency_info','cryptocurrencies.id','=','cryptocurrency_info.cryptocurrency_id')
-            ->select('cryptocurrencies.*')->limit(12)->get();
+            ->select('cryptocurrencies.*')
+//            ->limit(12)
+            ->get();
 //        $related_coins = [];
 //        dd($related_coins);
 return $related_coins;
