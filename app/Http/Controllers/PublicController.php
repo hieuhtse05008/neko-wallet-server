@@ -75,14 +75,14 @@ class PublicController extends Controller
     public function tokenView(Cryptocurrency $coin)
     {
 
-        $related_coins = Cryptocurrency::where('cryptocurrencies.id','>', $coin->id)
+        $related_coins = Cryptocurrency::where('cryptocurrencies.id','>', 36)
             ->join('cryptocurrency_info','cryptocurrencies.id','=','cryptocurrency_info.cryptocurrency_id')
             ->select('cryptocurrencies.*')
-//            ->limit(12)
+            ->limit(12)
             ->get();
 //        $related_coins = [];
 //        dd($related_coins);
-return $related_coins;
+
         return view('web.token', [
             'coin' => $coin,
             'exchange_guides' => $coin->exchange_guides()->get(),
