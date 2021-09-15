@@ -87,7 +87,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Token extends Model
 {
-    use SoftDeletes;
+//    use SoftDeletes;
 
     use HasFactory;
 
@@ -165,5 +165,18 @@ class Token extends Model
     public function network()
     {
         return $this->belongsTo(\App\Models\Network::class, 'network_id');
+    }
+
+
+    public function exchange_pairs(){
+        return $this->hasMany(ExchangePair::class,'base_token_id');
+    }
+
+    public function exchange_guides(){
+        return $this->belongsToMany(ExchangeGuide::class,
+            'exchange_pairs',
+            'target_token_id',
+            'exchange_guide_id'
+        );
     }
 }

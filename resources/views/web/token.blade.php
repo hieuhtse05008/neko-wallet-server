@@ -15,77 +15,113 @@
             </div>
             <hr>
             <div class="pt-5">
-                @if(!empty($coin->description))
+                @if(!empty(object_get($coin,'cryptocurrency_info.description')))
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">What is {{$coin->name}}</div>
-                        <div class="pg-content">{!! $coin->description !!}</div>
+                        <div class="pg-content">{!! $coin->cryptocurrency_info->description !!}</div>
                     </div>
                 @endif
-                @if(count($platforms) > 0)
+
+                {{--                <ul>--}}
+                {{--                    <li><b>Step 1:&nbsp;</b> Connect your wallet to Pancakeswap, make sure you have connected on Binance Smart Chain--}}
+                {{--                        network. In this guide, TrustWallet is used. Go to DApps Browsers and Select Pancakeswap--}}
+                {{--                        <img class="w-100 mt-3" src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1631707735At8HM8itnBM7IN8.png">--}}
+                {{--                    </li>--}}
+                {{--                    <li><b>Step 1:&nbsp;</b> Connect your wallet to Pancakeswap, make sure you have connected on Binance Smart Chain--}}
+                {{--                        network. In this guide, TrustWallet is used. Go to DApps Browsers and Select Pancakeswap--}}
+                {{--                        <img class="w-100 mt-3" src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1631707735At8HM8itnBM7IN8.png">--}}
+                {{--                    </li>--}}
+                {{--                </ul>--}}
+                @if(count($exchange_guides) > 0)
+                    <div class="mb-5">
+                        <div class="text-main pg-title mb-4">How to buy {{$coin->symbol}}?</div>
+                        <ul class="pg-content arrow-list">
+                            @foreach($exchange_guides as $exchange_guide)
+                                <li class="">
+                                    <div class="fw-bold mb-2"
+                                         type="button" data-bs-toggle="collapse"
+                                         data-bs-target="#how-to-{{$exchange_guide->id}}">
+                                        How to buy {{$coin->symbol}} on {{$exchange_guide->name}}
+                                    </div>
+                                    <div id="how-to-{{$exchange_guide->id}}" class="collapse">
+                                        <ul class=" pb-3">
+                                            <li>
+                                                <div>Pairs available:</div>
+                                                <ul>
+                                                    @foreach($coin->exchange_pairs as $exchange_pair)
+                                                        @if($exchange_pair->exchange_guide_id == $exchange_guide->id)
+                                                            <li>
+                                                                <a href="{{$exchange_pair->trade_url ?: $exchange_guide->url }}"
+                                                                   target="_blank"
+                                                                   class="d-flex text-main">
+                                            <span style="max-width: 200px;"
+                                                  class="d-block text-truncate">{{$exchange_pair->baseToken->symbol}}</span>/
+                                                                    <span style="max-width: 200px;"
+                                                                          class="d-block text-truncate">{{$exchange_pair->targetToken->symbol}}</span>
+                                                                </a>
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+
+                                            @if(!empty($exchange_guide->guide_html))
+                                                <li>
+                                                    <div
+                                                        type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#guide-{{$exchange_guide->id}}">Guide:
+                                                    </div>
+                                                    <ul id="guide-{{$exchange_guide->id}}" class="collapse">
+                                                        @foreach($exchange_guide->guide_html->steps as $step_key => $step)
+                                                            <li>
+                                                                <div class="mb-3"><b>Step {{$step_key + 1}}
+                                                                        :&nbsp;</b> {{$step->text}}</div>
+                                                                @if(!empty($step->image_url))
+                                                                    <img class="w-100 mt-3" src="{{$step->image_url}}">
+                                                                @endif
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endif
+
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if(count($coin->tokens) > 0)
 
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">Contract Addresses</div>
                         <div class="pg-content">
-                            @foreach($platforms as $platform)
-                                @if(!empty($coin->platforms->{strtolower($platform->asset_platform_id)}))
-                                    <div class=" text-truncate">
-                                        <span class="text-main">{{$platform->name}}</span>
-                                        : {!! $coin->platforms->{$platform->asset_platform_id} !!}
+                            @foreach($coin->tokens as $token)
+                                <div class=" text-truncate">
+                                    <span class="text-main">{{$token->name}}</span>
+                                    : {{$token->address}}
 
-                                    </div>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-
-                @if(is_array($coin->tickers) && count($coin->tickers) > 0)
-                    <div class="mb-5">
-                        <div class="text-main pg-title mb-4">Purchase on</div>
-                        <div class="pg-content">
-
-
-                            @foreach($markets as $market)
-                                <div class="">
-                                    <div target="_blank" class="fw-bold">
-                                        {{$market->name}}
-
-
-                                    </div>
-                                    <ul>
-                                        @foreach($coin->tickers as $ticker)
-                                            @if($ticker->market->identifier == $market->identifier)
-                                                <li>
-                                                    <a href="{{$ticker->trade_url}}" target="_blank"
-                                                       class="d-flex text-main">
-                                            <span style="max-width: 200px;"
-                                                  class="d-block text-truncate">{{$ticker->base}}</span>/
-                                                        <span style="max-width: 200px;"
-                                                              class="d-block text-truncate">{{$ticker->target}}</span>
-                                                    </a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                 @endif
-                @if(is_object(get_object_vars($coin->links)) && count(get_object_vars($coin->links))>0)
 
+                @if(!empty(object_get($coin,'cryptocurrency_info.links')))
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">More information</div>
                         <div class="pg-content">
-                            @foreach(get_object_vars($coin->links) as $key => $links)
+                            @foreach(get_object_vars($coin->cryptocurrency_info->links) as $key => $links)
                                 @if(is_array($links) && count($links) > 0)
                                     @foreach($links as $link)
                                         @if($link)
                                             <div class="d-flex">
-                                                <div class="text-main">
+                                                <div class="text-main text-capitalize">
                                                     {{preg_replace("/[^A-Za-z0-9.!?]/",' ',$key)}}:
                                                 </div>&nbsp;&nbsp;
-                                                <a target="_blank" href="{{$link}}">
+                                                <a target="_blank" href="{{$link}}" class="text-truncate">
                                                     {{$link}}
 
                                                 </a>
@@ -185,14 +221,14 @@
                         </div>
                     </div>
                 </div>
-                @if(is_string($coin->categories) && count(explode(',',$coin->categories)) > 0)
+                @if(!empty($coin->categories))
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">Tags</div>
                         <div class="pg-content">
-                            @foreach(explode(',',$coin->categories) as $category)
+                            @foreach($coin->categories as $category)
                                 @if(!empty($category))
                                     <a class="bg-main border-0 btn btn-sm btn-xs mb-2 me-2 rounded shadow-sm text-white"
-                                       target="_blank" href="">{{$category}}</a>
+                                       target="_blank" href="">{{$category->name}}</a>
                                 @endif
                             @endforeach
                         </div>
@@ -207,30 +243,46 @@
             <div class="row">
                 @foreach($related_coins as $coin)
                     <div class="col-12 col-md-3 col-lg-2">
-                    <div class="rounded-7 shadow p-3 mb-3 bg-white pointer">
+                        <div class="rounded-7 shadow p-3 mb-3 bg-white pointer">
 
-                        <div class="d-flex justify-content-center align-items-center flex-column">
-                            <img src="{{$coin->image_url}}" class="table-token-image mr-2 mb-3" style="width: 36px;">
-                            <div>
-                                <span class="mr-2 mb-3"><b>{{$coin->name}}</b></span>
+                            <div class="d-flex justify-content-center align-items-center flex-column">
+                                <img src="{{$coin->image_url}}" class="table-token-image mr-2 mb-3"
+                                     style="width: 36px;">
+                                <div>
+                                    <span class="mr-2 mb-3"><b>{{$coin->name}}</b></span>
+                                </div>
+                                <div>
+                                    <span class="text-secondary mb-3"><b>{{strtoupper($coin->symbol)}}</b></span>
+                                </div>
                             </div>
-                            <div>
-                                <span class="text-secondary mb-3"><b>{{strtoupper($coin->symbol)}}</b></span>
-                            </div>
+
+
                         </div>
-
-
-                    </div>
                     </div>
                 @endforeach
             </div>
-            </div>
         </div>
+    </div>
     </div>
 @endsection
 
 @section('styles')
     <style>
+        .arrow-list ul {
+            list-style: none;
+        }
+        .arrow-list ul li{
+            position: relative;
+        }
+        .arrow-list ul li:before{
+            content: "\f0da";
+            font-family: 'Font Awesome 5 Pro';
+            color: black;
+            position: absolute;
+            left: -15px;
+            top: -1.5px;
+            font-weight: 900;
+        }
         .pg-title {
             font-weight: bold;
             font-size: 24px;

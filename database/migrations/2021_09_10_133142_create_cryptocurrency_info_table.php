@@ -24,9 +24,7 @@ class CreateCryptocurrencyInfoTable extends Migration
             $table->unsignedBigInteger('cryptocurrency_id')->nullable();
             $table->foreign('cryptocurrency_id')->references('id')->on('cryptocurrencies');
             $table->text('description')->nullable();
-//            $table->jsonb('categories')->nullable();
             $table->jsonb('links')->nullable();
-//            $table->jsonb('tickers')->nullable();
             $table->timestamps();
         });
 

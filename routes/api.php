@@ -71,3 +71,47 @@ Route::prefix("v1")->group(function(){
         Route::get("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'show']);
     });
 });
+
+
+Route::prefix("v1")->group(function(){
+    Route::group(["prefix" => 'cryptocurrency-infos'], function () {
+        Route::get("/", [App\Http\Controllers\API\CryptocurrencyInfoAPIController::class, 'index']);
+        Route::post("/", [App\Http\Controllers\API\CryptocurrencyInfoAPIController::class, 'store']);
+        Route::get("{cryptocurrencyInfo}", [App\Http\Controllers\API\CryptocurrencyInfoAPIController::class, 'show']);
+        Route::put("{cryptocurrencyInfo}", [App\Http\Controllers\API\CryptocurrencyInfoAPIController::class, 'update']);
+        Route::delete("{cryptocurrencyInfo}", [App\Http\Controllers\API\CryptocurrencyInfoAPIController::class, 'destroy']);
+    });
+});
+
+
+Route::prefix("v1")->group(function(){
+    Route::group(["prefix" => 'categories'], function () {
+        Route::get("/", [App\Http\Controllers\API\CategoryAPIController::class, 'index']);
+        Route::post("/", [App\Http\Controllers\API\CategoryAPIController::class, 'store']);
+        Route::get("{category}", [App\Http\Controllers\API\CategoryAPIController::class, 'show']);
+        Route::put("{category}", [App\Http\Controllers\API\CategoryAPIController::class, 'update']);
+        Route::delete("{category}", [App\Http\Controllers\API\CategoryAPIController::class, 'destroy']);
+    });
+});
+
+
+Route::prefix("v1")->group(function(){
+    Route::group(["prefix" => 'exchange-guides'], function () {
+        Route::get("/", [App\Http\Controllers\API\ExchangeGuideAPIController::class, 'index']);
+        Route::post("/", [App\Http\Controllers\API\ExchangeGuideAPIController::class, 'store']);
+        Route::get("{exchangeGuide}", [App\Http\Controllers\API\ExchangeGuideAPIController::class, 'show']);
+        Route::put("{exchangeGuide}", [App\Http\Controllers\API\ExchangeGuideAPIController::class, 'update']);
+        Route::delete("{exchangeGuide}", [App\Http\Controllers\API\ExchangeGuideAPIController::class, 'destroy']);
+    });
+});
+
+
+Route::prefix("v1")->group(function(){
+    Route::group(["prefix" => 'exchange-pairs'], function () {
+        Route::get("/", [App\Http\Controllers\API\ExchangePairAPIController::class, 'index']);
+        Route::post("/", [App\Http\Controllers\API\ExchangePairAPIController::class, 'store']);
+        Route::get("{exchangePair}", [App\Http\Controllers\API\ExchangePairAPIController::class, 'show']);
+        Route::put("{exchangePair}", [App\Http\Controllers\API\ExchangePairAPIController::class, 'update']);
+        Route::delete("{exchangePair}", [App\Http\Controllers\API\ExchangePairAPIController::class, 'destroy']);
+    });
+});

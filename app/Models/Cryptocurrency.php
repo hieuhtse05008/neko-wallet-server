@@ -124,4 +124,30 @@ class Cryptocurrency extends Model
     {
         return $this->hasMany(\App\Models\Token::class, 'cryptocurrency_id');
     }
+
+    public function cryptocurrency_info(){
+        return $this->hasOne(CryptocurrencyInfo::class,'cryptocurrency_id');
+    }
+    public function categories(){
+        return $this->belongsToMany(Category::class,
+            'cryptocurrency_category',
+            'cryptocurrency_id',
+            'category_id'
+        );
+    }
+
+    public function exchange_pairs(){
+        return $this->belongsToMany(ExchangePair::class,
+            'tokens',
+            'cryptocurrency_id',
+            'id',
+            '',
+            'base_token_id'
+        );
+    }
+
+    public function exchange_guides(){
+        return ExchangeGuide::whereIn('id',$this->exchange_pairs()
+            ->distinct('exchange_guide_id')->pluck('exchange_guide_id'));
+    }
 }
