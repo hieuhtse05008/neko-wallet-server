@@ -72,10 +72,10 @@ class PublicController extends Controller
         ]);
     }
 
-    public function tokenView(Cryptocurrency $coin)
+    public function tokenView(Cryptocurrency $cryptocurrency)
     {
 
-        $related_coins = Cryptocurrency::where('cryptocurrencies.id','>', 36)
+        $related_coins = Cryptocurrency::where('cryptocurrencies.id','>', $cryptocurrency->id)
             ->join('cryptocurrency_info','cryptocurrencies.id','=','cryptocurrency_info.cryptocurrency_id')
             ->select('cryptocurrencies.*')
             ->limit(12)
@@ -88,8 +88,8 @@ class PublicController extends Controller
 //    'related_coins' => $related_coins,
 //]);
         return view('web.token', [
-            'coin' => $coin,
-            'exchange_guides' => $coin->exchange_guides()->get(),
+            'cryptocurrency' => $cryptocurrency,
+            'exchange_guides' => $cryptocurrency->exchange_guides()->get(),
             'related_coins' => $related_coins,
         ]);
     }

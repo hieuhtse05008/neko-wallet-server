@@ -8,47 +8,37 @@
                 <i class="far fa-long-arrow-left"></i>&nbsp;&nbsp;Back
             </a>
             <div class="token-time mb-3">
-                {{$coin->updated_at}}
+                {{$cryptocurrency->updated_at}}
             </div>
             <div class="token-title mb-5">
-                How to purchase {{$coin->name}} ({{strtoupper($coin->symbol)}})
+                How to purchase {{$cryptocurrency->name}} ({{strtoupper($cryptocurrency->symbol)}})
             </div>
             <hr>
             <div class="pt-5">
-                @if(!empty(object_get($coin,'cryptocurrency_info.description')))
+                @if(!empty(object_get($cryptocurrency,'cryptocurrency_info.description')))
                     <div class="mb-5">
-                        <div class="text-main pg-title mb-4">What is {{$coin->name}}</div>
-                        <div class="pg-content">{!! $coin->cryptocurrency_info->description !!}</div>
+                        <div class="text-main pg-title mb-4">What is {{$cryptocurrency->name}}</div>
+                        <div class="pg-content">{!! $cryptocurrency->cryptocurrency_info->description !!}</div>
                     </div>
                 @endif
 
-                {{--                <ul>--}}
-                {{--                    <li><b>Step 1:&nbsp;</b> Connect your wallet to Pancakeswap, make sure you have connected on Binance Smart Chain--}}
-                {{--                        network. In this guide, TrustWallet is used. Go to DApps Browsers and Select Pancakeswap--}}
-                {{--                        <img class="w-100 mt-3" src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1631707735At8HM8itnBM7IN8.png">--}}
-                {{--                    </li>--}}
-                {{--                    <li><b>Step 1:&nbsp;</b> Connect your wallet to Pancakeswap, make sure you have connected on Binance Smart Chain--}}
-                {{--                        network. In this guide, TrustWallet is used. Go to DApps Browsers and Select Pancakeswap--}}
-                {{--                        <img class="w-100 mt-3" src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1631707735At8HM8itnBM7IN8.png">--}}
-                {{--                    </li>--}}
-                {{--                </ul>--}}
-                @if(count($exchange_guides) > 0)
+                @if( count($exchange_guides) > 0)
                     <div class="mb-5">
-                        <div class="text-main pg-title mb-4">How to buy {{$coin->symbol}}?</div>
+                        <div class="text-main pg-title mb-4">How to buy {{$cryptocurrency->symbol}}?</div>
                         <ul class="pg-content arrow-list">
                             @foreach($exchange_guides as $exchange_guide)
                                 <li class="">
                                     <div class="fw-bold mb-2"
                                          type="button" data-bs-toggle="collapse"
                                          data-bs-target="#how-to-{{$exchange_guide->id}}">
-                                        How to buy {{$coin->symbol}} on {{$exchange_guide->name}}
+                                        How to buy {{$cryptocurrency->symbol}} on {{$exchange_guide->name}}
                                     </div>
                                     <div id="how-to-{{$exchange_guide->id}}" class="collapse">
                                         <ul class=" pb-3">
                                             <li>
                                                 <div>Pairs available:</div>
                                                 <ul>
-                                                    @foreach($coin->exchange_pairs as $exchange_pair)
+                                                    @foreach($cryptocurrency->exchange_pairs as $exchange_pair)
                                                         @if($exchange_pair->exchange_guide_id == $exchange_guide->id)
                                                             <li>
                                                                 <a href="{{$exchange_pair->trade_url ?: $exchange_guide->url }}"
@@ -93,12 +83,12 @@
                     </div>
                 @endif
 
-                @if(count($coin->tokens) > 0)
+                @if(count($cryptocurrency->tokens) > 0)
 
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">Contract Addresses</div>
                         <div class="pg-content">
-                            @foreach($coin->tokens as $token)
+                            @foreach($cryptocurrency->tokens as $token)
                                 <div class=" text-truncate">
                                     <span class="text-main">{{$token->name}}</span>
                                     : {{$token->address}}
@@ -109,11 +99,11 @@
                     </div>
                 @endif
 
-                @if(!empty(object_get($coin,'cryptocurrency_info.links')))
+                @if(!empty(object_get($cryptocurrency,'cryptocurrency_info.links')))
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">More information</div>
                         <div class="pg-content">
-                            @foreach(get_object_vars($coin->cryptocurrency_info->links) as $key => $links)
+                            @foreach(get_object_vars($cryptocurrency->cryptocurrency_info->links) as $key => $links)
                                 @if(is_array($links) && count($links) > 0)
                                     @foreach($links as $link)
                                         @if($link)
@@ -221,11 +211,11 @@
                         </div>
                     </div>
                 </div>
-                @if(!empty($coin->categories) && count($coin->categories) > 0)
+                @if(!empty($cryptocurrency->categories) && count($cryptocurrency->categories) > 0)
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">Tags</div>
                         <div class="pg-content">
-                            @foreach($coin->categories as $category)
+                            @foreach($cryptocurrency->categories as $category)
                                 @if(!empty($category))
                                     <a class="bg-main border-0 btn btn-sm btn-xs mb-2 me-2 rounded shadow-sm text-white"
                                        target="_blank" href="">{{$category->name}}</a>
@@ -241,18 +231,18 @@
         <div class="related-coins">
             <div class="text-main pg-title mb-4 ps-3 ps-md-0">Recommended</div>
             <div class="row">
-                @foreach($related_coins as $coin)
+                @foreach($related_coins as $cryptocurrency)
                     <div class="col-12 col-md-3 col-lg-2">
                         <div class="rounded-7 shadow p-3 mb-3 bg-white pointer">
 
                             <a href="" class="d-flex justify-content-center align-items-center flex-column">
-{{--                                <img src="{{$coin->icon_url}}" class="table-token-image mr-2 mb-3"--}}
-{{--                                     style="width: 36px;">--}}
+                                <img src="{{$cryptocurrency->icon_url}}" class="table-token-image mr-2 mb-3"
+                                     style="width: 36px;">
                                 <div>
-{{--                                    <span class="mr-2 mb-3"><b>{{$coin->name}}</b></span>--}}
+                                    <span class="mr-2 mb-3"><b>{{$cryptocurrency->name}}</b></span>
                                 </div>
                                 <div>
-{{--                                    <span class="text-secondary mb-3"><b>{{strtoupper($coin->symbol)}}</b></span>--}}
+                                    <span class="text-secondary mb-3"><b>{{strtoupper($cryptocurrency->symbol)}}</b></span>
                                 </div>
                             </a>
 
