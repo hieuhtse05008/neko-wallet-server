@@ -73,12 +73,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Network extends Model
 {
-    use SoftDeletes;
+//    use SoftDeletes;
 
     use HasFactory;
 
     public $table = 'networks';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 

@@ -69,7 +69,7 @@
                                                         @foreach($exchange_guide->guide_html->steps as $step_key => $step)
                                                             <li>
                                                                 <div class="collapse-btn mb-3"><b>Step {{$step_key + 1}}
-                                                                        :&nbsp;</b> {{$step->text}}</div>
+                                                                        :&nbsp;</b> {{str_replace('[TOKEN]',strtoupper($cryptocurrency->symbol),$step->text)}}</div>
                                                                 @if(!empty($step->image_url))
                                                                     <img class="w-100 mb-3" src="{{$step->image_url}}">
                                                                 @endif
@@ -94,7 +94,7 @@
                         <div class="pg-content">
                             @foreach($cryptocurrency->tokens as $token)
                                 <div class=" text-truncate">
-                                    <span class="text-main">{{$token->name}}</span>
+                                    <span class="text-main">{{$token->name}} ({{$token->network->name}})</span>
                                     : {{$token->address}}
 
                                 </div>

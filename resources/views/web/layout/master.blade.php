@@ -60,7 +60,7 @@
         <div class="text-white d-flex justify-content-center my-3">
             <div class="me-5"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
             <div class="me-5"><a href="/cryptocurrencies">How to buy</a></div>
-            <div class="me-5 me-sm-0"><a>Check my spot</a></div>
+            <div class="me-sm-0"><a>Check my spot</a></div>
         </div>
         <div class="text-white d-flex justify-content-end my-3">
             <div class="me-5"><a href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a></div>
