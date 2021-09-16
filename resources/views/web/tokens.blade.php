@@ -5,12 +5,13 @@
         <div class="my-5 d-flex justify-content-center flex-column align-items-center">
             <h1>How to buy</h1>
             <div class="mt-3">
-            <div class=" search-wrap">
-                <input placeholder="Search in ~6,000 cryptocurrencies "
+                <div class="align-items-center bg-white d-flex rounded-3 pe-3 text-truncate search-wrap">
+                    <i class="far fa-search me-2"></i>
+                    <input placeholder="Search"
 
-                       v-model="search.symbols" @change="onChangeSearch" class="rounded"
-                       type="text" style="">
-            </div>
+                           v-model="search.search" class="border-0 flex-grow-1"
+                           type="text" style="">
+                </div>
             </div>
         </div>
         <div
@@ -21,22 +22,22 @@
                 <img width="250" height="250" src="/images/loading.svg">
 
             </div>
-                <a :href="`/cryptocurrency/${coin.name}`"
-                   v-for="(coin,key) in cryptocurrencies"  v-if="!isLoading" @click="openTokenPage(coin)"
-                      class="coin-item shadow p-3 bg-white pointer">
-                    <div class="">
-                        <div class="d-flex justify-content-center align-items-center text-center flex-column">
-                            <img :src="coin.icon_url" class="table-token-image mr-2 mb-3" style="width: 36px;">
-                            <div>
-                                <span class="mr-2 mb-3"><b>@{{coin.name}}</b></span>
-                            </div>
-                            <div>
-                                <span class="text-secondary mb-3"><b>@{{coin.symbol.toUpperCase()}}</b></span>
-                            </div>
+            <a :href="`/cryptocurrency/${coin.name}`"
+               v-for="(coin,key) in cryptocurrencies" v-if="!isLoading" @click="openTokenPage(coin)"
+               class="coin-item shadow p-3 bg-white pointer">
+                <div class="">
+                    <div class="d-flex justify-content-center align-items-center text-center flex-column">
+                        <img :src="coin.icon_url" class="table-token-image mr-2 mb-3" style="width: 36px;">
+                        <div>
+                            <span class="mr-2 mb-3"><b>@{{coin.name}}</b></span>
+                        </div>
+                        <div>
+                            <span class="text-secondary mb-3"><b>@{{coin.symbol.toUpperCase()}}</b></span>
                         </div>
                     </div>
-                </a>
-{{--            </div>--}}
+                </div>
+            </a>
+            {{--            </div>--}}
         </div>
     </div>
 @endsection
@@ -49,7 +50,7 @@
                 isLoading: false,
                 page: 1,
                 search: {
-                    symbols:'',
+                    symbol: '',
                     categories: '',
                     platforms: '',
                 },
@@ -90,31 +91,36 @@
                 ],
                 timeout: null,
             },
+            watch: {
+                'search.search': function (new_search, old_search) {
+                    if (this.timeout || this.isLoading || new_search == old_search || new_search.length < 3) return;
+                    this.filter.search = new_search.toLowerCase();
+                    this.timeout = 500;
+                    setTimeout(() => this.loadCryptocurrencies(), this.timeout);
+                },
+            },
             methods: {
-                openTokenPage: function (coin){
+                openTokenPage: function (coin) {
                     window.location.href = `/cryptocurrency/${coin.name}`;
                 },
                 parseNumber: function (str) {
                     if (str.indexOf(".") == -1) return str;
                     return str.substr(0, str.indexOf(".") + 3);
                 },
-
                 onChangeSearch: function () {
                     if (this.timeout || this.isLoading) return;
-                    if (this.search.symbols.length < 3) {
-                        this.filter.symbols = [];
-                    }else {
-                        this.filter.symbols = [this.search.symbols.toLowerCase()];
-
+                    const {search} = this.search;
+                    if (search.length >= 3) {
+                        this.filter.search = search.toLowerCase();
                     }
-                    this.timeout = 300;
+                    this.timeout = 500;
                     setTimeout(() => this.loadCryptocurrencies(), this.timeout);
                 },
                 loadCryptocurrencies: function (page = 1) {
                     if (this.isLoading || (page > 1 && this.page == page)) return;
                     this.isLoading = true;
                     const {
-                        symbols,
+                        search,
                         from_rank,
                     } = this.filter;
 
@@ -122,7 +128,7 @@
                         page,
                         limit: 30,
                         cryptocurrency_info: true,
-                        symbols,
+                        search,
                         from_rank,
                         ...this.sort
                     }).then(
@@ -140,9 +146,7 @@
                     );
                 },
             },
-            computed: {
-
-            },
+            computed: {},
             created() {
                 this.loadCryptocurrencies();
             },
@@ -162,7 +166,10 @@
             margin-bottom: 40px;
         }
 
-        input {
+        .search-wrap input:focus{
+            outline: none;
+        }
+        .search-wrap {
             border: 1px solid #DCDEE3;
             box-sizing: border-box;
             padding: 13px 16px;

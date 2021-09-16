@@ -19,12 +19,12 @@ class CryptocurrencyRepositoryEloquent extends Repository implements Cryptocurre
      * @var array
      */
     protected $fieldSearchable = [
-        'name',
-        'symbol',
-        'slug',
-        'icon_url',
-        'rank',
-        'verified'
+        'name' =>'ilike',
+        'symbol' =>'ilike',
+        'slug' =>'ilike',
+//        'icon_url',
+//        'rank',
+//        'verified'
     ];
 
     /**

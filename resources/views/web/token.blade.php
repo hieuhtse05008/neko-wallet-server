@@ -23,51 +23,55 @@
                 @endif
 
                 @if( count($exchange_guides) > 0)
-                    <div class="mb-5">
+                    <div class="mb-5 arrow-list">
                         <div class="text-main pg-title mb-4">How to buy {{$cryptocurrency->symbol}}?</div>
-                        <ul class="pg-content arrow-list">
+                        <ul class="pg-content">
                             @foreach($exchange_guides as $exchange_guide)
                                 <li class="">
-                                    <div class="fw-bold mb-2"
+                                    <div class="fw-bold mb-2 collapse-btn"
                                          type="button" data-bs-toggle="collapse"
                                          data-bs-target="#how-to-{{$exchange_guide->id}}">
                                         How to buy {{$cryptocurrency->symbol}} on {{$exchange_guide->name}}
                                     </div>
                                     <div id="how-to-{{$exchange_guide->id}}" class="collapse">
                                         <ul class=" pb-3">
-                                            <li>
-                                                <div>Pairs available:</div>
-                                                <ul>
-                                                    @foreach($cryptocurrency->exchange_pairs as $exchange_pair)
-                                                        @if($exchange_pair->exchange_guide_id == $exchange_guide->id)
-                                                            <li>
-                                                                <a href="{{$exchange_pair->trade_url ?: $exchange_guide->url }}"
-                                                                   target="_blank"
-                                                                   class="d-flex text-main">
-                                            <span style="max-width: 200px;"
-                                                  class="d-block text-truncate">{{$exchange_pair->baseToken->symbol}}</span>/
-                                                                    <span style="max-width: 200px;"
-                                                                          class="d-block text-truncate">{{$exchange_pair->targetToken->symbol}}</span>
-                                                                </a>
-                                                            </li>
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
-                                            </li>
+                                            @if(count($cryptocurrency->exchange_pairs) > 0)
+                                                <li>
+                                                    <div class="collapse-btn mb-2">Pairs available:</div>
+                                                    <ul>
+                                                        @foreach($cryptocurrency->exchange_pairs as $exchange_pair)
+                                                            @if($exchange_pair->exchange_guide_id == $exchange_guide->id)
+                                                                <li>
+                                                                    <a href="{{$exchange_pair->trade_url ?: $exchange_guide->url }}"
+                                                                       target="_blank"
+                                                                       class="d-flex text-main">
+                                                                        <span style="max-width: 200px;"
+                                                                              class="d-block text-truncate">
+                                                                            {{$exchange_pair->baseToken->symbol}}
+                                                                        </span>/
+                                                                        <span style="max-width: 200px;"
+                                                                              class="d-block text-truncate">{{$exchange_pair->targetToken->symbol}}</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endif
 
                                             @if(!empty($exchange_guide->guide_html))
                                                 <li>
-                                                    <div
-                                                        type="button" data-bs-toggle="collapse"
-                                                        data-bs-target="#guide-{{$exchange_guide->id}}">Guide:
+                                                    <div class="mb-2"></div>
+                                                    <div type="button" data-bs-toggle="collapse" class="collapse-btn mb-2"
+                                                         data-bs-target="#guide-{{$exchange_guide->id}}">Guide:
                                                     </div>
                                                     <ul id="guide-{{$exchange_guide->id}}" class="collapse">
                                                         @foreach($exchange_guide->guide_html->steps as $step_key => $step)
                                                             <li>
-                                                                <div class="mb-3"><b>Step {{$step_key + 1}}
+                                                                <div class="collapse-btn mb-3"><b>Step {{$step_key + 1}}
                                                                         :&nbsp;</b> {{$step->text}}</div>
                                                                 @if(!empty($step->image_url))
-                                                                    <img class="w-100 mt-3" src="{{$step->image_url}}">
+                                                                    <img class="w-100 mb-3" src="{{$step->image_url}}">
                                                                 @endif
                                                             </li>
                                                         @endforeach
@@ -242,7 +246,8 @@
                                     <span class="mr-2 mb-3"><b>{{$cryptocurrency->name}}</b></span>
                                 </div>
                                 <div>
-                                    <span class="text-secondary mb-3"><b>{{strtoupper($cryptocurrency->symbol)}}</b></span>
+                                    <span
+                                        class="text-secondary mb-3"><b>{{strtoupper($cryptocurrency->symbol)}}</b></span>
                                 </div>
                             </a>
 
@@ -261,10 +266,15 @@
         .arrow-list ul {
             list-style: none;
         }
-        .arrow-list ul li{
+
+        .arrow-list ul li {
             position: relative;
         }
-        .arrow-list ul li:before{
+
+        .arrow-list .collapse-btn[aria-expanded='true']:before {
+            transform: rotate(90deg);
+        }
+        .arrow-list .collapse-btn:before {
             content: "\f0da";
             font-family: 'Font Awesome 5 Pro';
             color: black;
@@ -272,7 +282,9 @@
             left: -15px;
             top: -1.5px;
             font-weight: 900;
+            transition: transform .3s;
         }
+
         .pg-title {
             font-weight: bold;
             font-size: 24px;

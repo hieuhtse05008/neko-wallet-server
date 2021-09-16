@@ -87,6 +87,7 @@ class PublicController extends Controller
 //    'exchange_guides' => $coin->exchange_guides()->get(),
 //    'related_coins' => $related_coins,
 //]);
+
         return view('web.token', [
             'cryptocurrency' => $cryptocurrency,
             'exchange_guides' => $cryptocurrency->exchange_guides()->get(),
