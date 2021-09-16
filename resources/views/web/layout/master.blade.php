@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="text-white d-flex justify-content-center my-3">
+        <div class="d-flex flex-column flex-sm-row justify-content-center my-3 text-white">
             <div class="me-5"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
             <div class="me-5"><a href="/cryptocurrencies">How to buy</a></div>
             <div class="me-sm-0"><a>Check my spot</a></div>
