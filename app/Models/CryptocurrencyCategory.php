@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Category
+ * Class CryptocurrencyCategory
  * @package App\Models
- * @version September 15, 2021, 4:54 am UTC
+ * @version September 18, 2021, 8:32 am UTC
  *
  *
  * @OA\Schema(
- *     title="Category",
+ *     title="CryptocurrencyCategory",
  *     @OA\Xml(
- *         name="Category"
+ *         name="CryptocurrencyCategory"
  *     ),
- *     required={"name"},
+ *     required={""},
   *      @OA\Property(
  *          property="id",
  *          description="id",
@@ -26,9 +26,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
 ,
  *      @OA\Property(
- *          property="name",
- *          description="name",
- *          type="string"
+ *          property="cryptocurrency_id",
+ *          description="cryptocurrency_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+,
+ *      @OA\Property(
+ *          property="category_id",
+ *          description="category_id",
+ *          type="integer",
+ *          format="int32"
  *      )
 ,
  *      @OA\Property(
@@ -48,12 +56,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * )
  */
 
-class Category extends Model
+class CryptocurrencyCategory extends Model
 {
+//    use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'categories';
+    public $table = 'cryptocurrency_category';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -64,7 +73,8 @@ class Category extends Model
 
 
     public $fillable = [
-        'name'
+        'cryptocurrency_id',
+        'category_id'
     ];
 
     /**
@@ -74,7 +84,8 @@ class Category extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'name' => 'string'
+        'cryptocurrency_id' => 'integer',
+        'category_id' => 'integer'
     ];
 
     /**
@@ -83,23 +94,25 @@ class Category extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|string',
+        'cryptocurrency_id' => 'nullable',
+        'category_id' => 'nullable',
         'created_at' => 'nullable',
         'updated_at' => 'nullable'
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function cryptocurrencyCategories()
+    public function cryptocurrency()
     {
-        return $this->hasMany(\App\Models\CryptocurrencyCategory::class, 'category_id');
+        return $this->belongsTo(\App\Models\Cryptocurrency::class, 'cryptocurrency_id');
     }
 
-    public function cryptocurrencies(){
-        return $this->hasManyThrough(Cryptocurrency::class,CryptocurrencyCategory::class,
-            'category_id',
-            'id'
-        );
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function category()
+    {
+        return $this->belongsTo(\App\Models\Category::class, 'category_id');
     }
 }

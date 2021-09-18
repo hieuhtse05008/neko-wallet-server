@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Criteria\RequestCriteria;
 use App\Models\Category;
 use App\Repositories\Repository;
 use App\Presenters\CategoryPresenter;
@@ -70,6 +71,7 @@ class CategoryRepositoryEloquent extends Repository implements CategoryRepositor
         $this->resetCriteria();
 
         if (!$disabledRequestCriteria){
+            $this->pushCriteria(app(RequestCriteria::class));
 
         }
 

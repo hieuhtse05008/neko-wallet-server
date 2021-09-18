@@ -14,6 +14,42 @@
                 </div>
             </div>
         </div>
+        <div v-cloak
+             class="d-flex flex-wrap justify-content-center mb-5"
+        >
+            <div class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
+                 :class="{'bg-main': !filter.category_id,'text-white':!filter.category_id,}"
+                 @click="onChangeCategory({})"
+            >
+                All (@{{ count_total_cryptocurrencies }})
+            </div>
+            <div v-for="category in _categories.slice(0,5)" class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
+                 :class="{'bg-main': category.id == filter.category_id,'text-white': category.id == filter.category_id,}"
+                 @click="onChangeCategory(category)"
+            >
+                @{{ category.name }} (@{{ category.cryptocurrencies.length }})
+            </div>
+
+            <div v-if="_categories.length > 5" class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
+                 type="button"
+                 data-bs-toggle="collapse"
+                 data-bs-target="#more-categories"
+                 aria-expanded="false"
+            >
+                +@{{ _categories.length - 5 }} more
+            </div>
+            <div class="collapse" id="more-categories">
+                <div class=" d-flex flex-wrap justify-content-center">
+                    <div v-if="_categories.length > 5" v-for="category in _categories.slice(5,_categories.length)"
+                         class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
+                         :class="{'bg-main': category.id == filter.category_id,'text-white': category.id == filter.category_id,}"
+                         @click="onChangeCategory(category)"
+                    >
+                        @{{ category.name }} (@{{ category.cryptocurrencies.length }})
+                    </div>
+                </div>
+            </div>
+        </div>
         <div
             class="d-flex flex-wrap justify-content-center"
         >
@@ -22,22 +58,43 @@
                 <img width="250" height="250" src="/images/loading.svg">
 
             </div>
-            <a :href="`/cryptocurrency/${coin.name}`"
-               v-for="(coin,key) in cryptocurrencies" v-if="!isLoading" @click="openTokenPage(coin)"
-               class="coin-item shadow p-3 bg-white pointer">
+            <a :href="`/cryptocurrency/${cryptocurrency.name}`"
+               v-for="(cryptocurrency,key) in cryptocurrencies" v-if="!isLoading" @click="openTokenPage(cryptocurrency)"
+               class="cryptocurrency-item shadow p-3 bg-white pointer">
                 <div class="">
                     <div class="d-flex justify-content-center align-items-center text-center flex-column">
-                        <img :src="coin.icon_url" class="table-token-image mr-2 mb-3" style="width: 36px;">
+                        <img :src="cryptocurrency.icon_url" class="table-token-image mr-2 mb-3" style="width: 36px;">
                         <div>
-                            <span class="mr-2 mb-3"><b>@{{coin.name}}</b></span>
+                            <span class="mr-2 mb-3"><b>@{{cryptocurrency.name}}</b></span>
                         </div>
                         <div>
-                            <span class="text-secondary mb-3"><b>@{{coin.symbol.toUpperCase()}}</b></span>
+                            <span class="text-secondary mb-3"><b>@{{cryptocurrency.symbol.toUpperCase()}}</b></span>
                         </div>
                     </div>
                 </div>
             </a>
-            {{--            </div>--}}
+        </div>
+
+        <div v-if="cryptocurrencies.length == 0" class="text-center">
+            <svg style="transform: scale(.5);" width="244" height="260" viewBox="0 0 244 260" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M211.831 67.2638L206.172 10.4818C205.052 -0.914868 189.886 -3.9655 184.429 6.07855L158.578 53.5935H85.3928L59.5423 6.07855C54.085 -3.9655 38.9481 -0.886089 37.7992 10.4818L32.1695 67.2925C12.7242 80.9628 0 103.583 0 129.197V227.163C0 245.294 14.6773 260 32.7727 260H211.227C229.323 260 244 245.294 244 227.163V129.197C244 103.583 231.276 80.934 211.831 67.2638Z"
+                    fill="#1C2730"/>
+                <path
+                    d="M120.241 205.915L101.605 203.868L101.634 202.86L120.111 200.609L126.543 164.645C126.543 164.645 94.5239 158.559 82.0511 185.081H81.3848L87.1256 164.081H42V236.963H80.5804L80.5235 216.613H81.5311L89.0595 236.963H128.765L120.241 205.915Z"
+                    fill="white"/>
+                <path
+                    d="M98.3106 89.2804C87.2842 89.5567 81.3444 97.2191 77.8829 104.589H77.6188L82.8557 89.2682H42.0083V159.002H81.9294L83.4123 116.217H84.2208L93.7115 159.002H124.504V117.204C124.491 96.886 112.766 88.9188 98.3106 89.2804Z"
+                    fill="white"/>
+                <path
+                    d="M211.025 129.811C208.262 146.387 193.856 159.027 176.491 159.027H162.544C143.205 159.027 127.53 143.352 127.53 124.013C127.53 104.674 143.205 89 162.544 89H176.491C192.169 89 204.52 99.3074 208.981 113.515C209.904 116.456 207.482 129.547 182.971 129.266C178.758 129.218 174.695 128.637 170.864 127.471C170.88 126.577 170.889 125.663 170.889 124.724C170.889 116.03 170.149 108.985 169.239 108.985C168.329 108.985 167.59 116.034 167.59 124.724C167.59 125.346 167.594 125.959 167.602 126.565C167.59 126.605 167.59 126.646 167.602 126.691C167.602 126.727 167.602 126.768 167.602 126.804L167.744 126.841C177.222 135.657 197.642 134.284 211.025 129.811Z"
+                    fill="white"/>
+                <path
+                    d="M175.735 164.129H160.443C140.503 164.129 124.337 180.295 124.337 200.236V200.995C124.337 220.936 140.503 237.101 160.443 237.101H175.735C195.676 237.101 211.842 220.936 211.842 200.995V200.236C211.842 180.295 195.676 164.129 175.735 164.129ZM168.089 216.572C167.167 216.572 166.415 209.43 166.415 200.613C166.415 191.801 167.163 184.655 168.089 184.655C169.016 184.655 169.763 191.797 169.763 200.613C169.763 209.426 169.011 216.572 168.089 216.572Z"
+                    fill="white"/>
+            </svg>
+            <h4 class="fw-bold text-center">No result</h4>
         </div>
     </div>
 @endsection
@@ -54,10 +111,10 @@
                     categories: '',
                     platforms: '',
                 },
-                hint_coins: [],
-                categories: {!! collect($categories) !!},
-                platforms: {!! collect($platforms) !!},
                 cryptocurrencies: [],
+                _cryptocurrencies: [],
+                count_total_cryptocurrencies: {{$count_total_cryptocurrencies}},
+                categories: {!! collect($categories) !!},
                 caps: [
                     {label: 'Nano caps', key: 'nano_caps', low: -1, high: 10000},
                     {label: 'Micro caps', key: 'micro_caps', low: 100000, high: 1000000},
@@ -68,6 +125,7 @@
                 ],
                 filter: {
                     from_rank: 1,
+                    category_id: '{{request()['category'] ?: ''}}',
                 },
                 sort: {
                     orderBy: 'rank',
@@ -77,18 +135,6 @@
                     current_page: 1,
                     total_pages: 0,
                 },
-                fields: [
-                    {key: 'market_cap_rank', name: '#',},
-                    {key: 'name', name: 'Name',},
-                    {key: 'current_price', name: 'Price',},
-                    {key: 'price_change_percentage_24h', name: '24h %',},
-                    {key: 'price_change_percentage_7d_in_currency', name: '7d %',},
-                    {key: 'market_cap', name: 'Market cap',},
-                    {key: 'total_volume', name: 'Total volume',},
-                    {key: 'circulating_supply', name: 'Circulating supply',},
-                    {key: 'sparkline_7d', name: 'Last 7 days', disableSort: true,},
-
-                ],
                 timeout: null,
             },
             watch: {
@@ -100,8 +146,16 @@
                 },
             },
             methods: {
-                openTokenPage: function (coin) {
-                    window.location.href = `/cryptocurrency/${coin.name}`;
+                onChangeCategory: function (category = {}) {
+                    this.isLoading = true;
+                    this.filter.category_id = category.id;
+                    this.cryptocurrencies = category.cryptocurrencies || this._cryptocurrencies;
+                    setTimeout(() => {
+                        this.isLoading = false;
+                    }, 300);
+                },
+                openTokenPage: function (cryptocurrency) {
+                    window.location.href = `/cryptocurrency/${cryptocurrency.name}`;
                 },
                 parseNumber: function (str) {
                     if (str.indexOf(".") == -1) return str;
@@ -122,14 +176,15 @@
                     const {
                         search,
                         from_rank,
+                        category_id,
                     } = this.filter;
-
                     $.get(`/api/v1/cryptocurrencies?include=last_market`, {
                         page,
                         limit: 30,
                         cryptocurrency_info: true,
                         search,
                         from_rank,
+                        category_ids: [category_id],
                         ...this.sort
                     }).then(
                         (res) => {
@@ -139,6 +194,7 @@
                                 // ...this.cryptocurrencies,
                                 ...(res.cryptocurrencies.items || res.cryptocurrencies),
                             ];
+                            this._cryptocurrencies = [...this.cryptocurrencies];
                             this.meta = res.cryptocurrencies.meta;
                             this.isLoading = false;
 
@@ -146,7 +202,13 @@
                     );
                 },
             },
-            computed: {},
+            computed: {
+                _categories: function () {
+                    return this.categories.sort(function (a, b) {
+                        return b.cryptocurrencies.length - a.cryptocurrencies.length;
+                    })
+                },
+            },
             created() {
                 this.loadCryptocurrencies();
             },
@@ -157,7 +219,7 @@
 
 @section('styles')
     <style>
-        .coin-item {
+        .cryptocurrency-item {
             border-radius: 12px;
             width: calc(20% - 40px);
             min-width: 180px;
@@ -166,9 +228,10 @@
             margin-bottom: 40px;
         }
 
-        .search-wrap input:focus{
+        .search-wrap input:focus {
             outline: none;
         }
+
         .search-wrap {
             border: 1px solid #DCDEE3;
             box-sizing: border-box;

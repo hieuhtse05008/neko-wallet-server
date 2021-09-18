@@ -222,7 +222,7 @@
                             @foreach($cryptocurrency->categories as $category)
                                 @if(!empty($category))
                                     <a class="bg-main border-0 btn btn-sm btn-xs mb-2 me-2 rounded shadow-sm text-white"
-                                       target="_blank" href="">{{$category->name}}</a>
+                                       href="/cryptocurrencies?category={{$category->id}}">{{$category->name}}</a>
                                 @endif
                             @endforeach
                         </div>
@@ -239,7 +239,7 @@
                     <div class="col-12 col-md-3 col-lg-2">
                         <div class="rounded-7 shadow p-3 mb-3 bg-white pointer">
 
-                            <a href="" class="d-flex justify-content-center align-items-center flex-column">
+                            <a href="/cryptocurrency/{{$cryptocurrency->name}}" class="d-flex justify-content-center align-items-center flex-column">
                                 <img src="{{$cryptocurrency->icon_url}}" class="table-token-image mr-2 mb-3"
                                      style="width: 36px;">
                                 <div>

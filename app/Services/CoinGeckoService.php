@@ -31,6 +31,7 @@ class CoinGeckoService
             return ($response);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
+            Log::info("FAIL COINGECKO " . $coin_id . " - ");
         }
         return null;
     }

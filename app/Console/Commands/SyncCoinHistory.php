@@ -110,16 +110,6 @@ class SyncCoinHistory extends Command
             $explorers = object_get($obj, 'props.initialProps.pageProps.info.urls.explorer');
             $rank = object_get($obj, 'props.initialProps.pageProps.info.statistics.rank');
 
-            echo json_encode([
-                    'coin_market_cap_id' => $id,
-                    'coin_market_cap_slug' => $slug,
-                    'name' => $res->name,
-                    'symbol' => $res->symbol,
-                    'logo' => "https://s2.coinmarketcap.com/static/img/coins/200x200/$id",
-                    'platforms' => $platforms,
-                    'explorers' => $explorers,
-                    'rank' => $rank,
-                ]) . "\xA";
         } catch (\Exception $e) {
             Log::error($e);
             return null;

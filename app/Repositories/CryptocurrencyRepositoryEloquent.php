@@ -2,11 +2,14 @@
 
 namespace App\Repositories;
 
+use App\Criteria\CryptocurrencyJoinCryptocurrencyCategory;
 use App\Criteria\CryptocurrencyJoinInfo;
 use App\Criteria\RequestCriteria;
 use App\Models\Cryptocurrency;
 use App\Repositories\Repository;
 use App\Presenters\CryptocurrencyPresenter;
+use Illuminate\Support\Facades\DB;
+
 /**
  * Class CryptocurrencyRepositoryEloquent
  * @package App\Repositories
@@ -15,6 +18,7 @@ use App\Presenters\CryptocurrencyPresenter;
 
 class CryptocurrencyRepositoryEloquent extends Repository implements CryptocurrencyRepository
 {
+
     /**
      * @var array
      */
@@ -60,7 +64,9 @@ class CryptocurrencyRepositoryEloquent extends Repository implements Cryptocurre
      */
     static public function queryFilter($query, $filter)
     {
-
+        if(!empty($filter['from_rank'])){
+            $query = $query->where('rank','>=',$filter['from_rank']);
+        }
         return $query;
     }
 
@@ -78,18 +84,25 @@ class CryptocurrencyRepositoryEloquent extends Repository implements Cryptocurre
 
         if (!$disabledRequestCriteria){
             $this->pushCriteria(app(RequestCriteria::class));
-
         }
 
         if(!empty($filter['cryptocurrency_info'])){
             $this->pushCriteria(CryptocurrencyJoinInfo::class);
         }
 
+        if(!empty($filter['category'])){
+            $this->pushCriteria(CryptocurrencyJoinCryptocurrencyCategory::class);
+        }
+
+
         $this->scopeQuery(function ($query) use ($filter) {
-            if(!empty($filter['from_rank'])){
-                $query = $query->where('rank','>=',$filter['from_rank']);
+            if(!empty($filter['cryptocurrency'])){
+                $query = self::queryFilter($query,$filter['cryptocurrency']);
             }
-            return $query->select('cryptocurrencies.*');
+            if(!empty($filter['category'])){
+                $query = CryptocurrencyCategoryRepositoryEloquent::queryFilter($query, $filter['category']);
+            }
+            return $query->groupBy('cryptocurrencies.id')->select('cryptocurrencies.*');
         });
 
         if ($limit) {

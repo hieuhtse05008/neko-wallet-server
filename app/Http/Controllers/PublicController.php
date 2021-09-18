@@ -8,7 +8,10 @@ use App\Models\Coin;
 use App\Models\Cryptocurrency;
 use App\Models\EarlyAccessEmail;
 use App\Models\ExchangeGuide;
+use App\Repositories\CategoryRepository;
 use App\Repositories\CoinRepository;
+use App\Repositories\CryptocurrencyCategoryRepository;
+use App\Repositories\CryptocurrencyRepository;
 use App\Services\CryptoPanicService;
 use App\Services\TelegramService;
 use Illuminate\Http\Request;
@@ -16,11 +19,18 @@ use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
 {
-    protected $coinRepository;
+    protected $cryptocurrencyRepository;
+    protected $cryptocurrencyCategoryRepository;
+    protected $categoryRepository;
 
-    public function __construct(CoinRepository $coinRepository)
+    public function __construct(CryptocurrencyRepository $cryptocurrencyRepository,
+                                CryptocurrencyCategoryRepository $cryptocurrencyCategoryRepository,
+                                CategoryRepository $categoryRepository
+    )
     {
-        $this->coinRepository = $coinRepository;
+        $this->cryptocurrencyRepository = $cryptocurrencyRepository;
+        $this->cryptocurrencyCategoryRepository = $cryptocurrencyCategoryRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function registerEarlyAccessWithEmail(Request $request)
@@ -58,17 +68,17 @@ class PublicController extends Controller
         ]);
     }
 
-    public function tokensView()
+    public function tokensView(Request $request)
     {
         //======================================================
-
-        $categories = DB::table('categories')->get();
-        $platforms = DB::table('exchange_guides')->get();
-
+//        $this->categoryRepository->skipPresenter(false);
+        $this->categoryRepository->with(['cryptocurrencies']);
+        $categories = $this->categoryRepository->list(null);
+        $count_total_cryptocurrencies = count($this->cryptocurrencyRepository->list(null,['cryptocurrency_info'=>true]));
+//        return ($categories);
         return view('web.tokens', [
-//            'coins' => $coins,
             'categories' => $categories,
-            'platforms' => $platforms,
+            'count_total_cryptocurrencies' => $count_total_cryptocurrencies,
         ]);
     }
 
@@ -80,13 +90,7 @@ class PublicController extends Controller
             ->select('cryptocurrencies.*')
             ->limit(12)
             ->get();
-//        $related_coins = [];
-//        dd($related_coins);
-//dd([
-//    'coin' => $coin,
-//    'exchange_guides' => $coin->exchange_guides()->get(),
-//    'related_coins' => $related_coins,
-//]);
+
 
         return view('web.token', [
             'cryptocurrency' => $cryptocurrency,

@@ -3,21 +3,21 @@
 namespace App\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use App\Models\Category;
+use App\Models\CryptocurrencyCategory;
 
 /**
- * Class CategoryTransformer.
+ * Class CryptocurrencyCategoryTransformer.
  *
  * @package namespace App\Transformers;
  *
  * @OA\Schema(
- *     title="Category Transformer",
+ *     title="CryptocurrencyCategory Transformer",
  *     @OA\Xml(
- *         name="CategoryTransformer"
+ *         name="CryptocurrencyCategoryTransformer"
  *     ),
  *     @OA\Property(
  *          property="id",
- *          ref="#/components/schemas/Category/properties/id",
+ *          ref="#/components/schemas/CryptocurrencyCategory/properties/id",
  *      ),
  *      @OA\Property(
  *          property="created_at",
@@ -35,33 +35,25 @@ use App\Models\Category;
  *      ),
  * )
  */
-class CategoryTransformer extends TransformerAbstract
+class CryptocurrencyCategoryTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ['cryptocurrencies'];
-    protected $defaultIncludes  = ['cryptocurrencies'];
+    protected $availableIncludes = ['cryptocurrencies','categories'];
     /**
-     * Transform the Category entity.
+     * Transform the CryptocurrencyCategory entity.
      *
-     * @param \App\Models\Category $model
+     * @param \App\Models\CryptocurrencyCategory $model
      *
      * @return array
      */
-    public function transform(Category $model)
+    public function transform(CryptocurrencyCategory $model)
     {
         return [
             'id'         => (int) $model->id,
-            'name'         =>  $model->name,
 
             /* place your other model properties here */
 
             'created_at' => strtotime($model->created_at),
             'updated_at' => strtotime($model->updated_at),
         ];
-    }
-
-    public function includeCryptocurrencies(Category $model){
-
-//        if(empty($model->cryptocurrencies)) return null;
-        return $this->collection($model->cryptocurrencies, new CryptocurrencyTransformer());
     }
 }

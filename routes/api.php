@@ -115,3 +115,14 @@ Route::prefix("v1")->group(function(){
         Route::delete("{exchangePair}", [App\Http\Controllers\API\ExchangePairAPIController::class, 'destroy']);
     });
 });
+
+
+Route::prefix("v1")->group(function(){
+    Route::group(["prefix" => 'cryptocurrency-categories'], function () {
+        Route::get("/", [App\Http\Controllers\API\CryptocurrencyCategoryAPIController::class, 'index']);
+        Route::post("/", [App\Http\Controllers\API\CryptocurrencyCategoryAPIController::class, 'store']);
+        Route::get("{cryptocurrencyCategory}", [App\Http\Controllers\API\CryptocurrencyCategoryAPIController::class, 'show']);
+        Route::put("{cryptocurrencyCategory}", [App\Http\Controllers\API\CryptocurrencyCategoryAPIController::class, 'update']);
+        Route::delete("{cryptocurrencyCategory}", [App\Http\Controllers\API\CryptocurrencyCategoryAPIController::class, 'destroy']);
+    });
+});
