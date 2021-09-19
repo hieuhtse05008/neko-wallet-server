@@ -19,7 +19,9 @@
                     Get early access
                 </button>
             </form>
-{{--            <div class="mb-auto"><i class="fas fa-play-circle"></i> See how it works</div>--}}
+            <div class="mb-auto">
+{{--                <i class="fas fa-play-circle"></i> See how it works--}}
+            </div>
         </div>
         <div class="benefits bg-white py-5 px-sm-0 px-md-4 px-lg-5">
             <div class="benefits-title mb-5">Take your crypto to the next level with Neko</div>

@@ -42,6 +42,8 @@ class PublicController extends Controller
             $object->code = substr(md5($object->id), 0, 8);
             $object->save();
         }
+
+        //
         $start_time = new Carbon(1632009600);
         $end_time = Carbon::now()->timestamp;
         $interval = $end_time - $start_time->timestamp;
