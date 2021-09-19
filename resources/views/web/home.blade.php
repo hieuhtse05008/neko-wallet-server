@@ -4,6 +4,7 @@
     <div class="">
         <div class="spotlight d-flex flex-column justify-content-center align-items-center">
             <div class="text-spotlight text-center mt-auto">
+                <div>Limited 10,000 first slots!</div>
                 <div>Invest in <span class="text-main">more than 6,000 cryptocurrencies </span> from all exchanges.</div>
                 <div>Secured. Hassle-free. 0% fee for private beta.</div>
 
@@ -133,7 +134,7 @@
                 if(res.info){
                     $('#input-share-ref').val(`https://www.nekoinvest.io/?ref=${res.info.code}`);
                     $('#early-access-email').text(`${email}`);
-                    $('#count-all').text((`${res.info.id}`).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $('#count-all').text((`${res.register_count}`).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#modal-register-early-access-success').modal('show');
 
                 }
