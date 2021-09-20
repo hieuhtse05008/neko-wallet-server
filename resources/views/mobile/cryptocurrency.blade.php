@@ -24,7 +24,7 @@
                         @foreach($cryptocurrency->tokens as $token)
                             <div class=" text-truncate mb-3">
                                 <div class="text-main">{{$token->name}} ({{$token->network->name}})</div>
-                                <div> {{$token->address}}</div>
+                                <div class="text-truncate mb-3"> {{$token->address}}</div>
 
                             </div>
                         @endforeach
@@ -40,10 +40,10 @@
                             @if(is_array($links) && count($links) > 0)
                                 @foreach($links as $link)
                                     @if($link)
-                                        <div class="d-flex">
+                                        <div class="text-truncate mb-3">
                                             <div class="text-main text-capitalize">
-                                                {{preg_replace("/[^A-Za-z0-9.!?]/",' ',$key)}}:
-                                            </div>&nbsp;&nbsp;
+                                                {{preg_replace("/[^A-Za-z0-9.!?]/",' ',$key)}}
+                                            </div>
                                             <a target="_blank" href="{{$link}}" class="text-truncate">
                                                 {{$link}}
 
@@ -54,10 +54,10 @@
                             @elseif(!empty($links) && is_string($links))
                                 @switch($key)
                                     @case('twitter_screen_name')
-                                    <div class="d-flex">
+                                    <div class="text-truncate mb-3">
                                         <div class="text-main">
-                                            Twitter:
-                                        </div>&nbsp;&nbsp;
+                                            Twitter
+                                        </div>
                                         <a target="_blank" href="twitter.com/{{$links}}">
                                             twitter.com/{{$links}}
 
@@ -65,10 +65,10 @@
                                     </div>
                                     @break
                                     @case('telegram_channel_identifier')
-                                    <div class="d-flex">
+                                    <div class="text-truncate mb-3">
                                         <div class="text-main">
                                             Telegram:
-                                        </div>&nbsp;&nbsp;
+                                        </div>
                                         <a target="_blank" href="t.me/{{$links}}">
                                             t.me/{{$links}}
 
@@ -76,10 +76,10 @@
                                     </div>
                                     @break
                                     @case('facebook_username')
-                                    <div class="d-flex">
+                                    <div class="text-truncate mb-3">
                                         <div class="text-main">
-                                            Facebook:
-                                        </div>&nbsp;&nbsp;
+                                            Facebook
+                                        </div>
                                         <a target="_blank" href="www.facebook.com/{{$links}}">
                                             www.facebook.com/{{$links}}
 
@@ -87,10 +87,10 @@
                                     </div>
                                     @break
                                     @case('subreddit_url')
-                                    <div class="d-flex">
+                                    <div class="text-truncate mb-3">
                                         <div class="text-main">
-                                            Reddit:
-                                        </div>&nbsp;&nbsp;
+                                            Reddit
+                                        </div>
                                         <a target="_blank" href="{{$links}}">
                                             {{$links}}
 
@@ -98,10 +98,10 @@
                                     </div>
                                     @break
                                     @case('bitcointalk_thread_identifier')
-                                    <div class="d-flex">
+                                    <div class="text-truncate mb-3">
                                         <div class="text-main">
-                                            Bitcoin talk:
-                                        </div>&nbsp;&nbsp;
+                                            Bitcoin talk
+                                        </div>
                                         <a target="_blank"
                                            href="bitcointalk.org/index.php?topic={{$links}}">
                                             bitcointalk.org/index.php?topic={{$links}}
@@ -111,10 +111,10 @@
                                     @break
                                 @endswitch
                             @elseif(!empty($links) && $key == 'repos_url' && is_object($links) && !empty($links->github) && is_array($links->github) && count($links->github) > 0 && !empty($links->github[0]))
-                                <div class="d-flex">
+                                <div class="text-truncate mb-3">
                                     <div class="text-main">
-                                        Github:
-                                    </div>&nbsp;&nbsp;
+                                        Github
+                                    </div>
                                     <a target="_blank" href="{{$links->github[0]}}">
                                         {{$links->github[0]}}
 
@@ -130,14 +130,14 @@
             <div class="mb-5">
                 <div class="text-main pg-title mb-4">Join our community at</div>
                 <div class="pg-content">
-                    <div class="d-flex">
-                        <span>Discord:</span>&nbsp;&nbsp;
+                    <div class="text-truncate mb-3">
+                        <div>Discord</div>
                         <a class="text-main" target="_blank" href="https://discord.gg/nekoinvest">
                             https://discord.gg/nekoinvest
                         </a>
                     </div>
-                    <div class="d-flex">
-                        <span>Telegram:</span>&nbsp;&nbsp;
+                    <div class="text-truncate mb-3">
+                        <div>Telegram</div>
                         <a class="text-main" target="_blank" href="https://t.me/nekoinvest">
                             https://t.me/nekoinvest
                         </a>
@@ -261,7 +261,7 @@
         }
 
         .token-title {
-            font-size: 44px;
+            font-size: 34px;
             font-weight: bold;
         }
     </style>
