@@ -111,7 +111,7 @@
                                 @if(is_array($links) && count($links) > 0)
                                     @foreach($links as $link)
                                         @if($link)
-                                            <div class="d-flex">
+                                            <div class="d-flex text-truncate">
                                                 <div class="text-main text-capitalize">
                                                     {{preg_replace("/[^A-Za-z0-9.!?]/",' ',$key)}}:
                                                 </div>&nbsp;&nbsp;
@@ -125,7 +125,7 @@
                                 @elseif(!empty($links) && is_string($links))
                                     @switch($key)
                                         @case('twitter_screen_name')
-                                        <div class="d-flex">
+                                        <div class="d-flex text-truncate">
                                             <div class="text-main">
                                                 Twitter:
                                             </div>&nbsp;&nbsp;
@@ -136,7 +136,7 @@
                                         </div>
                                         @break
                                         @case('telegram_channel_identifier')
-                                        <div class="d-flex">
+                                        <div class="d-flex text-truncate">
                                             <div class="text-main">
                                                 Telegram:
                                             </div>&nbsp;&nbsp;
@@ -147,7 +147,7 @@
                                         </div>
                                         @break
                                         @case('facebook_username')
-                                        <div class="d-flex">
+                                        <div class="d-flex text-truncate">
                                             <div class="text-main">
                                                 Facebook:
                                             </div>&nbsp;&nbsp;
@@ -158,7 +158,7 @@
                                         </div>
                                         @break
                                         @case('subreddit_url')
-                                        <div class="d-flex">
+                                        <div class="d-flex text-truncate">
                                             <div class="text-main">
                                                 Reddit:
                                             </div>&nbsp;&nbsp;
@@ -169,7 +169,7 @@
                                         </div>
                                         @break
                                         @case('bitcointalk_thread_identifier')
-                                        <div class="d-flex">
+                                        <div class="d-flex text-truncate">
                                             <div class="text-main">
                                                 Bitcoin talk:
                                             </div>&nbsp;&nbsp;
@@ -182,7 +182,7 @@
                                         @break
                                     @endswitch
                                 @elseif(!empty($links) && $key == 'repos_url' && is_object($links) && !empty($links->github) && is_array($links->github) && count($links->github) > 0 && !empty($links->github[0]))
-                                    <div class="d-flex">
+                                    <div class="d-flex text-truncate">
                                         <div class="text-main">
                                             Github:
                                         </div>&nbsp;&nbsp;
@@ -201,13 +201,13 @@
                 <div class="mb-5">
                     <div class="text-main pg-title mb-4">Join our community at</div>
                     <div class="pg-content">
-                        <div class="d-flex">
+                        <div class="d-flex text-truncate">
                             <span>Discord:</span>&nbsp;&nbsp;
                             <a class="text-main" target="_blank" href="https://discord.gg/nekoinvest">
                                 https://discord.gg/nekoinvest
                             </a>
                         </div>
-                        <div class="d-flex">
+                        <div class="d-flex text-truncate">
                             <span>Telegram:</span>&nbsp;&nbsp;
                             <a class="text-main" target="_blank" href="https://t.me/nekoinvest">
                                 https://t.me/nekoinvest

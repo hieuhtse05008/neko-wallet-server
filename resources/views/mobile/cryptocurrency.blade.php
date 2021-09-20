@@ -4,14 +4,10 @@
     <div class="token-wrap">
 
     <div class="token-content bg-white rounded-7 mt-0">
-        <div class="token-title mb-5">
-            What is {{$cryptocurrency->name}} ({{strtoupper($cryptocurrency->symbol)}})
-        </div>
-        <hr>
-        <div class="pt-5">
+        <div class="">
             @if(!empty(object_get($cryptocurrency,'cryptocurrency_info.description')))
                 <div class="mb-5">
-                    <div class="text-main pg-title mb-4">What is {{$cryptocurrency->name}}</div>
+                    <div class="text-main pg-title mb-4">What is {{$cryptocurrency->name}} ({{strtoupper($cryptocurrency->symbol)}})</div>
                     <div class="pg-content">{!! $cryptocurrency->cryptocurrency_info->description !!}</div>
                 </div>
             @endif
@@ -216,7 +212,7 @@
             margin-left: auto;
             margin-right: auto;
 
-            padding-top: 80px;
+            padding-top: 40px;
             padding-bottom: 120px;
             padding-left: min(110px, max(100vw - 576px, 20px));
             padding-right: min(110px, max(100vw - 576px, 20px));
