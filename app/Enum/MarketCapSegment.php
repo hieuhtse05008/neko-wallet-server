@@ -4,7 +4,7 @@
 namespace App\Enum;
 
 
-final class Coin
+final class MarketCapSegment
 {
     const MARKET_CAPS = [
         ["key" => "nano_caps",  "high" => 10000,],

@@ -8,49 +8,49 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class NetworkMapping
+ *
  * @package App\Models
  * @version September 2, 2021, 10:17 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="NetworkMapping",
  *     @OA\Xml(
  *         name="NetworkMapping"
  *     ),
  *     required={""},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="network_id",
  *          description="network_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="coingecko_id",
  *          description="coingecko_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="cmc_id",
  *          description="cmc_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="binance_id",
  *          description="binance_id",
  *          type="string"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperNetworkMapping
  */
 
 class NetworkMapping extends Model

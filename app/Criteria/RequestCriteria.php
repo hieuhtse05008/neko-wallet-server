@@ -54,27 +54,17 @@ class RequestCriteria extends \Prettus\Repository\Criteria\RequestCriteria
                 $prefix = Str::singular($sortTable);
                 $keyName = $table.'.'.$prefix.'_id';
             }
-            $is_double_field = in_array($sortColumn,array_keys(CoinMarketsData::DOUBLE_FIELDS));
-            if(!$is_double_field){
+
                 $model = $model
                     ->leftJoin($sortTable, $keyName, '=', $sortTable.$localKey)
                     ->orderBy($sortColumn, $sortedBy)
                     ->addSelect($table.'.*');
-            }else{
-                $model = $model
-                    ->leftJoin($sortTable, $keyName, '=', $sortTable.$localKey)
-                    ->orderByRaw(CoinMarketsData::DOUBLE_FIELDS[$sortColumn]." ".$sortedBy)
-                    ->addSelect($table.'.*');
-            }
+
 
         } else {
-            $is_double_field = in_array($orderBy,array_keys(CoinMarketsData::DOUBLE_FIELDS));
-            if(!$is_double_field){
-                $model = $model->orderBy($orderBy, $sortedBy);
-            }else{
-                $model = $model->orderByRaw(CoinMarketsData::DOUBLE_FIELDS[$orderBy]." ".$sortedBy);
 
-            }
+                $model = $model->orderBy($orderBy, $sortedBy);
+
         }
         return $model;
     }

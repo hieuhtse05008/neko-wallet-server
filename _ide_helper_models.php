@@ -25,56 +25,26 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * Class Contract
+ * Class Category
  *
  * @package App\Models
- * @version June 26, 2021, 3:17 am UTC
+ * @version September 15, 2021, 4:54 am UTC
  * @OA\Schema (
- *     title="Contract",
+ *     title="Category",
  *     @OA\Xml(
- *         name="Contract"
+ *         name="Category"
  *     ),
- *     required={"network_id", "name", "symbol", "icon_url", "decimal", "address"},
+ *     required={"name"},
  *      @OA\Property(
  *          property="id",
  *          description="id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="network_id",
- *          description="network_id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="name",
- *          description="name",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="symbol",
- *          description="symbol",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="icon_url",
- *          description="icon_url",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="decimal",
- *          description="decimal",
  *          type="integer",
  *          format="int32"
  *      )
  * ,
  *      @OA\Property(
- *          property="address",
- *          description="address",
+ *          property="name",
+ *          description="name",
  *          type="string"
  *      )
  * ,
@@ -91,36 +61,757 @@ namespace App\Models{
  *          type="string",
  *          format="date-time"
  *      )
+ * 
  * )
- * @property string $id
- * @property string $network_id
+ * @property int $id
  * @property string $name
- * @property string $symbol
- * @property string $icon_url
- * @property int $decimal
- * @property string $address
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Swap[] $swap1s
- * @property-read int|null $swap1s_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Swap[] $swaps
- * @property-read int|null $swaps_count
- * @method static \Database\Factories\ContractFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Contract newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Contract query()
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereDecimal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereIconUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereNetworkId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSymbol($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contract whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Cryptocurrency[] $cryptocurrencies
+ * @property-read int|null $cryptocurrencies_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CryptocurrencyCategory[] $cryptocurrencyCategories
+ * @property-read int|null $cryptocurrency_categories_count
+ * @method static \Database\Factories\CategoryFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-	class IdeHelperContract extends \Eloquent {}
+	class IdeHelperCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class Cryptocurrency
+ *
+ * @package App\Models
+ * @version September 2, 2021, 10:09 am UTC
+ * @OA\Schema (
+ *     title="Cryptocurrency",
+ *     @OA\Xml(
+ *         name="Cryptocurrency"
+ *     ),
+ *     required={"name", "symbol", "slug", "verified"},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="name",
+ *          description="name",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="symbol",
+ *          description="symbol",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="slug",
+ *          description="slug",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="icon_url",
+ *          description="icon_url",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="rank",
+ *          description="rank",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="verified",
+ *          description="verified",
+ *          type="boolean"
+ *      )
+ * 
+ * )
+ * @property int $id
+ * @property string $name
+ * @property string $symbol
+ * @property string $slug
+ * @property string|null $icon_url
+ * @property int|null $rank
+ * @property bool $verified
+ * @property string|null $first_historical_data
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \App\Models\CryptocurrencyInfo|null $cryptocurrency_info
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ExchangePair[] $exchange_pairs
+ * @property-read int|null $exchange_pairs_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Token[] $tokens
+ * @property-read int|null $tokens_count
+ * @method static \Database\Factories\CryptocurrencyFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereFirstHistoricalData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereIconUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereRank($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereSymbol($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereVerified($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperCryptocurrency extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class CryptocurrencyCategory
+ *
+ * @package App\Models
+ * @version September 18, 2021, 8:32 am UTC
+ * @OA\Schema (
+ *     title="CryptocurrencyCategory",
+ *     @OA\Xml(
+ *         name="CryptocurrencyCategory"
+ *     ),
+ *     required={""},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="cryptocurrency_id",
+ *          description="cryptocurrency_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="category_id",
+ *          description="category_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * 
+ * )
+ * @property int $id
+ * @property int|null $cryptocurrency_id
+ * @property int|null $category_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Category|null $category
+ * @property-read \App\Models\Cryptocurrency|null $cryptocurrency
+ * @method static \Database\Factories\CryptocurrencyCategoryFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory whereCryptocurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperCryptocurrencyCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class CryptocurrencyInfo
+ *
+ * @package App\Models
+ * @version September 15, 2021, 4:33 am UTC
+ * @OA\Schema (
+ *     title="CryptocurrencyInfo",
+ *     @OA\Xml(
+ *         name="CryptocurrencyInfo"
+ *     ),
+ *     required={""},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="cryptocurrency_id",
+ *          description="cryptocurrency_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="description",
+ *          description="description",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="links",
+ *          description="links",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * 
+ * )
+ * @property int $id
+ * @property int|null $cryptocurrency_id
+ * @property string|null $description
+ * @property object|null $links
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property mixed|null $test
+ * @property float|null $current_supply
+ * @property float|null $max_supply
+ * @property float|null $market_cap_dominance
+ * @property float|null $holder_count
+ * @property float|null $fully_diluted_market_cap
+ * @property-read \App\Models\Cryptocurrency|null $cryptocurrency
+ * @method static \Database\Factories\CryptocurrencyInfoFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereCryptocurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereCurrentSupply($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereFullyDilutedMarketCap($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereHolderCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereLinks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereMarketCapDominance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereMaxSupply($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereTest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperCryptocurrencyInfo extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class CryptocurrencyMapping
+ *
+ * @package App\Models
+ * @version September 2, 2021, 10:14 am UTC
+ * @OA\Schema (
+ *     title="CryptocurrencyMapping",
+ *     @OA\Xml(
+ *         name="CryptocurrencyMapping"
+ *     ),
+ *     required={"cryptocurrency_id"},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="cryptocurrency_id",
+ *          description="cryptocurrency_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="coingecko_id",
+ *          description="coingecko_id",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="cmc_id",
+ *          description="cmc_id",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="binance_id",
+ *          description="binance_id",
+ *          type="string"
+ *      )
+ * 
+ * )
+ * @property int $id
+ * @property int $cryptocurrency_id
+ * @property string|null $coingecko_id
+ * @property string|null $cmc_id
+ * @property string|null $binance_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Cryptocurrency $cryptocurrency
+ * @method static \Database\Factories\CryptocurrencyMappingFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping whereBinanceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping whereCmcId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping whereCoingeckoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping whereCryptocurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperCryptocurrencyMapping extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\EarlyAccessEmail
+ *
+ * @property int $id
+ * @property string $email
+ * @property string|null $code
+ * @property string|null $ref
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail whereRef($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperEarlyAccessEmail extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class ExchangeGuide
+ *
+ * @package App\Models
+ * @version September 15, 2021, 4:55 am UTC
+ * @OA\Schema (
+ *     title="ExchangeGuide",
+ *     @OA\Xml(
+ *         name="ExchangeGuide"
+ *     ),
+ *     required={""},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="name",
+ *          description="name",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="description",
+ *          description="description",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="url",
+ *          description="url",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="image_url",
+ *          description="image_url",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="coingecko_id",
+ *          description="coingecko_id",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="guide_html",
+ *          description="guide_html",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * 
+ * )
+ * @property int $id
+ * @property string|null $name
+ * @property string|null $description
+ * @property string|null $url
+ * @property string|null $image_url
+ * @property string|null $coingecko_id
+ * @property object|null $guide_html
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ExchangePair[] $exchangePairs
+ * @property-read int|null $exchange_pairs_count
+ * @method static \Database\Factories\ExchangeGuideFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereCoingeckoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereGuideHtml($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereImageUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereUrl($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperExchangeGuide extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class ExchangePair
+ *
+ * @package App\Models
+ * @version September 15, 2021, 4:56 am UTC
+ * @OA\Schema (
+ *     title="ExchangePair",
+ *     @OA\Xml(
+ *         name="ExchangePair"
+ *     ),
+ *     required={""},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="trade_url",
+ *          description="trade_url",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="base_token_id",
+ *          description="base_token_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="target_token_id",
+ *          description="target_token_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="exchange_guide_id",
+ *          description="exchange_guide_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * 
+ * )
+ * @property int $id
+ * @property string|null $trade_url
+ * @property int|null $base_token_id
+ * @property int|null $target_token_id
+ * @property int|null $exchange_guide_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Token|null $baseToken
+ * @property-read \App\Models\ExchangeGuide|null $exchangeGuide
+ * @property-read \App\Models\Token|null $targetToken
+ * @method static \Database\Factories\ExchangePairFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair whereBaseTokenId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair whereExchangeGuideId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair whereTargetTokenId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair whereTradeUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperExchangePair extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class HistoricalPrice
+ *
+ * @package App\Models
+ * @version September 2, 2021, 9:38 am UTC
+ * @OA\Schema (
+ *     title="HistoricalPrice",
+ *     @OA\Xml(
+ *         name="HistoricalPrice"
+ *     ),
+ *     required={""},
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ * @property int $cryptocurrency_id
+ * @property float|null $price
+ * @property float|null $volume_24h
+ * @property float|null $market_cap
+ * @property \Illuminate\Support\Carbon $time
+ * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice query()
+ * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice whereCryptocurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice whereMarketCap($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice whereVolume24h($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperHistoricalPrice extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class Network
+ *
+ * @package App\Models
+ * @version September 2, 2021, 10:16 am UTC
+ * @OA\Schema (
+ *     title="Network",
+ *     @OA\Xml(
+ *         name="Network"
+ *     ),
+ *     required={"name", "is_active"},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="name",
+ *          description="name",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="chain_id",
+ *          description="chain_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="icon_url",
+ *          description="icon_url",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="short_name",
+ *          description="short_name",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="symbol",
+ *          description="symbol",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="wallet_derive_path",
+ *          description="wallet_derive_path",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="is_active",
+ *          description="is_active",
+ *          type="boolean"
+ *      )
+ * 
+ * )
+ * @property int $id
+ * @property string $name
+ * @property int|null $chain_id
+ * @property string|null $icon_url
+ * @property string|null $short_name
+ * @property string|null $symbol
+ * @property string|null $wallet_derive_path
+ * @property bool $is_active
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Token[] $tokens
+ * @property-read int|null $tokens_count
+ * @method static \Database\Factories\NetworkFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Network newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Network newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Network query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Network whereChainId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Network whereIconUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Network whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Network whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Network whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Network whereShortName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Network whereSymbol($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Network whereWalletDerivePath($value)
+ * @mixin \Eloquent
+ */
+	class IdeHelperNetwork extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class NetworkMapping
+ *
+ * @package App\Models
+ * @version September 2, 2021, 10:17 am UTC
+ * @OA\Schema (
+ *     title="NetworkMapping",
+ *     @OA\Xml(
+ *         name="NetworkMapping"
+ *     ),
+ *     required={""},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="network_id",
+ *          description="network_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="coingecko_id",
+ *          description="coingecko_id",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="cmc_id",
+ *          description="cmc_id",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="binance_id",
+ *          description="binance_id",
+ *          type="string"
+ *      )
+ * 
+ * )
+ * @property int $id
+ * @property int|null $network_id
+ * @property string|null $coingecko_id
+ * @property string|null $cmc_id
+ * @property string|null $binance_id
+ * @property-read \App\Models\Network|null $network
+ * @method static \Database\Factories\NetworkMappingFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|NetworkMapping newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|NetworkMapping newQuery()
+ * @method static \Illuminate\Database\Query\Builder|NetworkMapping onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|NetworkMapping query()
+ * @method static \Illuminate\Database\Eloquent\Builder|NetworkMapping whereBinanceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NetworkMapping whereCmcId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NetworkMapping whereCoingeckoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NetworkMapping whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NetworkMapping whereNetworkId($value)
+ * @method static \Illuminate\Database\Query\Builder|NetworkMapping withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|NetworkMapping withoutTrashed()
+ * @mixin \Eloquent
+ */
+	class IdeHelperNetworkMapping extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -156,291 +847,27 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * Class Swap
+ * Class Token
  *
  * @package App\Models
- * @version June 25, 2021, 7:57 am UTC
+ * @version September 2, 2021, 10:18 am UTC
  * @OA\Schema (
- *     title="Swap",
+ *     title="Token",
  *     @OA\Xml(
- *         name="Swap"
+ *         name="Token"
  *     ),
- *     required={"from_contract_id", "from_address", "from_value", "from_price", "from_gas_price", "from_gas_limit", "to_contract_id", "to_address", "to_value", "to_price", "to_gas_price", "to_gas_limit"},
- *      @OA\Property(
- *          property="id",
- *          description="id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="type",
- *          description="type",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="from_contract_id",
- *          description="from_contract_id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="from_address",
- *          description="from_address",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="from_value",
- *          description="from_value",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="from_price",
- *          description="from_price",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="from_gas_price",
- *          description="from_gas_price",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="from_gas_limit",
- *          description="from_gas_limit",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="to_contract_id",
- *          description="to_contract_id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="to_address",
- *          description="to_address",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="to_value",
- *          description="to_value",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="to_price",
- *          description="to_price",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="to_gas_price",
- *          description="to_gas_price",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="to_gas_limit",
- *          description="to_gas_limit",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      )
- * ,
- *      @OA\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
- * 
- * )
- * @property string $id
- * @property string|null $type
- * @property string $from_contract_id
- * @property string $from_address
- * @property string $from_value
- * @property string $from_price
- * @property string $from_gas_price
- * @property string $from_gas_limit
- * @property string $to_contract_id
- * @property string $to_address
- * @property string $to_value
- * @property string $to_price
- * @property string $to_gas_price
- * @property string $to_gas_limit
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Contract $fromContract
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SwapOrder[] $swapOrders
- * @property-read int|null $swap_orders_count
- * @property-read \App\Models\Contract $toContract
- * @method static \Database\Factories\SwapFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Swap newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Swap query()
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereFromAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereFromContractId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereFromGasLimit($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereFromGasPrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereFromPrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereFromValue($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereToAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereToContractId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereToGasLimit($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereToGasPrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereToPrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereToValue($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Swap whereUpdatedAt($value)
- * @mixin \Eloquent
- */
-	class IdeHelperSwap extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * Class SwapOrder
- *
- * @package App\Models
- * @version June 26, 2021, 3:18 am UTC
- * @OA\Schema (
- *     title="SwapOrder",
- *     @OA\Xml(
- *         name="SwapOrder"
- *     ),
- *     required={"status", "fee", "current_step", "swap_id"},
- *      @OA\Property(
- *          property="id",
- *          description="id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="status",
- *          description="status",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="fee",
- *          description="fee",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="current_step",
- *          description="current_step",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="swap_id",
- *          description="swap_id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="from_swap_transaction_id",
- *          description="from_swap_transaction_id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="from_dex_order_request_id",
- *          description="from_dex_order_request_id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="to_swap_transaction_id",
- *          description="to_swap_transaction_id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="to_dex_order_request_id",
- *          description="to_dex_order_request_id",
- *          type="string"
- *      )
- * ,
- *      @OA\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      )
- * ,
- *      @OA\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
- * )
- * @property string $id
- * @property string $status
- * @property string $fee
- * @property string $current_step
- * @property string $swap_id
- * @property string|null $from_swap_transaction_id
- * @property string|null $from_dex_order_request_id
- * @property string|null $to_swap_transaction_id
- * @property string|null $to_dex_order_request_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $dex_id
- * @property-read \App\Models\Swap $swap
- * @method static \Database\Factories\SwapOrderFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder query()
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereCurrentStep($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereDexId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereFee($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereFromDexOrderRequestId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereFromSwapTransactionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereSwapId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereToDexOrderRequestId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereToSwapTransactionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SwapOrder whereUpdatedAt($value)
- * @mixin \Eloquent
- */
-	class IdeHelperSwapOrder extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * Class TokenPrice
- *
- * @package App\Models
- * @version June 12, 2021, 4:44 am UTC
- * @OA\Schema (
- *     title="TokenPrice",
- *     @OA\Xml(
- *         name="TokenPrice"
- *     ),
- *     required={"symbol", "last_price", "price_change_percent"},
+ *     required={"name", "symbol", "decimals", "address", "verified", "active_wallet"},
  *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="name",
+ *          description="name",
+ *          type="string"
  *      )
  * ,
  *      @OA\Property(
@@ -450,50 +877,88 @@ namespace App\Models{
  *      )
  * ,
  *      @OA\Property(
- *          property="last_price",
- *          description="last_price",
+ *          property="decimals",
+ *          description="decimals",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="address",
+ *          description="address",
  *          type="string"
  *      )
  * ,
  *      @OA\Property(
- *          property="price_change_percent",
- *          description="price_change_percent",
+ *          property="icon_url",
+ *          description="icon_url",
  *          type="string"
  *      )
  * ,
  *      @OA\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
+ *          property="verified",
+ *          description="verified",
+ *          type="boolean"
  *      )
  * ,
  *      @OA\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
+ *          property="active_wallet",
+ *          description="active_wallet",
+ *          type="boolean"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="cryptocurrency_id",
+ *          description="cryptocurrency_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="network_id",
+ *          description="network_id",
+ *          type="integer",
+ *          format="int32"
  *      )
  * 
  * )
- * @mixin IdeHelperTokenPrice
  * @property int $id
+ * @property string $name
  * @property string $symbol
- * @property string $last_price
- * @property string $price_change_percent
+ * @property int $decimals
+ * @property string $address
+ * @property string|null $icon_url
+ * @property bool $verified
+ * @property bool $active_wallet
+ * @property int|null $cryptocurrency_id
+ * @property int|null $network_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|TokenPrice newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|TokenPrice newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|TokenPrice query()
- * @method static \Illuminate\Database\Eloquent\Builder|TokenPrice whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TokenPrice whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TokenPrice whereLastPrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TokenPrice wherePriceChangePercent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TokenPrice whereSymbol($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TokenPrice whereUpdatedAt($value)
+ * @property-read \App\Models\Cryptocurrency|null $cryptocurrency
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ExchangeGuide[] $exchange_guides
+ * @property-read int|null $exchange_guides_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ExchangePair[] $exchange_pairs
+ * @property-read int|null $exchange_pairs_count
+ * @property-read \App\Models\Network|null $network
+ * @method static \Database\Factories\TokenFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Token newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Token query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereActiveWallet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereCryptocurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereDecimals($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereIconUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereNetworkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereSymbol($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereVerified($value)
+ * @mixin \Eloquent
  */
-	class IdeHelperTokenPrice extends \Eloquent {}
+	class IdeHelperToken extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -501,11 +966,6 @@ namespace App\Models{
  * App\Models\User
  *
  * @mixin IdeHelperUser
- * @property string $id
- * @property string $password
- * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PersonalAccessToken[] $tokens
@@ -514,11 +974,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class IdeHelperUser extends \Eloquent {}
 }

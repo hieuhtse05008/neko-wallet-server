@@ -8,44 +8,44 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Category
+ *
  * @package App\Models
  * @version September 15, 2021, 4:54 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="Category",
  *     @OA\Xml(
  *         name="Category"
  *     ),
  *     required={"name"},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="name",
  *          description="name",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
  *          type="string",
  *          format="date-time"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperCategory
  */
 
 class Category extends Model

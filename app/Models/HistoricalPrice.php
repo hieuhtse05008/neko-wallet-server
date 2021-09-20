@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class HistoricalPrice
+ *
  * @package App\Models
  * @version September 2, 2021, 9:38 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="HistoricalPrice",
  *     @OA\Xml(
  *         name="HistoricalPrice"
@@ -23,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
@@ -31,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  *          format="date-time"
  *      )
  * )
+ * @mixin IdeHelperHistoricalPrice
  */
 class HistoricalPrice extends Model
 {

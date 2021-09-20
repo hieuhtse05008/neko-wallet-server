@@ -22,27 +22,6 @@ Route::get('/test', function () {
 
 Route::get('/telegram', [App\Http\Controllers\API\TelegramAPIController::class, 'index']);
 
-Route::prefix("v1")->group(function () {
-    Route::group(["prefix" => 'coin-markets-data'], function () {
-        Route::get("/", [App\Http\Controllers\API\CoinMarketsDataAPIController::class, 'index']);
-        Route::post("/", [App\Http\Controllers\API\CoinMarketsDataAPIController::class, 'store']);
-        Route::get("{coinMarketsData}", [App\Http\Controllers\API\CoinMarketsDataAPIController::class, 'show']);
-        Route::put("{coinMarketsData}", [App\Http\Controllers\API\CoinMarketsDataAPIController::class, 'update']);
-        Route::delete("{coinMarketsData}", [App\Http\Controllers\API\CoinMarketsDataAPIController::class, 'destroy']);
-    });
-});
-
-
-Route::prefix("v1")->group(function () {
-    Route::group(["prefix" => 'coins'], function () {
-        Route::get("/", [App\Http\Controllers\API\CoinAPIController::class, 'index']);
-        Route::post("/", [App\Http\Controllers\API\CoinAPIController::class, 'store']);
-        Route::get("{coin}", [App\Http\Controllers\API\CoinAPIController::class, 'show']);
-        Route::put("{coin}", [App\Http\Controllers\API\CoinAPIController::class, 'update']);
-        Route::delete("{coin}", [App\Http\Controllers\API\CoinAPIController::class, 'destroy']);
-    });
-});
-
 
 Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'cryptocurrencies'], function () {

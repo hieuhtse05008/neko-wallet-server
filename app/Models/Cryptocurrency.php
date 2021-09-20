@@ -8,61 +8,61 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Cryptocurrency
+ *
  * @package App\Models
  * @version September 2, 2021, 10:09 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="Cryptocurrency",
  *     @OA\Xml(
  *         name="Cryptocurrency"
  *     ),
  *     required={"name", "symbol", "slug", "verified"},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="name",
  *          description="name",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="symbol",
  *          description="symbol",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="slug",
  *          description="slug",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="icon_url",
  *          description="icon_url",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="rank",
  *          description="rank",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="verified",
  *          description="verified",
  *          type="boolean"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperCryptocurrency
  */
 
 class Cryptocurrency extends Model

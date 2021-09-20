@@ -8,65 +8,65 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class ExchangePair
+ *
  * @package App\Models
  * @version September 15, 2021, 4:56 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="ExchangePair",
  *     @OA\Xml(
  *         name="ExchangePair"
  *     ),
  *     required={""},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="trade_url",
  *          description="trade_url",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="base_token_id",
  *          description="base_token_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="target_token_id",
  *          description="target_token_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="exchange_guide_id",
  *          description="exchange_guide_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
  *          type="string",
  *          format="date-time"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperExchangePair
  */
 
 class ExchangePair extends Model

@@ -8,74 +8,74 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class ExchangeGuide
+ *
  * @package App\Models
  * @version September 15, 2021, 4:55 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="ExchangeGuide",
  *     @OA\Xml(
  *         name="ExchangeGuide"
  *     ),
  *     required={""},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="name",
  *          description="name",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="description",
  *          description="description",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="url",
  *          description="url",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="image_url",
  *          description="image_url",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="coingecko_id",
  *          description="coingecko_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="guide_html",
  *          description="guide_html",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
  *          type="string",
  *          format="date-time"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperExchangeGuide
  */
 
 class ExchangeGuide extends Model

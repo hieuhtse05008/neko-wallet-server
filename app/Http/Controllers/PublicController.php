@@ -9,8 +9,6 @@ use App\Models\EarlyAccessEmail;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CryptocurrencyCategoryRepository;
 use App\Repositories\CryptocurrencyRepository;
-use App\Services\CryptoPanicService;
-use App\Services\TelegramService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -56,19 +54,9 @@ class PublicController extends Controller
         ];
     }
 
-    public function searchCoin(Request $request)
-    {
-
-        $limit = $request->limit ?: 20;
-
-        $coins = $this->coinRepository->list($limit);
-
-        return $coins;
-    }
 
     public function homeView(Request $request)
     {
-
         return view('web.home', [
         ]);
     }
@@ -110,21 +98,4 @@ class PublicController extends Controller
         ]);
     }
 
-    public function pushNewsTelegram(Request $request)
-    {
-        $chat_id = $request->chat_id;
-        $text = urlencode($request->encoded_text);
-        $res = TelegramService::sendMessageToChat($chat_id, $text);
-        return $res;
-    }
-
-    public function loadNews(Request $request)
-    {
-        $page = $request->page;
-        $type = $request->type;
-        $kind = $request->kind;
-        $currencies = $request->currencies;
-        $res = CryptoPanicService::loadNews($page, $type, $kind, $currencies);
-        return response($res);
-    }
 }

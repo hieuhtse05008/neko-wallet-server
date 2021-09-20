@@ -18,7 +18,7 @@
                 @if(!empty(object_get($cryptocurrency,'cryptocurrency_info.description')))
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">What is {{$cryptocurrency->name}}</div>
-                        <div class="pg-content">{!! $cryptocurrency->cryptocurrency_info->description !!}</div>
+                        <div class="pg-content">{!! htmlspecialchars_decode($cryptocurrency->cryptocurrency_info->description) !!}</div>
                     </div>
                 @endif
 

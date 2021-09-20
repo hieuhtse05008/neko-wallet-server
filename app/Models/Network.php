@@ -8,67 +8,67 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Network
+ *
  * @package App\Models
  * @version September 2, 2021, 10:16 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="Network",
  *     @OA\Xml(
  *         name="Network"
  *     ),
  *     required={"name", "is_active"},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="name",
  *          description="name",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="chain_id",
  *          description="chain_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="icon_url",
  *          description="icon_url",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="short_name",
  *          description="short_name",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="symbol",
  *          description="symbol",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="wallet_derive_path",
  *          description="wallet_derive_path",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="is_active",
  *          description="is_active",
  *          type="boolean"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperNetwork
  */
 
 class Network extends Model

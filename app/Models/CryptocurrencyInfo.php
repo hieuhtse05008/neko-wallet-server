@@ -8,57 +8,57 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class CryptocurrencyInfo
+ *
  * @package App\Models
  * @version September 15, 2021, 4:33 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="CryptocurrencyInfo",
  *     @OA\Xml(
  *         name="CryptocurrencyInfo"
  *     ),
  *     required={""},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="cryptocurrency_id",
  *          description="cryptocurrency_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="description",
  *          description="description",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="links",
  *          description="links",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
  *          type="string",
  *          format="date-time"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperCryptocurrencyInfo
  */
 
 class CryptocurrencyInfo extends Model
@@ -78,7 +78,12 @@ class CryptocurrencyInfo extends Model
     public $fillable = [
         'cryptocurrency_id',
         'description',
-        'links'
+        'links',
+        'market_cap_dominance',
+        'current_supply',
+        'max_supply',
+        'holder_count',
+        'fully_diluted_market_cap',
     ];
 
     /**
@@ -90,7 +95,7 @@ class CryptocurrencyInfo extends Model
         'id' => 'integer',
         'cryptocurrency_id' => 'integer',
         'description' => 'string',
-        'links' => 'object'
+        'links' => 'object',
     ];
 
     /**

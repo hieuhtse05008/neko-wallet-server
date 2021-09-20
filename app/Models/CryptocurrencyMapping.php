@@ -8,49 +8,49 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class CryptocurrencyMapping
+ *
  * @package App\Models
  * @version September 2, 2021, 10:14 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="CryptocurrencyMapping",
  *     @OA\Xml(
  *         name="CryptocurrencyMapping"
  *     ),
  *     required={"cryptocurrency_id"},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="cryptocurrency_id",
  *          description="cryptocurrency_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="coingecko_id",
  *          description="coingecko_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="cmc_id",
  *          description="cmc_id",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="binance_id",
  *          description="binance_id",
  *          type="string"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperCryptocurrencyMapping
  */
 
 class CryptocurrencyMapping extends Model
@@ -100,5 +100,8 @@ class CryptocurrencyMapping extends Model
         'binance_id' => 'nullable|string|max:255'
     ];
 
+    public function cryptocurrency(){
+        return $this->belongsTo(Cryptocurrency::class,'cryptocurrency_id');
+    }
 
 }

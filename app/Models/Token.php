@@ -8,81 +8,81 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Token
+ *
  * @package App\Models
  * @version September 2, 2021, 10:18 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="Token",
  *     @OA\Xml(
  *         name="Token"
  *     ),
  *     required={"name", "symbol", "decimals", "address", "verified", "active_wallet"},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="name",
  *          description="name",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="symbol",
  *          description="symbol",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="decimals",
  *          description="decimals",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="address",
  *          description="address",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="icon_url",
  *          description="icon_url",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="verified",
  *          description="verified",
  *          type="boolean"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="active_wallet",
  *          description="active_wallet",
  *          type="boolean"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="cryptocurrency_id",
  *          description="cryptocurrency_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="network_id",
  *          description="network_id",
  *          type="integer",
  *          format="int32"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperToken
  */
 
 class Token extends Model

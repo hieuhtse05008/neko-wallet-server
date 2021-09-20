@@ -8,52 +8,52 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class CryptocurrencyCategory
+ *
  * @package App\Models
  * @version September 18, 2021, 8:32 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="CryptocurrencyCategory",
  *     @OA\Xml(
  *         name="CryptocurrencyCategory"
  *     ),
  *     required={""},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="cryptocurrency_id",
  *          description="cryptocurrency_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="category_id",
  *          description="category_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
  *          type="string",
  *          format="date-time"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperCryptocurrencyCategory
  */
 
 class CryptocurrencyCategory extends Model

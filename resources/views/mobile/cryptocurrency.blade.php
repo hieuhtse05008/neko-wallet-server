@@ -13,7 +13,6 @@
             @endif
 
             @if(count($cryptocurrency->tokens) > 0)
-
                 <div class="mb-5">
                     <div class="text-main pg-title mb-4">Contract Addresses</div>
                     <div class="pg-content">
@@ -42,7 +41,6 @@
                                             </div>
                                             <a target="_blank" href="{{$link}}" class="text-truncate">
                                                 {{$link}}
-
                                             </a>
                                         </div>
                                     @endif
@@ -56,7 +54,6 @@
                                         </div>
                                         <a target="_blank" href="twitter.com/{{$links}}">
                                             twitter.com/{{$links}}
-
                                         </a>
                                     </div>
                                     @break
@@ -67,7 +64,6 @@
                                         </div>
                                         <a target="_blank" href="t.me/{{$links}}">
                                             t.me/{{$links}}
-
                                         </a>
                                     </div>
                                     @break
@@ -78,7 +74,6 @@
                                         </div>
                                         <a target="_blank" href="www.facebook.com/{{$links}}">
                                             www.facebook.com/{{$links}}
-
                                         </a>
                                     </div>
                                     @break
