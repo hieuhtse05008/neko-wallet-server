@@ -51,7 +51,7 @@ Route::prefix("v1")->group(function(){
         });
         Route::get("/", [App\Http\Controllers\API\CryptocurrencyAPIController::class, 'index']);
         Route::get("{cryptocurrency}", [App\Http\Controllers\API\CryptocurrencyAPIController::class, 'show'])
-            ->middleware("include:info,categories");
+            ->middleware("include:info,categories,tokens.network");
 
     });
 });

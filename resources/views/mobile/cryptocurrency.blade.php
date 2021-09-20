@@ -126,18 +126,25 @@
             <div class="mb-5">
                 <div class="text-main pg-title mb-4">Join our community at</div>
                 <div class="pg-content">
+
                     <div class="text-truncate mb-3">
-                        <div>Discord</div>
-                        <a class="text-main" target="_blank" href="https://discord.gg/nekoinvest">
-                            https://discord.gg/nekoinvest
+                        <div>Twitter</div>
+                        <a class="text-main" target="_blank" href="https://twitter.com/Neko_Invest">
+                            https://twitter.com/Neko_Invest
                         </a>
                     </div>
-                    <div class="text-truncate mb-3">
-                        <div>Telegram</div>
-                        <a class="text-main" target="_blank" href="https://t.me/nekoinvest">
-                            https://t.me/nekoinvest
-                        </a>
-                    </div>
+{{--                    <div class="text-truncate mb-3">--}}
+{{--                        <div>Discord</div>--}}
+{{--                        <a class="text-main" target="_blank" href="https://discord.gg/nhZsK6Xarz">--}}
+{{--                            https://discord.gg/nhZsK6Xarz--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                    <div class="text-truncate mb-3">--}}
+{{--                        <div>Telegram</div>--}}
+{{--                        <a class="text-main" target="_blank" href="https://t.me/nekoinvest">--}}
+{{--                            https://t.me/nekoinvest--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
             @if(!empty($cryptocurrency->categories) && count($cryptocurrency->categories) > 0)

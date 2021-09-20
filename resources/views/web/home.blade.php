@@ -75,7 +75,6 @@
                             The more friends that join, the sooner you’ll get access.
                         </div>
 
-
                         <div class="mb-4 d-flex justify-content-center flex-wrap" id="form-share-ref">
                             <input readonly id="input-share-ref" placeholder="Url here" class="flex-grow-1 inp-main mb-3 rounded" type="text" style="" >
                             <div class="me-3"></div>
@@ -88,29 +87,27 @@
                         <div class="text-center mb-4">
                             <div class="text-center mb-3">
                                 Or share to your social
-
                             </div>
                             <div class="d-flex justify-content-center align-items-center flex-wrap p-3">
-
                                 <div class="me-3">
                                     <a class="rounded-circle text-white d-flex"
                                        style="background: #1DA0F1;"
                                        href="https://twitter.com/Neko_Invest"><i
                                             class="fab fa-twitter link-icon"></i></a></div>
-                                <div class="me-3">
-                                    <a class="rounded-circle text-white d-flex"
-                                       style="background: #2CA5E0;"
-                                       href="https://t.me/nekoinvest">
-                                        <i class="fab fa-telegram-plane link-icon"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a class="rounded-circle text-white d-flex"
-                                       style="background: #7289da;"
-                                       href="https://discord.gg/nhZsK6Xarz"><i
-                                            class="fab fa-discord  link-icon"></i>
-                                    </a>
-                                </div>
+{{--                                <div class="me-3">--}}
+{{--                                    <a class="rounded-circle text-white d-flex"--}}
+{{--                                       style="background: #2CA5E0;"--}}
+{{--                                       href="https://t.me/nekoinvest">--}}
+{{--                                        <i class="fab fa-telegram-plane link-icon"></i>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                <div>--}}
+{{--                                    <a class="rounded-circle text-white d-flex"--}}
+{{--                                       style="background: #7289da;"--}}
+{{--                                       href="https://discord.gg/nhZsK6Xarz"><i--}}
+{{--                                            class="fab fa-discord  link-icon"></i>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -126,8 +123,8 @@
             document.getElementById('btn-copy-ref').innerText = 'Copied!';
             document.getElementById('input-share-ref').select();
             document.execCommand("copy");
-
         }
+
         $('#form-early-access').on('submit', function (e){
             e.preventDefault();
             const email = $('#input-early-access-email').val();

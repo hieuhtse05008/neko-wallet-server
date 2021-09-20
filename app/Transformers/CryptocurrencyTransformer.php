@@ -37,7 +37,7 @@ use League\Fractal\TransformerAbstract;
  */
 class CryptocurrencyTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ["info","categories"];
+    protected $availableIncludes = ["info","categories","tokens"];
     /**
      * Transform the Cryptocurrency entity.
      *
@@ -67,4 +67,11 @@ class CryptocurrencyTransformer extends TransformerAbstract
             return $this->collection($model->categories, new CategoryTransformer());
         }
     }
+
+    public function includeTokens(Cryptocurrency $model){
+        if(!empty($model->tokens)){
+            return $this->collection($model->tokens, new TokenTransformer());
+        }
+    }
+
 }

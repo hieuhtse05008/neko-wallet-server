@@ -2,8 +2,8 @@
 
 namespace App\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use App\Models\Token;
+use League\Fractal\TransformerAbstract;
 
 /**
  * Class TokenTransformer.
@@ -37,6 +37,7 @@ use App\Models\Token;
  */
 class TokenTransformer extends TransformerAbstract
 {
+    protected $availableIncludes =["network"];
     /**
      * Transform the Token entity.
      *
@@ -48,11 +49,19 @@ class TokenTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
-
-            /* place your other model properties here */
+            'name'         => $model->name,
+            'symbol' => $model->symbol,
+            'address'         => $model->address,
+            'icon_url'         => $model->icon_url,
 
             'created_at' => strtotime($model->created_at),
             'updated_at' => strtotime($model->updated_at),
         ];
+    }
+
+    public function includeNetwork(Token $model){
+        if(!empty($model->network)){
+            return $this->item($model->network, new NetworkTransformer());
+        }
     }
 }

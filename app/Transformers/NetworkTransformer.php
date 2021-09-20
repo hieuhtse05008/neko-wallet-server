@@ -2,8 +2,8 @@
 
 namespace App\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use App\Models\Network;
+use League\Fractal\TransformerAbstract;
 
 /**
  * Class NetworkTransformer.
@@ -47,7 +47,12 @@ class NetworkTransformer extends TransformerAbstract
     public function transform(Network $model)
     {
         return [
-            'id'         => (int) $model->id,
+            'id' => (int)$model->id,
+            'name' => $model->name,
+            'short_name' => $model->short_name,
+            'icon_url' => $model->icon_url,
+            'symbol' => $model->symbol,
+
 
             /* place your other model properties here */
 
