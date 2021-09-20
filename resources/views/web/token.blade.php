@@ -203,8 +203,8 @@
                     <div class="pg-content">
                         <div class="d-flex text-truncate">
                             <span>Discord:</span>&nbsp;&nbsp;
-                            <a class="text-main" target="_blank" href="https://discord.gg/nekoinvest">
-                                https://discord.gg/nekoinvest
+                            <a class="text-main" target="_blank" href="https://discord.gg/nhZsK6Xarz">
+                                https://discord.gg/nhZsK6Xarz
                             </a>
                         </div>
                         <div class="d-flex text-truncate">

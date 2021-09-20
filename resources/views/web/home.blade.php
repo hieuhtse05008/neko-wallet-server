@@ -101,7 +101,7 @@
                                     <a class="rounded-circle text-white d-flex"
                                        style="background: #2CA5E0;"
                                        href="https://t.me/nekoinvest">
-                                        <i                                            class="fab fa-telegram-plane link-icon"></i>
+                                        <i class="fab fa-telegram-plane link-icon"></i>
                                     </a>
                                 </div>
                                 <div>
