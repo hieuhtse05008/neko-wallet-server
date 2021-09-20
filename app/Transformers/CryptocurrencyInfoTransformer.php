@@ -48,6 +48,10 @@ class CryptocurrencyInfoTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
+            'description'         => $model->description,
+            'links' => $model->links,
+
+
 
             /* place your other model properties here */
 

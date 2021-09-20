@@ -77,10 +77,10 @@ class PublicController extends Controller
     {
         //======================================================
 //        $this->categoryRepository->skipPresenter(false);
-        $this->categoryRepository->with(['cryptocurrencies']);
-        $categories = $this->categoryRepository->list(null);
+
+        $categories = $this->categoryRepository->with(['cryptocurrencies'])->skipPresenter(false)->list(null);
         $count_total_cryptocurrencies = count($this->cryptocurrencyRepository->list(null, ['cryptocurrency_info' => true]));
-//        return ($categories);
+
         return view('web.tokens', [
             'categories' => $categories,
             'count_total_cryptocurrencies' => $count_total_cryptocurrencies,
@@ -105,18 +105,8 @@ class PublicController extends Controller
     }
     public function cryptocurrencyMobileView(Cryptocurrency $cryptocurrency)
     {
-
-        $related_coins = Cryptocurrency::where('cryptocurrencies.id', '>', $cryptocurrency->id)
-            ->join('cryptocurrency_info', 'cryptocurrencies.id', '=', 'cryptocurrency_info.cryptocurrency_id')
-            ->select('cryptocurrencies.*')
-            ->limit(12)
-            ->get();
-
-
         return view('mobile.cryptocurrency', [
             'cryptocurrency' => $cryptocurrency,
-            'exchange_guides' => $cryptocurrency->exchange_guides()->get(),
-            'related_coins' => $related_coins,
         ]);
     }
 

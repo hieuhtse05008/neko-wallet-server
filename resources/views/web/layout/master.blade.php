@@ -65,7 +65,7 @@
         <div class="text-white d-flex justify-content-end my-3">
             <div class="me-5"><a href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a></div>
             <div class="me-5"><a href="https://t.me/nekoinvest"><i class="fab fa-telegram-plane"></i></a></div>
-            <div><a href="https://discord.gg/DfRF5uFf"><i class="fab fa-discord"></i></a></div>
+            <div><a href="https://discord.gg/nhZsK6Xarz"><i class="fab fa-discord"></i></a></div>
         </div>
     </div>
 </footer>

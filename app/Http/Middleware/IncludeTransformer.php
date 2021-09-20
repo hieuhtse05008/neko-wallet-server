@@ -21,9 +21,10 @@ class IncludeTransformer
     public function handle($request, Closure $next, ...$includes)
     {
         $paramIncludes = config('repository.fractal.params.include', 'include');
-//        $request[$paramIncludes] = _empty($request, $paramIncludes) ? implode(",", $includes) :
-//            $request[$paramIncludes] . ',' . implode(",", $includes);
-        $request[$paramIncludes] = implode(",", $includes);
+        $request[$paramIncludes] = _empty($request, $paramIncludes) ? implode(",", $includes) :
+        $request[$paramIncludes] . ',' . implode(",", $includes);
+
+//      $request[$paramIncludes] = implode(",", $includes);
         return $next($request);
     }
 }

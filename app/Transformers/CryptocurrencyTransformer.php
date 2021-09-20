@@ -37,6 +37,7 @@ use League\Fractal\TransformerAbstract;
  */
 class CryptocurrencyTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = ["info","categories"];
     /**
      * Transform the Cryptocurrency entity.
      *
@@ -54,5 +55,16 @@ class CryptocurrencyTransformer extends TransformerAbstract
             'icon_url' => $model->icon_url,
             'rank' => $model->rank,
         ];
+    }
+
+    public function includeInfo(Cryptocurrency $model){
+        if(!empty($model->cryptocurrency_info)){
+            return $this->item($model->cryptocurrency_info, new CryptocurrencyInfoTransformer());
+        }
+    }
+    public function includeCategories(Cryptocurrency $model){
+        if(!empty($model->categories)){
+            return $this->collection($model->categories, new CategoryTransformer());
+        }
     }
 }

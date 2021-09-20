@@ -72,9 +72,7 @@ class CategoryRepositoryEloquent extends Repository implements CategoryRepositor
 
         if (!$disabledRequestCriteria){
             $this->pushCriteria(app(RequestCriteria::class));
-
         }
-
         $this->scopeQuery(function ($query) use ($filter) {
             return $query;
         });

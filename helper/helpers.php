@@ -24,3 +24,15 @@ function getRelationsFromIncludeRequest($ignores = [])
     return [];
 
 }
+
+
+function _empty($data, $field)
+{
+    $fields = explode('.', $field);
+    foreach ($fields as $f) {
+        if (empty($data[$f])) return true;
+        $data = $data[$f];
+    }
+
+    return false;
+}

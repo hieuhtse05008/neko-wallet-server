@@ -39,9 +39,10 @@ class GetCoinMarketCapJson extends Command
 //        $this->handleCoin(11156);return;
 
         for ($i = 1; $i <= 12000; $i++) {
+//         foreach([] as $i){
             $data = $this->handleCoin($i);
-            $this->saveFile($i, $data);
-            sleep(2);
+            if(!empty($data)) $this->saveFile($i, $data);
+//            sleep(2);
         }
     }
 

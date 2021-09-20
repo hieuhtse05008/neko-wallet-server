@@ -46,13 +46,12 @@ Route::prefix("v1")->group(function () {
 
 Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'cryptocurrencies'], function () {
-
         Route::group(['prefix' => 'prices'], function () {
             Route::get("/latest", [App\Http\Controllers\API\HistoricalPriceAPIController::class, 'latest']);
         });
-
         Route::get("/", [App\Http\Controllers\API\CryptocurrencyAPIController::class, 'index']);
-        Route::get("{cryptocurrency}", [App\Http\Controllers\API\CryptocurrencyAPIController::class, 'show']);
+        Route::get("{cryptocurrency}", [App\Http\Controllers\API\CryptocurrencyAPIController::class, 'show'])
+            ->middleware("include:info,categories");
 
     });
 });
