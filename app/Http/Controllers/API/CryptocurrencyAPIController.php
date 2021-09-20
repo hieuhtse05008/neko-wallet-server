@@ -80,6 +80,7 @@ class CryptocurrencyAPIController extends APIController
 
     public function index(Request $request)
     {
+
         $filter = [
             'cryptocurrency'=>[
                 'cryptocurrency_info'=> $request->cryptocurrency_info,
@@ -141,6 +142,9 @@ class CryptocurrencyAPIController extends APIController
 
     public function show(Cryptocurrency $cryptocurrency)
     {
+        $relations = getRelationsFromIncludeRequest([]);
+        $this->cryptocurrencyRepository->with($relations);
+
         /** @var Cryptocurrency $cryptocurrency */
         $cryptocurrency = $this->cryptocurrencyRepository->find($cryptocurrency->id);
 
