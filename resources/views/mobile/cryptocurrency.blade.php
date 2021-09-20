@@ -63,7 +63,7 @@
                                     @case('telegram_channel_identifier')
                                     <div class="text-truncate mb-3">
                                         <div class="text-main">
-                                            Telegram:
+                                            Telegram
                                         </div>
                                         <a target="_blank" href="t.me/{{$links}}">
                                             t.me/{{$links}}
