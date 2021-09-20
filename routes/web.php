@@ -28,4 +28,7 @@ Route::post('/push-news-telegram', [PublicController::class,'pushNewsTelegram'])
 Route::post('/register-early-access', [PublicController::class,'registerEarlyAccessWithEmail']);
 Route::get('/search-coin', [PublicController::class,'searchCoin']);
 Route::get('/cryptocurrency/{cryptocurrency:name}', [PublicController::class,'tokenView']);
+Route::group(["prefix" => 'mobile'], function () {
+    Route::get('/cryptocurrency/{cryptocurrency:id}', [PublicController::class,'cryptocurrencyMobileView']);
+});
 //Route::post('/login', [AuthController::class,'login']);

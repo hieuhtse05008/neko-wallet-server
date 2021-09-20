@@ -31,7 +31,7 @@
             </div>
 
             <div v-if="_categories.length > 5" class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
-                 type="button"
+
                  data-bs-toggle="collapse"
                  data-bs-target="#more-categories"
                  aria-expanded="false"
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div
+        <div v-cloak
             class="d-flex flex-wrap justify-content-center"
         >
             <div v-if="isLoading" class="w-100 d-flex align-items-center justify-content-center"
@@ -75,7 +75,7 @@
             </a>
         </div>
 
-        <div v-if="cryptocurrencies.length == 0" class="text-center">
+        <div v-if="cryptocurrencies.length == 0 && !isLoading" class="text-center">
             <svg style="transform: scale(.5);" width="244" height="260" viewBox="0 0 244 260" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
                 <path

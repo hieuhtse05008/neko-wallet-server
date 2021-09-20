@@ -103,6 +103,22 @@ class PublicController extends Controller
             'related_coins' => $related_coins,
         ]);
     }
+    public function cryptocurrencyMobileView(Cryptocurrency $cryptocurrency)
+    {
+
+        $related_coins = Cryptocurrency::where('cryptocurrencies.id', '>', $cryptocurrency->id)
+            ->join('cryptocurrency_info', 'cryptocurrencies.id', '=', 'cryptocurrency_info.cryptocurrency_id')
+            ->select('cryptocurrencies.*')
+            ->limit(12)
+            ->get();
+
+
+        return view('mobile.cryptocurrency', [
+            'cryptocurrency' => $cryptocurrency,
+            'exchange_guides' => $cryptocurrency->exchange_guides()->get(),
+            'related_coins' => $related_coins,
+        ]);
+    }
 
     public function pushNewsTelegram(Request $request)
     {
