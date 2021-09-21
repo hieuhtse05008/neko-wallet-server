@@ -78,9 +78,13 @@
                         <div class="mb-4 d-flex justify-content-center flex-wrap" id="form-share-ref">
                             <input readonly id="input-share-ref" placeholder="Url here" class="flex-grow-1 inp-main mb-3 rounded" type="text" style="" >
                             <div class="me-3"></div>
-                            <button onclick="copyRefLink()" class="btn btn-main px-3 text-center">
+                            <button onclick="
+                                    document.getElementById('text-copy-ref').innerText = 'Copied!';
+                                    document.getElementById('input-share-ref').select();
+                                    document.execCommand('copy');
+                                " class="btn btn-main px-3 text-center">
                                 <i class="fal fa-copy"></i>
-                                <span  id="btn-copy-ref">Copy link</span>
+                                <span  id="text-copy-ref">Copy link</span>
                             </button>
                         </div>
 
@@ -119,11 +123,6 @@
 @endsection
 @push('scripts')
     <script>
-        function copyRefLink(){
-            document.getElementById('btn-copy-ref').innerText = 'Copied!';
-            document.getElementById('input-share-ref').select();
-            document.execCommand("copy");
-        }
 
         $('#form-early-access').on('submit', function (e){
             e.preventDefault();
@@ -138,8 +137,7 @@
 
                 }
             });
-        }
-        );
+        });
     </script>
 @endpush
 @section('styles')

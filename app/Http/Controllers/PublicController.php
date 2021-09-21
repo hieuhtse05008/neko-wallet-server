@@ -30,27 +30,26 @@ class PublicController extends Controller
 
     public function registerEarlyAccessWithEmail(Request $request)
     {
-        $object = EarlyAccessEmail::firstOrNew([
+        $object = EarlyAccessEmail::firstOrCreate([
             'email' => $request->email,
         ], [
             'ref' => $request->ref,
         ]);
-        if (empty(object_get($object, 'id'))) {
-            $object->save();
-            $object->code = substr(md5($object->id), 0, 8);
-            $object->save();
-        }
+        $object->code = substr(md5($object->id), 0, 8);
+        $object->save();
 
         //
         $start_time = new Carbon(1632009600);
-        $end_time = Carbon::now()->timestamp;
+        $end_time = $object->created_at->timestamp;
         $interval = $end_time - $start_time->timestamp;
         $hours_passed = $interval / 3600;
-        $register_count = (int)$hours_passed * 40 + 1293;
+        $register_count = max((int)$hours_passed * 40 + 1293, 1293);
+        $total_register =(int)( (now()->timestamp - $start_time->timestamp)/3600* 40 + 1293);
 
         return [
             'info' => $object,
-            'register_count' => $register_count
+            'register_count' => $register_count,
+            'total_register' => $total_register,
         ];
     }
 

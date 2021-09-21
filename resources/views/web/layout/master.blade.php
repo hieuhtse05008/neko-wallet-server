@@ -30,27 +30,22 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {{--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">--}}
-            {{--                <li class="nav-item">--}}
-            {{--                    <a class="nav-link active" aria-current="page" href="#">Home</a>--}}
-            {{--                </li>--}}
-            {{--                --}}
-            {{--            </ul>--}}
-            {{--            <form class="d-flex">--}}
-            {{--                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--}}
-            {{--                <button class="btn btn-outline-success" type="submit">Search</button>--}}
-            {{--            </form>--}}
-            <div class="ms-auto">
-                <a  href="/#input-early-access-email" class="hide-from-home btn btn-sm rounded btn-main ">Get early access</a>
-            </div>
+        <div class="ms-auto">
+            <a  href="/#input-early-access-email" class="hide-from-home btn btn-sm rounded btn-main ">Get early access</a>
         </div>
+{{--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
+{{--            <div class="ms-auto">--}}
+{{--                <a  href="/#input-early-access-email" class="hide-from-home btn btn-sm rounded btn-main ">Get early access</a>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 </nav>
 @yield('content')
+
+
 <footer>
     <div id="footer-wrap" class="d-flex justify-content-between align-items-center flex-wrap px-3">
-        <div class="">
+        <div class="my-3 my-md-0 me-3 me-md-0">
             <img width="100" height="28" src="/images/logo/long-orange-text-white-neko.svg" alt="">
             <div class="mt-2 text-white">
                 © 2021 Neko, All Rights Reserved.
@@ -60,7 +55,7 @@
         <div class="d-flex flex-column flex-sm-row justify-content-center my-3 text-white">
             <div class="me-5 mb-3 mb-md-0"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
             <div class="me-5 mb-3 mb-md-0"><a href="/cryptocurrencies">How to buy</a></div>
-            <div class="me-sm-0"><a>Check my spot</a></div>
+            <div class="me-sm-0"><a class="pointer" data-bs-toggle="modal" data-bs-target="#modal-check-my-spot">Check my spot</a></div>
         </div>
         <div class="text-white d-flex justify-content-end my-3">
             <div class="me-5"><a href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a></div>
@@ -69,8 +64,6 @@
         </div>
     </div>
 </footer>
-</body>
-
 
 <script src="/js/vue.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
@@ -78,6 +71,7 @@
 <script>
     _token = "{{ csrf_token() }}"
 </script>
+@include('web.modal.check_my_spot')
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q091EE5SJE"></script>
