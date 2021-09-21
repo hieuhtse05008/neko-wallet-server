@@ -26,7 +26,7 @@
         <div class="benefits bg-white py-5 px-sm-0 px-md-4 px-lg-5">
             <div class="benefits-title mb-5">Take your crypto to the next level with Neko</div>
             <div class="benefits-items row">
-                <div class="col-md-4">
+                <div class="col-12 col-lg-4">
                     <div class="benefits-item d-flex flex-column justify-content-between text-center">
                         <div><img src="/images/home/benefit_1.png"></div>
                         <div class="my-5 ">Exchange any Crypto-assets on <br>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-lg-4">
                     <div class="benefits-item d-flex flex-column justify-content-between text-center">
                         <div><img src="/images/home/benefit_2.png"></div>
                         <div class="my-5 ">Non-custodial Wallet.<br>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-lg-4">
                     <div class="benefits-item d-flex flex-column justify-content-between text-center">
                         <div><img src="/images/home/benefit_3.png"></div>
                         <div class="my-5 ">Stay on top of your portfolio.<br>
@@ -182,7 +182,9 @@
         }
 
         .benefits-items img{
-            max-width: 100vw;
+            max-width: min(100vw, 400px);
+            width: 100%;
+            max-height: 270px;
         }
         .benefits-items {
             /*display: flex;*/

@@ -58,8 +58,8 @@
         </div>
 
         <div class="d-flex flex-column flex-sm-row justify-content-center my-3 text-white">
-            <div class="me-5 mb-3"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
-            <div class="me-5 mb-3"><a href="/cryptocurrencies">How to buy</a></div>
+            <div class="me-5 mb-3 mb-md-0"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
+            <div class="me-5 mb-3 mb-md-0"><a href="/cryptocurrencies">How to buy</a></div>
             <div class="me-sm-0"><a>Check my spot</a></div>
         </div>
         <div class="text-white d-flex justify-content-end my-3">
