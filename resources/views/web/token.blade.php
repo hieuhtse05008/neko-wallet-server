@@ -18,7 +18,8 @@
                 @if(!empty(object_get($cryptocurrency,'cryptocurrency_info.description')))
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">What is {{$cryptocurrency->name}}</div>
-                        <div class="pg-content">{!! htmlspecialchars_decode($cryptocurrency->cryptocurrency_info->description) !!}</div>
+                        <div
+                            class="pg-content">{!! htmlspecialchars_decode($cryptocurrency->cryptocurrency_info->description) !!}</div>
                     </div>
                 @endif
 
@@ -62,14 +63,16 @@
                                             @if(!empty($exchange_guide->guide_html))
                                                 <li>
                                                     <div class="mb-2"></div>
-                                                    <div type="button" data-bs-toggle="collapse" class="collapse-btn mb-2"
+                                                    <div type="button" data-bs-toggle="collapse"
+                                                         class="collapse-btn mb-2"
                                                          data-bs-target="#guide-{{$exchange_guide->id}}">Guide:
                                                     </div>
                                                     <ul id="guide-{{$exchange_guide->id}}" class="collapse">
                                                         @foreach($exchange_guide->guide_html->steps as $step_key => $step)
                                                             <li>
                                                                 <div class="collapse-btn mb-3"><b>Step {{$step_key + 1}}
-                                                                        :&nbsp;</b> {{str_replace('[TOKEN]',strtoupper($cryptocurrency->symbol),$step->text)}}</div>
+                                                                        :&nbsp;</b> {{str_replace('[TOKEN]',strtoupper($cryptocurrency->symbol),$step->text)}}
+                                                                </div>
                                                                 @if(!empty($step->image_url))
                                                                     <img class="w-100 mb-3" src="{{$step->image_url}}">
                                                                 @endif
@@ -87,7 +90,7 @@
                     </div>
                 @endif
 
-                @if(count($cryptocurrency->tokens) > 0)
+                @if(count($cryptocurrency->tokens) > 0 )
 
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">Contract Addresses</div>
@@ -95,8 +98,9 @@
                             @foreach($cryptocurrency->tokens as $token)
                                 <div class=" text-truncate">
                                     <span class="text-main">{{$token->name}} ({{$token->network->name}})</span>
-                                    : {{$token->address}}
-
+                                    @if(!in_array($token->address, \App\Enum\HiddenAddresses::ADDRESS))
+                                        : {{$token->address}}
+                                    @endif
                                 </div>
                             @endforeach
                         </div>
@@ -207,18 +211,18 @@
                                 https://twitter.com/Neko_Invest
                             </a>
                         </div>
-{{--                        <div class="d-flex text-truncate">--}}
-{{--                            <span>Discord:</span>&nbsp;&nbsp;--}}
-{{--                            <a class="text-main" target="_blank" href="https://discord.gg/nhZsK6Xarz">--}}
-{{--                                https://discord.gg/nhZsK6Xarz--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                        <div class="d-flex text-truncate">--}}
-{{--                            <span>Telegram:</span>&nbsp;&nbsp;--}}
-{{--                            <a class="text-main" target="_blank" href="https://t.me/nekoinvest">--}}
-{{--                                https://t.me/nekoinvest--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="d-flex text-truncate">--}}
+                        {{--                            <span>Discord:</span>&nbsp;&nbsp;--}}
+                        {{--                            <a class="text-main" target="_blank" href="https://discord.gg/nhZsK6Xarz">--}}
+                        {{--                                https://discord.gg/nhZsK6Xarz--}}
+                        {{--                            </a>--}}
+                        {{--                        </div>--}}
+                        {{--                        <div class="d-flex text-truncate">--}}
+                        {{--                            <span>Telegram:</span>&nbsp;&nbsp;--}}
+                        {{--                            <a class="text-main" target="_blank" href="https://t.me/nekoinvest">--}}
+                        {{--                                https://t.me/nekoinvest--}}
+                        {{--                            </a>--}}
+                        {{--                        </div>--}}
                     </div>
                 </div>
                 @if(!empty($cryptocurrency->categories) && count($cryptocurrency->categories) > 0)
@@ -240,12 +244,11 @@
 
         <div class="related-coins">
             <div class="text-main pg-title mb-4 ps-3 ps-md-0">Recommended</div>
-            <div class="row">
+            <div class="row row-eq-height">
                 @foreach($related_coins as $cryptocurrency)
-                    <div class="col-12 col-md-3 col-lg-2">
-                        <div class="rounded-7 shadow p-3 mb-3 bg-white pointer">
-
-                            <a href="/cryptocurrency/{{$cryptocurrency->name}}" class="d-flex justify-content-center align-items-center flex-column">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 pb-3">
+                        <a href="/cryptocurrency/{{$cryptocurrency->name}}">
+                            <div class="align-items-center d-flex flex-column h-100 justify-content-center p-3 pointer rounded-7 shadow text-center">
                                 <img src="{{$cryptocurrency->icon_url}}" class="table-token-image mr-2 mb-3"
                                      style="width: 36px;">
                                 <div>
@@ -255,10 +258,8 @@
                                     <span
                                         class="text-secondary mb-3"><b>{{strtoupper($cryptocurrency->symbol)}}</b></span>
                                 </div>
-                            </a>
-
-
-                        </div>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
@@ -280,6 +281,7 @@
         .arrow-list .collapse-btn[aria-expanded='true']:before {
             transform: rotate(90deg);
         }
+
         .arrow-list .collapse-btn:before {
             content: "\f0da";
             font-family: 'Font Awesome 5 Pro';

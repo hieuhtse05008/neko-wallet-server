@@ -19,8 +19,9 @@
                         @foreach($cryptocurrency->tokens as $token)
                             <div class=" text-truncate mb-3">
                                 <div class="text-main">{{$token->name}} ({{$token->network->name}})</div>
-                                <div class="text-truncate mb-3"> {{$token->address}}</div>
-
+                                @if(!in_array($token->address, \App\Enum\HiddenAddresses::ADDRESS))
+                                    <div class="text-truncate mb-3"> {{$token->address}}</div>
+                                @endif
                             </div>
                         @endforeach
                     </div>

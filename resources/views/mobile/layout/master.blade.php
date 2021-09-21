@@ -15,11 +15,14 @@
 
     <style>
         @import "/css/fontawesome/fontawesome.css";
+        body{
+            background: none;
+        }
     </style>
     @yield('styles')
 
 </head>
-<body>
+<body >
 @yield('content')
 </body>
 

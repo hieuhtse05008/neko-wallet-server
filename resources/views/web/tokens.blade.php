@@ -15,7 +15,7 @@
             </div>
         </div>
         <div v-cloak
-             class="d-flex flex-wrap justify-content-center mb-5"
+             class="categories-wrap smooth-scroll-x mb-5"
         >
             <div class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
                  :class="{'bg-main': !filter.category_id,'text-white':!filter.category_id,}"
@@ -23,56 +23,37 @@
             >
                 All (@{{ count_total_cryptocurrencies }})
             </div>
-            <div v-for="category in _categories.slice(0,5)" class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
+            <div v-for="category in _categories" class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
                  :class="{'bg-main': category.id == filter.category_id,'text-white': category.id == filter.category_id,}"
                  @click="onChangeCategory(category)"
             >
                 @{{ category.name }} (@{{ category.cryptocurrencies.length }})
             </div>
 
-            <div v-if="_categories.length > 5" class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
-
-                 data-bs-toggle="collapse"
-                 data-bs-target="#more-categories"
-                 aria-expanded="false"
-            >
-                +@{{ _categories.length - 5 }} more
-            </div>
-            <div class="collapse" id="more-categories">
-                <div class=" d-flex flex-wrap justify-content-center">
-                    <div v-if="_categories.length > 5" v-for="category in _categories.slice(5,_categories.length)"
-                         class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
-                         :class="{'bg-main': category.id == filter.category_id,'text-white': category.id == filter.category_id,}"
-                         @click="onChangeCategory(category)"
-                    >
-                        @{{ category.name }} (@{{ category.cryptocurrencies.length }})
-                    </div>
-                </div>
-            </div>
         </div>
-        <div v-cloak
-            class="d-flex flex-wrap justify-content-center"
-        >
-            <div v-if="isLoading" class="w-100 d-flex align-items-center justify-content-center"
+        <div class="row">
+            <div v-if="isLoading" class="col-12 d-flex align-items-center justify-content-center"
                  style="height: 80vh;">
                 <img width="250" height="250" src="/images/loading.svg">
-
             </div>
-            <a :href="`/cryptocurrency/${cryptocurrency.name}`"
-               v-for="(cryptocurrency,key) in cryptocurrencies" v-if="!isLoading" @click="openTokenPage(cryptocurrency)"
-               class="cryptocurrency-item shadow p-3 bg-white pointer">
-                <div class="">
-                    <div class="d-flex justify-content-center align-items-center text-center flex-column">
-                        <img :src="cryptocurrency.icon_url" class="table-token-image mr-2 mb-3" style="width: 36px;">
-                        <div>
-                            <span class="mr-2 mb-3"><b>@{{cryptocurrency.name}}</b></span>
-                        </div>
-                        <div>
-                            <span class="text-secondary mb-3"><b>@{{cryptocurrency.symbol.toUpperCase()}}</b></span>
-                        </div>
+        </div>
+        <div v-cloak class="row row-eq-height">
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 pb-3"
+                 v-for="(cryptocurrency,key) in cryptocurrencies" v-if="!isLoading">
+                <a :href="`/cryptocurrency/${cryptocurrency.name}`">
+                    <div class="align-items-center d-flex flex-column h-100 justify-content-center p-3 pointer rounded-7 shadow text-center">
+                            <img :src="cryptocurrency.icon_url" class="table-token-image mr-2 mb-3"
+                                 style="width: 36px;">
+                            <div>
+                                <span class="mr-2 mb-3"><b>@{{cryptocurrency.name}}</b></span>
+                            </div>
+                            <div>
+                                <span class="text-secondary mb-3"><b>@{{cryptocurrency.symbol.toUpperCase()}}</b></span>
+                            </div>
+
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
 
         <div v-if="cryptocurrencies.length == 0 && !isLoading" class="text-center">
@@ -96,6 +77,7 @@
             </svg>
             <h4 class="fw-bold text-center">No result</h4>
         </div>
+        <div class="mb-5"></div>
     </div>
 @endsection
 
@@ -153,9 +135,6 @@
                     setTimeout(() => {
                         this.isLoading = false;
                     }, 300);
-                },
-                openTokenPage: function (cryptocurrency) {
-                    window.location.href = `/cryptocurrency/${cryptocurrency.name}`;
                 },
                 parseNumber: function (str) {
                     if (str.indexOf(".") == -1) return str;
@@ -219,14 +198,6 @@
 
 @section('styles')
     <style>
-        .cryptocurrency-item {
-            border-radius: 12px;
-            width: calc(20% - 40px);
-            min-width: 180px;
-            margin-right: 20px;
-            margin-left: 20px;
-            margin-bottom: 40px;
-        }
 
         .search-wrap input:focus {
             outline: none;
@@ -252,6 +223,10 @@
             height: 30px;
         }
 
+        .categories-wrap {
+            height: 58px;
+            white-space: nowrap;
+        }
 
     </style>
 @endsection
