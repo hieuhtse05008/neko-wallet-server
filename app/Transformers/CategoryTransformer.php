@@ -38,7 +38,7 @@ use App\Models\Category;
 class CategoryTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['cryptocurrencies'];
-    protected $defaultIncludes  = ['cryptocurrencies'];
+//    protected $defaultIncludes  = ['cryptocurrencies'];
     /**
      * Transform the Category entity.
      *

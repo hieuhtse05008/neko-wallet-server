@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicController::class, 'homeView']);
 
-Route::get('/cryptocurrencies', [PublicController::class, 'tokensView']);
+Route::get('/cryptocurrencies', [PublicController::class, 'tokensView'])->middleware("include:cryptocurrencies");
 
 Route::get('/test', [AuthController::class, 'test']);
 

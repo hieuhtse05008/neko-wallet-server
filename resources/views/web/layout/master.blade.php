@@ -50,7 +50,7 @@
 @yield('content')
 <footer>
     <div id="footer-wrap" class="d-flex justify-content-between align-items-center flex-wrap px-3">
-        <div class="my-3">
+        <div class="">
             <img width="100" height="28" src="/images/logo/long-orange-text-white-neko.svg" alt="">
             <div class="mt-2 text-white">
                 © 2021 Neko, All Rights Reserved.
@@ -58,8 +58,8 @@
         </div>
 
         <div class="d-flex flex-column flex-sm-row justify-content-center my-3 text-white">
-            <div class="me-5"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
-            <div class="me-5"><a href="/cryptocurrencies">How to buy</a></div>
+            <div class="me-5 mb-3"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
+            <div class="me-5 mb-3"><a href="/cryptocurrencies">How to buy</a></div>
             <div class="me-sm-0"><a>Check my spot</a></div>
         </div>
         <div class="text-white d-flex justify-content-end my-3">
