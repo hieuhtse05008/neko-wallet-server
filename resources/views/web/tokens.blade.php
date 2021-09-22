@@ -61,7 +61,7 @@
                 @endforeach
             </div>
         </div>
-        {{--        MOBILE --}}
+        {{--MOBILE --}}
         <div
             class="categories-wrap smooth-scroll-x mb-5 d-block d-lg-none"
         >
@@ -127,9 +127,10 @@
                 <h4 class="fw-bold text-center">No result</h4>
             </div>
         @endif
-
-        @include('web.component.paginator', ['paginator' => $cryptocurrencies, 'suffix'=>"&category_id=$category_id&search=$search"])
-
+        <div class="mb-5"></div>
+        <div class="d-flex justify-content-center">
+            @include('web.component.paginator', ['paginator' => $cryptocurrencies, 'suffix'=>"&category_id=$category_id&search=$search"])
+        </div>
         <div class="mb-5"></div>
     </div>
 @endsection

@@ -53,7 +53,7 @@
                                         <div class="text-main">
                                             Twitter
                                         </div>
-                                        <a target="_blank" href="twitter.com/{{$links}}">
+                                        <a target="_blank" href="https://twitter.com/{{$links}}">
                                             twitter.com/{{$links}}
                                         </a>
                                     </div>
@@ -63,7 +63,7 @@
                                         <div class="text-main">
                                             Telegram
                                         </div>
-                                        <a target="_blank" href="t.me/{{$links}}">
+                                        <a target="_blank" href="https://t.me/{{$links}}">
                                             t.me/{{$links}}
                                         </a>
                                     </div>
@@ -73,7 +73,7 @@
                                         <div class="text-main">
                                             Facebook
                                         </div>
-                                        <a target="_blank" href="www.facebook.com/{{$links}}">
+                                        <a target="_blank" href="https://www.facebook.com/{{$links}}">
                                             www.facebook.com/{{$links}}
                                         </a>
                                     </div>
@@ -95,7 +95,7 @@
                                             Bitcoin talk
                                         </div>
                                         <a target="_blank"
-                                           href="bitcointalk.org/index.php?topic={{$links}}">
+                                           href="https://bitcointalk.org/index.php?topic={{$links}}">
                                             bitcointalk.org/index.php?topic={{$links}}
 
                                         </a>

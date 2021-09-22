@@ -4,7 +4,6 @@
 namespace App\Http\Controllers;
 
 
-use App\Criteria\RequestCriteria;
 use App\Models\Cryptocurrency;
 use App\Models\CryptocurrencyInfo;
 use App\Models\EarlyAccessEmail;
@@ -46,7 +45,7 @@ class PublicController extends Controller
         $interval = $end_time - $start_time->timestamp;
         $hours_passed = $interval / 3600;
         $register_count = max((int)$hours_passed * 40 + 1293, 1293);
-        $total_register =(int)( (now()->timestamp - $start_time->timestamp)/3600* 40 + 1293);
+        $total_register = (int)((now()->timestamp - $start_time->timestamp) / 3600 * 40 + 1293);
 
         return [
             'info' => $object,
@@ -66,9 +65,11 @@ class PublicController extends Controller
     {
         //======================================================
         $this->categoryRepository->skipPresenter(false);
-        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null,[],true);
+        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null, [], true);
         $categories = collect($categories)->sortBy([
-            function ($a, $b) {return (int)( count($a['cryptocurrencies']) < count($b['cryptocurrencies']));},
+            function ($a, $b) {
+                return (int)(count($a['cryptocurrencies']) < count($b['cryptocurrencies']));
+            },
         ]);
 
         //======================================================
@@ -77,23 +78,19 @@ class PublicController extends Controller
 
         //======================================================
         $this->cryptocurrencyRepository->skipPresenter(true);
-//        $this->cryptocurrencyRepository->pushCriteria(app(RequestCriteria::class));
 
-        $filter=[
-            'search'=>$request->search,
-            'cryptocurrency_info'=>true,
-            'cryptocurrency'=>[
-                'from_rank'=>1,
+        $filter = [
+            'search' => $request->search,
+            'cryptocurrency_info' => true,
+            'cryptocurrency' => [
+                'from_rank' => 1,
             ],
-            'category'=>[
-                'category_ids'=>[$request->category_id],
+            'category' => [
+                'category_ids' => [$request->category_id],
             ]
         ];
-        $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(50,$filter);
+        $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(11295, $filter);
 
-//        return [
-//            'cryptocurrencies' => $cryptocurrencies,
-//        ];
 
         return view('web.tokens', [
             'cryptocurrencies' => $cryptocurrencies,
@@ -119,6 +116,7 @@ class PublicController extends Controller
             'related_coins' => $related_coins,
         ]);
     }
+
     public function cryptocurrencyMobileView(Cryptocurrency $cryptocurrency)
     {
         return view('mobile.cryptocurrency', [
@@ -126,10 +124,13 @@ class PublicController extends Controller
         ]);
     }
 
-    public function termsOfServiceView(){
+    public function termsOfServiceView()
+    {
         return view('web.terms_of_service');
     }
-    public function privacyPolicyView(){
+
+    public function privacyPolicyView()
+    {
         return view('web.privacy_policy');
     }
 
