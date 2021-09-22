@@ -52,6 +52,11 @@ class CryptocurrencyInfoTransformer extends TransformerAbstract
             'links' => $model->links,
 
 
+            'market_cap_dominance' => $model->market_cap_dominance,
+            'current_supply' => $model->current_supply,
+            'max_supply' => $model->max_supply,
+            'holder_count' => $model->holder_count,
+            'fully_diluted_market_cap' => $model->fully_diluted_market_cap,
 
             /* place your other model properties here */
 

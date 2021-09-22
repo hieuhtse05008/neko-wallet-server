@@ -14,8 +14,47 @@
                 </div>
             </div>
         </div>
+{{--    PC    --}}
+
         <div v-cloak
-             class="categories-wrap smooth-scroll-x mb-5"
+             class="smooth-scroll-x mb-5 d-none d-lg-block"
+        >
+            <div class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
+                 :class="{'bg-main': !filter.category_id,'text-white':!filter.category_id,}"
+                 @click="onChangeCategory({})"
+            >
+                All (@{{ count_total_cryptocurrencies }})
+            </div>
+            <div v-for="category in _categories.slice(0,5)" class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
+                 :class="{'bg-main': category.id == filter.category_id,'text-white': category.id == filter.category_id,}"
+                 @click="onChangeCategory(category)"
+            >
+                @{{ category.name }} (@{{ category.cryptocurrencies.length }})
+            </div>
+
+            <div v-if="_categories.length > 5" class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
+
+                 data-bs-toggle="collapse"
+                 data-bs-target="#more-categories"
+                 aria-expanded="false"
+            >
+                +@{{ _categories.length - 5 }} more
+            </div>
+            <div class="collapse" id="more-categories">
+                <div class=" d-flex flex-wrap justify-content-center">
+                    <div v-if="_categories.length > 5" v-for="category in _categories.slice(5,_categories.length)"
+                         class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
+                         :class="{'bg-main': category.id == filter.category_id,'text-white': category.id == filter.category_id,}"
+                         @click="onChangeCategory(category)"
+                    >
+                        @{{ category.name }} (@{{ category.cryptocurrencies.length }})
+                    </div>
+                </div>
+            </div>
+        </div>
+{{--        MOBILE --}}
+        <div v-cloak
+             class="categories-wrap smooth-scroll-x mb-5 d-block d-lg-none"
         >
             <div class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill"
                  :class="{'bg-main': !filter.category_id,'text-white':!filter.category_id,}"
@@ -41,7 +80,7 @@
             <div class="col-6 col-sm-4 col-md-3 col-lg-2 pb-3"
                  v-for="(cryptocurrency,key) in cryptocurrencies" v-if="!isLoading">
                 <a :href="`/cryptocurrency/${cryptocurrency.name}`">
-                    <div class="align-items-center d-flex flex-column h-100 justify-content-center p-3 pointer rounded-7 shadow text-center">
+                    <div class="align-items-center d-flex flex-column h-100 justify-content-center p-3 pointer rounded-7 shadow text-center bg-white">
                             <img :src="cryptocurrency.icon_url" class="table-token-image mr-2 mb-3"
                                  style="width: 36px;">
                             <div>
@@ -50,7 +89,6 @@
                             <div>
                                 <span class="text-secondary mb-3"><b>@{{cryptocurrency.symbol.toUpperCase()}}</b></span>
                             </div>
-
                     </div>
                 </a>
             </div>

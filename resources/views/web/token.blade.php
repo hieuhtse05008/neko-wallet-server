@@ -242,13 +242,13 @@
 
         </div>
 
-        <div class="related-coins">
+        <div class="related-coins container">
             <div class="text-main pg-title mb-4 ps-3 ps-md-0">Recommended</div>
             <div class="row row-eq-height">
                 @foreach($related_coins as $cryptocurrency)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 pb-3">
                         <a href="/cryptocurrency/{{$cryptocurrency->name}}">
-                            <div class="align-items-center d-flex flex-column h-100 justify-content-center p-3 pointer rounded-7 shadow text-center">
+                            <div class="align-items-center d-flex flex-column h-100 justify-content-center p-3 pointer rounded-7 shadow text-center bg-white">
                                 <img src="{{$cryptocurrency->icon_url}}" class="table-token-image mr-2 mb-3"
                                      style="width: 36px;">
                                 <div>
