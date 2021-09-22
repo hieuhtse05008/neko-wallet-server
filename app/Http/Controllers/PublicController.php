@@ -68,7 +68,7 @@ class PublicController extends Controller
         $this->categoryRepository->skipPresenter(false);
         $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null,[],true);
         $categories = collect($categories)->sortBy([
-            function ($a, $b) {return count($a['cryptocurrencies']) < count($b['cryptocurrencies']);},
+            function ($a, $b) {return (int)( count($a['cryptocurrencies']) < count($b['cryptocurrencies']));},
         ]);
 
         //======================================================
