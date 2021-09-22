@@ -79,11 +79,11 @@ class SyncJsonCoinmarketcap extends Command
             }
             //update from json
             $cryptocurrency_info->update([
-                'market_cap_dominance' => object_get($data,'statistic.marketCapDominance'),
-                'current_supply'=>object_get($data,'statistic.circulatingSupply'),
-                'max_supply'=>object_get($data,'statistic.maxSupply'),
+                'market_cap_dominance' => object_get($data,'statistics.marketCapDominance'),
+                'current_supply'=>object_get($data,'statistics.circulatingSupply'),
+                'max_supply'=>object_get($data,'statistics.maxSupply'),
                 'holder_count'=>object_get($data,'holders.holderCount'),
-                'fully_diluted_market_cap'=>object_get($data,'statistic.fullyDilutedMarketCap'),
+                'fully_diluted_market_cap'=>object_get($data,'statistics.fullyDilutedMarketCap'),
             ]);
             //update except coingecko
             if(empty($mapping->coingecko_id)){
