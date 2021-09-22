@@ -89,7 +89,7 @@ class PublicController extends Controller
                 'category_ids' => [$request->category_id],
             ]
         ];
-        $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(11295, $filter);
+        $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(48, $filter);
 
 
         return view('web.tokens', [
