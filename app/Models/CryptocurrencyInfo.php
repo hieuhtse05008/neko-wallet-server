@@ -56,7 +56,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          type="string",
  *          format="date-time"
  *      )
- * 
+ *
  * )
  * @mixin IdeHelperCryptocurrencyInfo
  */
@@ -95,6 +95,11 @@ class CryptocurrencyInfo extends Model
         'id' => 'integer',
         'cryptocurrency_id' => 'integer',
         'description' => 'string',
+        'market_cap_dominance' => 'object',
+        'current_supply' => 'double',
+        'max_supply' => 'double',
+        'holder_count' => 'integer',
+        'fully_diluted_market_cap' => 'double',
         'links' => 'object',
     ];
 
