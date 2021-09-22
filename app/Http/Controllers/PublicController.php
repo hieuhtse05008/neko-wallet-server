@@ -4,7 +4,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Criteria\RequestCriteria;
 use App\Models\Cryptocurrency;
+use App\Models\CryptocurrencyInfo;
 use App\Models\EarlyAccessEmail;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CryptocurrencyCategoryRepository;
@@ -64,20 +66,37 @@ class PublicController extends Controller
     {
         //======================================================
         $this->categoryRepository->skipPresenter(false);
-        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null);
-        $count_total_cryptocurrencies = count($this->cryptocurrencyRepository->list(null, ['cryptocurrency_info' => true]));
+        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null,[],true);
+        $categories = collect($categories)->sortBy([
+            function ($a, $b) {return count($a['cryptocurrencies']) < count($b['cryptocurrencies']);},
+        ]);
 
-//        $this->cryptocurrencyRepository->skipPresenter(true);
-//        $cryptocurrencies = $this->cryptocurrencyRepository->list(50);
+        //======================================================
+
+        $count_total_cryptocurrencies = CryptocurrencyInfo::count('cryptocurrency_id');
+
+        //======================================================
+        $this->cryptocurrencyRepository->skipPresenter(true);
+//        $this->cryptocurrencyRepository->pushCriteria(app(RequestCriteria::class));
+
+        $filter=[
+            'search'=>$request->search,
+            'cryptocurrency_info'=>true,
+            'cryptocurrency'=>[
+                'from_rank'=>1,
+            ],
+            'category'=>[
+                'category_ids'=>[$request->category_id],
+            ]
+        ];
+        $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(50,$filter);
 
 //        return [
-//            'categories' => $categories,
-//            'count_total_cryptocurrencies' => $count_total_cryptocurrencies,
 //            'cryptocurrencies' => $cryptocurrencies,
 //        ];
 
         return view('web.tokens', [
-//            'cryptocurrencies' => $cryptocurrencies,
+            'cryptocurrencies' => $cryptocurrencies,
             'categories' => $categories,
             'count_total_cryptocurrencies' => $count_total_cryptocurrencies,
             'category_id' => $request->category_id,

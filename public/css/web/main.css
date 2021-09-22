@@ -174,3 +174,7 @@ body {
     display: -ms-flexbox;
     display: flex;
 }
+
+.page-link:hover{
+    background-color: var(--main-color, #FC7819);;
+}
