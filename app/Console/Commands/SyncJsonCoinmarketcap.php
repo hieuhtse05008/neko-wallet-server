@@ -57,15 +57,15 @@ class SyncJsonCoinmarketcap extends Command
         return 0;
     }
 
-    public function handleItem($cmd_id, $data,$parse_down)
+    public function handleItem($cmc_id, $data,$parse_down)
     {
         try {
-            echo $cmd_id, PHP_EOL;
+            echo $cmc_id, PHP_EOL;
 
             //find mapping
-            $mapping = CryptocurrencyMapping::where('cmc_id','=',$cmd_id)->first();
+            $mapping = CryptocurrencyMapping::where('cmc_id','=',$cmc_id)->first();
             if(empty($mapping)){
-                echo "ERROR mapping $cmd_id", PHP_EOL;
+                echo "ERROR mapping $cmc_id", PHP_EOL;
                 return;
             }
             $cryptocurrency = $mapping->cryptocurrency;
@@ -78,22 +78,23 @@ class SyncJsonCoinmarketcap extends Command
                 $cryptocurrency_info->save();
             }
             //update from json
-            $cryptocurrency_info->update([
-                'market_cap_dominance' => object_get($data,'statistics.marketCapDominance'),
-                'current_supply'=>object_get($data,'statistics.circulatingSupply'),
-                'max_supply'=>object_get($data,'statistics.maxSupply'),
-                'holder_count'=>object_get($data,'holders.holderCount'),
-                'fully_diluted_market_cap'=>object_get($data,'statistics.fullyDilutedMarketCap'),
-            ]);
+            $cryptocurrency_info->market_cap_dominance=object_get($data,'statistics.marketCapDominance');
+            $cryptocurrency_info->current_supply=object_get($data,'statistics.circulatingSupply');
+            $cryptocurrency_info->max_supply=object_get($data,'statistics.maxSupply');
+            $cryptocurrency_info->holder_count=object_get($data,'holders.holderCount');
+            $cryptocurrency_info->fully_diluted_market_cap=object_get($data,'statistics.fullyDilutedMarketCap');
+
+            $cryptocurrency_info->save();
             //update except coingecko
-            if(empty($mapping->coingecko_id)){
+            if(empty($cryptocurrency_info->description)){
                 $description = $parse_down->text(object_get($data,'description'));
                 $description = str_replace(['h1>','h2>','h3>','h4>','h5>'],'div>', $description);
-
-                $cryptocurrency_info->update([
-                    'description'=>$description,
-                    'links'=> object_get($data,'urls'),
-                ]);
+                $cryptocurrency_info->description =$description;
+                $cryptocurrency_info->save();
+            }
+            if(empty($cryptocurrency_info->links)){
+                $cryptocurrency_info->links= object_get($data,'urls');
+                $cryptocurrency_info->save();
             }
             //update category
             $tags = object_get($data,'tags');
@@ -107,7 +108,7 @@ class SyncJsonCoinmarketcap extends Command
                 }
             }
         } catch (\Exception $e) {
-            echo "ERROR catch $cmd_id", PHP_EOL;
+            echo "ERROR catch $cmc_id", PHP_EOL;
             Log::error($e);
         }
     }

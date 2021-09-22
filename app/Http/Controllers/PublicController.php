@@ -63,14 +63,25 @@ class PublicController extends Controller
     public function tokensView(Request $request)
     {
         //======================================================
-//        $this->categoryRepository->skipPresenter(false);
-
-        $categories = $this->categoryRepository->with(['cryptocurrencies'])->skipPresenter(false)->list(null);
+        $this->categoryRepository->skipPresenter(false);
+        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null);
         $count_total_cryptocurrencies = count($this->cryptocurrencyRepository->list(null, ['cryptocurrency_info' => true]));
 
+//        $this->cryptocurrencyRepository->skipPresenter(true);
+//        $cryptocurrencies = $this->cryptocurrencyRepository->list(50);
+
+//        return [
+//            'categories' => $categories,
+//            'count_total_cryptocurrencies' => $count_total_cryptocurrencies,
+//            'cryptocurrencies' => $cryptocurrencies,
+//        ];
+
         return view('web.tokens', [
+//            'cryptocurrencies' => $cryptocurrencies,
             'categories' => $categories,
             'count_total_cryptocurrencies' => $count_total_cryptocurrencies,
+            'category_id' => $request->category_id,
+            'search' => $request->search,
         ]);
     }
 
@@ -83,7 +94,6 @@ class PublicController extends Controller
             ->limit(12)
             ->get();
 
-
         return view('web.token', [
             'cryptocurrency' => $cryptocurrency,
             'exchange_guides' => $cryptocurrency->exchange_guides()->get(),
@@ -95,6 +105,13 @@ class PublicController extends Controller
         return view('mobile.cryptocurrency', [
             'cryptocurrency' => $cryptocurrency,
         ]);
+    }
+
+    public function termsOfServiceView(){
+        return view('web.terms_of_service');
+    }
+    public function privacyPolicyView(){
+        return view('web.privacy_policy');
     }
 
 }

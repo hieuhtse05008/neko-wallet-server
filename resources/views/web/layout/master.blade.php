@@ -4,8 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    @yield("meta")
     <title>Neko Invest</title>
-    <meta name="robots" content="noindex, follow">
+    
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
@@ -31,13 +32,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="ms-auto">
-            <a  href="/#input-early-access-email" class="hide-from-home btn btn-sm rounded btn-main ">Get early access</a>
+            <a href="/#input-early-access-email" class="hide-from-home btn btn-sm rounded btn-main ">Get early
+                access</a>
         </div>
-{{--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
-{{--            <div class="ms-auto">--}}
-{{--                <a  href="/#input-early-access-email" class="hide-from-home btn btn-sm rounded btn-main ">Get early access</a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        {{--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
+        {{--            <div class="ms-auto">--}}
+        {{--                <a  href="/#input-early-access-email" class="hide-from-home btn btn-sm rounded btn-main ">Get early access</a>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
     </div>
 </nav>
 @yield('content')
@@ -55,12 +57,13 @@
         <div class="d-flex flex-column flex-sm-row justify-content-center my-3 text-white">
             <div class="me-5 mb-3 mb-md-0"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
             <div class="me-5 mb-3 mb-md-0"><a href="/cryptocurrencies">How to buy</a></div>
-            <div class="me-sm-0"><a class="pointer" data-bs-toggle="modal" data-bs-target="#modal-check-my-spot">Check my spot</a></div>
+            <div class="me-sm-0"><a class="pointer" data-bs-toggle="modal" data-bs-target="#modal-check-my-spot">Check
+                    my spot</a></div>
         </div>
         <div class="text-white d-flex justify-content-end my-3">
             <div class="me-5"><a href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a></div>
-{{--            <div class="me-5"><a href="https://t.me/nekoinvest"><i class="fab fa-telegram-plane"></i></a></div>--}}
-{{--            <div><a href="https://discord.gg/nhZsK6Xarz"><i class="fab fa-discord"></i></a></div>--}}
+            {{--            <div class="me-5"><a href="https://t.me/nekoinvest"><i class="fab fa-telegram-plane"></i></a></div>--}}
+            {{--            <div><a href="https://discord.gg/nhZsK6Xarz"><i class="fab fa-discord"></i></a></div>--}}
         </div>
     </div>
 </footer>
@@ -77,7 +80,11 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q091EE5SJE"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
     gtag('js', new Date());
 
     gtag('config', 'G-Q091EE5SJE');

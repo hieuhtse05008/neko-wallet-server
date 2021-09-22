@@ -25,6 +25,8 @@ Route::get('/test', [AuthController::class, 'test']);
 Route::post('/register-early-access', [PublicController::class, 'registerEarlyAccessWithEmail']);
 
 Route::get('/cryptocurrency/{cryptocurrency:name}', [PublicController::class, 'tokenView']);
+Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
+Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);
 Route::group(["prefix" => 'mobile'], function () {
     Route::get('/cryptocurrency/{cryptocurrency:id}', [PublicController::class, 'cryptocurrencyMobileView']);
 });
