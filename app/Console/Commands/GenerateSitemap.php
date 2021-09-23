@@ -54,7 +54,7 @@ class GenerateSitemap extends Command
             $name = urlencode($cryptocurrency->name);
             $xml .= "
                 <url>
-                  <loc>https://nekowallet.io/cryptocurrency/$name</loc>
+                  <loc>https://nekoinvest.io/cryptocurrency/$name</loc>
                   <lastmod>2021-09-22T11:05:32+00:00</lastmod>
                   <priority>1</priority>
                 </url>
@@ -63,7 +63,7 @@ class GenerateSitemap extends Command
         foreach ($categories as $category){
             $xml .= "
                 <url>
-                  <loc>https://nekowallet.io/cryptocurrencies?category_id={$category->id}</loc>
+                  <loc>https://nekoinvest.io/cryptocurrencies?category_id={$category->id}</loc>
                   <lastmod>2021-09-22T11:05:32+00:00</lastmod>
                   <priority>1</priority>
                 </url>
