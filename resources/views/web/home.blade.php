@@ -29,8 +29,9 @@
                 <div class="col-12 col-lg-4">
                     <div class="benefits-item d-flex flex-column justify-content-between text-center">
                         <div><img src="/images/home/benefit_1.png"></div>
-                        <div class="my-5 ">Exchange any Crypto-assets on <br>
-                            any Blockchain networks
+                        <div class="my-5 ">
+                            Invest in any Cryptocurrency with just one swipe.
+
                         </div>
                     </div>
                 </div>
@@ -181,7 +182,7 @@
 
         .benefits-items img{
             max-width: min(100vw, 400px);
-            width: 100%;
+            width: auto;
             max-height: 270px;
         }
         .benefits-items {
