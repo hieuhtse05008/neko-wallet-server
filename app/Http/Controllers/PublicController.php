@@ -31,6 +31,14 @@ class PublicController extends Controller
         $this->categoryRepository = $categoryRepository;
     }
 
+    public function test(){
+        return [
+            'ok'=>file_exists('https://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
+            'ok2'=>getimagesize('https://nekoinvest.io/images/home/protect.png'),
+            'ok3'=>getimagesize('https://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
+        ];
+    }
+
     public function registerEarlyAccessWithEmail(Request $request)
     {
         $object = EarlyAccessEmail::firstOrCreate([
@@ -102,9 +110,9 @@ class PublicController extends Controller
                     ['title' => 'Add support for BSC, Ethereum & Solana', 'done' => true],
                     ['title' => 'Secure Angel round', 'done' => true],
                     ['title' => 'Integrate BSC, Ethereum & Solana DEXes', 'done' => true],
-                    ['title' => 'Secure Seed round', 'done' => true],
-                    ['title' => 'Release public beta', 'done' => true],
-                    ['title' => 'Secure strategic rounds', 'done' => true],
+                    ['title' => 'Secure Seed round', 'done' => false],
+                    ['title' => 'Release public beta', 'done' => false],
+                    ['title' => 'Secure strategic rounds', 'done' => false],
                 ],
             ],
             [
@@ -230,4 +238,20 @@ class PublicController extends Controller
         return view('web.privacy_policy');
     }
 
+    public function uploadBlogView(Blog $blog)
+    {
+
+        return view('web.blog.upload_blog', [
+            'blog' => $blog
+        ]);
+
+    }
+
+    public function blogView(Blog $blog)
+    {
+
+        return view('web.blog.blog', [
+            'blog' => $blog
+        ]);
+    }
 }

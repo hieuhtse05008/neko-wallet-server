@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-md">
-        <div class="row my-5 py-5">
+        <div class="row my-3 py-3 my-md-5 py-md-5">
             <div class="col-12 col-sm-6">
                 <div class="d-flex flex-column h-100 justify-content-center">
                     <div class="text-spotlight mb-4">
@@ -13,9 +13,9 @@
                     <div class="mb-4">Secured. Hassle-free. 0% fee for private beta.</div>
                     <form class="mb-4 d-flex flex-wrap" id="form-early-access">
                         <input id="input-early-access-email" placeholder="Enter your email"
-                               class="rounded mb-3 mb-lg-0  inp-main" type="email" style="" required>
+                               class="rounded mb-3 mb-lg-0  inp-main flex-grow-1 mw-100"  type="email" style="" required>
                         <div class="me-3 d-none d-md-block"></div>
-                        <button class="btn btn-main px-3 text-center border-light rounded-3">
+                        <button class="btn btn-main px-3 text-center border-light rounded-3 flex-grow-1 flex-md-grow-0">
                             Get early access
                         </button>
                     </form>
@@ -70,7 +70,7 @@
         </div>
 
         <div class="row my-5 py-5 gx-5">
-            <div class="col-12 col-sm-6">
+            <div class="col-12 col-sm-6 mb-5 mb-sm-0">
                 <img src="/images/home/cute_boat.png">
             </div>
             <div class="col-12 col-sm-6">
@@ -161,7 +161,7 @@
             <div class="row gy-5">
                 @foreach($founders as $founder)
                     <div class="col-6 col-md-3 text-center">
-                        <img src="{{$founder['avatar']}}">
+                        <img class="px-3 px-sm-0" src="{{$founder['avatar']}}">
                         <div class="fw-bold text-uppercase mt-3 mt-lg-5">{{$founder['name']}}</div>
                         <div>{{$founder['role']}}</div>
                     </div>
@@ -176,7 +176,7 @@
                 <form id="form-early-access-2">
                     <div class="mb-4 d-flex flex-wrap justify-content-center mx-0 px-0 mx-lg-5 px-lg-5">
                         <input id="input-early-access-email-2" placeholder="Enter your email"
-                               class="rounded mb-3 mb-md-0  inp-main flex-grow-1" type="email" style="" required>
+                               class="rounded mb-3 mb-md-0  inp-main flex-grow-1 border-0" type="email" style="" required>
                         <div class="me-3 d-none d-md-block"></div>
                         <button class="btn btn-main px-3 py-2 text-center border-light rounded-3 flex-grow-1 flex-lg-grow-0">
                             Get early access

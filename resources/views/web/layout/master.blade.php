@@ -32,8 +32,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="ms-auto">
-            <a href="/#input-early-access-email" class="btn btn-sm rounded btn-main ">Get early
-                access</a>
+            <a href="https://docs.nekoinvest.io/" class="btn btn-sm rounded btn-main p-2">White paper</a>
+{{--            <a href="/#input-early-access-email" class="btn btn-sm rounded btn-main ">Get early--}}
+{{--                access</a>--}}
         </div>
         {{--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
         {{--            <div class="ms-auto">--}}
