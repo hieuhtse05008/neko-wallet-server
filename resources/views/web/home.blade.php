@@ -19,7 +19,7 @@
                             Get early access
                         </button>
                     </form>
-                    <div class="">
+                    <div class="mb-5 mb-sm-0">
                         <i class="fas fa-play-circle"></i> See how it works
                     </div>
                 </div>
@@ -30,8 +30,8 @@
                 </div>
             </div>
         </div>
-        <div class="row my-5 py-5">
-            <div class="col-12 col-sm-6">
+        <div class="row my-5 py-5 gx-5">
+            <div class="col-12 col-sm-6 mb-5 mb-sm-0">
                 <img src="/images/home/swipe.png">
             </div>
             <div class="col-12 col-sm-6">
@@ -39,11 +39,11 @@
                     <div class="ms-auto my-auto">
                         <div class="text-spotlight mb-4">Exchange any Crypto-assets on any Blockchain networks.</div>
                         <div class="mb-4">Neko is a multichain wallet, Neko is now supports 6000+ tokens on</div>
-                        <div class="d-flex">
+                        <div class="d-flex flex-wrap">
                             @foreach($networks as $network)
-                                <div class="rounded-7 bg-gray px-3 py-3 me-3">
+                                <div class="rounded-7 bg-gray py-2 px-2 me-3 d-flex flex-nowrap mb-3 mb-lg-0">
                                     <img src="{{$network->icon_url}}" width="25" height="25">
-                                    {{$network->symbol}}
+                                    <div class="mx-2">{{$network->symbol}}</div>
                                 </div>
                             @endforeach
                         </div>
@@ -52,7 +52,10 @@
             </div>
         </div>
 
-        <div class="row my-5 py-5">
+        <div class="row my-5 py-5 d-flex flex-row-reverse gx-5">
+            <div class="col-12 col-sm-6 mb-5 mb-sm-0">
+                <img src="/images/home/protect.png">
+            </div>
             <div class="col-12 col-sm-6">
                 <div class="h-100 d-flex">
                     <div class="ms-auto my-auto">
@@ -64,12 +67,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-6">
-                <img src="/images/home/protect.png">
-            </div>
         </div>
 
-        <div class="row my-5 py-5">
+        <div class="row my-5 py-5 gx-5">
             <div class="col-12 col-sm-6">
                 <img src="/images/home/cute_boat.png">
             </div>
@@ -121,16 +121,16 @@
                             @if(isset($road_map['current']))
                             shadow-sm
                             @endif">
-                            <div class="mb-4 rounded-pill btn
+                            <div class="mb-5 rounded-pill btn
                             @if(isset($road_map['current']))
                                 bg-main text-white
                                 @else
                                 bg-gray
                             @endif
                                 ">{{$road_map['time']}}</div>
-                            <h6 class="mb-4 text-main">{{$road_map['title']}}</h6>
+                            <h6 class="mb-5 text-main">{{$road_map['title']}}</h6>
                             @foreach($road_map['items'] as $item)
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <div class="d-flex">
                                         <div class="me-2">
                                             @if($item['done'])
@@ -156,13 +156,13 @@
         <div class="my-5 py-5">
             <div class="text-center mb-5 pb-5">
                 <h1 class="text-main">Founding Team</h1>
-{{--                <h5 class="fw-normal">See what is going on with Neko</h5>--}}
+                {{--                <h5 class="fw-normal">See what is going on with Neko</h5>--}}
             </div>
             <div class="row gy-5">
                 @foreach($founders as $founder)
-                    <div class="col-12 col-md-3 text-center">
+                    <div class="col-6 col-md-3 text-center">
                         <img src="{{$founder['avatar']}}">
-                        <div class="fw-bold text-uppercase mt-5">{{$founder['name']}}</div>
+                        <div class="fw-bold text-uppercase mt-3 mt-lg-5">{{$founder['name']}}</div>
                         <div>{{$founder['role']}}</div>
                     </div>
                 @endforeach
@@ -173,13 +173,15 @@
                 <h3 class="mb-5">Join our beta program for free</h3>
                 <div class="mb-5">Leave your email and we will send you a private invitation for beta app</div>
 
-                <form class="mb-4 d-flex flex-wrap justify-content-center" id="form-early-access-2">
-                    <input id="input-early-access-email-2" placeholder="Enter your email"
-                           class="rounded mb-3 mb-md-0  inp-main" type="email" style="" required>
-                    <div class="me-3 d-none d-md-block"></div>
-                    <button class="btn btn-main px-3 text-center border-light rounded-3">
-                        Get early access
-                    </button>
+                <form id="form-early-access-2">
+                    <div class="mb-4 d-flex flex-wrap justify-content-center mx-0 px-0 mx-lg-5 px-lg-5">
+                        <input id="input-early-access-email-2" placeholder="Enter your email"
+                               class="rounded mb-3 mb-md-0  inp-main flex-grow-1" type="email" style="" required>
+                        <div class="me-3 d-none d-md-block"></div>
+                        <button class="btn btn-main px-3 py-2 text-center border-light rounded-3 flex-grow-1 flex-lg-grow-0">
+                            Get early access
+                        </button>
+                    </div>
                 </form>
             </div>
             <div class="mx-auto rounded-2-7 " style="
@@ -301,8 +303,8 @@
 
         #form-early-access-2 input {
 
-            width: 413px;
-            max-width: 80%;
+            /*width: 413px;*/
+            max-width: 100%;
         }
 
         .text-spotlight {

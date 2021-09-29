@@ -45,32 +45,37 @@
 @yield('content')
 <footer>
     <div class="container-md">
-        <div id="footer-wrap" class="d-flex justify-content-between align-items-center flex-wrap">
-            <div class="my-3 my-md-0 me-3 me-md-0">
-                <img width="100" height="28" src="/images/logo/long-orange-text-white-neko.svg" alt="">
-                <div class="mt-2 text-white">
-                    © 2021 Neko, All Rights Reserved.
-                </div>
-            </div>
+        <div id="footer-wrap" class=" py-5">
+            <div class=" row py-5">
+                <div class="col-md-3 mb-5">
+                    <img width="50"  src="/images/no_padding_light.png" alt="">
 
-            <div class="my-3 text-white">
-                <div class="mb-2"><a href="/">Home</a></div>
-                <div class="mb-2"><a href="/">Blog</a></div>
-                <div class="mb-sm-0">
-                    <a class="pointer">
-                        White Paper</a>
                 </div>
-            </div>
-            <div class="my-3 text-white">
-                <div class="mb-2"><a href="/cryptocurrencies">How to buy</a></div>
-                <div class="mb-2"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
-                <div class="mb-sm-0"><a class="pointer" data-bs-toggle="modal" data-bs-target="#modal-check-my-spot">Check
-                        my spot</a></div>
-            </div>
-            <div class="text-white d-flex justify-content-end my-3">
-                <div {{--class="me-5"--}}><a href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a></div>
-{{--                            <div class="me-5"><a href="https://t.me/nekoinvest"><i class="fab fa-telegram-plane"></i></a></div>--}}
-{{--                            <div><a href="https://discord.gg/nhZsK6Xarz"><i class="fab fa-discord"></i></a></div>--}}
+
+                <div class="col-md-3 mb-3 text-white">
+                    <div class="mb-3"><a href="/">Home</a></div>
+                    <div class="mb-3"><a href="/">Blog</a></div>
+                    <div class="mb-sm-0">
+                        <a class="pointer">
+                            White Paper</a>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5 text-white">
+                    <div class="mb-3"><a href="/cryptocurrencies">How to buy</a></div>
+                    <div class="mb-3"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
+                    <div class="mb-sm-0"><a class="pointer" data-bs-toggle="modal"
+                                            data-bs-target="#modal-check-my-spot">Check
+                            my spot</a></div>
+                </div>
+                <div class="text-white mb-3 col-md-3">
+                    <div class="d-flex">
+                        <div class="me-5"><a href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a>
+                        </div>
+                        <div class="me-5"><a href="https://t.me/nekoinvest"><i class="fab fa-telegram-plane"></i></a>
+                        </div>
+                        <div><a href="https://discord.gg/nhZsK6Xarz"><i class="fab fa-discord"></i></a></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
