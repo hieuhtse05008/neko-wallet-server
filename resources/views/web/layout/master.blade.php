@@ -32,7 +32,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="ms-auto">
-            <a href="https://docs.nekoinvest.io/" class="btn btn-sm rounded btn-main p-2">White paper</a>
+            <a href="https://docs.nekoinvest.io/" target="_blank" class="btn btn-sm rounded btn-main py-2 px-3">White paper</a>
 {{--            <a href="/#input-early-access-email" class="btn btn-sm rounded btn-main ">Get early--}}
 {{--                access</a>--}}
         </div>
@@ -49,7 +49,9 @@
         <div id="footer-wrap" class=" py-5">
             <div class=" row py-5">
                 <div class="col-md-3 mb-5">
-                    <img width="50"  src="/images/no_padding_light.png" alt="">
+                    <a href="/">
+                        <img width="50"  src="/images/no_padding_light.png" alt="">
+                    </a>
 
                 </div>
 
@@ -57,13 +59,13 @@
                     <div class="mb-3"><a href="/">Home</a></div>
                     <div class="mb-3"><a href="/">Blog</a></div>
                     <div class="mb-sm-0">
-                        <a class="pointer">
+                        <a target="_blank" href="https://docs.nekoinvest.io/" class="pointer">
                             White Paper</a>
                     </div>
                 </div>
                 <div class="col-md-3 mb-5 text-white">
                     <div class="mb-3"><a href="/cryptocurrencies">How to buy</a></div>
-                    <div class="mb-3"><a href="https://docs.nekoinvest.io/">Litepaper</a></div>
+                    <div class="mb-3"><a>Brand assets</a></div>
                     <div class="mb-sm-0"><a class="pointer" data-bs-toggle="modal"
                                             data-bs-target="#modal-check-my-spot">Check
                             my spot</a></div>

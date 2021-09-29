@@ -13,7 +13,7 @@
                     <div class="mb-4">Secured. Hassle-free. 0% fee for private beta.</div>
                     <form class="mb-4 d-flex flex-wrap" id="form-early-access">
                         <input id="input-early-access-email" placeholder="Enter your email"
-                               class="rounded mb-3 mb-lg-0  inp-main flex-grow-1 mw-100"  type="email" style="" required>
+                               class="rounded mb-3 mb-lg-0  inp-main flex-grow-1 mw-100" type="email" style="" required>
                         <div class="me-3 d-none d-md-block"></div>
                         <button class="btn btn-main px-3 text-center border-light rounded-3 flex-grow-1 flex-md-grow-0">
                             Get early access
@@ -91,36 +91,30 @@
                 <h5 class="fw-normal">See what Neko can do</h5>
             </div>
             <div class="py-5"></div>
-            <div class="row row-eq-height gx-5 gy-3">
+            <div class="row row-eq-height gx-5 gy-5">
                 @foreach($features as $key=>$feature)
-                    <div class="col-12 col-sm-4">
-                        <div class=" h-100
-                        @if(in_array($key,[1,4]))
-                            mt-0 mt-sm-5
-                        @endif
-                            ">
-                            <div class="rounded-1-56 shadow-sm p-5">
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="rounded-1-56 h-100 shadow-sm p-4 p-md-5 d-flex flex-column justify-content-between">
+                            <div>
                                 <h5 class="text-main mb-3">{{$feature['title']}}</h5>
                                 <div class="mb-5">{{$feature['description']}}</div>
-                                <img class="w-100 mx-auto" src="{{$feature['image_url']}}">
                             </div>
+                            <img class="w-100 mx-auto" src="{{$feature['image_url']}}">
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
         <div class="my-5 py-5">
-            <div class="text-center mb-5">
+            <div class="text-start text-sm-center mb-5">
                 <h1 class="text-main">Road map</h1>
                 <h5 class="fw-normal">See what is going on with Neko</h5>
             </div>
-            <div class="row row-eq-height">
+            <div class="row row-eq-height position-relative">
+                <div class="bg-gray road-map-line position-absolute d-none d-lg-block"></div>
                 @foreach($road_maps as $road_map)
                     <div class="col-12 col-sm-6 col-lg-3 gy-3">
-                        <div class="rounded-7 p-4 h-100
-                            @if(isset($road_map['current']))
-                            shadow-sm
-                            @endif">
+                        <div class="rounded-7 p-0 p-sm-4 h-100">
                             <div class="mb-5 rounded-pill btn
                             @if(isset($road_map['current']))
                                 bg-main text-white
@@ -169,18 +163,25 @@
             </div>
         </div>
         <div class="my-5 py-5">
-            <div class="bg-main w-100 rounded-2-7 text-white text-center py-5 px-3">
-                <h3 class="mb-5">Join our beta program for free</h3>
+            <div class="bg-main w-100 rounded-2-7 text-white text-center py-5 px-4">
+                <img class="mb-3" src="/images/logo/logo_white.svg">
+                <h3 class="mb-4">Join our beta program for free</h3>
                 <div class="mb-5">Leave your email and we will send you a private invitation for beta app</div>
 
                 <form id="form-early-access-2">
-                    <div class="mb-4 d-flex flex-wrap justify-content-center mx-0 px-0 mx-lg-5 px-lg-5">
-                        <input id="input-early-access-email-2" placeholder="Enter your email"
-                               class="rounded mb-3 mb-md-0  inp-main flex-grow-1 border-0" type="email" style="" required>
-                        <div class="me-3 d-none d-md-block"></div>
-                        <button class="btn btn-main px-3 py-2 text-center border-light rounded-3 flex-grow-1 flex-lg-grow-0">
-                            Get early access
-                        </button>
+                    <div class="row">
+                    <div class="col-12 col-lg-10 offset-lg-1">
+                        <div class="mb-4 d-flex flex-wrap justify-content-center mx-0 px-0 mx-lg-5 px-lg-5">
+                            <input id="input-early-access-email-2" placeholder="Enter your email"
+                                   class="rounded mb-3 mb-md-0  inp-main flex-grow-1 border-0" type="email" style=""
+                                   required>
+                            <div class="me-3 d-none d-md-block"></div>
+                            <button
+                                class="btn btn-main px-3 py-2 text-center border-light rounded-3 flex-grow-1 flex-lg-grow-0">
+                                Get early access
+                            </button>
+                        </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -285,6 +286,12 @@
 @endpush
 @section('styles')
     <style>
+        .road-map-line {
+            height: 3px !important;
+            z-index: -1;
+            top: 57px;
+        }
+
         img {
             max-width: 100%;
         }
