@@ -15,7 +15,7 @@
                         <input id="input-early-access-email" placeholder="Enter your email"
                                class="rounded mb-3 mb-lg-0  inp-main flex-grow-1 mw-100" type="email" style="" required>
                         <div class="me-3 d-none d-md-block"></div>
-                        <button class="btn btn-main px-3 text-center border-light rounded-3 flex-grow-1 flex-md-grow-0">
+                        <button class="btn btn-main px-3 py-2 py-lg-0 text-center border-light rounded-3 flex-grow-1 flex-md-grow-0">
                             Get early access
                         </button>
                     </form>
@@ -341,12 +341,10 @@
 
         }
 
-        @media (min-width: 768px) {
-
+        @media (min-width: 1024px) {
             .text-spotlight {
                 font-size: 30px;
             }
-
         }
     </style>
 @endsection
