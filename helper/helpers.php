@@ -36,3 +36,15 @@ function _empty($data, $field)
 
     return false;
 }
+
+
+function getDataByKeys($data, $keys)
+{
+    return array_filter(
+        $data,
+        function ($key) use ($keys) {
+            return in_array($key, $keys);
+        },
+        ARRAY_FILTER_USE_KEY
+    );
+}

@@ -4,9 +4,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Blog;
 use App\Models\Cryptocurrency;
 use App\Models\CryptocurrencyInfo;
 use App\Models\EarlyAccessEmail;
+use App\Models\Network;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CryptocurrencyCategoryRepository;
 use App\Repositories\CryptocurrencyRepository;
@@ -57,7 +59,101 @@ class PublicController extends Controller
 
     public function homeView(Request $request)
     {
+        $networks = Network::whereIn('id', [1, 2, 4])->get();
+        $features = [
+            [
+                'title' => 'Send & Receive Crypto',
+                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'image_url' => '/images/feature/boat.png',
+            ],
+            [
+                'title' => 'Swap between tokens',
+                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'image_url' => '/images/feature/exchange.png',
+            ],
+            [
+                'title' => 'NFTs',
+                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'image_url' => '/images/feature/nft.png',
+            ],
+            [
+                'title' => 'dApps Connect',
+                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'image_url' => '/images/feature/dapps.png',
+            ],
+            [
+                'title' => 'Market Overview',
+                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'image_url' => '/images/feature/market.png',
+            ],
+            [
+                'title' => 'Project inspect',
+                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'image_url' => '/images/feature/inspect.png',
+            ],
+        ];
+        $road_maps = [
+            [
+                'time' => '2021',
+                'title' => 'MINIMUM VIABLE PRODUCT',
+                'current' => true,
+                'items' => [
+                    ['title' => 'Finish MVP Aggregator & multichain Wallet', 'done' => true],
+                    ['title' => 'Add support for BSC, Ethereum & Solana', 'done' => true],
+                    ['title' => 'Secure Angel round', 'done' => true],
+                    ['title' => 'Integrate BSC, Ethereum & Solana DEXes', 'done' => true],
+                    ['title' => 'Secure Seed round', 'done' => true],
+                    ['title' => 'Release public beta', 'done' => true],
+                    ['title' => 'Secure strategic rounds', 'done' => true],
+                ],
+            ],
+            [
+                'time' => 'Q1-Q2 2022',
+                'title' => 'REFINE PLATFORM',
+                'items' => [
+                    ['title' => 'Integrate all popular networks', 'done' => false],
+                    ['title' => 'Integrate popular cexes', 'done' => false],
+                    ['title' => 'Continue adding more DEXes', 'done' => false],
+                    ['title' => 'Smart contracts audits', 'done' => false],
+                    ['title' => 'Release neko bridge', 'done' => false],
+                    ['title' => 'Public sales', 'done' => false],
+                ],
+            ],
+            [
+                'time' => 'Q3-Q4 2022',
+                'title' => 'PUBLIC RELEASE',
+                'items' => [
+                    ['title' => 'Continue adding networks, DEXes & CEXes', 'done' => false],
+                    ['title' => 'Neko NFT', 'done' => false],
+                    ['title' => 'Neko Index', 'done' => false],
+                    ['title' => 'Neko Decentralized Investment Funds', 'done' => false],
+                ],
+            ],
+            [
+                'time' => '2023',
+                'title' => 'USER GROWTH',
+                'items' => [
+                    ['title' => 'Continue adding networks, DEXes & CEXes', 'done' => false],
+                    ['title' => 'Yield Aggregator', 'done' => false],
+                    ['title' => 'Saving Products', 'done' => false],
+                ],
+            ],
+        ];
+        $founders = [
+            ['name' => 'LEO NGUYEN', 'role' => 'CEO', 'department' => 'Msc. Strategy - Aalto Uni','avatar'=>'/images/founder/locnv.png'],
+            ['name' => 'NGUYEN VIET HUNG', 'role' => 'Product', 'department' => 'Computer Science FPT Uni','avatar'=>'/images/founder/hungnv.png'],
+            ['name' => 'TRINH ANH DUC', 'role' => 'Strategy & Finance', 'department' => 'Venture Capital','avatar'=>'/images/founder/ducta.png'],
+            ['name' => 'NGUYEN QUANG THAI', 'role' => 'Growth', 'department' => 'Founder DTX Asia','avatar'=>'/images/founder/thainq.png'],
+            ['name' => 'PHAN MINH DUONG', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH','avatar'=>'/images/founder/duongpm.png'],
+            ['name' => 'HA TRUNG HIEU', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH','avatar'=>'/images/founder/hieuht.png'],
+            ['name' => 'DUONG NHAT ANH', 'role' => 'NFT Designer', 'department' => 'Graphic Design FPT Uni','avatar'=>'/images/founder/anhnd.png'],
+            ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni','avatar'=>'/images/founder/longhd.png'],
+        ];
         return view('web.home', [
+            'founders' => $founders,
+            'road_maps' => $road_maps,
+            'networks' => $networks,
+            'features' => $features,
         ]);
     }
 

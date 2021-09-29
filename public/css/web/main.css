@@ -81,6 +81,7 @@ body {
     color: white;
 }
 
+
 .inp-main {
     border: 1px solid #DCDEE3;
     box-sizing: border-box;
@@ -104,6 +105,15 @@ body {
 /*rounded radius*/
 .rounded-7 {
     border-radius: .7rem;
+}
+.rounded-2-7 {
+    border-radius: 2.7rem;
+}
+.rounded-9-4 {
+    border-radius: .94rem;
+}
+.rounded-1-56 {
+    border-radius: 1.56rem;
 }
 
 /*font sizes*/
@@ -178,3 +188,4 @@ body {
 .page-link:hover{
     background-color: var(--main-color, #FC7819);;
 }
+
