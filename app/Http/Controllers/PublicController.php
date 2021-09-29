@@ -70,33 +70,33 @@ class PublicController extends Controller
         $networks = Network::whereIn('id', [1, 2, 4])->get();
         $features = [
             [
-                'title' => 'Send & Receive Crypto',
-                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'title' => 'Invest in any token',
+                'description' => 'By sourcing liquidity from multiple major exchanges, Neko provides you the ability to invest in 6000+ tokens',
                 'image_url' => '/images/feature/boat.png',
             ],
             [
-                'title' => 'Swap between tokens',
-                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'title' => 'Support MultiChains',
+                'description' => 'With Neko cross-chain protocol, you will be able to swap between assets that belongs to different blockchain networks seamlessly',
                 'image_url' => '/images/feature/exchange.png',
             ],
             [
-                'title' => 'NFTs',
-                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'title' => 'Secured Wallets',
+                'description' => 'Since Neko Wallet is a non-custodial wallet, you are in full control your assets, and own the proofs that the funds are yours',
                 'image_url' => '/images/feature/nft.png',
             ],
             [
                 'title' => 'dApps Connect',
-                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'description' => 'With Wallet Connect and in-app browser, you can easly connect your wallets with dApps right on your mobile devices',
                 'image_url' => '/images/feature/dapps.png',
             ],
             [
-                'title' => 'Market Overview',
-                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'title' => 'Full Market Overview',
+                'description' => 'Stay informed of trend and vast investment opportunities on field',
                 'image_url' => '/images/feature/market.png',
             ],
             [
-                'title' => 'Project inspect',
-                'description' => 'Get your first $50 of Bitcoin, Ethereum, Binance Coin and many other cryptocurrencies.',
+                'title' => 'Projects Discovery',
+                'description' => 'By prospecting numerous projects, Neko discover hidden gems and feed them to you',
                 'image_url' => '/images/feature/inspect.png',
             ],
         ];
