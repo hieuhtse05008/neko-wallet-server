@@ -37,8 +37,8 @@
             <div class="col-12 col-sm-6">
                 <div class="h-100 d-flex">
                     <div class="ms-auto my-auto">
-                        <div class="text-spotlight mb-4">Exchange any Crypto-assets on any Blockchain networks.</div>
-                        <div class="mb-4">Neko is a multichain wallet, Neko is now supports 6000+ tokens on</div>
+                        <div class="text-spotlight mb-4">Swap any crypto assets on any Blockchain networks.</div>
+                        <div class="mb-4">Neko is a multichain wallet, now supporting 6000+ tokens on:</div>
                         <div class="d-flex flex-wrap">
                             @foreach($networks as $network)
                                 <div class="rounded-7 bg-gray py-2 px-2 me-3 d-flex flex-nowrap mb-3 mb-lg-0">
@@ -59,8 +59,8 @@
             <div class="col-12 col-sm-6">
                 <div class="h-100 d-flex">
                     <div class="ms-auto my-auto">
-                        <div class="text-spotlight mb-4">Take your crypto to the next level with Neko.</div>
-                        <div class="mb-4">Neko is easy to use, secured, functional</div>
+                        <div class="text-spotlight mb-4">Investment made easy.</div>
+                        <div class="mb-4">With simplified user interface, for the first time Neko offers crypto enthusiasts the swapping process at ease.</div>
                         <a href="#input-early-access-email" class="btn btn-main px-3 text-center">
                             Get early access
                         </a>
@@ -77,7 +77,7 @@
                 <div class="h-100 d-flex">
                     <div class="ms-auto my-auto">
                         <div class="text-spotlight mb-4">Stay on top of your portfolio. Anytime. Anywhere.</div>
-                        <div class="mb-4">Exchange any Crypto-assets on any Blockchain networks.</div>
+                        <div class="mb-4">Neko’s detailed Profit and Loss tracker keeps you well informed regarding your investment performance.</div>
                         <a href="#input-early-access-email" class="btn btn-main px-3 text-center">
                             Get early access
                         </a>
@@ -94,7 +94,7 @@
             <div class="row row-eq-height gx-5 gy-5">
                 @foreach($features as $key=>$feature)
                     <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="rounded-1-56 h-100 shadow-sm p-4 p-md-5 d-flex flex-column justify-content-between">
+                        <div class="rounded-1-56 h-100 shadow-lg-light p-4 p-md-5 d-flex flex-column justify-content-between">
                             <div>
                                 <h5 class="text-main mb-3">{{$feature['title']}}</h5>
                                 <div class="mb-5">{{$feature['description']}}</div>
