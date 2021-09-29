@@ -90,6 +90,7 @@
                 <h1 class="text-main">Main Features</h1>
                 <h5 class="fw-normal">See what Neko can do</h5>
             </div>
+
             <div class="py-5"></div>
             <div class="row row-eq-height gx-5 gy-5">
                 @foreach($features as $key=>$feature)
