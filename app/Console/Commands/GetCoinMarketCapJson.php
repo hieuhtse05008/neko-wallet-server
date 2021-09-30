@@ -34,20 +34,21 @@ class GetCoinMarketCapJson extends Command
     private $path = 'resources/json/cmc';
 
 
-
-    private function handleCoins(){
+    private function handleCoins()
+    {
 //        $this->handleCoin(11156);return;
 
-        for ($i = 1; $i <= 12000; $i++) {
+        for ($i = 11000; $i <= 14000; $i++) {
 //         foreach([] as $i){
             $data = $this->handleCoin($i);
-            if(!empty($data)) $this->saveFile($i, $data);
-//            sleep(2);
+            if ($data) $this->saveFile($i, $data);
+            sleep(1);
         }
     }
 
 
-    private function handleCoin($id){
+    private function handleCoin($id)
+    {
         try {
             //get slug
             $httpClient = new \GuzzleHttp\Client();
@@ -58,8 +59,8 @@ class GetCoinMarketCapJson extends Command
             if (!property_exists($api_data, 'slug')) {
                 Log::info("EMPTY $id handleCoinMarketCap");
                 echo "EMPTY $id", PHP_EOL;
-                return null;
-            }else{
+                return false;
+            } else {
                 echo $id, PHP_EOL;
             }
             //get info
@@ -71,7 +72,8 @@ class GetCoinMarketCapJson extends Command
                 )
             );
             $content = (file_get_contents("https://coinmarketcap.com/currencies/{$api_data->slug}", false, $context));
-            preg_match("/<script id=\"__NEXT_DATA__\" type=\"application\/json\">(.*)<\/script>/", $content, $json, PREG_OFFSET_CAPTURE);
+            $is_match = preg_match("/<script id=\"__NEXT_DATA__\" type=\"application\/json\">(.*)<\/script>/", $content, $json, PREG_OFFSET_CAPTURE);
+            if ($is_match != 1) return false;
             $text = (($json[0])[0]);
             $dom = new \DOMDocument();
             $dom->preserveWhiteSpace = false;
@@ -82,21 +84,25 @@ class GetCoinMarketCapJson extends Command
             $obj = json_decode($json_text);
             $web_data = object_get($obj, 'props.initialProps.pageProps.info');
 
-            return  (object) array_merge((array) $web_data, (array) $api_data);
-        }catch (\Exception $e){
+            return (object)array_merge((array)$web_data, (array)$api_data);
+        } catch (\Exception $e) {
             echo "FAIL $id ", $e, PHP_EOL;
             Log::info("FAIL CMC $id ");
 //            Log::info($e);
         }
+        return false;
+
     }
 
-    private function saveFile($id,$data){
+    private function saveFile($id, $data)
+    {
         $f = fopen("{$this->path}/$id.json", "w") or die("Unable to open file!");
         $txt = json_encode($data);
         fwrite($f, $txt);
         fclose($f);
     }
-        /**
+
+    /**
      * Execute the console command.
      *
      * @return int
