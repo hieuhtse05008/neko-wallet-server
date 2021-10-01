@@ -47,7 +47,7 @@ class SyncPrices extends Command
     {
 //        dd(config('database.connections.timescale_price'));
         $connection = 'timescale_price';
-        for ($i = 11301; $i <= 13000; $i++) {
+        for ($i = 1; $i <= 13000; $i++) {
             $this->handleCoin($i, $connection);
         }
         return 0;
@@ -58,6 +58,8 @@ class SyncPrices extends Command
         try {
             echo "Progress: $id       \r";
             $map = DB::table('cryptocurrencies_mapping')->where('cmc_id', '=', $id)->first();
+
+
             if (empty($map)) {
                 echo "No mapping $id ",PHP_EOL;
 
@@ -71,7 +73,8 @@ class SyncPrices extends Command
             $res = json_decode($response->getBody()->getContents())->data;
 
             if (!property_exists($res, 'points')) {
-                echo "FAIL $id SyncCoinHistory",PHP_EOL;
+                echo "EMPTY $id SyncCoinHistory",PHP_EOL;
+                sleep(1);
                 return;
             }
 
