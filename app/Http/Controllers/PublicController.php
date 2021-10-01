@@ -170,7 +170,7 @@ class PublicController extends Controller
     {
         //======================================================
         $this->categoryRepository->skipPresenter(false);
-        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(48, [], true);
+        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null, [], true);
         $categories = collect($categories)->sortBy([
             function ($a, $b) {
                 return (int)(count($a['cryptocurrencies']) < count($b['cryptocurrencies']));
@@ -194,7 +194,7 @@ class PublicController extends Controller
                 'category_ids' => [$request->category_id],
             ]
         ];
-        $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(12295, $filter);
+        $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(48, $filter);
 
 
         return view('web.tokens', [
