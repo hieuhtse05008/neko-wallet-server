@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\Cryptocurrency;
 use App\Models\CryptocurrencyMapping;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 
 class ValidateCryptocurrencyImage extends Command
 {
@@ -40,16 +39,19 @@ class ValidateCryptocurrencyImage extends Command
      */
     public function handle()
     {
-//        dd(getimagesize('https://s2.coinmarketcap.com/static/img/coins/200x200/74.png'));
-//        $cryptocurrency = Cryptocurrency::find(7);
-//        $this->uploadImage($cryptocurrency);
-//        return 0;
-//        dd(str_replace('200x200','64x64','https://s2.coinmarketcap.com/static/img/coins/200x200/6958.png'));
-        $cryptocurrencies = Cryptocurrency::orderBy('id')->get();
-        $total = count($cryptocurrencies);
-        $faileds = [];
-        foreach ($cryptocurrencies as $key => $cryptocurrency) {
 
+//        $cryptocurrencies = Cryptocurrency::orderBy('id')->get();
+//        $total = count($cryptocurrencies);
+//        foreach ($cryptocurrencies as $key => $cryptocurrency) {
+
+        $total = 13000;
+        for ($key = 11301; $key < 13000; $key++) {
+            $mapping = CryptocurrencyMapping::where('cmc_id', '=', $key)->first();
+            if (empty($mapping)) {
+                echo "No mapping $key", PHP_EOL;
+                continue;
+            }
+            $cryptocurrency = $mapping->cryptocurrency;
             if (empty($cryptocurrency->icon_url)) continue;
             if (str_contains($cryptocurrency->icon_url, 'cloudfront')) continue;
             try {
@@ -58,55 +60,43 @@ class ValidateCryptocurrencyImage extends Command
                 $this->uploadImage($cryptocurrency);
 
             } catch (\Exception $e) {
-                Log::info($cryptocurrency->id);
-                Log::error($e);
-                $faileds[] = $cryptocurrency;
                 echo PHP_EOL;
-                echo $cryptocurrency->id, PHP_EOL;
+                echo 'Change image size ', $cryptocurrency->id, PHP_EOL;
                 $cryptocurrency->icon_url = str_replace('200x200', '64x64', $cryptocurrency->icon_url);
                 $cryptocurrency->save();
-                try {
-                    $this->uploadImage($cryptocurrency);
-                }catch (\Exception $e2){
-                    echo 'USE DEFAULT ',$cryptocurrency->id, PHP_EOL;
-                    $cryptocurrency->icon_url = 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1632918583FJlG6MQa2h41nBb.jpg';
-                    $cryptocurrency->save();
-
-                }
-
+                $this->uploadImage($cryptocurrency, true);
             }
-//            usleep(900000);
         }
-        echo "FAILED: ", count($faileds), PHP_EOL;
         return 0;
     }
 
-    private function uploadImage(Cryptocurrency $cryptocurrency)
+    private function uploadImage(Cryptocurrency $cryptocurrency, $use_default = false)
     {
         try {
             $httpClient = new \GuzzleHttp\Client();
-//            $filename = $cryptocurrency->id . "png";
-//            $image = file_get_contents($cryptocurrency->icon_url);
             $image = fopen($cryptocurrency->icon_url, 'r');
 
             $response = $httpClient->request('POST', "https://colorme.vn/api/v3/upload-image-public", [
                 'multipart' => [
                     [
                         'name' => 'image',
-//                        'contents' => \GuzzleHttp\Psr7\Utils::tryFopen($cryptocurrency->icon_url, 'r'),
                         'contents' => $image,
                     ],
                 ]
             ]);
+
             $data = json_decode($response->getBody()->getContents());
-//            dd($cryptocurrency, $data);
             $cryptocurrency->icon_url = $data->link;
             $cryptocurrency->save();
+
         } catch (\Exception $e) {
 //            dd($e);
-            echo 'Not found', PHP_EOL;
-//            echo \GuzzleHttp\Psr7\Message::toString($e->getRequest());
-//            echo \GuzzleHttp\Psr7\Message::toString($e->getResponse());
+            echo 'Failed Upload Image ', $cryptocurrency->id, PHP_EOL;
+            if($use_default){
+                echo 'USE DEFAULT ',$cryptocurrency->id, PHP_EOL;
+                $cryptocurrency->icon_url = 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1632918583FJlG6MQa2h41nBb.jpg';
+                $cryptocurrency->save();
+            }
         }
     }
 }
