@@ -12,7 +12,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/images/logo/neko-logo-orange.svg">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/web/main.css">
+    <link rel="stylesheet" href="/css/web/main.css?123">
 
     <style>
         @import "/css/fontawesome/fontawesome.css";
