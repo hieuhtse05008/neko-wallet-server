@@ -48,6 +48,13 @@ class InsertCryptocurrencyFromJson extends Command
         DB::table('cryptocurrency_category')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
         DB::table('cryptocurrencies_mapping')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
         DB::table('cryptocurrency_info')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
+
+        $token_ids = DB::table('tokens')->whereIn('cryptocurrency_id',$crypto_ids)
+            ->pluck('id');
+        DB::table('exchange_pairs')
+            ->whereIn('base_token_id',$token_ids)
+            ->orWhereIn('target_token_id',$token_ids)
+            ->delete();
         DB::table('tokens')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
 
 
