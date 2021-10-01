@@ -65,23 +65,28 @@ class InsertCryptocurrencyFromJson extends Command
         foreach ($cryptocurrencies as $cryptocurrency) {
             $data = get_object_vars($cryptocurrency);
             $obj = Cryptocurrency::find($data['id']);
-            if(!empty($obj)) continue;
-            Cryptocurrency::insertOrIgnore([
-                "id" => $data['id'],
-                "name" => $data['name'],
-                "symbol" => $data['symbol'],
-                "slug" => $data['slug'],
-                "icon_url" => $data['icon_url'],
-                "rank" => $data['rank'],
-                "verified" => $data['verified'],
-            ]);
+            if(empty($obj)) {
+                Cryptocurrency::insertOrIgnore([
+                    "id" => $data['id'],
+                    "name" => $data['name'],
+                    "symbol" => $data['symbol'],
+                    "slug" => $data['slug'],
+                    "icon_url" => $data['icon_url'],
+                    "rank" => $data['rank'],
+                    "verified" => $data['verified'],
+                ]);
+            }
+
 
             $obj = CryptocurrencyMapping::where('cmc_id','=',$data['cmc_id'])->first();
-            if(!empty($obj)) continue;
-            CryptocurrencyMapping::insertOrIgnore([
-                'cryptocurrency_id'=>$data['id'],
-                'cmc_id'=>$data['cmc_id'],
-            ]);
+            if(empty($obj)) {
+
+                CryptocurrencyMapping::insertOrIgnore([
+                    'cryptocurrency_id'=>$data['id'],
+                    'cmc_id'=>$data['cmc_id'],
+                ]);
+
+            }
         }
         return 0;
     }
