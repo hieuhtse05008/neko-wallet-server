@@ -78,15 +78,15 @@ class InsertCryptocurrencyFromJson extends Command
             }
 
 
-            $obj = CryptocurrencyMapping::where('cmc_id','=',$data['cmc_id'])->first();
-            if(empty($obj)) {
+//            $obj = CryptocurrencyMapping::where('cmc_id','=',$data['cmc_id'])->first();
+//            if(empty($obj)) {
 
-                CryptocurrencyMapping::insertOrIgnore([
+                CryptocurrencyMapping::updateOrCreate([
                     'cryptocurrency_id'=>$data['id'],
                     'cmc_id'=>$data['cmc_id'],
                 ]);
 
-            }
+//            }
         }
         return 0;
     }
