@@ -133,9 +133,12 @@
                                     <div class="d-flex">
                                         <div class="me-2">
                                             @if($item['done'])
-                                                <i class="text-main fas fa-check-circle bg-white"></i>
+{{--                                                <i class="text-main fas fa-check-circle bg-white"></i>--}}
+                                                <img src="/images/logo/icon_fill.svg" width="16"  style="max-width: unset!important;">
                                             @else
-                                                <i class="text-main far fa-circle bg-white"></i>
+{{--                                                <i class="text-main far fa-circle bg-white"></i>--}}
+                                                <img src="/images/logo/icon_outline.svg" width="16" style="max-width: unset!important;">
+
                                             @endif
                                         </div>
                                         <div class="
