@@ -43,37 +43,38 @@ class InsertCryptocurrencyFromJson extends Command
      */
     public function handle()
     {
-        $crypto_ids = CryptocurrencyMapping::where('cmc_id','>=','11301')->pluck('cryptocurrency_id');
+//        $crypto_ids = CryptocurrencyMapping::where('cmc_id','>=','11301')->pluck('cryptocurrency_id');
+//
+//        DB::table('cryptocurrency_category')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
+//        DB::table('cryptocurrencies_mapping')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
+//        DB::table('cryptocurrency_info')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
+//
+//        $token_ids = DB::table('tokens')->whereIn('cryptocurrency_id',$crypto_ids)
+//            ->pluck('id');
+//        DB::table('exchange_pairs')
+//            ->whereIn('base_token_id',$token_ids)
+//            ->orWhereIn('target_token_id',$token_ids)
+//            ->delete();
+//        DB::table('tokens')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
 
-        DB::table('cryptocurrency_category')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
-        DB::table('cryptocurrencies_mapping')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
-        DB::table('cryptocurrency_info')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
-
-        $token_ids = DB::table('tokens')->whereIn('cryptocurrency_id',$crypto_ids)
-            ->pluck('id');
-        DB::table('exchange_pairs')
-            ->whereIn('base_token_id',$token_ids)
-            ->orWhereIn('target_token_id',$token_ids)
-            ->delete();
-        DB::table('tokens')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
 
 
-
-        $json_str = file_get_contents("cryptocurrencies3-final.json");
+//        $json_str = file_get_contents("cryptocurrencies3-final.json");
+        $json_str = file_get_contents("crytocurrencies.json");
         $cryptocurrencies = json_decode($json_str);
         foreach ($cryptocurrencies as $cryptocurrency) {
             $data = get_object_vars($cryptocurrency);
-            $obj = Cryptocurrency::find($data['id']);
-            if(!empty($obj)) continue;
-            Cryptocurrency::insertOrIgnore([
-                "id" => $data['id'],
-                "name" => $data['name'],
-                "symbol" => $data['symbol'],
-                "slug" => $data['slug'],
-                "icon_url" => $data['icon_url'],
-                "rank" => $data['rank'],
-                "verified" => $data['verified'],
-            ]);
+//            $obj = Cryptocurrency::find($data['id']);
+//            if(!empty($obj)) continue;
+//            Cryptocurrency::insertOrIgnore([
+//                "id" => $data['id'],
+//                "name" => $data['name'],
+//                "symbol" => $data['symbol'],
+//                "slug" => $data['slug'],
+//                "icon_url" => $data['icon_url'],
+//                "rank" => $data['rank'],
+//                "verified" => $data['verified'],
+//            ]);
             $obj = CryptocurrencyMapping::where('cmc_id','=',$data['id'])->first();
             if(!empty($obj)) continue;
             CryptocurrencyMapping::insertOrIgnore([
