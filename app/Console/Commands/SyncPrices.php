@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SyncPrices extends Command
 {
@@ -95,6 +96,7 @@ class SyncPrices extends Command
             }
             DB::connection($connection)->table('historical_prices')->insert($data);
         } catch (\Exception $e) {
+            Log::error($e);
             echo "Error ",$id,PHP_EOL;
             return;
         }
