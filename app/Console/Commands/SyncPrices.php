@@ -69,12 +69,12 @@ class SyncPrices extends Command
 
 
             $httpClient = new \GuzzleHttp\Client();
-            $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=ALL";
+            $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=1M";
             $response = $httpClient->get($url);
             $res = json_decode($response->getBody()->getContents())->data;
 
             if (!property_exists($res, 'points')) {
-                echo "EMPTY $id SyncCoinHistory",PHP_EOL;
+                echo PHP_EOL, "EMPTY $id SyncCoinHistory",PHP_EOL;
                 sleep(1);
                 return;
             }
@@ -97,7 +97,7 @@ class SyncPrices extends Command
             DB::connection($connection)->table('historical_prices')->insert($data);
         } catch (\Exception $e) {
             Log::error($e);
-            echo "Error ",$id,PHP_EOL;
+            echo PHP_EOL,"Error ",$id,PHP_EOL;
             return;
         }
     }
