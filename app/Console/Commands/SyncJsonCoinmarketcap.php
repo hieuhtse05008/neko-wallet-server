@@ -47,11 +47,19 @@ class SyncJsonCoinmarketcap extends Command
         $parse_down = new \Parsedown();
         $parse_down->setSafeMode(true);
 
-        for ($i = 1; $i < 12000; $i++) {
-            $json_str = file_get_contents("{$this->path}/$i.json");
+        for ($i = 11301; $i < 13000; $i++) {
+            $file_name = "{$this->path}/$i.json";
+            if(!file_exists($file_name)) {
+                echo "Skipping $i", PHP_EOL;
+
+                continue;
+            }
+            $json_str = file_get_contents($file_name);
             $data = json_decode($json_str);
             if (!empty($data)) {
                 $this->handleItem($i, $data,$parse_down);
+            }else{
+                echo "Empty data", PHP_EOL;
             }
         }
         return 0;
@@ -65,7 +73,7 @@ class SyncJsonCoinmarketcap extends Command
             //find mapping
             $mapping = CryptocurrencyMapping::where('cmc_id','=',$cmc_id)->first();
             if(empty($mapping)){
-                echo "ERROR mapping $cmc_id", PHP_EOL;
+                echo "No mapping $cmc_id", PHP_EOL;
                 return;
             }
             $cryptocurrency = $mapping->cryptocurrency;
