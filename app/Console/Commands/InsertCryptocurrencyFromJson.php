@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Models\Cryptocurrency;
+use App\Models\CryptocurrencyCategory;
 use App\Models\CryptocurrencyMapping;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class InsertCryptocurrencyFromJson extends Command
 {
@@ -41,7 +43,16 @@ class InsertCryptocurrencyFromJson extends Command
      */
     public function handle()
     {
-        $json_str = file_get_contents("cryptocurrencies2.json");
+        $crypto_ids = CryptocurrencyMapping::where('cmc_id','>=','11301')->pluck('cryptocurrency_id');
+
+        DB::table('cryptocurrency_category')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
+        DB::table('cryptocurrencies_mapping')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
+        DB::table('cryptocurrency_info')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
+        DB::table('tokens')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
+
+
+
+        $json_str = file_get_contents("resources/json/cryptocurrencies3-final.json");
         $cryptocurrencies = json_decode($json_str);
         foreach ($cryptocurrencies as $cryptocurrency) {
             $data = get_object_vars($cryptocurrency);
@@ -56,7 +67,7 @@ class InsertCryptocurrencyFromJson extends Command
                 "rank" => $data['rank'],
                 "verified" => $data['verified'],
             ]);
-            $obj = CryptocurrencyMapping::where('cmd_id','=',$data['id'])->first();
+            $obj = CryptocurrencyMapping::where('cmc_id','=',$data['id'])->first();
             if(!empty($obj)) continue;
             CryptocurrencyMapping::insertOrIgnore([
                 'cryptocurrency_id'=>$data['id'],
