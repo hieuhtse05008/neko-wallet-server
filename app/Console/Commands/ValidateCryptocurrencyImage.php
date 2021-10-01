@@ -40,18 +40,20 @@ class ValidateCryptocurrencyImage extends Command
     public function handle()
     {
 
+        $cryptocurrencies = Cryptocurrency::orderBy('id')->where('icon_url','like','%coinmarketcap%')->get();
 //        $cryptocurrencies = Cryptocurrency::orderBy('id')->get();
-//        $total = count($cryptocurrencies);
-//        foreach ($cryptocurrencies as $key => $cryptocurrency) {
+        $total = count($cryptocurrencies);
 
-        $total = 13000;
-        for ($key = 11301; $key < 13000; $key++) {
-            $mapping = CryptocurrencyMapping::where('cmc_id', '=', $key)->first();
-            if (empty($mapping)) {
-                echo "No mapping $key", PHP_EOL;
-                continue;
-            }
-            $cryptocurrency = $mapping->cryptocurrency;
+        foreach ($cryptocurrencies as $key => $cryptocurrency) {
+
+//        $total = 13000;
+//        for ($key = 11301; $key < 13000; $key++) {
+//            $mapping = CryptocurrencyMapping::where('cmc_id', '=', $key)->first();
+//            if (empty($mapping)) {
+//                echo "No mapping $key", PHP_EOL;
+//                continue;
+//            }
+//            $cryptocurrency = $mapping->cryptocurrency;
             if (empty($cryptocurrency->icon_url)) continue;
             if (str_contains($cryptocurrency->icon_url, 'cloudfront')) continue;
             try {
