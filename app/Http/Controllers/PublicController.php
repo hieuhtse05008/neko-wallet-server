@@ -103,47 +103,45 @@ class PublicController extends Controller
         $road_maps = [
             [
                 'time' => '2021',
-                'title' => 'MINIMUM VIABLE PRODUCT',
+                'title' => 'MVP',
                 'current' => true,
                 'items' => [
-                    ['title' => 'Finish MVP Aggregator & multichain Wallet', 'done' => true],
-                    ['title' => 'Add support for BSC, Ethereum & Solana', 'done' => true],
-                    ['title' => 'Secure Angel round', 'done' => true],
-                    ['title' => 'Integrate BSC, Ethereum & Solana DEXes', 'done' => true],
-                    ['title' => 'Secure Seed round', 'done' => false],
-                    ['title' => 'Release public beta', 'done' => false],
-                    ['title' => 'Secure strategic rounds', 'done' => false],
+                    ['title' => 'Support BSC, Ethereum & Solana', 'done' => true],
+                    ['title' => 'Aggregator & Multichain wallet ', 'done' => true],
+                    ['title' => 'Secure Seed round', 'done' => true],
+                    ['title' => 'Beta release', 'done' => true],
                 ],
             ],
             [
-                'time' => 'Q1-Q2 2022',
-                'title' => 'REFINE PLATFORM',
+                'time' => 'Q1 2022',
+                'title' => 'Beta Release',
                 'items' => [
-                    ['title' => 'Integrate all popular networks', 'done' => false],
-                    ['title' => 'Integrate popular cexes', 'done' => false],
-                    ['title' => 'Continue adding more DEXes', 'done' => false],
-                    ['title' => 'Smart contracts audits', 'done' => false],
-                    ['title' => 'Release neko bridge', 'done' => false],
-                    ['title' => 'Public sales', 'done' => false],
+                    ['title' => 'Refine platform performance, UIUX', 'done' => false],
+                    ['title' => 'Integrate more public networks', 'done' => false],
+                    ['title' => 'Add Decentralized Fund Management feature', 'done' => false],
+                    ['title' => 'Add cross-chain protocol aggregation', 'done' => false],
+                    ['title' => 'Secure Strategic round', 'done' => false],
+                ],
+            ],
+            [
+                'time' => 'Q2 2022',
+                'title' => 'Public Release',
+                'items' => [
+                    ['title' => 'Smart contract Audit', 'done' => false],
+                    ['title' => 'Aggregate more Dexes', 'done' => false],
+                    ['title' => 'Add Limit Order protocol', 'done' => false],
+                    ['title' => 'Introduce Neko NFT collection based on the branding of Neko', 'done' => false],
+                    ['title' => 'Issue token $NEKO', 'done' => false],
                 ],
             ],
             [
                 'time' => 'Q3-Q4 2022',
-                'title' => 'PUBLIC RELEASE',
+                'title' => 'User Growth',
                 'items' => [
-                    ['title' => 'Continue adding networks, DEXes & CEXes', 'done' => false],
-                    ['title' => 'Neko NFT', 'done' => false],
-                    ['title' => 'Neko Index', 'done' => false],
-                    ['title' => 'Neko Decentralized Investment Funds', 'done' => false],
-                ],
-            ],
-            [
-                'time' => '2023',
-                'title' => 'USER GROWTH',
-                'items' => [
-                    ['title' => 'Continue adding networks, DEXes & CEXes', 'done' => false],
-                    ['title' => 'Yield Aggregator', 'done' => false],
-                    ['title' => 'Saving Products', 'done' => false],
+                    ['title' => 'Neko Index Fund', 'done' => false],
+                    ['title' => 'Aggregate DeFi Yield product', 'done' => false],
+                    ['title' => 'Launch Neko-verse applications for Neko NFT', 'done' => false],
+                    ['title' => 'Aggregate multichain NFT Marketplaces', 'done' => false],
                 ],
             ],
         ];
@@ -193,7 +191,7 @@ class PublicController extends Controller
                 'category_ids' => [$request->category_id],
             ]
         ];
-        $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(48, $filter);
+        $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(12295, $filter);
 
 
         return view('web.tokens', [

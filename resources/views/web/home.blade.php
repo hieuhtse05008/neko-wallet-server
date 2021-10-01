@@ -112,26 +112,30 @@
                 <h5 class="fw-normal">See what is going on with Neko</h5>
             </div>
             <div class="row row-eq-height position-relative">
-                <div class="bg-gray road-map-line position-absolute d-none d-lg-block"></div>
+
                 @foreach($road_maps as $road_map)
                     <div class="col-12 col-sm-6 col-lg-3 gy-3">
-                        <div class="rounded-7 p-0 p-sm-4 h-100">
-                            <div class="mb-5 rounded-pill btn
+                        <div class="rounded-7 p-0 p-sm-4 h-100 position-relative">
+                            <div class="bg-main road-map-line position-absolute d-none d-md-block w-100 ms-4"></div>
+                            <div class="road-map-line-mobile h-100 position-absolute mt-3 ms-3 bg-main d-block d-md-none"></div>
+                            <div class="mb-5 rounded-pill btn me-auto
                             @if(isset($road_map['current']))
                                 bg-main text-white
                                 @else
-                                bg-gray
+                                border-1 border-main bg-white text-main
                             @endif
                                 ">{{$road_map['time']}}</div>
-                            <h6 class="mb-5 text-main">{{$road_map['title']}}</h6>
+                            <h6 class="mb-5 text-main ms-2 ms-lg-0">
+                                <i class="text-main far fa-circle invisible d-inline-block d-md-none"></i>
+                                {{$road_map['title']}}</h6>
                             @foreach($road_map['items'] as $item)
-                                <div class="mb-4">
+                                <div class="mb-4 ms-2 ms-md-0">
                                     <div class="d-flex">
                                         <div class="me-2">
                                             @if($item['done'])
-                                                <i class="text-main fas fa-check-circle"></i>
+                                                <i class="text-main fas fa-check-circle bg-white"></i>
                                             @else
-                                                <i class="text-main far fa-circle"></i>
+                                                <i class="text-main far fa-circle bg-white"></i>
                                             @endif
                                         </div>
                                         <div class="
@@ -288,9 +292,14 @@
 @section('styles')
     <style>
         .road-map-line {
-            height: 3px !important;
+            height:1px !important;
             z-index: -1;
-            top: 57px;
+            top: 42px;
+        }
+        .road-map-line-mobile {
+
+            width: 1px!important;
+            line-height: 1px!important; z-index: -2;
         }
 
         img {

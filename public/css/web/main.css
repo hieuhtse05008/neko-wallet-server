@@ -29,13 +29,16 @@ a:hover {
 }
 
 .text-main {
-    color: var(--main-color, #FC7819);;
+    color: var(--main-color, #FC7819);
 }
 
 .bg-main {
-    background-color: var(--main-color, #FC7819);;
+    background-color: var(--main-color, #FC7819);
 }
 
+.border-main{
+    border-color: var(--main-color, #FC7819);
+}
 footer {
     background: #0E0928;
     min-height: 154px;
