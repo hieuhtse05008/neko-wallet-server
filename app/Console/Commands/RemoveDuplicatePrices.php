@@ -50,7 +50,9 @@ from cryptocurrencies  c join cryptocurrencies_mapping cm on c.id = cm.cryptocur
             $duplicate_maps = CryptocurrencyMapping::where('cmc_id','=',$pair->cmc_id)
             ->where('cryptocurrency_id','<>',$pair->min)->get();
             foreach ($duplicate_maps as $key2=>$duplicate_map){
-                $prices = HistoricalPrice::where('cryptocurrency_id','=',$duplicate_map->cryptocurrency_id)->get();
+                $prices = HistoricalPrice::where('cryptocurrency_id','=',$duplicate_map->cryptocurrency_id)
+                    ->where('time','>','2021-09-29 00:00:00')
+                    ->get();
                 foreach ($prices as $key3=>$price){
                     echo $key."/".count($pairs)." - ".
                         $key2."/".count($duplicate_maps)." - ".
@@ -60,6 +62,7 @@ from cryptocurrencies  c join cryptocurrencies_mapping cm on c.id = cm.cryptocur
                 }
 
                 DB::connection('timescale_price')->table('historical_prices_date')
+                    ->where('time','>','2021-09-29 00:00:00')
                     ->where('cryptocurrency_id','=',$duplicate_map->cryptocurrency_id)
                     ->update(['cryptocurrency_id'=>$pair->min]);
             }
