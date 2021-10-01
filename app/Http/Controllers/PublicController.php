@@ -64,6 +64,9 @@ class PublicController extends Controller
         ];
     }
 
+    public function blogsView(Request $request){
+        return view();
+    }
 
     public function homeView(Request $request)
     {
@@ -167,7 +170,7 @@ class PublicController extends Controller
     {
         //======================================================
         $this->categoryRepository->skipPresenter(false);
-        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null, [], true);
+        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(48, [], true);
         $categories = collect($categories)->sortBy([
             function ($a, $b) {
                 return (int)(count($a['cryptocurrencies']) < count($b['cryptocurrencies']));
