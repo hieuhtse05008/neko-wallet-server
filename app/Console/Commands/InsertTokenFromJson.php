@@ -64,7 +64,7 @@ class InsertTokenFromJson extends Command
                     'verified'=>object_get($token,'verified'),
                     'address'=>object_get($token,'address'),
                     'active_wallet'=>object_get($token,'active_wallet'),
-                    'decimals'=>object_get($token,'decimals'),
+                    'decimals'=>object_get($token,'decimals') ?? 0,
                 ]);
 
         }
