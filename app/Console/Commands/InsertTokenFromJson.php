@@ -50,21 +50,21 @@ class InsertTokenFromJson extends Command
         $tokens = json_decode($json_str);
 
         foreach ($tokens as $token) {
-            $data = get_object_vars($token);
-            $crypto = Cryptocurrency::find($data['cryptocurrency_id']);
-            $network = Network::find($data['network_id']);
+
+            $crypto = Cryptocurrency::find(object_get($token,'cryptocurrency_id'));
+            $network = Network::find(object_get($token,'network_id'));
             if($crypto && $network)
                 Token::updateOrCreate([
-                    'cryptocurrency_id'=>$data['cryptocurrency_id'],
-                    'network_id'=>$data['network_id'],
+                    'cryptocurrency_id'=>object_get($token,'cryptocurrency_id'),
+                    'network_id'=>object_get($token,'network_id'),
                 ], [
-                    'name'=>$data['name'],
-                    'symbol'=>$data['symbol'],
-                    'icon_url'=>$data['icon_url'],
-                    'verified'=>$data['verified'],
-                    'address'=>$data['address'],
-                    'active_wallet'=>$data['active_wallet'],
-                    'decimals'=>$data['decimals'],
+                    'name'=>object_get($token,'name'),
+                    'symbol'=>object_get($token,'symbol'),
+                    'icon_url'=>object_get($token,'icon_url'),
+                    'verified'=>object_get($token,'verified'),
+                    'address'=>object_get($token,'address'),
+                    'active_wallet'=>object_get($token,'active_wallet'),
+                    'decimals'=>object_get($token,'decimals'),
                 ]);
 
         }
