@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-md">
-        <div class="row my-3 py-3 my-md-5 py-md-5">
+        <div class="row my-3 py-3 my-md-5 py-md-5 gx-5">
             <div class="col-12 col-sm-6">
                 <div class="d-flex flex-column h-100 justify-content-center">
                     <div class="text-spotlight mb-4">
@@ -26,7 +26,7 @@
             </div>
             <div class="col-12 col-sm-6">
                 <div class="d-flex">
-                    <img class="ms-auto" src="/images/home/phone.png">
+                    <iframe src="https://player.vimeo.com/video/620445236?h=4c000effaf" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
