@@ -80,7 +80,7 @@ class ValidateCryptocurrencyImage extends Command
             ]);
 
             $data = json_decode($response->getBody()->getContents());
-            $cryptocurrency->icon_url = $data->link;
+            $cryptocurrency->icon_url = str_replace('http:','https:',$data->link);
             $cryptocurrency->save();
 
         } catch (\Exception $e) {
