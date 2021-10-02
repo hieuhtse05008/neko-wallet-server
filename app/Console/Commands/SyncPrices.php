@@ -63,20 +63,20 @@ class SyncPrices extends Command
 
 
             if (empty($map)) {
-                echo "No mapping $id ",PHP_EOL;
+                echo PHP_EOL,"No mapping $id ",PHP_EOL;
 
                 return;
             }
 
 
             $httpClient = new \GuzzleHttp\Client();
-            $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=ALL";
+            $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=1D";
             $response = $httpClient->get($url);
             $res = json_decode($response->getBody()->getContents())->data;
+            sleep(1);
 
             if (!property_exists($res, 'points')) {
                 echo PHP_EOL, "EMPTY $id SyncCoinHistory",PHP_EOL;
-                sleep(1);
                 return;
             }
 
