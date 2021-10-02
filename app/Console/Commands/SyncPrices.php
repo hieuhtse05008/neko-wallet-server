@@ -76,7 +76,7 @@ class SyncPrices extends Command
             usleep(500000);
 
             if (!property_exists($res, 'points')) {
-                echo PHP_EOL, "EMPTY $id SyncCoinHistory",PHP_EOL;
+                echo PHP_EOL, "EMPTY $id ",PHP_EOL;
                 return;
             }
 
