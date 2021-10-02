@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\CryptocurrencyInfo;
 use App\Models\CryptocurrencyMapping;
 use App\Services\CoinMarketCapService;
 use Illuminate\Console\Command;
