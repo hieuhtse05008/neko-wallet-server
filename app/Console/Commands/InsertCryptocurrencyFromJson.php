@@ -41,24 +41,8 @@ class InsertCryptocurrencyFromJson extends Command
      */
     public function handle()
     {
-//        $crypto_ids = CryptocurrencyMapping::where('cmc_id','>=','11301')->pluck('cryptocurrency_id');
-//
-//        DB::table('cryptocurrency_category')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
-//        DB::table('cryptocurrencies_mapping')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
-//        DB::table('cryptocurrency_info')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
-//
-//        $token_ids = DB::table('tokens')->whereIn('cryptocurrency_id',$crypto_ids)
-//            ->pluck('id');
-//        DB::table('exchange_pairs')
-//            ->whereIn('base_token_id',$token_ids)
-//            ->orWhereIn('target_token_id',$token_ids)
-//            ->delete();
-//        DB::table('tokens')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
 
-
-        $json_str = file_get_contents("cryptocurrencies3-final.json");
-//        $json_str = file_get_contents("cryptocurrencies4.json");
-//        $json_str = file_get_contents("crytocurrencies.json");
+        $json_str = file_get_contents("cryptocurrencies-02-10-21.json");
         $cryptocurrencies = json_decode($json_str);
         foreach ($cryptocurrencies as $cryptocurrency) {
             $data = get_object_vars($cryptocurrency);
@@ -69,10 +53,8 @@ class InsertCryptocurrencyFromJson extends Command
                 continue;
             }
 
-
-            $crypto = Cryptocurrency::updateOrCreate([
+            Cryptocurrency::insert([
                 "id" => $data['id'],
-            ],[
                 "name" => $data['name'],
                 "symbol" => $data['symbol'],
                 "slug" => $data['slug'],
@@ -81,17 +63,13 @@ class InsertCryptocurrencyFromJson extends Command
                 "verified" => $data['verified'],
             ]);
 
-
-//            $obj = CryptocurrencyMapping::where('cmc_id','=',$data['cmc_id'])->first();
-//            if(empty($obj)) {
-            echo "Inserted {$data['id']} {$data['cmc_id']}", PHP_EOL;
-
             CryptocurrencyMapping::updateOrCreate([
-                'cryptocurrency_id' => $crypto->id,
+                'cryptocurrency_id' => $data['id'],
                 'cmc_id' => $data['cmc_id'],
             ]);
 
-//            }
+            echo "Inserted {$data['id']} {$data['cmc_id']}", PHP_EOL;
+
         }
         return 0;
     }
