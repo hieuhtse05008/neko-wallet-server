@@ -73,7 +73,7 @@ class SyncPrices extends Command
             $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=1D";
             $response = $httpClient->get($url);
             $res = json_decode($response->getBody()->getContents())->data;
-            sleep(1);
+            usleep(500000);
 
             if (!property_exists($res, 'points')) {
                 echo PHP_EOL, "EMPTY $id SyncCoinHistory",PHP_EOL;
