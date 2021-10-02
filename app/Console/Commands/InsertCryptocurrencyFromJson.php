@@ -74,7 +74,7 @@ class InsertCryptocurrencyFromJson extends Command
 
             $obj = Cryptocurrency::find($data['id']);
             if(empty($obj)) {
-                Cryptocurrency::insertOrIgnore([
+                Cryptocurrency::updateOrCreate([
                     "id" => $data['id'],
                     "name" => $data['name'],
                     "symbol" => $data['symbol'],
