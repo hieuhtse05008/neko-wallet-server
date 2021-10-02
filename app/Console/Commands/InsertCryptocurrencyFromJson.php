@@ -59,9 +59,9 @@ class InsertCryptocurrencyFromJson extends Command
 
 
 
-        $json_str = file_get_contents("cryptocurrencies3-final.json");
+//        $json_str = file_get_contents("cryptocurrencies3-final.json");
 //        $json_str = file_get_contents("cryptocurrencies4.json");
-//        $json_str = file_get_contents("crytocurrencies.json");
+        $json_str = file_get_contents("crytocurrencies.json");
         $cryptocurrencies = json_decode($json_str);
         foreach ($cryptocurrencies as $cryptocurrency) {
             $data = get_object_vars($cryptocurrency);
