@@ -47,7 +47,7 @@ class SyncJsonCoinmarketcap extends Command
         $parse_down = new \Parsedown();
         $parse_down->setSafeMode(true);
 
-        for ($i = 11301; $i < 13000; $i++) {
+        for ($i = 1; $i < 14000; $i++) {
             $file_name = "{$this->path}/$i.json";
             if(!file_exists($file_name)) {
                 echo "Skipping $i", PHP_EOL;
@@ -91,6 +91,7 @@ class SyncJsonCoinmarketcap extends Command
             $cryptocurrency_info->max_supply=object_get($data,'statistics.maxSupply');
             $cryptocurrency_info->holder_count=object_get($data,'holders.holderCount');
             $cryptocurrency_info->fully_diluted_market_cap=object_get($data,'statistics.fullyDilutedMarketCap');
+
 
             $cryptocurrency_info->save();
             //update except coingecko
