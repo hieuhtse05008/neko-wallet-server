@@ -59,11 +59,19 @@ class InsertCryptocurrencyFromJson extends Command
 
 
 
-        $json_str = file_get_contents("cryptocurrencies3-final.json");
-//        $json_str = file_get_contents("crytocurrencies.json");
+//        $json_str = file_get_contents("cryptocurrencies3-final.json");
+//        $json_str = file_get_contents("cryptocurrencies3-final.json");
+        $json_str = file_get_contents("crytocurrencies.json");
         $cryptocurrencies = json_decode($json_str);
         foreach ($cryptocurrencies as $cryptocurrency) {
             $data = get_object_vars($cryptocurrency);
+
+            $mapping = CryptocurrencyMapping::where('cmc_id','=',$data['cmc_id'])->first();
+            if(!empty($mapping)){
+                echo "Existed {$data['id']} {$data['cmc_id']}", PHP_EOL;
+                continue;
+            }
+
             $obj = Cryptocurrency::find($data['id']);
             if(empty($obj)) {
                 Cryptocurrency::insertOrIgnore([
@@ -80,6 +88,7 @@ class InsertCryptocurrencyFromJson extends Command
 
 //            $obj = CryptocurrencyMapping::where('cmc_id','=',$data['cmc_id'])->first();
 //            if(empty($obj)) {
+            echo "Inserted {$data['id']} {$data['cmc_id']}", PHP_EOL;
 
                 CryptocurrencyMapping::updateOrCreate([
                     'cryptocurrency_id'=>$data['id'],
