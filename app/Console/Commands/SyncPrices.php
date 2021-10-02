@@ -70,7 +70,7 @@ class SyncPrices extends Command
 
 
             $httpClient = new \GuzzleHttp\Client();
-            $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=1D";
+            $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=ALL";
             $response = $httpClient->get($url);
             $res = json_decode($response->getBody()->getContents())->data;
             usleep(500000);
