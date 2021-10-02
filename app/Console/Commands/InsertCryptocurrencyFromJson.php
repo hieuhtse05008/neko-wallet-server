@@ -3,10 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Cryptocurrency;
-use App\Models\CryptocurrencyCategory;
 use App\Models\CryptocurrencyMapping;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 
 class InsertCryptocurrencyFromJson extends Command
 {
@@ -58,7 +56,6 @@ class InsertCryptocurrencyFromJson extends Command
 //        DB::table('tokens')->whereIn('cryptocurrency_id',$crypto_ids)->delete();
 
 
-
 //        $json_str = file_get_contents("cryptocurrencies3-final.json");
 //        $json_str = file_get_contents("cryptocurrencies4.json");
         $json_str = file_get_contents("crytocurrencies.json");
@@ -66,34 +63,33 @@ class InsertCryptocurrencyFromJson extends Command
         foreach ($cryptocurrencies as $cryptocurrency) {
             $data = get_object_vars($cryptocurrency);
 
-            $mapping = CryptocurrencyMapping::where('cmc_id','=',$data['cmc_id'])->first();
-            if(!empty($mapping)){
+            $mapping = CryptocurrencyMapping::where('cmc_id', '=', $data['cmc_id'])->first();
+            if (!empty($mapping)) {
                 echo "Existed {$data['id']} {$data['cmc_id']}", PHP_EOL;
                 continue;
             }
 
-            $obj = Cryptocurrency::find($data['id']);
-            if(empty($obj)) {
-                Cryptocurrency::updateOrCreate([
-                    "id" => $data['id'],
-                    "name" => $data['name'],
-                    "symbol" => $data['symbol'],
-                    "slug" => $data['slug'],
-                    "icon_url" => $data['icon_url'],
-                    "rank" => $data['rank'],
-                    "verified" => $data['verified'],
-                ]);
-            }
+
+            $crypto = Cryptocurrency::updateOrCreate([
+                "id" => $data['id'],
+            ],[
+                "name" => $data['name'],
+                "symbol" => $data['symbol'],
+                "slug" => $data['slug'],
+                "icon_url" => $data['icon_url'],
+                "rank" => $data['rank'],
+                "verified" => $data['verified'],
+            ]);
 
 
 //            $obj = CryptocurrencyMapping::where('cmc_id','=',$data['cmc_id'])->first();
 //            if(empty($obj)) {
             echo "Inserted {$data['id']} {$data['cmc_id']}", PHP_EOL;
 
-                CryptocurrencyMapping::updateOrCreate([
-                    'cryptocurrency_id'=>$data['id'],
-                    'cmc_id'=>$data['cmc_id'],
-                ]);
+            CryptocurrencyMapping::updateOrCreate([
+                'cryptocurrency_id' => $crypto->id,
+                'cmc_id' => $data['cmc_id'],
+            ]);
 
 //            }
         }
