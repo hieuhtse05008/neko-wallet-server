@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\CryptocurrencyMapping;
 use App\Services\CoinMarketCapService;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Model;
 
 class SyncCoinmarketcapRankActive extends Command
 {
@@ -51,6 +52,14 @@ class SyncCoinmarketcapRankActive extends Command
             $cryptocurrency->save();
 
             $cryptocurrency_info = $cryptocurrency->cryptocurrency_info;
+
+            if(empty($cryptocurrency_info)){
+                $cryptocurrency_info = new CryptocurrencyInfo([
+                    'cryptocurrency_id'=>$cryptocurrency->id,
+                ]);
+                $cryptocurrency_info->save();
+            }
+
             $cryptocurrency_info->status = $filter['listing_status'];
             $cryptocurrency_info->save();
         }
