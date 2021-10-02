@@ -2,7 +2,19 @@
 
 @section('content')
     <div class="container-md">
-        <div class="row my-3 py-3 my-md-5 py-md-5 gx-5">
+        <div class="row my-0 my-lg-5 d-flex flex-row-reverse gx-5 gy-4 gy-lg-0">
+            <div class="col-12 col-sm-6">
+                <div class="h-100">
+                    <iframe class="d-none d-lg-block"
+                            style="width: 100%; height: 320px; max-height: 100%;"
+                            src="https://player.vimeo.com/video/620445236?h=4c000effaf"
+                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="d-block d-lg-none"
+                            style="width: 100%; min-height: 30vh;"
+                            src="https://player.vimeo.com/video/620445236?h=4c000effaf"
+                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
             <div class="col-12 col-sm-6">
                 <div class="d-flex flex-column h-100 justify-content-center">
                     <div class="text-spotlight mb-4">
@@ -19,14 +31,9 @@
                             Get early access
                         </button>
                     </form>
-                    <div class="mb-5 mb-sm-0">
-                        <i class="fas fa-play-circle"></i> See how it works
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="d-flex">
-                    <iframe src="https://player.vimeo.com/video/620445236?h=4c000effaf" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+{{--                    <div class="mb-5 mb-sm-0">--}}
+{{--                        <i class="fas fa-play-circle"></i> See how it works--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>
