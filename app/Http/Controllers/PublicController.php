@@ -152,10 +152,10 @@ class PublicController extends Controller
             ['name' => 'LEO NGUYEN', 'role' => 'CEO', 'department' => 'Msc. Strategy - Aalto Uni','avatar'=>'/images/founder/locnv.png'],
             ['name' => 'NGUYEN VIET HUNG', 'role' => 'Product', 'department' => 'Computer Science FPT Uni','avatar'=>'/images/founder/hungnv.png'],
             ['name' => 'TRINH ANH DUC', 'role' => 'Strategy & Finance', 'department' => 'Venture Capital','avatar'=>'/images/founder/ducta.png'],
-            ['name' => 'HANH PHAM', 'role' => 'Graphic Designer', 'department' => '','avatar'=>'/images/founder/hanhpt.png'],
+            ['name' => 'DUONG NHAT ANH', 'role' => 'NFT Designer', 'department' => 'Graphic Design FPT Uni','avatar'=>'/images/founder/anhnd.png'],
             ['name' => 'PHAN MINH DUONG', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH','avatar'=>'/images/founder/duongpm.png'],
             ['name' => 'HA TRUNG HIEU', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH','avatar'=>'/images/founder/hieuht.png'],
-            ['name' => 'DUONG NHAT ANH', 'role' => 'NFT Designer', 'department' => 'Graphic Design FPT Uni','avatar'=>'/images/founder/anhnd.png'],
+            ['name' => 'HANH PHAM', 'role' => 'Graphic Designer', 'department' => '','avatar'=>'/images/founder/hanhpt.png'],
             ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni','avatar'=>'/images/founder/longhd.png'],
         ];
         return view('web.home', [
