@@ -3,12 +3,11 @@
 @section('content')
     <div class="container" style="min-height: 100vh;">
         <div class="my-5 d-flex justify-content-center flex-column align-items-center">
-            <h1>How to buy</h1>
+            <h1>Blogs</h1>
             <div class="mt-3">
-                <form method="GET" action="/cryptocurrencies">
+                <form method="GET" action="/blogs">
                     <div class="align-items-center bg-white d-flex rounded-3 pe-3 text-truncate search-wrap">
                         <i class="far fa-search me-2"></i>
-
                         <input placeholder="Search" required
                                name="search"
                                value="{{$search}}"
@@ -20,21 +19,22 @@
         </div>
 
 
-        <div class="row row-eq-height">
+        <div class="row row-eq-height gy-5 gx-5">
             @foreach($blogs as $blog)
-                <div class="col-6 col-sm-4 col-md-3 col-lg-2 pb-3">
-                    <a href="/cryptocurrency/{{$blog->name}}">
-                        <div
-                            class="align-items-center d-flex flex-column h-100 justify-content-center p-3 pointer rounded-7 shadow text-center bg-white">
-                            <img src="{{$blog->icon_url}}" class="table-token-image mr-2 mb-3"
-                                 style="width: 36px;">
-                            <div>
-                                <span class="mr-2 mb-3"><b>{{$blog->name}}</b></span>
+                <div class="col-6  col-lg-4 pb-3">
+                    <a href="/blogs/{{$blog['slug']}}" class="pointer h-100">
+
+                        <div class="img-blog rounded-t-7 img-blog bg-white" style="background-image: url('{{$blog['image_url']}}')"></div>
+
+                        <div class="align-items-start d-flex flex-column h-100 justify-content-start">
+                            <div class="d-flex flex-wrap text-wrap text-break">
+                                <span class="my-3"><b>{{$blog['title']}}</b></span>
                             </div>
-                            <div>
-                                <span class="text-secondary mb-3"><b>{{strtoupper($blog->symbol)}}</b></span>
-                            </div>
+{{--                            <div class="d-flex flex-wrap text-wrap text-break">--}}
+{{--                                <span class="text-secondary mb-3"><b>{{($blog['description)}}</b></span>--}}
+{{--                            </div>--}}
                         </div>
+
                     </a>
                 </div>
             @endforeach
@@ -64,7 +64,7 @@
         @endif
         <div class="mb-5"></div>
         <div class="d-flex justify-content-center">
-            @include('web.component.paginator', ['paginator' => $blogs, 'suffix'=>"&category_id=$category_id&search=$search"])
+            @include('web.component.paginator', ['paginator' => $blogs, 'suffix'=>"&search=$search"])
         </div>
         <div class="mb-5"></div>
     </div>
@@ -79,7 +79,13 @@
 
 @section('styles')
     <style>
-
+        .img-blog{
+            background-repeat: no-repeat !important;
+            background-position: center center !important;
+            background-size: cover !important;
+            border-radius: 5px;
+            padding-bottom: 70%;
+        }
         .search-wrap input:focus {
             outline: none;
         }
@@ -92,7 +98,6 @@
             height: 48px;
             max-width: 80vw;
         }
-
 
 
     </style>

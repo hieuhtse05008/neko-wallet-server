@@ -8,8 +8,12 @@
                 <div>
                     <input required v-model="form.title" class="inp-main rounded-3 w-100" @input="changeTitle">
                 </div>
-
-
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold mb-2">Description</label>
+                <div>
+                    <textarea style="min-height: 300px" required v-model="form.description" class="inp-main rounded-3 w-100"></textarea>
+                </div>
             </div>
             <div class="mb-3">
                 <label class="fw-bold mb-2">Slug</label>
@@ -112,6 +116,7 @@
 
     <script>
         let editor;
+        const defaultBLog = {!! $blog!!};
         var uploadBLog = new Vue({
             el: '#upload-blog',
             data() {
@@ -123,14 +128,15 @@
                     errors: {},
                     form: {
                         id: '',
-                        'slug': '',
                         'title': '',
+                        'description': '',
                         'image_url': '',
-                        'content_en': '',
                         'status': '',
                         'type': '',
-                        'tags': '',
-                        ...{!! $blog!!}
+                        'slug': '',
+                        ...defaultBLog,
+                        'tags': defaultBLog.tags || '',
+                        'content_en': defaultBLog.content_en || '',
                     }
                 };
             },
@@ -161,8 +167,7 @@
                         {
                             ...this.form,
                             content_en: editor.getData(),
-
-                        }
+                        },
                     ];
                     console.log(parameters);
                     if (this.form.id) {

@@ -10,6 +10,7 @@ use App\Models\Cryptocurrency;
 use App\Models\CryptocurrencyInfo;
 use App\Models\EarlyAccessEmail;
 use App\Models\Network;
+use App\Repositories\BlogRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CryptocurrencyCategoryRepository;
 use App\Repositories\CryptocurrencyRepository;
@@ -21,15 +22,18 @@ class PublicController extends Controller
     protected $cryptocurrencyRepository;
     protected $cryptocurrencyCategoryRepository;
     protected $categoryRepository;
+    protected $blogRepository;
 
     public function __construct(CryptocurrencyRepository $cryptocurrencyRepository,
                                 CryptocurrencyCategoryRepository $cryptocurrencyCategoryRepository,
-                                CategoryRepository $categoryRepository
+                                CategoryRepository $categoryRepository,
+                                BlogRepository  $blogRepository
     )
     {
         $this->cryptocurrencyRepository = $cryptocurrencyRepository;
         $this->cryptocurrencyCategoryRepository = $cryptocurrencyCategoryRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->blogRepository = $blogRepository;
     }
 
     public function test(){
@@ -65,13 +69,6 @@ class PublicController extends Controller
         ];
     }
 
-    public function blogsView(Request $request){
-        $blogs = Blog::paginate(48);
-        return view('web.blog.blogs',[
-            'blogs'=>$blogs,
-            'search'=>$request->search
-        ]);
-    }
 
     public function homeView(Request $request)
     {
@@ -252,6 +249,20 @@ class PublicController extends Controller
             'blog' => $blog
         ]);
 
+    }
+
+    public function blogsView(Request $request){
+        $filter = [
+            'search'=>$request->search,
+        ];
+
+        $this->blogRepository->skipPresenter(true);
+        $blogs = $this->blogRepository->list(48,$filter);
+
+        return view('web.blog.blogs',[
+            'blogs'=>$blogs,
+            'search'=>$request->search
+        ]);
     }
 
     public function blogView(Blog $blog)

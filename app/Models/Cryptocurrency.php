@@ -60,7 +60,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          description="verified",
  *          type="boolean"
  *      )
- * 
+ *
  * )
  * @mixin IdeHelperCryptocurrency
  */
@@ -80,6 +80,7 @@ class Cryptocurrency extends Model
 //    protected $dates = ['deleted_at'];
 
     public $fillable = [
+        'id',
         'name',
         'symbol',
         'slug',

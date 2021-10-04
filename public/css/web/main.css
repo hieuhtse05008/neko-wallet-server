@@ -109,6 +109,10 @@ body {
 .rounded-7 {
     border-radius: .7rem;
 }
+.rounded-t-7 {
+    border-top-left-radius: .7rem;
+    border-top-right-radius: .7rem;
+}
 .rounded-2-7 {
     border-radius: 2.7rem;
 }

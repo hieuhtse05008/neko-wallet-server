@@ -114,7 +114,8 @@ class SyncJsonCoinmarketcap extends Command
             if(!empty($tags)){
                 foreach ($tags as $tag){
                     $category = Category::firstOrCreate(['name'=>$tag->name]);
-                    CryptocurrencyCategory::firstOrCreate([
+                    $category->save();
+                    CryptocurrencyCategory::updateOrInsert([
                         'cryptocurrency_id'=>$cryptocurrency->id,
                         'category_id'=>$category->id,
                     ]);

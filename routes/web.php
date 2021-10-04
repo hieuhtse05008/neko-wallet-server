@@ -19,11 +19,16 @@ Route::get('/', [PublicController::class, 'homeView']);
 
 Route::get('/cryptocurrencies', [PublicController::class, 'tokensView'])->middleware("include:cryptocurrencies");
 
-Route::get('/test', [AuthController::class, 'test']);
+Route::get('/test', [PublicController::class, 'test']);
 
 
 Route::post('/register-early-access', [PublicController::class, 'registerEarlyAccessWithEmail']);
 
+Route::get('/blog/upload/{blog:slug?}', [PublicController::class, 'uploadBlogView']);
+Route::group(["prefix" => 'blogs'], function () {
+    Route::get('/{blog:slug}', [PublicController::class, 'blogView']);
+    Route::get('/', [PublicController::class, 'blogsView']);
+});
 Route::get('/cryptocurrency/{cryptocurrency:name}', [PublicController::class, 'tokenView']);
 Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
 Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);

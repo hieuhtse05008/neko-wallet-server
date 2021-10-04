@@ -103,3 +103,14 @@ Route::prefix("v1")->group(function(){
         Route::delete("{cryptocurrencyCategory}", [App\Http\Controllers\API\CryptocurrencyCategoryAPIController::class, 'destroy']);
     });
 });
+
+
+Route::prefix("v1")->group(function(){
+    Route::group(["prefix" => 'blogs'], function () {
+        Route::get("/", [App\Http\Controllers\API\BlogAPIController::class, 'index']);
+        Route::post("/", [App\Http\Controllers\API\BlogAPIController::class, 'store']);
+        Route::get("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'show']);
+        Route::put("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'update']);
+        Route::delete("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'destroy']);
+    });
+});

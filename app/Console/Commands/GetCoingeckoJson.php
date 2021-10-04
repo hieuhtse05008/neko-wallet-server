@@ -37,22 +37,23 @@ class GetCoingeckoJson extends Command
 
     private function handleCoins()
     {
-//        $coins = CoinGeckoService::getListCoins();
-        $coins = [
-          ['id'=>'wenburn'],
-          ['id'=>'hotbit-token'],
-          ['id'=>'king-cardano'],
-          ['id'=>'monavale'],
-          ['id'=>'meter-governance-mapped-by-meter-io'],
-          ['id'=>'nerva'],
-          ['id'=>'ninjaswap'],
-          ['id'=>'papa-doge'],
-          ['id'=>'rope-token'],
-          ['id'=>'soft-yearn'],
-        ];
+        $coins = CoinGeckoService::getListCoins();
+//        $coins = [
+//          ['id'=>'wenburn'],
+//          ['id'=>'hotbit-token'],
+//          ['id'=>'king-cardano'],
+//          ['id'=>'monavale'],
+//          ['id'=>'meter-governance-mapped-by-meter-io'],
+//          ['id'=>'nerva'],
+//          ['id'=>'ninjaswap'],
+//          ['id'=>'papa-doge'],
+//          ['id'=>'rope-token'],
+//          ['id'=>'soft-yearn'],
+//        ];
         foreach ($coins as $key=>$coin) {
             try {
-                echo $key. " - " . $coin['id'], PHP_EOL;
+                echo $key."/".count($coins). " - " . $coin['id'], PHP_EOL;
+                if(file_exists("{$this->path}/".$coin['id'].".json")) continue;
                 $data = CoinGeckoService::getCoinById($coin['id'], [
                     'localization'=>'true',
                     'tickers'=>'true',

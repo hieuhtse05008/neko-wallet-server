@@ -3,21 +3,21 @@
 namespace App\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use App\Models\Category;
+use App\Models\Blog;
 
 /**
- * Class CategoryTransformer.
+ * Class BlogTransformer.
  *
  * @package namespace App\Transformers;
  *
  * @OA\Schema(
- *     title="Category Transformer",
+ *     title="Blog Transformer",
  *     @OA\Xml(
- *         name="CategoryTransformer"
+ *         name="BlogTransformer"
  *     ),
  *     @OA\Property(
  *          property="id",
- *          ref="#/components/schemas/Category/properties/id",
+ *          ref="#/components/schemas/Blog/properties/id",
  *      ),
  *      @OA\Property(
  *          property="created_at",
@@ -35,33 +35,31 @@ use App\Models\Category;
  *      ),
  * )
  */
-class CategoryTransformer extends TransformerAbstract
+class BlogTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ['cryptocurrencies'];
-    protected $defaultIncludes  = ['cryptocurrencies'];
     /**
-     * Transform the Category entity.
+     * Transform the Blog entity.
      *
-     * @param \App\Models\Category $model
+     * @param \App\Models\Blog $model
      *
      * @return array
      */
-    public function transform(Category $model)
+    public function transform(Blog $model)
     {
         return [
             'id'         => (int) $model->id,
-            'name'         =>  $model->name,
-
+            'slug' => $model->slug,
+            'title' => $model->title,
+            'description' => $model->description,
+            'image_url' => $model->image_url,
+            'content_en' => $model->content_en,
+            'status' => $model->status,
+            'type' => $model->type,
+            'tags' => $model->tags,
             /* place your other model properties here */
 
             'created_at' => strtotime($model->created_at),
             'updated_at' => strtotime($model->updated_at),
         ];
-    }
-
-    public function includeCryptocurrencies(Category $model){
-
-//        if(empty($model->cryptocurrencies)) return null;
-        return $this->collection($model->cryptocurrencies, new CryptocurrencyTransformer());
     }
 }

@@ -3,7 +3,7 @@
     <div class="token-wrap">
         <div class="token-cover"></div>
         <div class="token-content bg-white rounded-7">
-            <a class="d-flex align-items-center mb-5" href="/">
+            <a class="d-flex align-items-center mb-5" href="/blogs">
                 <i class="far fa-long-arrow-left"></i>&nbsp;&nbsp;Back
             </a>
             <div class="token-time mb-3">
