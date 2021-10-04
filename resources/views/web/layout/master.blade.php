@@ -32,7 +32,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="ms-auto">
-            <a href="https://docs.nekoinvest.io/" target="_blank" class="btn btn-sm rounded btn-main py-2 px-3">Light paper</a>
+            <a href="https://docs.nekoinvest.io/" target="_blank" class="btn btn-sm rounded btn-main py-2 px-3">Litepaper</a>
 {{--            <a href="/#input-early-access-email" class="btn btn-sm rounded btn-main ">Get early--}}
 {{--                access</a>--}}
         </div>
@@ -59,7 +59,7 @@
                     <div class="mb-3"><a href="/">Blog</a></div>
                     <div class="mb-sm-0">
                         <a target="_blank" href="https://docs.nekoinvest.io/" class="pointer">
-                            Light Paper
+                            Litepaper
                         </a>
                     </div>
                 </div>
