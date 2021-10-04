@@ -56,6 +56,7 @@ class SyncJsonCoinmarketcap extends Command
             }
             $json_str = file_get_contents($file_name);
             $data = json_decode($json_str);
+
             if (!empty($data)) {
                 $this->handleItem($i, $data,$parse_down);
             }else{
@@ -94,13 +95,16 @@ class SyncJsonCoinmarketcap extends Command
 
 
             $cryptocurrency_info->save();
-            //update except coingecko
-            if(empty($cryptocurrency_info->description)){
+
+//            if(empty($cryptocurrency_info->description)){//update except coingecko
                 $description = $parse_down->text(object_get($data,'description'));
-                $description = str_replace(['h1>','h2>','h3>','h4>','h5>'],'div>', $description);
+
+                $description = strip_tags($description);
+//                if(!empty($description)) dd($description);
+//                $description = str_replace(['h1>','h2>','h3>','h4>','h5>'],'div>', $description);
                 $cryptocurrency_info->description =$description;
                 $cryptocurrency_info->save();
-            }
+//            }
             if(empty($cryptocurrency_info->links)){
                 $cryptocurrency_info->links= object_get($data,'urls');
                 $cryptocurrency_info->save();

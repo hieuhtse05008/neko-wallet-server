@@ -8,7 +8,7 @@
             @if(!empty(object_get($cryptocurrency,'cryptocurrency_info.description')))
                 <div class="mb-5">
                     <div class="text-main pg-title mb-4">What is {{$cryptocurrency->name}} ({{strtoupper($cryptocurrency->symbol)}})</div>
-                    <div class="pg-content">{!! $cryptocurrency->cryptocurrency_info->description !!}</div>
+                    <div class="pg-content">{!!  nl2br(e($cryptocurrency->cryptocurrency_info->description)) !!}</div>
                 </div>
             @endif
 
