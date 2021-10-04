@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Blog;
+use App\Models\Category;
 use App\Models\Cryptocurrency;
 use App\Models\CryptocurrencyInfo;
 use App\Models\EarlyAccessEmail;
@@ -65,7 +66,11 @@ class PublicController extends Controller
     }
 
     public function blogsView(Request $request){
-        return view();
+        $blogs = Blog::paginate(48);
+        return view('web.blog.blogs',[
+            'blogs'=>$blogs,
+            'search'=>$request->search
+        ]);
     }
 
     public function homeView(Request $request)
@@ -170,7 +175,8 @@ class PublicController extends Controller
     {
         //======================================================
         $this->categoryRepository->skipPresenter(false);
-        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null, [], true);
+        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null, []);
+
         $categories = collect($categories)->sortBy([
             function ($a, $b) {
                 return (int)(count($a['cryptocurrencies']) < count($b['cryptocurrencies']));
@@ -214,7 +220,7 @@ class PublicController extends Controller
             ->select('cryptocurrencies.*')
             ->limit(12)
             ->get();
-
+//dd($cryptocurrency->cryptocurrency_info->description);
         return view('web.token', [
             'cryptocurrency' => $cryptocurrency,
             'exchange_guides' => $cryptocurrency->exchange_guides()->get(),
