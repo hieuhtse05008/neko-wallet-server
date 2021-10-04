@@ -95,7 +95,7 @@ class SyncPrices extends Command
                     'time' => Carbon::createFromTimestamp($timestamp),
                 ];
             }
-            DB::connection($connection)->table('historical_prices')->insert($data);
+            DB::connection($connection)->table('historical_prices_date')->insert($data);
         } catch (\Exception $e) {
             Log::error($e);
             echo PHP_EOL,"Error ",$id,PHP_EOL;
