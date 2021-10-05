@@ -70,7 +70,7 @@ class SyncPrices extends Command
 
 
             $httpClient = new \GuzzleHttp\Client();
-            $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=ALL";
+            $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=7D";
             $response = $httpClient->get($url);
             $res = json_decode($response->getBody()->getContents())->data;
             usleep(500000);
@@ -95,7 +95,7 @@ class SyncPrices extends Command
                     'time' => Carbon::createFromTimestamp($timestamp),
                 ];
             }
-            DB::connection($connection)->table('historical_prices_date')->insert($data);
+            DB::connection($connection)->table('historical_prices')->insert($data);
         } catch (\Exception $e) {
             Log::error($e);
             echo PHP_EOL,"Error ",$id,PHP_EOL;
