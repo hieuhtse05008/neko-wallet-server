@@ -33,7 +33,9 @@ class AuthController extends Controller
             $token = $request->user()->createToken('authToken')->plainTextToken;
             $request->user()->withAccessToken($token);
 //            dd($token);
-            return redirect('/');
+
+            return redirect()->intended('/');
+
         }
 
         return back()->withErrors([
@@ -49,6 +51,7 @@ class AuthController extends Controller
             $request->user()->tokens()->delete();
         }
         Auth::logout();
+        $request->session()->flush();
 
         return redirect('/');
 
