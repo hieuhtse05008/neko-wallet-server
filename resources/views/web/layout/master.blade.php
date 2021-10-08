@@ -91,6 +91,7 @@
 <script>
     _token = "{{ csrf_token() }}";
     axios.defaults.withCredentials = true;
+    axios.defaults.credentials = true;
 
 </script>
 @include('web.modal.check_my_spot')
