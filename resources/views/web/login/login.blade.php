@@ -39,7 +39,7 @@
                 return obj;
             }, {});
             console.log(data)
-            axios.get('/sanctum/csrf-cookie').then(res => {
+            axios.get('/sanctum/csrf-cookie').then(() => {
                 axios.post('/login', data);//.then(()=>{window.location.href = '/'});
             }, {
                 headers: {
