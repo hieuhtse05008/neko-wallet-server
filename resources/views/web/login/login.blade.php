@@ -33,6 +33,7 @@
         axios.get('/sanctum/csrf-cookie');
         $('#form-login').on('submit',function (e){
             e.preventDefault();
+            axios.defaults.withCredentials = true;
             var data = $('#form-login').serializeArray().reduce(function(obj, item) {
                 obj[item.name] = item.value;
                 return obj;
