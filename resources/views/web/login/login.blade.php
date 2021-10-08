@@ -30,19 +30,21 @@
 @endsection
 @push('scripts')
     <script>
-        // axios.get('/sanctum/csrf-cookie');
-        // $('#form-login').on('submit',function (e){
-        //     e.preventDefault();
-        //     var data = $('#form-login').serializeArray().reduce(function(obj, item) {
-        //         obj[item.name] = item.value;
-        //         return obj;
-        //     }, {});
-        //     console.log(data)
-        //     axios.get('/sanctum/csrf-cookie').then(res => {
-        //         axios.post('/login', data).then(()=>{window.location.href = '/'});
-        //     });
-        //
-        // });
+        axios.get('/sanctum/csrf-cookie');
+        $('#form-login').on('submit',function (e){
+            e.preventDefault();
+            var data = $('#form-login').serializeArray().reduce(function(obj, item) {
+                obj[item.name] = item.value;
+                return obj;
+            }, {});
+
+            data._token = null;
+            console.log(data)
+            axios.get('/sanctum/csrf-cookie').then(res => {
+                axios.post('/login', data).then(()=>{window.location.href = '/'});
+            });
+
+        });
 
     </script>
 @endpush
