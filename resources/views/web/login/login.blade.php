@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container-fluid py-5">
-        <div class="container" >
+        <div class="container-md">
             <div class="row d-flex align-items-center">
-                <div class="col-4">
-                    <form class="p-5 bg-white rounded-7" method="POST" id="form-login"  action="/login">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <form class="p-3 p-lg-5 bg-white rounded-7" method="POST" id="form-login"  action="/login">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="exampleInputEmail1"
@@ -21,7 +21,7 @@
                         <button type="submit" class="btn btn-main w-100 mt-5" >Login</button>
                     </form>
                 </div>
-                <div class="col-8 h-100" style="min-height: 50vh;">
+                <div class="col-8 col-sm-6 col-lg-8 d-none d-md-block h-100" style="min-height: 50vh;">
                     <img class="w-100 p-5" src="/images/full_model_neko.png">
                 </div>
             </div>
