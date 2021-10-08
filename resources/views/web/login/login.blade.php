@@ -16,7 +16,7 @@
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                         </div>
-                        @csrf
+{{--                        @csrf--}}
 
                         <button type="submit" class="btn btn-main w-100 mt-5" >Login</button>
                     </form>
@@ -37,8 +37,6 @@
                 obj[item.name] = item.value;
                 return obj;
             }, {});
-
-            data._token = null;
             console.log(data)
             axios.get('/sanctum/csrf-cookie').then(res => {
                 axios.post('/login', data).then(()=>{window.location.href = '/'});
