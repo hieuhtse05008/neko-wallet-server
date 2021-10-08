@@ -25,6 +25,115 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * Class Blog
+ *
+ * @package App\Models
+ * @version September 23, 2021, 8:05 am UTC
+ * @OA\Schema (
+ *     title="Blog",
+ *     @OA\Xml(
+ *         name="Blog"
+ *     ),
+ *     required={"title", "tags"},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="slug",
+ *          description="slug",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="title",
+ *          description="title",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="image_url",
+ *          description="image_url",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="content_en",
+ *          description="content_en",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="status",
+ *          description="status",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="type",
+ *          description="type",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="tags",
+ *          description="tags",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * 
+ * )
+ * @mixin IdeHelperBlog
+ * @property int $id
+ * @property string|null $slug
+ * @property string $title
+ * @property string|null $image_url
+ * @property string|null $content_en
+ * @property string|null $status
+ * @property string|null $type
+ * @property string|null $tags
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string $description
+ * @method static \Database\Factories\BlogFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereContentEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereImageUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereTags($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereUpdatedAt($value)
+ */
+	class IdeHelperBlog extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * Class Category
  *
  * @package App\Models
@@ -63,6 +172,7 @@ namespace App\Models{
  *      )
  * 
  * )
+ * @mixin IdeHelperCategory
  * @property int $id
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -79,7 +189,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class IdeHelperCategory extends \Eloquent {}
 }
@@ -141,6 +250,7 @@ namespace App\Models{
  *      )
  * 
  * )
+ * @mixin IdeHelperCryptocurrency
  * @property int $id
  * @property string $name
  * @property string $symbol
@@ -172,7 +282,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereSymbol($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Cryptocurrency whereVerified($value)
- * @mixin \Eloquent
  */
 	class IdeHelperCryptocurrency extends \Eloquent {}
 }
@@ -225,6 +334,7 @@ namespace App\Models{
  *      )
  * 
  * )
+ * @mixin IdeHelperCryptocurrencyCategory
  * @property int $id
  * @property int|null $cryptocurrency_id
  * @property int|null $category_id
@@ -241,7 +351,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory whereCryptocurrencyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyCategory whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class IdeHelperCryptocurrencyCategory extends \Eloquent {}
 }
@@ -299,6 +408,7 @@ namespace App\Models{
  *      )
  * 
  * )
+ * @mixin IdeHelperCryptocurrencyInfo
  * @property int $id
  * @property int|null $cryptocurrency_id
  * @property string|null $description
@@ -308,9 +418,10 @@ namespace App\Models{
  * @property mixed|null $test
  * @property float|null $current_supply
  * @property float|null $max_supply
- * @property float|null $market_cap_dominance
- * @property float|null $holder_count
+ * @property object|null $market_cap_dominance
+ * @property int|null $holder_count
  * @property float|null $fully_diluted_market_cap
+ * @property string|null $status
  * @property-read \App\Models\Cryptocurrency|null $cryptocurrency
  * @method static \Database\Factories\CryptocurrencyInfoFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo newModelQuery()
@@ -326,9 +437,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereLinks($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereMarketCapDominance($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereMaxSupply($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereTest($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class IdeHelperCryptocurrencyInfo extends \Eloquent {}
 }
@@ -378,6 +489,7 @@ namespace App\Models{
  *      )
  * 
  * )
+ * @mixin IdeHelperCryptocurrencyMapping
  * @property int $id
  * @property int $cryptocurrency_id
  * @property string|null $coingecko_id
@@ -397,7 +509,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping whereCryptocurrencyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyMapping whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class IdeHelperCryptocurrencyMapping extends \Eloquent {}
 }
@@ -406,6 +517,7 @@ namespace App\Models{
 /**
  * App\Models\EarlyAccessEmail
  *
+ * @mixin IdeHelperEarlyAccessEmail
  * @property int $id
  * @property string $email
  * @property string|null $code
@@ -421,7 +533,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail whereRef($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EarlyAccessEmail whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class IdeHelperEarlyAccessEmail extends \Eloquent {}
 }
@@ -496,6 +607,7 @@ namespace App\Models{
  *      )
  * 
  * )
+ * @mixin IdeHelperExchangeGuide
  * @property int $id
  * @property string|null $name
  * @property string|null $description
@@ -520,7 +632,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExchangeGuide whereUrl($value)
- * @mixin \Eloquent
  */
 	class IdeHelperExchangeGuide extends \Eloquent {}
 }
@@ -586,6 +697,7 @@ namespace App\Models{
  *      )
  * 
  * )
+ * @mixin IdeHelperExchangePair
  * @property int $id
  * @property string|null $trade_url
  * @property int|null $base_token_id
@@ -607,7 +719,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair whereTargetTokenId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair whereTradeUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExchangePair whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class IdeHelperExchangePair extends \Eloquent {}
 }
@@ -638,6 +749,7 @@ namespace App\Models{
  *          format="date-time"
  *      )
  * )
+ * @mixin IdeHelperHistoricalPrice
  * @property int $cryptocurrency_id
  * @property float|null $price
  * @property float|null $volume_24h
@@ -651,7 +763,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice whereTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HistoricalPrice whereVolume24h($value)
- * @mixin \Eloquent
  */
 	class IdeHelperHistoricalPrice extends \Eloquent {}
 }
@@ -719,6 +830,7 @@ namespace App\Models{
  *      )
  * 
  * )
+ * @mixin IdeHelperNetwork
  * @property int $id
  * @property string $name
  * @property int|null $chain_id
@@ -741,7 +853,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Network whereShortName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Network whereSymbol($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Network whereWalletDerivePath($value)
- * @mixin \Eloquent
  */
 	class IdeHelperNetwork extends \Eloquent {}
 }
@@ -791,6 +902,7 @@ namespace App\Models{
  *      )
  * 
  * )
+ * @mixin IdeHelperNetworkMapping
  * @property int $id
  * @property int|null $network_id
  * @property string|null $coingecko_id
@@ -809,7 +921,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|NetworkMapping whereNetworkId($value)
  * @method static \Illuminate\Database\Query\Builder|NetworkMapping withTrashed()
  * @method static \Illuminate\Database\Query\Builder|NetworkMapping withoutTrashed()
- * @mixin \Eloquent
  */
 	class IdeHelperNetworkMapping extends \Eloquent {}
 }
@@ -922,6 +1033,7 @@ namespace App\Models{
  *      )
  * 
  * )
+ * @mixin IdeHelperToken
  * @property int $id
  * @property string $name
  * @property string $symbol
@@ -934,6 +1046,8 @@ namespace App\Models{
  * @property int|null $network_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property bool $swappable
+ * @property bool $enable_profit_loss
  * @property-read \App\Models\Cryptocurrency|null $cryptocurrency
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ExchangeGuide[] $exchange_guides
  * @property-read int|null $exchange_guides_count
@@ -949,31 +1063,151 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Token whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Token whereCryptocurrencyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Token whereDecimals($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereEnableProfitLoss($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Token whereIconUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Token whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Token whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Token whereNetworkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereSwappable($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Token whereSymbol($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Token whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Token whereVerified($value)
- * @mixin \Eloquent
  */
 	class IdeHelperToken extends \Eloquent {}
 }
 
 namespace App\Models{
 /**
- * App\Models\User
+ * Class User
  *
+ * @package App\Models
+ * @version October 6, 2021, 8:34 am UTC
+ * @OA\Schema (
+ *     title="User",
+ *     @OA\Xml(
+ *         name="User"
+ *     ),
+ *     required={"name", "email", "username", "password"},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="name",
+ *          description="name",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="email",
+ *          description="email",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="username",
+ *          description="username",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="password",
+ *          description="password",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="avatar_url",
+ *          description="avatar_url",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="phone",
+ *          description="phone",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="dob",
+ *          description="dob",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="gender",
+ *          description="gender",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="remember_token",
+ *          description="remember_token",
+ *          type="string"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="deleted_at",
+ *          description="deleted_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * 
+ * )
  * @mixin IdeHelperUser
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read int|null $notifications_count
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $username
+ * @property string $password
+ * @property string|null $avatar_url
+ * @property string|null $phone
+ * @property \Illuminate\Support\Carbon|null $dob
+ * @property string|null $gender
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Query\Builder|User onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatarUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDob($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
+ * @method static \Illuminate\Database\Query\Builder|User withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  */
 	class IdeHelperUser extends \Eloquent {}
 }

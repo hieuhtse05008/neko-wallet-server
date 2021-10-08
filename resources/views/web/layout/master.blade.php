@@ -43,6 +43,7 @@
         {{--        </div>--}}
     </div>
 </nav>
+
 @yield('content')
 <footer>
     <div class="container-md">
@@ -85,9 +86,12 @@
 
 <script src="/js/vue.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/axios.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script>
-    _token = "{{ csrf_token() }}"
+    _token = "{{ csrf_token() }}";
+    axios.defaults.withCredentials = true;
+
 </script>
 @include('web.modal.check_my_spot')
 

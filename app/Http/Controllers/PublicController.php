@@ -17,7 +17,7 @@ use App\Repositories\CryptocurrencyRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class PublicController extends Controller
+class PublicController extends ViewController
 {
     protected $cryptocurrencyRepository;
     protected $cryptocurrencyCategoryRepository;
@@ -30,6 +30,7 @@ class PublicController extends Controller
                                 BlogRepository  $blogRepository
     )
     {
+        parent::__construct();
         $this->cryptocurrencyRepository = $cryptocurrencyRepository;
         $this->cryptocurrencyCategoryRepository = $cryptocurrencyCategoryRepository;
         $this->categoryRepository = $categoryRepository;
@@ -160,7 +161,8 @@ class PublicController extends Controller
             ['name' => 'HANH PHAM', 'role' => 'Graphic Designer', 'department' => '','avatar'=>'/images/founder/hanhpt.png'],
             ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni','avatar'=>'/images/founder/longhd.png'],
         ];
-        return view('web.home', [
+//dd($this->user->tokens);
+        return $this->view('web.home', [
             'founders' => $founders,
             'road_maps' => $road_maps,
             'networks' => $networks,
@@ -200,7 +202,7 @@ class PublicController extends Controller
         $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(48, $filter);
 
 
-        return view('web.tokens', [
+        return $this->view('web.cryptocurrency.cryptocurrencies', [
             'cryptocurrencies' => $cryptocurrencies,
             'categories' => $categories,
             'count_total_cryptocurrencies' => $count_total_cryptocurrencies,
@@ -217,8 +219,8 @@ class PublicController extends Controller
             ->select('cryptocurrencies.*')
             ->limit(12)
             ->get();
-//dd($cryptocurrency->cryptocurrency_info->description);
-        return view('web.token', [
+
+        return $this->view('web.cryptocurrency.cryptocurrency', [
             'cryptocurrency' => $cryptocurrency,
             'exchange_guides' => $cryptocurrency->exchange_guides()->get(),
             'related_coins' => $related_coins,
@@ -227,25 +229,26 @@ class PublicController extends Controller
 
     public function cryptocurrencyMobileView(Cryptocurrency $cryptocurrency)
     {
-        return view('mobile.cryptocurrency', [
+        return $this->view('mobile.cryptocurrency', [
             'cryptocurrency' => $cryptocurrency,
         ]);
     }
 
     public function termsOfServiceView()
     {
-        return view('web.terms_of_service');
+        return $this->view('web.terms_of_service');
     }
 
     public function privacyPolicyView()
     {
-        return view('web.privacy_policy');
+        return $this->view('web.privacy_policy');
     }
 
-    public function uploadBlogView(Blog $blog)
+    public function uploadBlogView(Blog $blog, Request $request)
     {
+//        dd($request->user()->tokens);
 
-        return view('web.blog.upload_blog', [
+        return $this->view('web.blog.upload_blog', [
             'blog' => $blog
         ]);
 
@@ -259,7 +262,7 @@ class PublicController extends Controller
         $this->blogRepository->skipPresenter(true);
         $blogs = $this->blogRepository->list(48,$filter);
 
-        return view('web.blog.blogs',[
+        return $this->view('web.blog.blogs',[
             'blogs'=>$blogs,
             'search'=>$request->search
         ]);
@@ -268,8 +271,13 @@ class PublicController extends Controller
     public function blogView(Blog $blog)
     {
 
-        return view('web.blog.blog', [
+        return $this->view('web.blog.blog', [
             'blog' => $blog
         ]);
+    }
+    public function loginView()
+    {
+
+        return $this->view('web.login.login');
     }
 }

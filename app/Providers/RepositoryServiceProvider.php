@@ -36,6 +36,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\ExchangePairRepository::class, \App\Repositories\ExchangePairRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\CryptocurrencyCategoryRepository::class, \App\Repositories\CryptocurrencyCategoryRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\BlogRepository::class, \App\Repositories\BlogRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\UserRepository::class, \App\Repositories\UserRepositoryEloquent::class);
         //:end-bindings:
     }
 }

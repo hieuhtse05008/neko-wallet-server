@@ -8,80 +8,80 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Blog
+ *
  * @package App\Models
  * @version September 23, 2021, 8:05 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="Blog",
  *     @OA\Xml(
  *         name="Blog"
  *     ),
  *     required={"title", "tags"},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="slug",
  *          description="slug",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="title",
  *          description="title",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="image_url",
  *          description="image_url",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="content_en",
  *          description="content_en",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="status",
  *          description="status",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="type",
  *          description="type",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="tags",
  *          description="tags",
  *          type="string"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
  *          type="string",
  *          format="date-time"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperBlog
  */
 
 class Blog extends Model

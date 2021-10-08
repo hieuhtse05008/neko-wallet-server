@@ -43,7 +43,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          type="string",
  *          format="date-time"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperCategory
  */

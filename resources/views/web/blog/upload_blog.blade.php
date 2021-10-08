@@ -12,7 +12,8 @@
             <div class="mb-3">
                 <label class="fw-bold mb-2">Description</label>
                 <div>
-                    <textarea style="min-height: 300px" required v-model="form.description" class="inp-main rounded-3 w-100"></textarea>
+                    <textarea style="min-height: 300px" required v-model="form.description"
+                              class="inp-main rounded-3 w-100"></textarea>
                 </div>
             </div>
             <div class="mb-3">
@@ -117,6 +118,9 @@
     <script>
         let editor;
         const defaultBLog = {!! $blog!!};
+        @if(!empty($user))
+        console.log({!! json_encode($user->currentAccessToken()) !!})
+        @endif
         var uploadBLog = new Vue({
             el: '#upload-blog',
             data() {
@@ -155,27 +159,25 @@
                     console.log(res.status, res);
                     if (res.status) {
                         alert('Blog is saved successfully!');
-                        this.errors = {};
+                        window.location.href = `/blog/upload/${res.data.blog.slug}`
                     }
                 },
                 submitBlog: function () {
                     this.isSaving = true;
 
-                    let url = `/api/v1/blogs/${this.form.id}`;
-                    const parameters = [
-                        `/api/v1/blogs/${this.form.id}`,
-                        {
-                            ...this.form,
-                            content_en: editor.getData(),
-                        },
-                    ];
+                    const url = `/api/auth/v1/blogs/${this.form.id}`;
+                    const parameters = {
+                        ...this.form,
+                        content_en: editor.getData(),
+                    };
                     console.log(parameters);
+
                     if (this.form.id) {
-                        $.put(...parameters).then(this.submitBlogSuccess).catch(this.submitBlogError);
+                        axios.put(url, {...parameters}).then(this.submitBlogSuccess).catch(this.submitBlogError);
                     } else {
-                        $.post(...parameters).then(this.submitBlogSuccess).catch(this.submitBlogError);
+                        axios.post(url, {...parameters}).then(this.submitBlogSuccess).catch(this.submitBlogError);
+
                     }
-                    console.log(url)
                 },
                 onChangeImage: function () {
                     var input = document.createElement("input");
@@ -256,7 +258,6 @@
                     });
 
                 }, 500);
-
             },
 
         });

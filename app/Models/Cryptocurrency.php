@@ -60,7 +60,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          description="verified",
  *          type="boolean"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperCryptocurrency
  */

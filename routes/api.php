@@ -20,8 +20,6 @@ Route::get('/test', function () {
     return response()->json($api->depositAddress('BNB', 'BSC'));
 });
 
-Route::get('/telegram', [App\Http\Controllers\API\TelegramAPIController::class, 'index']);
-
 
 Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'cryptocurrencies'], function () {
@@ -32,25 +30,15 @@ Route::prefix("v1")->group(function(){
         Route::get("{cryptocurrency}", [App\Http\Controllers\API\CryptocurrencyAPIController::class, 'show'])
             ->middleware("include:cryptocurrency_info,categories,tokens.network");
     });
-});
-
-Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'networks'], function () {
         Route::get("/", [App\Http\Controllers\API\NetworkAPIController::class, 'index']);
         Route::get("{network}", [App\Http\Controllers\API\NetworkAPIController::class, 'show']);
     });
-});
-
-Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'tokens'], function () {
         Route::get("/", [App\Http\Controllers\API\TokenAPIController::class, 'index']);
         Route::post("/", [App\Http\Controllers\API\TokenAPIController::class, 'store']);
         Route::get("{token}", [App\Http\Controllers\API\TokenAPIController::class, 'show']);
     });
-});
-
-
-Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'cryptocurrency-infos'], function () {
         Route::get("/", [App\Http\Controllers\API\CryptocurrencyInfoAPIController::class, 'index']);
         Route::post("/", [App\Http\Controllers\API\CryptocurrencyInfoAPIController::class, 'store']);
@@ -58,10 +46,6 @@ Route::prefix("v1")->group(function(){
         Route::put("{cryptocurrencyInfo}", [App\Http\Controllers\API\CryptocurrencyInfoAPIController::class, 'update']);
         Route::delete("{cryptocurrencyInfo}", [App\Http\Controllers\API\CryptocurrencyInfoAPIController::class, 'destroy']);
     });
-});
-
-
-Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'categories'], function () {
         Route::get("/", [App\Http\Controllers\API\CategoryAPIController::class, 'index']);
         Route::post("/", [App\Http\Controllers\API\CategoryAPIController::class, 'store']);
@@ -69,10 +53,6 @@ Route::prefix("v1")->group(function(){
         Route::put("{category}", [App\Http\Controllers\API\CategoryAPIController::class, 'update']);
         Route::delete("{category}", [App\Http\Controllers\API\CategoryAPIController::class, 'destroy']);
     });
-});
-
-
-Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'exchange-guides'], function () {
         Route::get("/", [App\Http\Controllers\API\ExchangeGuideAPIController::class, 'index']);
         Route::post("/", [App\Http\Controllers\API\ExchangeGuideAPIController::class, 'store']);
@@ -80,10 +60,6 @@ Route::prefix("v1")->group(function(){
         Route::put("{exchangeGuide}", [App\Http\Controllers\API\ExchangeGuideAPIController::class, 'update']);
         Route::delete("{exchangeGuide}", [App\Http\Controllers\API\ExchangeGuideAPIController::class, 'destroy']);
     });
-});
-
-
-Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'exchange-pairs'], function () {
         Route::get("/", [App\Http\Controllers\API\ExchangePairAPIController::class, 'index']);
         Route::post("/", [App\Http\Controllers\API\ExchangePairAPIController::class, 'store']);
@@ -91,10 +67,6 @@ Route::prefix("v1")->group(function(){
         Route::put("{exchangePair}", [App\Http\Controllers\API\ExchangePairAPIController::class, 'update']);
         Route::delete("{exchangePair}", [App\Http\Controllers\API\ExchangePairAPIController::class, 'destroy']);
     });
-});
-
-
-Route::prefix("v1")->group(function(){
     Route::group(["prefix" => 'cryptocurrency-categories'], function () {
         Route::get("/", [App\Http\Controllers\API\CryptocurrencyCategoryAPIController::class, 'index']);
         Route::post("/", [App\Http\Controllers\API\CryptocurrencyCategoryAPIController::class, 'store']);
@@ -102,10 +74,16 @@ Route::prefix("v1")->group(function(){
         Route::put("{cryptocurrencyCategory}", [App\Http\Controllers\API\CryptocurrencyCategoryAPIController::class, 'update']);
         Route::delete("{cryptocurrencyCategory}", [App\Http\Controllers\API\CryptocurrencyCategoryAPIController::class, 'destroy']);
     });
+    Route::group(["prefix" => 'blogs'], function () {
+        Route::get("/", [App\Http\Controllers\API\BlogAPIController::class, 'index']);
+//        Route::post("/", [App\Http\Controllers\API\BlogAPIController::class, 'store']);
+        Route::get("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'show']);
+//        Route::put("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'update']);
+//        Route::delete("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'destroy']);
+    });
 });
 
-
-Route::prefix("v1")->group(function(){
+Route::prefix("auth/v1")->middleware('auth:sanctum')->group(function() {
     Route::group(["prefix" => 'blogs'], function () {
         Route::get("/", [App\Http\Controllers\API\BlogAPIController::class, 'index']);
         Route::post("/", [App\Http\Controllers\API\BlogAPIController::class, 'store']);
@@ -114,3 +92,16 @@ Route::prefix("v1")->group(function(){
         Route::delete("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'destroy']);
     });
 });
+
+
+
+
+//Route::prefix("v1")->group(function(){
+//    Route::group(["prefix" => 'users'], function () {
+//        Route::get("/", [App\Http\Controllers\API\UserAPIController::class, 'index']);
+//        Route::post("/", [App\Http\Controllers\API\UserAPIController::class, 'store']);
+//        Route::get("{user}", [App\Http\Controllers\API\UserAPIController::class, 'show']);
+//        Route::put("{user}", [App\Http\Controllers\API\UserAPIController::class, 'update']);
+//        Route::delete("{user}", [App\Http\Controllers\API\UserAPIController::class, 'destroy']);
+//    });
+//});
