@@ -40,7 +40,9 @@
             }, {});
             console.log(data)
             axios.get('/sanctum/csrf-cookie').then(res => {
-                axios.post('/login', data).then(()=>{window.location.href = '/'});
+                axios.post('/login', data).then(
+                    // ()=>{window.location.href = '/'}
+                );
             }, {
                 headers: {
                     'X-XSRF-TOKEN': (() => {
