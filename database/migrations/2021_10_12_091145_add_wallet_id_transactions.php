@@ -18,7 +18,7 @@ class AddWalletIdTransactions extends Migration
         });
         Schema::table('transactions', function (Blueprint $table) {
             $table->primary('id');
-            $table->foreignUuid('wallet_id')->references('id')->on('wallets');
+            $table->foreignUuid('wallet_id')->nullable()->references('id')->on('wallets');
         });
     }
 
