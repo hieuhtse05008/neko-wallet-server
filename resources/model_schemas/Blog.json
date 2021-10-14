@@ -48,7 +48,7 @@
         "inView": true
     },
     {
-        "name": "content_en",
+        "name": "content",
         "dbType": "text:nullable",
         "htmlType": "textarea",
         "validations": "nullable|string|nullable|string",

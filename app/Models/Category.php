@@ -43,7 +43,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          type="string",
  *          format="date-time"
  *      )
- * 
+ *
  * )
  * @mixin IdeHelperCategory
  */
@@ -98,7 +98,8 @@ class Category extends Model
 
     public function cryptocurrencies(){
 
-        return $this->belongsToMany(Cryptocurrency::class,CryptocurrencyCategory::class,
+        return $this->belongsToMany(Cryptocurrency::class,
+            CryptocurrencyCategory::class,
             'category_id',
             'cryptocurrency_id',
         );

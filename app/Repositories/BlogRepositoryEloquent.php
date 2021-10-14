@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Criteria\BlogJoinGroupCriteria;
 use App\Criteria\RequestCriteria;
 use App\Models\Blog;
 use App\Repositories\Repository;
@@ -20,7 +21,7 @@ class BlogRepositoryEloquent extends Repository implements BlogRepository
     protected $fieldSearchable = [
         'slug' => 'ilike',
         'title' => 'ilike',
-        'content_en' => 'ilike',
+        'content' => 'ilike',
         'tags' => 'ilike',
     ];
 
@@ -57,9 +58,13 @@ class BlogRepositoryEloquent extends Repository implements BlogRepository
      */
     static public function queryFilter($query, $filter)
     {
-
+        if(isset($filter['statuses'])){
+            $query = $query->whereIn('blogs.status',$filter['statuses']);
+        }
         return $query;
     }
+
+
 
     /**
      * @param int $limit
@@ -76,9 +81,18 @@ class BlogRepositoryEloquent extends Repository implements BlogRepository
         if (!$disabledRequestCriteria){
             $this->pushCriteria(app(RequestCriteria::class));
         }
+        if(isset($filter['blog_group'])){
+            $this->pushCriteria(BlogJoinGroupCriteria::class);
+        }
 
         $this->scopeQuery(function ($query) use ($filter) {
-            return $query;
+            if(isset($filter['blog'])){
+                $query = self::queryFilter($query,$filter['blog']);
+            }
+            if(isset($filter['blog_group'])){
+                $query = BlogGroupRepositoryEloquent::queryFilter($query,$filter['blog_group']);
+            }
+            return $query->select('blogs.*');
         });
 
         if ($limit) {

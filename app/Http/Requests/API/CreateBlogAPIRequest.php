@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\API;
 
+use App\Enum\BlogGroup;
 use App\Models\Blog;
 use App\Http\Requests\API\APIRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * Class CreateBlogAPIRequest
@@ -39,19 +41,33 @@ class CreateBlogAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $createRules = Blog::$rules;
+        $modelRules = Blog::$rules;
         $keyRules = [
-            'slug',
-            'title',
-            'description',
             'image_url',
-            'content_en',
             'status',
             'type',
             'tags'
         ];
-        $createRules = getDataByKeys($createRules, $keyRules);
+        $createRules = getDataByKeys($modelRules, $keyRules);
+        $keyLocaleRules = [
+            'slug',
+            'title',
+            'description',
+            'content',
+        ];
+        $localeRules = getLocaleRules(getDataByKeys($modelRules, $keyLocaleRules));
+        $blogGroupRule =[];
+        foreach (array_keys(BlogGroup::TYPES) as $type){
+            $blogGroupRule["{$type}_id"] =[
+                'nullable',
+                Rule::exists('blog_groups',"id")
+                    ->where(function ($query) use($type){
+                    return $query->where('type', $type);
+                })
+            ];
+        }
 
-        return $createRules;
+
+        return array_merge($createRules, $localeRules,$blogGroupRule);
     }
 }

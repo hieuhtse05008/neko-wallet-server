@@ -1,7 +1,7 @@
 @extends('web.layout.master')
 
 @section('content')
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-5 bg-main">
         <div class="container-md">
             <div class="row d-flex align-items-center">
                 <div class="col-12 col-sm-6 col-lg-4">
@@ -31,25 +31,25 @@
 @push('scripts')
     <script>
 
-        // $('#form-login').on('submit',function (e){
-        //     e.preventDefault();
-        //     let data = $('#form-login').serializeArray().reduce(function(obj, item) {
-        //         obj[item.name] = item.value;
-        //         return obj;
-        //     }, {});
-        //     console.log(data)
-        //     axios.get('/sanctum/csrf-cookie').then(() => {
-        //         axios.post('/login', data).then(()=>{window.location.href = '/'});
-        //     });
-        //
-        // });
+        $('#form-login').on('submit',function (e){
+            e.preventDefault();
+            let data = $('#form-login').serializeArray().reduce(function(obj, item) {
+                obj[item.name] = item.value;
+                return obj;
+            }, {});
+            console.log(data)
+            axios.get('/sanctum/csrf-cookie').then(() => {
+                axios.post('/login', data).then(()=>{window.location.href = '/'});
+            });
+
+        });
 
     </script>
 @endpush
 @section('styles')
     <style>
         body{
-            background-color: var(--main-color, #FC7819);;
+            /*background-color: var(--main-color, #FC7819);;*/
         }
     </style>
 @endsection

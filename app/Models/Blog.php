@@ -43,8 +43,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * ,
  *      @OA\Property(
- *          property="content_en",
- *          description="content_en",
+ *          property="content",
+ *          description="content",
  *          type="string"
  *      )
  * ,
@@ -79,7 +79,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          type="string",
  *          format="date-time"
  *      )
- * 
+ *
  * )
  * @mixin IdeHelperBlog
  */
@@ -88,24 +88,22 @@ class Blog extends Model
 {
 //    use SoftDeletes;
 
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
     public $table = 'blogs';
+    public $translatable  = ['slug','content', 'title', 'description'];
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
-
     protected $dates = ['deleted_at'];
-
-
 
     public $fillable = [
         'slug',
         'title',
         'description',
         'image_url',
-        'content_en',
+        'content',
         'status',
         'type',
         'tags'
@@ -118,13 +116,12 @@ class Blog extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'slug' => 'string',
-        'title' => 'string',
-        'description' => 'string',
+        'slug' => 'array',
+        'title' => 'array',
+        'description' => 'array',
         'image_url' => 'string',
-        'content_en' => 'string',
+        'content' => 'array',
         'status' => 'string',
-        'type' => 'string',
         'tags' => 'string'
     ];
 
@@ -134,17 +131,22 @@ class Blog extends Model
      * @var array
      */
     public static $rules = [
-        'slug' => 'nullable|string',
+        'slug' => 'required|string',
         'title' => 'required|string',
         'description' => 'required|string',
+        'content' => 'required|string',
         'image_url' => 'nullable|string',
-        'content_en' => 'nullable|string',
         'status' => 'nullable|string|max:255',
-        'type' => 'nullable|string|max:255',
         'tags' => 'nullable|string',
         'created_at' => 'nullable',
         'updated_at' => 'nullable'
     ];
 
-
+    public function blog_groups(){
+        return $this->belongsToMany(BlogGroup::class,
+            RefBlogGroup::class,
+            'blog_id',
+            'blog_group_id',
+        );
+    }
 }

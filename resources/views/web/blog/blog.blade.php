@@ -1,26 +1,38 @@
 @extends('web.layout.master')
 @section('content')
-    <div class="token-wrap">
-        <div class="token-cover"></div>
-        <div class="token-content bg-white rounded-7">
+    <div class="blog-wrap">
+        <div class="blog-cover"></div>
+        <div class="blog-content bg-white rounded-7  shadow">
             <a class="d-flex align-items-center mb-5" href="/blogs">
                 <i class="far fa-long-arrow-left"></i>&nbsp;&nbsp;Back
             </a>
-            <div class="token-time mb-3">
+            <div class="blog-time mb-3">
                 {{$blog->updated_at}}
             </div>
-            <div class="token-title mb-5">
+            <div class="blog-title mb-5">
                 {{$blog->title}}
             </div>
             <hr>
             <div class="pt-5 overflow-auto">
                 <div class="ck-content">
-                    {!! $blog->content_en !!}
+                    {!! $blog->content !!}
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        const slug = '{{$slug}}';
+        const blog_slug = '{{$blog->slug}}';
+        console.log(slug , blog_slug,_locale);
+        if(slug !== blog_slug && blog_slug && slug){
+            console.log('redirect',`/${_locale}/blogs/${blog_slug}`);
+            window.location.href = `/${_locale}/blogs/${blog_slug}`;
+        }
+    </script>
+@endpush
 @section('styles')
     <link rel="stylesheet" href="/css/ckeditor/ckeditor.css">
     <style>
@@ -59,11 +71,11 @@
             line-height: 150%;
         }
 
-        .token-wrap {
+        .blog-wrap {
             min-height: 100vh;
         }
 
-        .token-content {
+        .blog-content {
             min-height: 80vh;
             /*max-width: max(74vw,min(576px,100vw));*/
             max-width: clamp(74vw, 576px, 100vw);
@@ -105,19 +117,19 @@
             margin-bottom: 40px;
         }
 
-        .token-cover {
+        .blog-cover {
             background: url("/images/blog/cover.jpg") no-repeat center;
             width: 100%;
             height: 480px;
             background-size: cover;
         }
 
-        .token-time {
+        .blog-time {
             line-height: 140%;
             color: #8C939E;
         }
 
-        .token-title {
+        .blog-title {
             font-size: 44px;
             font-weight: bold;
         }

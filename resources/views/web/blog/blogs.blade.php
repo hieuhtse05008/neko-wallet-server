@@ -20,19 +20,27 @@
 
 
         <div class="row row-eq-height gy-5 gx-5">
+
             @foreach($blogs as $blog)
-                <div class="col-6  col-lg-4 pb-3">
-                    <a href="/blogs/{{$blog['slug']}}" class="pointer h-100">
+                <div class="col-12 col-sm-6  col-lg-4 pb-3">
+                    <a href="/{{$locale}}/blogs/{{$blog['slug']}}" class="pointer h-100">
 
-                        <div class="img-blog rounded-t-7 img-blog bg-white" style="background-image: url('{{$blog['image_url']}}')"></div>
+                        <div class="img-blog rounded-t-7 img-blog bg-white shadow" style="background-image: url('{{$blog['image_url']}}')"></div>
 
-                        <div class="align-items-start d-flex flex-column h-100 justify-content-start">
+                        <div class="h-100">
                             <div class="d-flex flex-wrap text-wrap text-break">
-                                <span class="my-3"><b>{{$blog['title']}}</b></span>
+                                <span class="mt-4"><b>{{$blog['title']}}</b></span>
                             </div>
-{{--                            <div class="d-flex flex-wrap text-wrap text-break">--}}
-{{--                                <span class="text-secondary mb-3"><b>{{($blog['description)}}</b></span>--}}
-{{--                            </div>--}}
+                            <div class="mt-2 d-flex flex-wrap text-wrap text-break">
+                                <span class="text-secondary"><b>{{($blog->description)}}</b></span>
+                            </div>
+
+                            @if(Auth::check())
+                                    <div class="mt-2">
+                                        <a href="/blog/upload/{{$blog['id']}}" target="_blank" class="btn btn-main pointer">Edit</a>
+                                    </div>
+
+                            @endif
                         </div>
 
                     </a>
@@ -84,7 +92,7 @@
             background-position: center center !important;
             background-size: cover !important;
             border-radius: 5px;
-            padding-bottom: 70%;
+            height: 200px;
         }
         .search-wrap input:focus {
             outline: none;

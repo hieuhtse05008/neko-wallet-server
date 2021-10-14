@@ -37,6 +37,7 @@ use App\Models\Blog;
  */
 class BlogTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = ['blog_groups'];
     /**
      * Transform the Blog entity.
      *
@@ -46,13 +47,16 @@ class BlogTransformer extends TransformerAbstract
      */
     public function transform(Blog $model)
     {
+        $model->skipTranslation(true);
+
+//dd($model, $model['slug']);
         return [
             'id'         => (int) $model->id,
             'slug' => $model->slug,
             'title' => $model->title,
             'description' => $model->description,
             'image_url' => $model->image_url,
-            'content_en' => $model->content_en,
+            'content' => $model->content,
             'status' => $model->status,
             'type' => $model->type,
             'tags' => $model->tags,
@@ -61,5 +65,8 @@ class BlogTransformer extends TransformerAbstract
             'created_at' => strtotime($model->created_at),
             'updated_at' => strtotime($model->updated_at),
         ];
+    }
+    public function includeBlogGroups(Blog $model){
+        return $this->collection($model->blog_groups, new BlogGroupTransformer());
     }
 }

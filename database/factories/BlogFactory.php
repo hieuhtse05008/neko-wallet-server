@@ -25,7 +25,7 @@ class BlogFactory extends Factory
             'slug' => $this->faker->text,
         'title' => $this->faker->text,
         'image_url' => $this->faker->text,
-        'content_en' => $this->faker->text,
+        'content' => $this->faker->text,
         'status' => $this->faker->word,
         'type' => $this->faker->word,
         'tags' => $this->faker->word

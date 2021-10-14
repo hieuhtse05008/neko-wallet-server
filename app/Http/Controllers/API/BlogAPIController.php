@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enum\BlogGroup;
 use App\Http\Requests\API\CreateBlogAPIRequest;
 use App\Http\Requests\API\UpdateBlogAPIRequest;
 use App\Models\Blog;
 use App\Repositories\BlogRepository;
+use App\Repositories\RefBlogGroupRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\APIController;
 use Response;
@@ -19,11 +21,13 @@ class BlogAPIController extends APIController
 {
     /** @var  BlogRepository */
     private $blogRepository;
+    private $refBlogGroupRepository;
 
-    public function __construct(BlogRepository $blogRepo)
+    public function __construct(BlogRepository $blogRepo, RefBlogGroupRepository $refBlogGroupRepository)
     {
         parent::__construct();
         $this->blogRepository = $blogRepo;
+        $this->refBlogGroupRepository = $refBlogGroupRepository;
     }
 
     /**
@@ -80,7 +84,15 @@ class BlogAPIController extends APIController
 
     public function index(Request $request)
     {
-        $filter = [];
+        $filter = [
+            'blog'=>[
+                'statuses'=>$request->statuses
+            ],
+            'blog_group'=>[
+                'ids'=>$request->blog_group_ids,
+                'type'=>$request->type,
+            ],
+        ];
         $limit = $request->limit;
         $blogs = $this->blogRepository->list($limit, $filter);
 
@@ -131,6 +143,17 @@ class BlogAPIController extends APIController
     {
         $input = $request->validated();
         $blog = $this->blogRepository->create($input);
+
+        foreach (array_keys(BlogGroup::TYPES) as $type){
+            if(isset($input["{$type}_id"])){
+                $this->refBlogGroupRepository->updateOrCreate([
+                    'blog_id' => $blog['id'],
+                    'type'=>$type,
+                ],[
+                    'blog_group_id' => $input["{$type}_id"],
+                ]);
+            }
+        }
 
         return $this->respondSuccess([
             "blog" => $blog
@@ -244,6 +267,17 @@ class BlogAPIController extends APIController
         $input = $request->validated();
 
         $blog = $this->blogRepository->update($input, $blog->id);
+        foreach (array_keys(BlogGroup::TYPES) as $type){
+            if(isset($input["{$type}_id"])){
+                $this->refBlogGroupRepository->updateOrCreate([
+                    'blog_id' => $blog['id'],
+                    'type'=>$type,
+                ],[
+                    'blog_group_id' => $input["{$type}_id"],
+                ]);
+            }
+
+        }
 
         return $this->respondSuccess([
             "blog" => $blog

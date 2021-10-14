@@ -48,3 +48,12 @@ function getDataByKeys($data, $keys)
         ARRAY_FILTER_USE_KEY
     );
 }
+
+
+function getLocaleRules($keys){
+    $res = [];
+    foreach ($keys as $key=>$rule){
+        $res[$key] = [new \App\Rules\MultiLocaleRule(\App\Enum\Locales::AVAILABLE_LOCALES, $rule)];
+    }
+    return $res;
+}

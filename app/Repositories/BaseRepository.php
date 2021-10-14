@@ -3,10 +3,14 @@
 namespace App\Repositories;
 
 use Illuminate\Container\Container as Application;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Prettus\Repository\Contracts\Presentable;
+use Prettus\Repository\Contracts\PresenterInterface;
 
 
-abstract class BaseRepository
+abstract class BaseRepository extends \Prettus\Repository\Eloquent\BaseRepository
 {
     /**
      * @var Model
@@ -28,13 +32,13 @@ abstract class BaseRepository
         $this->app = $app;
         $this->makeModel();
     }
-
-    /**
-     * Get searchable fields array
-     *
-     * @return array
-     */
-    abstract public function getFieldsSearchable();
+//
+//    /**
+//     * Get searchable fields array
+//     *
+//     * @return array
+//     */
+//    abstract public function getFieldsSearchable();
 
     /**
      * Configure the Model
@@ -61,19 +65,19 @@ abstract class BaseRepository
         return $this->model = $model;
     }
 
-    /**
-     * Paginate records for scaffold.
-     *
-     * @param int $perPage
-     * @param array $columns
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function paginate($perPage, $columns = ['*'])
-    {
-        $query = $this->allQuery();
-
-        return $query->paginate($perPage, $columns);
-    }
+//    /**
+//     * Paginate records for scaffold.
+//     *
+//     * @param int $perPage
+//     * @param array $columns
+//     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+//     */
+//    public function paginate($perPage, $columns = ['*'])
+//    {
+//        $query = $this->allQuery();
+//
+//        return $query->paginate($perPage, $columns);
+//    }
 
     /**
      * Build a query for retrieving all records.
@@ -189,5 +193,34 @@ abstract class BaseRepository
         $model = $query->findOrFail($id);
 
         return $model->delete();
+    }
+
+    /**
+     * @param mixed $result
+     * @param string $include
+     * @return LengthAwarePaginator|Collection|mixed
+     */
+    public function parserResult($result, string $include = '')
+    {
+        $this->presenter->parseIncludes($include);
+        if ($this->presenter instanceof PresenterInterface) {
+            if ($result instanceof Collection || $result instanceof LengthAwarePaginator) {
+                $result->each(function ($model) {
+                    if ($model instanceof Presentable) {
+                        $model->setPresenter($this->presenter);
+                    }
+
+                    return $model;
+                });
+            } elseif ($result instanceof Presentable) {
+                $result = $result->setPresenter($this->presenter);
+            }
+
+            if (!$this->skipPresenter) {
+                return $this->presenter->present($result);
+            }
+        }
+
+        return $result;
     }
 }

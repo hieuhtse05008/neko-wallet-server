@@ -31,7 +31,7 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script>
-    _token = "{{ csrf_token() }}"
+    var _token = "{{ csrf_token() }}";
 </script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

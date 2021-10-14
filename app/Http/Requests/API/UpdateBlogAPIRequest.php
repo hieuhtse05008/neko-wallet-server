@@ -2,8 +2,12 @@
 
 namespace App\Http\Requests\API;
 
+use App\Enum\BlogGroup;
+use App\Enum\Locales;
 use App\Models\Blog;
 use App\Http\Requests\API\APIRequest;
+use App\Rules\MultiLocaleRule;
+use Illuminate\Validation\Rule;
 
 /**
  * Class UpdateBlogAPIRequest
@@ -39,18 +43,31 @@ class UpdateBlogAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $updateRules = Blog::$rules;
+        $modelRules = Blog::$rules;
         $keyRules = [
-            'slug',
-            'title',
-            'description',
             'image_url',
-            'content_en',
             'status',
             'type',
             'tags'
         ];
-        $updateRules = getDataByKeys($updateRules, $keyRules);
-        return $updateRules;
+        $updateRules = getDataByKeys($modelRules, $keyRules);
+        $keyLocaleRules = [
+            'slug',
+            'title',
+            'description',
+            'content',
+        ];
+        $localeRules = getLocaleRules(getDataByKeys($modelRules, $keyLocaleRules));
+        $blogGroupRule =[];
+        foreach (array_keys(BlogGroup::TYPES) as $type){
+            $blogGroupRule["{$type}_id"] =[
+                'nullable',
+                Rule::exists('blog_groups',"id")
+                    ->where(function ($query) use($type){
+                        return $query->where('type', $type);
+                    })
+            ];
+        }
+        return array_merge($updateRules, $localeRules,$blogGroupRule);
     }
 }
