@@ -31,9 +31,9 @@
                             <div class="d-flex flex-wrap text-wrap text-break">
                                 <span class="mt-4"><b>{{$blog['title']}}</b></span>
                             </div>
-                            <div class="mt-2 d-flex flex-wrap text-wrap text-break">
-                                <span class="text-secondary"><b>{{($blog->description)}}</b></span>
-                            </div>
+{{--                            <div class="mt-2 d-flex flex-wrap text-wrap text-break">--}}
+{{--                                <span class="text-secondary"><b>{{($blog->description)}}</b></span>--}}
+{{--                            </div>--}}
 
                             @if(Auth::check())
                                     <div class="mt-2">
