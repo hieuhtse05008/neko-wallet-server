@@ -6,11 +6,11 @@ use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Class CoinJoinMarketCriteria.
+ * Class BlogJoinGroupCriteria.
  *
  * @package namespace App\Criteria;
  */
-class CoinJoinMarketCriteria implements CriteriaInterface
+class BlogJoinGroupCriteria implements CriteriaInterface
 {
     /**
      * Apply criteria in query repository
@@ -22,7 +22,10 @@ class CoinJoinMarketCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        $model = $model->join("coin_markets_data", "coin_markets_data.coin_id", "=", "coins.coin_id");
+        $model = $model
+            ->join("ref_blog_group", "ref_blog_group.blog_id", "=", "blogs.id")
+            ->join("blog_groups", "blog_groups.id", "=", "ref_blog_group.blog_group_id")
+        ;
 
         return $model;
     }

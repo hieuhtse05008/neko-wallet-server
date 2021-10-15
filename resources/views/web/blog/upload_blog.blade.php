@@ -1,25 +1,41 @@
 @extends('web.layout.master')
 
 @section('content')
-    <div id="upload-blog" class="py-5">
+    <div id="upload-blog" class="py-5" v-cloak>
         <div class="container">
+            <div class="mb-3">
+                <label class="fw-bold mb-2">Language</label>
+                <div class="dropdown">
+                    <div class="btn btn-secondary dropdown-toggle btn-main border-0" type="button"
+                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        @{{current_locale.name}}
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li v-for="locale in locales">
+                            <div @click="onChangeLocale(locale)" class="dropdown-item pointer">@{{ locale.name }}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="mb-3">
                 <label class="fw-bold mb-2">Title</label>
                 <div>
-                    <input required v-model="form.title" class="inp-main rounded-3 w-100" @input="changeTitle">
+                    <input required v-model="form.title[current_locale.id]" class="inp-main rounded-3 w-100"
+                           @input="changeTitle">
                 </div>
             </div>
             <div class="mb-3">
                 <label class="fw-bold mb-2">Description</label>
                 <div>
-                    <textarea style="min-height: 300px" required v-model="form.description"
+                    <textarea style="min-height: 300px" required v-model="form.description[current_locale.id]"
                               class="inp-main rounded-3 w-100"></textarea>
                 </div>
             </div>
             <div class="mb-3">
                 <label class="fw-bold mb-2">Slug</label>
                 <div>
-                    <input required v-model="form.slug" class="inp-main rounded-3 w-100" placeholder="">
+                    <input required v-model="form.slug[current_locale.id]" class="inp-main rounded-3 w-100"
+                           placeholder="">
                 </div>
             </div>
             <div class="my-5 rounded-3 shadow-sm" v-cloak>
@@ -46,7 +62,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="fw-bold mb-2">Tags</label>
+                <label class="fw-bold mb-2">Tags (split by ",")</label>
                 <div>
                     <input v-model="form.tags" class="inp-main rounded-3 w-100" placeholder="Split by &#34;,&#34;">
                 </div>
@@ -62,9 +78,72 @@
             <div class="mb-3" v-cloak>
                 <label class="fw-bold mb-2">Content</label>
                 <div>
-                    <textarea name="content_en" id="editor" disabled class="w-100" v-model="form.content_en">
-                        @{{form.content_en}}
+                    <textarea name="content" id="editor" disabled class="w-100"
+                              v-model="form.content[current_locale.id]">
+                        @{{form.content}}
                     </textarea>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold mb-2">Category</label>
+                <div class="dropdown">
+                    <div class="btn btn-secondary dropdown-toggle btn-main border-0" type="button" id="dropdownCategory"
+                         data-bs-toggle="dropdown" aria-expanded="false">
+                        @{{_category.name}}
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
+                        <li v-for="category in categories">
+                            <div @click="onChangeSelect('category_id',category.id)" class="dropdown-item pointer">@{{
+                                category.name }}
+                            </div>
+                        </li>
+                        <li class="px-3">
+                            <button class="btn btn-main btn-sm p-0 w-100"
+                                    data-bs-toggle="modal" data-bs-target="#modalCreateBlogGroup"
+                                    @click="formBlogGroup.type='category'">
+                                <i class="fas fa-plus-circle me-2"></i> Add
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold mb-2">Kind</label>
+                <div class="dropdown">
+                    <div class="btn btn-secondary dropdown-toggle btn-main border-0" type="button" id="dropdownKind"
+                         data-bs-toggle="dropdown" aria-expanded="false">
+                        @{{_kind.name}}
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownKind">
+                        <li v-for="kind in kinds">
+                            <div @click="onChangeSelect('kind_id',kind.id)" class="dropdown-item pointer">@{{ kind.name
+                                }}
+                            </div>
+                        </li>
+                        <li class="px-3">
+                            <button class="btn btn-main btn-sm p-0 w-100"
+                                    data-bs-toggle="modal" data-bs-target="#modalCreateBlogGroup"
+                                    @click="formBlogGroup.type='kind'">
+                                <i class="fas fa-plus-circle me-2"></i> Add
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold mb-2">Status</label>
+                <div class="dropdown">
+                    <div class="btn btn-secondary dropdown-toggle btn-main border-0" type="button" id="dropdownStatus"
+                         data-bs-toggle="dropdown" aria-expanded="false">
+                        @{{_status.name}}
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownStatus">
+                        <li v-for="status in statuses">
+                            <div @click="onChangeSelect('status',status.key)" class="dropdown-item pointer">@{{
+                                status.name }}
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -75,7 +154,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="btn btn-main mt-5 mb-3" v-if="form.content_en"
+
+                <button class="btn btn-main mt-5 mb-3" v-if="form.content"
                         data-bs-toggle="modal" data-bs-target="#modalPreviewBlog">
                     Preview
                 </button>
@@ -94,15 +174,45 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header border-0">
-                            <h5 class="modal-title" id="modalPreviewBlogLabel"></h5>
+                            <h5 class="modal-title" id="modalPreviewBlogLabel">@{{ form.title }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="px-3">
-                                <div class="ck-content" v-html="form.content_en"></div>
+                                <div class="ck-content" v-html="form.content[current_locale.id]"></div>
                             </div>
                         </div>
                         <div class="modal-footer border-0">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal create blog group-->
+            <div class="modal fade" id="modalCreateBlogGroup" tabindex="-1" aria-labelledby="modalCreateBlogGroup"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title" id="modalPreviewBlogLabel">Create @{{ formBlogGroup.type }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="px-3">
+                                <input class="inp-main rounded-3 w-100"
+                                       placeholder="Enter name"
+                                       type="text" v-model="formBlogGroup.name">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0">
+
+                            <div class="btn btn-main " @click="submitBlogGroup" disabled="isSaving">
+                                <div class="spinner-border bg-main" role="status" style="width: 16px; height: 16px;"
+                                     v-if="isSaving">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                @{{ !isSaving ? 'Save' : 'Saving' }}
+                            </div>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -117,34 +227,61 @@
 
     <script>
         let editor;
-        const defaultBLog = {!! $blog!!};
-        @if(!empty($user))
-        console.log({!! json_encode($user->currentAccessToken()) !!})
-        @endif
+        const defaultBLog = {!! collect($blog)!!};
+        const defaultStatuses = {!! collect($statuses) !!};
+        const defaultSelect = {id: null, name: 'None'};
+        const localeObject = {!! collect($locales) !!}.reduce(function (obj, key) {
+            return {...obj, [key]: ''};
+        }, {});
+        console.log(localeObject)
+        console.log(defaultBLog)
         var uploadBLog = new Vue({
             el: '#upload-blog',
             data() {
                 return {
+                    current_locale: {id: 'en', name: 'English'},
+                    locales: [
+                        {id: 'en', name: 'English'},
+                        {id: 'vi', name: 'Tiếng Việt'},
+                    ],
                     editor: null,
                     percent: 0,
                     isSaving: false,
                     isUploadingImage: false,
                     errors: {},
+                    statuses: defaultStatuses,
+                    groups: [],
+                    formBlogGroup: {
+                        name: '',
+                        type: 'category',
+                    },
                     form: {
+                        status: 'draft',
                         id: '',
-                        'title': '',
-                        'description': '',
+                        // 'title': {...localeObject},
+                        // 'description': {...localeObject},
+                        // 'slug': {...localeObject},
+                        // 'content': defaultBLog.content || {...localeObject},
                         'image_url': '',
-                        'status': '',
                         'type': '',
-                        'slug': '',
                         ...defaultBLog,
-                        'tags': defaultBLog.tags || '',
-                        'content_en': defaultBLog.content_en || '',
+                        'tags': defaultBLog.tag || '',
+                        category_id: (defaultBLog.blog_groups.filter(e => e.type === 'category')[0] || {}).id,
+                        kind_id: (defaultBLog.blog_groups.filter(e => e.type === 'kind')[0] || {}).id,
+
+
                     }
                 };
             },
             methods: {
+                onChangeSelect: function (key, val) {
+                    this.form[key] = val;
+                },
+                onChangeLocale: function (locale) {
+                    this.form.content[this.current_locale.id] = editor.getData();
+                    this.current_locale = locale;
+                    editor.setData(this.form.content[locale.id] || '');
+                },
                 initEditor: function () {
 
                 },
@@ -159,16 +296,16 @@
                     console.log(res.status, res);
                     if (res.status) {
                         alert('Blog is saved successfully!');
-                        window.location.href = `/blog/upload/${res.data.blog.slug}`
+                        window.location.href = `/blog/upload/${res.data.blog.id}`
                     }
                 },
                 submitBlog: function () {
+                    this.form.content[this.current_locale.id] = editor.getData();
                     this.isSaving = true;
 
-                    const url = `/api/auth/v1/blogs/${this.form.id}`;
+                    const url = `/api/auth/v1/blogs/${this.form.id || ''}`;
                     const parameters = {
                         ...this.form,
-                        content_en: editor.getData(),
                     };
                     console.log(parameters);
 
@@ -178,6 +315,23 @@
                         axios.post(url, {...parameters}).then(this.submitBlogSuccess).catch(this.submitBlogError);
 
                     }
+                },
+                submitBlogGroup: function () {
+                    this.isSaving = true;
+                    const url = `/api/auth/v1/blog-groups/`;
+                    const parameters = {
+                        ...this.formBlogGroup,
+                    };
+                    console.log(parameters);
+
+                    axios.post(url, {...parameters}).then(this.submitBlogGroupSuccess);
+                },
+                submitBlogGroupSuccess: function (res){
+                    console.log('submitBlogGroupSuccess', res);
+                    this.isSaving = false;
+                    this.groups.push(res.data.blog_group);
+                    $('#modalCreateBlogGroup').modal('hide');
+
                 },
                 onChangeImage: function () {
                     var input = document.createElement("input");
@@ -238,26 +392,89 @@
                     return str;
                 },
                 changeTitle: function () {
-                    this.form.slug = this.removeAccents(this.form.title)
+                    this.form.slug[this.current_locale.id] = this.removeAccents(this.form.title[this.current_locale.id])
                         .toLowerCase()
                         .replace(/[^a-z0-9 ]/gi, '')
                         .replace(/ /gi, '-');
                 },
+                getBlogGroups: function () {
+                    $.get('/api/v1/blog-groups').then(res => {
+                        console.log(res);
+                        this.groups = res.blog_groups;
+                    });
+                }
+            },
+            computed: {
+                _status: function () {
+                    return this.statuses.filter(e => e.key === (this.form.status || 'draft'))[0];
+                },
+                _category: function () {
+                    return this.groups.filter(e => e.id === (this.form.category_id))[0] || defaultSelect;
+                },
+                _kind: function () {
+                    return this.groups.filter(e => e.id === (this.form.kind_id))[0] || defaultSelect;
+                },
+                categories: function () {
+                    return [
+                        defaultSelect,
+                        ...this.groups.filter(e => e.type === 'category'),
+                    ];
+                },
+                kinds: function () {
+                    return [
+                        defaultSelect,
+                        ...this.groups.filter(e => e.type === 'kind')
+                    ];
+                },
             },
             created() {
                 console.log('created', this.form);
-                const _this = this;
+                this.getBlogGroups();
                 setTimeout(function () {
                     ClassicEditor.create(document.querySelector('#editor'), {
-                        extraPlugins: [MyCustomUploadAdapterPlugin],
+                        toolbar: [
+                            'heading', '|',
+                            'alignment', '|',
+                            'bold', 'italic', 'underline', 'strikethrough', 'link','removeFormat', '|',
+                            'undo', 'redo' ,'findAndReplace', '|',
+                            'fontsize', 'fontColor', 'fontBackgroundColor', 'blockQuote', 'code', '|',
+                            'outdent', 'indent', '|',
+                            'bulletedList', 'numberedList','|',
+                            'uploadImage', 'insertTable', 'mediaEmbed', '|',
+
+
+                            // 'fontfamily',
+
+
+
+                        ],
+                        image: {
+                            // You need to configure the image toolbar, too, so it uses the new style buttons.
+                            toolbar: [ 'imageTextAlternative', '|',
+                                'imageStyle:block',
+                                'imageStyle:alignLeft',
+                                'imageStyle:alignRight',
+                                'imageStyle:inline',
+                                'imageStyle:side',
+                                'imageStyle:alignCenter',
+                                'imageStyle:alignBlockLeft',
+                                'imageStyle:alignBlockRight',
+                                'resizeImage:50',
+                                'resizeImage:75',
+                                'resizeImage:original',
+                            ],
+
+
+                        },
+                        extraPlugins: [MyCustomUploadAdapterPlugin,],
                     }).then(e => {
                         editor = e;
-                        _this.editor = e;
+                        this.editor = e;
                     }).catch(error => {
                         console.error(error);
                     });
 
-                }, 500);
+                }.bind(this), 500);
             },
 
         });

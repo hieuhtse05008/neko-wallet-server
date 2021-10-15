@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Enum\Locales;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Cryptocurrency;
@@ -19,6 +20,7 @@ use Illuminate\Http\Request;
 
 class PublicController extends ViewController
 {
+    protected $lang;
     protected $cryptocurrencyRepository;
     protected $cryptocurrencyCategoryRepository;
     protected $categoryRepository;
@@ -27,21 +29,23 @@ class PublicController extends ViewController
     public function __construct(CryptocurrencyRepository $cryptocurrencyRepository,
                                 CryptocurrencyCategoryRepository $cryptocurrencyCategoryRepository,
                                 CategoryRepository $categoryRepository,
-                                BlogRepository  $blogRepository
+                                BlogRepository $blogRepository
     )
     {
         parent::__construct();
+        $this->lang = config('app.locale');
         $this->cryptocurrencyRepository = $cryptocurrencyRepository;
         $this->cryptocurrencyCategoryRepository = $cryptocurrencyCategoryRepository;
         $this->categoryRepository = $categoryRepository;
         $this->blogRepository = $blogRepository;
     }
 
-    public function test(){
+    public function test()
+    {
         return [
-            'ok'=>file_exists('https://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
-            'ok2'=>getimagesize('https://nekoinvest.io/images/home/protect.png'),
-            'ok3'=>getimagesize('https://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
+            'ok' => file_exists('https://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
+            'ok2' => getimagesize('https://nekoinvest.io/images/home/protect.png'),
+            'ok3' => getimagesize('https://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
         ];
     }
 
@@ -152,14 +156,14 @@ class PublicController extends ViewController
             ],
         ];
         $founders = [
-            ['name' => 'LEO NGUYEN', 'role' => 'CEO', 'department' => 'Msc. Strategy - Aalto Uni','avatar'=>'/images/founder/locnv.png'],
-            ['name' => 'NGUYEN VIET HUNG', 'role' => 'Product', 'department' => 'Computer Science FPT Uni','avatar'=>'/images/founder/hungnv.png'],
-            ['name' => 'TRINH ANH DUC', 'role' => 'Strategy & Finance', 'department' => 'Venture Capital','avatar'=>'/images/founder/ducta.png'],
-            ['name' => 'DUONG NHAT ANH', 'role' => 'NFT Designer', 'department' => 'Graphic Design FPT Uni','avatar'=>'/images/founder/anhnd.png'],
-            ['name' => 'PHAN MINH DUONG', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH','avatar'=>'/images/founder/duongpm.png'],
-            ['name' => 'HA TRUNG HIEU', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH','avatar'=>'/images/founder/hieuht.png'],
-            ['name' => 'HANH PHAM', 'role' => 'Graphic Designer', 'department' => '','avatar'=>'/images/founder/hanhpt.png'],
-            ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni','avatar'=>'/images/founder/longhd.png'],
+            ['name' => 'LEO NGUYEN', 'role' => 'CEO', 'department' => 'Msc. Strategy - Aalto Uni', 'avatar' => '/images/founder/locnv.png'],
+            ['name' => 'NGUYEN VIET HUNG', 'role' => 'Product', 'department' => 'Computer Science FPT Uni', 'avatar' => '/images/founder/hungnv.png'],
+            ['name' => 'TRINH ANH DUC', 'role' => 'Strategy & Finance', 'department' => 'Venture Capital', 'avatar' => '/images/founder/ducta.png'],
+            ['name' => 'DUONG NHAT ANH', 'role' => 'NFT Designer', 'department' => 'Graphic Design FPT Uni', 'avatar' => '/images/founder/anhnd.png'],
+            ['name' => 'PHAN MINH DUONG', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH', 'avatar' => '/images/founder/duongpm.png'],
+            ['name' => 'HA TRUNG HIEU', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH', 'avatar' => '/images/founder/hieuht.png'],
+            ['name' => 'HANH PHAM', 'role' => 'Graphic Designer', 'department' => '', 'avatar' => '/images/founder/hanhpt.png'],
+            ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni', 'avatar' => '/images/founder/longhd.png'],
         ];
 //dd($this->user->tokens);
         return $this->view('web.home', [
@@ -244,37 +248,45 @@ class PublicController extends ViewController
         return $this->view('web.privacy_policy');
     }
 
-    public function uploadBlogView(Blog $blog, Request $request)
+
+
+    public function blogsView(Request $request)
     {
-//        dd($request->user()->tokens);
-
-        return $this->view('web.blog.upload_blog', [
-            'blog' => $blog
-        ]);
-
-    }
-
-    public function blogsView(Request $request){
         $filter = [
-            'search'=>$request->search,
+            'search' => $request->search,
         ];
 
         $this->blogRepository->skipPresenter(true);
-        $blogs = $this->blogRepository->list(48,$filter);
+        $blogs = $this->blogRepository->list(48, $filter);
 
-        return $this->view('web.blog.blogs',[
-            'blogs'=>$blogs,
-            'search'=>$request->search
+        return $this->view('web.blog.blogs', [
+            'blogs' => $blogs,
+            'search' => $request->search
         ]);
     }
 
-    public function blogView(Blog $blog)
+    public function blogView(Request $request)
     {
+        $slug = $request->slug;
+        $blog = Blog::where(function ($q) use ($slug) {
+            foreach (Locales::AVAILABLE_LOCALES as $locale) {
+                $q->orWhere("slug->{$locale}", $slug);
+            }
+        })->first();
+
+//        dd($request->slug, $this->locale,$blog);
+
+        if (empty($blog)) {
+            abort(404);
+        }
+
 
         return $this->view('web.blog.blog', [
-            'blog' => $blog
+            'blog' => $blog,
+            'slug' => $slug,
         ]);
     }
+
     public function loginView()
     {
 

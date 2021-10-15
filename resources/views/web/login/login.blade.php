@@ -1,7 +1,7 @@
 @extends('web.layout.master')
 
 @section('content')
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-5 bg-main">
         <div class="container-md">
             <div class="row d-flex align-items-center">
                 <div class="col-12 col-sm-6 col-lg-4">
@@ -49,7 +49,7 @@
 @section('styles')
     <style>
         body{
-            background-color: var(--main-color, #FC7819);;
+            /*background-color: var(--main-color, #FC7819);;*/
         }
     </style>
 @endsection
