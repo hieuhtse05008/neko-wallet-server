@@ -432,7 +432,24 @@
                 this.getBlogGroups();
                 setTimeout(function () {
                     ClassicEditor.create(document.querySelector('#editor'), {
-                        extraPlugins: [MyCustomUploadAdapterPlugin],
+                        toolbar: [
+                            'heading', '|',
+                            'alignment', '|',
+                            'bold', 'italic', 'underline', 'strikethrough', 'link','removeFormat', '|',
+                            'undo', 'redo' ,'findAndReplace', '|',
+                            'fontsize', 'fontColor', 'fontBackgroundColor', 'blockQuote', 'code', '|',
+                            'outdent', 'indent', '|',
+                            'bulletedList', 'numberedList','|',
+                            'uploadImage', 'insertTable', 'mediaEmbed', '|',
+
+
+                            // 'fontfamily',
+
+
+
+                        ],
+
+                        extraPlugins: [MyCustomUploadAdapterPlugin,],
                     }).then(e => {
                         editor = e;
                         this.editor = e;
