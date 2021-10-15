@@ -263,9 +263,9 @@
                         // 'slug': {...localeObject},
                         // 'content': defaultBLog.content || {...localeObject},
                         'image_url': '',
-                        'tags': '',
                         'type': '',
                         ...defaultBLog,
+                        'tags': defaultBLog.tag || '',
                         category_id: (defaultBLog.blog_groups.filter(e => e.type === 'category')[0] || {}).id,
                         kind_id: (defaultBLog.blog_groups.filter(e => e.type === 'kind')[0] || {}).id,
 
