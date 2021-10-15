@@ -263,6 +263,7 @@
                         // 'slug': {...localeObject},
                         // 'content': defaultBLog.content || {...localeObject},
                         'image_url': '',
+                        'tags': '',
                         'type': '',
                         ...defaultBLog,
                         category_id: (defaultBLog.blog_groups.filter(e => e.type === 'category')[0] || {}).id,
