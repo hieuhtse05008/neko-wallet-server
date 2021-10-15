@@ -448,7 +448,24 @@
 
 
                         ],
+                        image: {
+                            // You need to configure the image toolbar, too, so it uses the new style buttons.
+                            toolbar: [ 'imageTextAlternative', '|',
+                                'imageStyle:block',
+                                'imageStyle:alignLeft',
+                                'imageStyle:alignRight',
+                                'imageStyle:inline',
+                                'imageStyle:side',
+                                'imageStyle:alignCenter',
+                                'imageStyle:alignBlockLeft',
+                                'imageStyle:alignBlockRight',
+                                'resizeImage:50',
+                                'resizeImage:75',
+                                'resizeImage:original',
+                            ],
 
+
+                        },
                         extraPlugins: [MyCustomUploadAdapterPlugin,],
                     }).then(e => {
                         editor = e;
