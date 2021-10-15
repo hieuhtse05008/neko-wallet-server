@@ -20,14 +20,25 @@ class ViewAuthController extends ViewController
 
     public function uploadBlogView(Blog $blog)
     {
-
         $relations = getRelationsFromIncludeRequest([]);
+//        dd($blog);
         $blog->skipTranslation(true);
-        $blog = $this->blogRepository->with($relations)->parserResult($blog);
+        $blogData = $this->blogRepository->with($relations)->parserResult($blog);
+
+        if (empty($blogData['id'])) {
+            $defaultLocaleObject = [];
+            foreach (Locales::AVAILABLE_LOCALES as $locale){
+                $defaultLocaleObject[$locale] = '';
+            }
+            foreach ($blog->getTranslatableAttributes() as $translatableAttribute) {
+                $blogData[$translatableAttribute] = $defaultLocaleObject;
+            }
+            $blogData['tags'] = '';
+        }
 
         return $this->view('web.blog.upload_blog', [
-            'blog' => $blog,
-            'statuses'=>\App\Enum\Blog::STATUSES,
+            'blog' => $blogData,
+            'statuses' => \App\Enum\Blog::STATUSES,
         ]);
 
     }

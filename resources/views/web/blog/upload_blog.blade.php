@@ -234,6 +234,7 @@
             return {...obj, [key]: ''};
         }, {});
         console.log(localeObject)
+        console.log(defaultBLog)
         var uploadBLog = new Vue({
             el: '#upload-blog',
             data() {
@@ -241,7 +242,7 @@
                     current_locale: {id: 'en', name: 'English'},
                     locales: [
                         {id: 'en', name: 'English'},
-                        {id: 'vi', name: 'Vietnamese'},
+                        {id: 'vi', name: 'Tiếng Việt'},
                     ],
                     editor: null,
                     percent: 0,
@@ -257,16 +258,17 @@
                     form: {
                         status: 'draft',
                         id: '',
-                        'title': {...localeObject},
-                        'description': {...localeObject},
+                        // 'title': {...localeObject},
+                        // 'description': {...localeObject},
+                        // 'slug': {...localeObject},
+                        // 'content': defaultBLog.content || {...localeObject},
                         'image_url': '',
                         'type': '',
-                        'slug': {...localeObject},
                         ...defaultBLog,
                         category_id: (defaultBLog.blog_groups.filter(e => e.type === 'category')[0] || {}).id,
                         kind_id: (defaultBLog.blog_groups.filter(e => e.type === 'kind')[0] || {}).id,
-                        'tags': defaultBLog.tags || '',
-                        'content': defaultBLog.content || {...localeObject},
+
+
                     }
                 };
             },
