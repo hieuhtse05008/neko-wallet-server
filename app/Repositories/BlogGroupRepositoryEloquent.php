@@ -56,10 +56,10 @@ class BlogGroupRepositoryEloquent extends Repository implements BlogGroupReposit
     static public function queryFilter($query, $filter)
     {
 
-        if($filter['ids']){
+        if(isset($filter['ids'])){
             $query = $query->whereIn('blog_groups.id',$filter['ids']);
         }
-        if($filter['type']){
+        if(isset($filter['type']) && $filter['type']){
             $query = $query->where('blog_groups.type','=',$filter['type']);
         }
         return $query;
