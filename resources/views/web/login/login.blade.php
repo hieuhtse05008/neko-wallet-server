@@ -31,18 +31,18 @@
 @push('scripts')
     <script>
 
-        $('#form-login').on('submit',function (e){
-            e.preventDefault();
-            let data = $('#form-login').serializeArray().reduce(function(obj, item) {
-                obj[item.name] = item.value;
-                return obj;
-            }, {});
-            console.log(data)
-            axios.get('/sanctum/csrf-cookie').then(() => {
-                axios.post('/login', data).then(()=>{window.location.href = '/'});
-            });
-
-        });
+        // $('#form-login').on('submit',function (e){
+        //     e.preventDefault();
+        //     let data = $('#form-login').serializeArray().reduce(function(obj, item) {
+        //         obj[item.name] = item.value;
+        //         return obj;
+        //     }, {});
+        //     console.log(data)
+        //     axios.get('/sanctum/csrf-cookie').then(() => {
+        //         axios.post('/login', data).then(()=>{window.location.href = '/'});
+        //     });
+        //
+        // });
 
     </script>
 @endpush
