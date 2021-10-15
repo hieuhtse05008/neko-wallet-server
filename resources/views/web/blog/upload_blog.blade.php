@@ -302,7 +302,7 @@
                     this.form.content[this.current_locale.id] = editor.getData();
                     this.isSaving = true;
 
-                    const url = `/api/auth/v1/blogs/${this.form.id}`;
+                    const url = `/api/auth/v1/blogs/${this.form.id || ''}`;
                     const parameters = {
                         ...this.form,
                     };

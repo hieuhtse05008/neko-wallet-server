@@ -51,7 +51,7 @@ class BlogTransformer extends TransformerAbstract
 
 //dd($model, $model['slug']);
         return [
-            'id'         => (int) $model->id,
+            'id'         => $model->id,
             'slug' => $model->slug,
             'title' => $model->title,
             'description' => $model->description,

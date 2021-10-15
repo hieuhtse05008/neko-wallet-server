@@ -24,7 +24,7 @@ class ViewAuthController extends ViewController
 //        dd($blog);
         $blog->skipTranslation(true);
         $blogData = $this->blogRepository->with($relations)->parserResult($blog);
-
+//dd($blogData);
         if (empty($blogData['id'])) {
             $defaultLocaleObject = [];
             foreach (Locales::AVAILABLE_LOCALES as $locale){
