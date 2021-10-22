@@ -63,7 +63,7 @@
                             @foreach($locales as $lang)
                                 <li>
                                     @if($lang !== $locale)
-                                        <a href="/{{request()->path()}}?redirect_locale={{$lang}}"
+                                        <a href="{{request()->url()}}?redirect_locale={{$lang}}"
                                            class="dropdown-item pointer">{{ __("web.$lang") }}</a>
                                     @else
                                         <a href="#" class="dropdown-item pointer">{{ __("web.$lang") }}</a>
