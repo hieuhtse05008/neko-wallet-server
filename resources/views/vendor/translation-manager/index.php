@@ -114,7 +114,7 @@
         </div>
     </div>
 </header>
-<h1><?php echo action('\Barryvdh\TranslationManager\Controller@postTranslateMissing',[],false) ?></h1>
+<!--<h1>--><?php //echo action('\Barryvdh\TranslationManager\Controller@postTranslateMissing',[],false) ?><!--</h1>-->
 <div class="container-fluid">
 <!--    <p>Warning, translations are not visible until they are exported back to the app/lang file, using <code>php artisan translation:export</code> command or publish button.</p>-->
     <div class="alert alert-success success-import" style="display:none;">
@@ -261,7 +261,7 @@
                                class="editable status-<?php echo $t ? $t->status : 0 ?> locale-<?php echo $locale ?>"
                                data-locale="<?php echo $locale ?>" data-name="<?php echo $locale . "|" . htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?>"
                                id="username" data-type="textarea" data-pk="<?php echo $t ? $t->id : 0 ?>"
-                               data-url="<?php echo $editUrl ?>"
+                               data-url="<?php echo ($group ? action('\Barryvdh\TranslationManager\Controller@postEdit', [$group]) : null) ?>"
                                data-title="Enter translation"><?php echo $t ? htmlentities($t->value, ENT_QUOTES, 'UTF-8', false) : '' ?></a>
                         </td>
                     <?php endforeach; ?>
