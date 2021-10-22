@@ -44,9 +44,9 @@
             $('.group-select').on('change', function(){
                 var group = $(this).val();
                 if (group) {
-                    window.location.href = '<?php echo action('\Barryvdh\TranslationManager\Controller@getView') ?>/'+$(this).val();
+                    window.location.href = '<?php echo action('\Barryvdh\TranslationManager\Controller@getView',[],false) ?>/'+$(this).val();
                 } else {
-                    window.location.href = '<?php echo action('\Barryvdh\TranslationManager\Controller@getIndex') ?>';
+                    window.location.href = '<?php echo action('\Barryvdh\TranslationManager\Controller@getIndex',[],false) ?>';
                 }
             });
 
@@ -108,13 +108,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="<?php echo action('\Barryvdh\TranslationManager\Controller@getIndex') ?>" class="navbar-brand">
+            <a href="<?php echo action('\Barryvdh\TranslationManager\Controller@getIndex',[],false) ?>" class="navbar-brand">
                 Translation Manager
             </a>
         </div>
     </div>
 </header>
-<h1><?php echo action('\Barryvdh\TranslationManager\Controller@postTranslateMissing',['scheme' => 'https']) ?></h1>
+<h1><?php echo action('\Barryvdh\TranslationManager\Controller@postTranslateMissing',[],false) ?></h1>
 <div class="container-fluid">
 <!--    <p>Warning, translations are not visible until they are exported back to the app/lang file, using <code>php artisan translation:export</code> command or publish button.</p>-->
     <div class="alert alert-success success-import" style="display:none;">
@@ -137,7 +137,7 @@
     <p>
         <!--
         <?php if(!isset($group)) : ?>
-        <form class="form-import" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postImport') ?>" data-remote="true" role="form">
+        <form class="form-import" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postImport',[],false) ?>" data-remote="true" role="form">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="form-group">
                 <div class="row">
@@ -153,7 +153,7 @@
                 </div>
             </div>
         </form>
-        <form class="form-find" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postFind') ?>" data-remote="true" role="form" data-confirm="Are you sure you want to scan you app folder? All found translation keys will be added to the database.">
+        <form class="form-find" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postFind',[],false) ?>" data-remote="true" role="form" data-confirm="Are you sure you want to scan you app folder? All found translation keys will be added to the database.">
             <div class="form-group">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <button type="submit" class="btn btn-info" data-disable-with="Searching.." >Find translations in files</button>
@@ -162,14 +162,14 @@
         <?php endif; ?>
         -->
         <?php if(isset($group)) : ?>
-            <form class="form-inline form-publish" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postPublish', $group) ?>" data-remote="true" role="form" data-confirm="Are you sure you want to publish the translations group '<?php echo $group ?>? This will overwrite existing language files.">
+            <form class="form-inline form-publish" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postPublish', $group,false) ?>" data-remote="true" role="form" data-confirm="Are you sure you want to publish the translations group '<?php echo $group ?>? This will overwrite existing language files.">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <button type="submit" class="btn btn-info" data-disable-with="Publishing.." >Publish translations</button>
-                <a href="<?= action('\Barryvdh\TranslationManager\Controller@getIndex') ?>" class="btn btn-default">Back</a>
+                <a href="<?= action('\Barryvdh\TranslationManager\Controller@getIndex',[],false) ?>" class="btn btn-default">Back</a>
             </form>
         <?php endif; ?>
     </p>
-    <form role="form" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAddGroup') ?>">
+    <form role="form" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAddGroup',[],false) ?>">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group">
             <p>Choose a group to display the group translations.
@@ -190,7 +190,7 @@
 <!--        </div>-->
     </form>
     <?php if($group): ?>
-        <form action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAdd', array($group)) ?>" method="POST"  role="form">
+        <form action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAdd', array($group),false) ?>" method="POST"  role="form">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="form-group">
                 <label>Add new keys to this group</label>
@@ -205,7 +205,7 @@
 <!--                <span class="btn btn-default enable-auto-translate-group">Use Auto Translate</span>-->
 <!--            </div>-->
 <!--        </div>-->
-        <form class="form-add-locale autotranslate-block-group hidden" method="POST" role="form" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postTranslateMissing') ?>">
+        <form class="form-add-locale autotranslate-block-group hidden" method="POST" role="form" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postTranslateMissing',[],false) ?>">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="row">
                 <div class="col-sm-6">
@@ -267,7 +267,7 @@
                     <?php endforeach; ?>
                     <?php if ($deleteEnabled): ?>
                         <td>
-                            <a href="<?php echo action('\Barryvdh\TranslationManager\Controller@postDelete', [$group, $key]) ?>"
+                            <a href="<?php echo action('\Barryvdh\TranslationManager\Controller@postDelete', [$group, $key],false) ?>"
                                class="delete-key"
                                data-confirm="Are you sure you want to delete the translations for '<?php echo htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?>?"><span
                                         class="glyphicon glyphicon-trash"></span></a>
@@ -283,7 +283,7 @@
             <p>
                 Current supported locales:
             </p>
-            <form  class="form-remove-locale" method="POST" role="form" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postRemoveLocale') ?>" data-confirm="Are you sure to remove this locale and all of data?">
+            <form  class="form-remove-locale" method="POST" role="form" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postRemoveLocale',[],false) ?>" data-confirm="Are you sure to remove this locale and all of data?">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <ul class="list-locales">
                 <?php foreach($locales as $locale): ?>
@@ -299,7 +299,7 @@
                 <?php endforeach; ?>
                 </ul>
             </form>
-            <form class="form-add-locale" method="POST" role="form" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAddLocale') ?>">
+            <form class="form-add-locale" method="POST" role="form" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAddLocale',[],false) ?>">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <div class="form-group">
                     <p>
@@ -318,7 +318,7 @@
         </fieldset>
         <fieldset>
             <legend>Export all translations</legend>
-            <form class="form-inline form-publish-all" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postPublish', '*') ?>" data-remote="true" role="form" data-confirm="Are you sure you want to publish all translations group? This will overwrite existing language files.">
+            <form class="form-inline form-publish-all" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postPublish', '*',false) ?>" data-remote="true" role="form" data-confirm="Are you sure you want to publish all translations group? This will overwrite existing language files.">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <button type="submit" class="btn btn-primary" data-disable-with="Publishing.." >Publish all</button>
             </form>
