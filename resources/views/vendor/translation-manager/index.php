@@ -134,7 +134,7 @@
         </div>
     <?php endif; ?>
     <p>
-
+        <!--
         <?php if(!isset($group)) : ?>
         <form class="form-import" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postImport') ?>" data-remote="true" role="form">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -159,7 +159,7 @@
             </div>
         </form>
         <?php endif; ?>
-
+        -->
         <?php if(isset($group)) : ?>
             <form class="form-inline form-publish" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postPublish', $group) ?>" data-remote="true" role="form" data-confirm="Are you sure you want to publish the translations group '<?php echo $group ?>? This will overwrite existing language files.">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
