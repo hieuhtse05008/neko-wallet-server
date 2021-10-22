@@ -114,6 +114,7 @@
         </div>
     </div>
 </header>
+<h1><?php echo action('\Barryvdh\TranslationManager\Controller@postTranslateMissing') ?></h1>
 <div class="container-fluid">
 <!--    <p>Warning, translations are not visible until they are exported back to the app/lang file, using <code>php artisan translation:export</code> command or publish button.</p>-->
     <div class="alert alert-success success-import" style="display:none;">
