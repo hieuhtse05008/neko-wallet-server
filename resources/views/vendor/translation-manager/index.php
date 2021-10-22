@@ -261,7 +261,7 @@
                                class="editable status-<?php echo $t ? $t->status : 0 ?> locale-<?php echo $locale ?>"
                                data-locale="<?php echo $locale ?>" data-name="<?php echo $locale . "|" . htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?>"
                                id="username" data-type="textarea" data-pk="<?php echo $t ? $t->id : 0 ?>"
-                               data-url="<?php echo ($group ? action('\Barryvdh\TranslationManager\Controller@postEdit', [$group]) : null) ?>"
+                               data-url="<?php echo ($group ? action('\Barryvdh\TranslationManager\Controller@postEdit', [$group],false) : null) ?>"
                                data-title="Enter translation"><?php echo $t ? htmlentities($t->value, ENT_QUOTES, 'UTF-8', false) : '' ?></a>
                         </td>
                     <?php endforeach; ?>
