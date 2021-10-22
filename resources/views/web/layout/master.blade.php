@@ -96,8 +96,8 @@
                 </div>
 
                 <div class="col-md-3 col-6 mb-3 text-white">
-                    <div class="mb-3"><a href="{{route('home')}}">{{__('homepage')}}</a></div>
-                    <div class="mb-3"><a href="{{route('blogs')}}">{{__('blog')}}</a></div>
+                    <div class="mb-3"><a href="{{route('home')}}">{{__('web.homepage')}}</a></div>
+                    <div class="mb-3"><a href="{{route('blogs')}}">{{__('web.blog')}}</a></div>
                     <div class="mb-sm-0">
                         <a target="_blank" href="https://docs.nekoinvest.io/" class="pointer">
                             Litepaper
@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-6 mb-5 text-white">
-                    <div class="mb-3"><a href="{{route('cryptocurrencies')}}">{{__('how_to_buy')}}</a></div>
+                    <div class="mb-3"><a href="{{route('cryptocurrencies')}}">{{__('web.how_to_buy')}}</a></div>
                     <div class="mb-3"><a>Brand assets</a></div>
                     <div class="mb-sm-0"><a class="pointer" data-bs-toggle="modal"
                                             data-bs-target="#modal-check-my-spot">Check my spot</a></div>
