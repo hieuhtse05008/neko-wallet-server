@@ -5,9 +5,25 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ViewAuthController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Locale Web Routes
+|--------------------------------------------------------------------------
+*/
+//$routesWithLocale = function () {
+//    Route::group(["prefix" => 'blogs'], function () {
+//        Route::get('/{slug}', [PublicController::class, 'blogView']);
+//        Route::get('/', [PublicController::class, 'blogsView']);
+//    });
+//};
+//Route::middleware('locale')->group($routesWithLocale);
+//Route::prefix('{lang?}')->middleware('locale')->group($routesWithLocale);
+
+
+/*
+|--------------------------------------------------------------------------
+| Public Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -16,54 +32,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PublicController::class, 'homeView']);
-
 Route::get('/login', [PublicController::class, 'loginView']);
-Route::post('/login', [AuthController::class,'login'])->name('login');
-Route::get('/logout', [AuthController::class,'logout']);
-
-Route::get('/cryptocurrencies', [PublicController::class, 'tokensView'])->middleware("include:cryptocurrencies");
-Route::get('/cryptocurrency/{cryptocurrency:name}', [PublicController::class, 'tokenView']);
-
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/register-early-access', [PublicController::class, 'registerEarlyAccessWithEmail']);
-
-
-//Route::group(["prefix" => 'blogs'], function () {
-//    Route::get('/{slug}', [PublicController::class, 'blogView']);
-//    Route::get('/', [PublicController::class, 'blogsView']);
-//});
-
 Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
 Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);
-
 Route::group(["prefix" => 'mobile'], function () {
     Route::get('/cryptocurrency/{cryptocurrency:id}', [PublicController::class, 'cryptocurrencyMobileView']);
 });
-
 Route::get('/test', [PublicController::class, 'test']);
 
+$publicLocaleRoutes = function () {
+    Route::get('/', [PublicController::class, 'homeView'])->name("home");
+    Route::group(["prefix" => 'blogs'], function () {
+        Route::get('/', [PublicController::class, 'blogsView'])->name("blogs");
+        Route::get('/{slug}', [PublicController::class, 'blogView'])->name("blog");
+    });
+    Route::get('/login', [PublicController::class, 'loginView'])->name("login");
+    Route::get('/cryptocurrencies', [PublicController::class, 'tokensView'])->middleware("include:cryptocurrencies")->name("cryptocurrencies");
+    Route::get('/cryptocurrency/{cryptocurrency:name}', [PublicController::class, 'tokenView'])->name("cryptocurrency");
+};
+
+Route::prefix('{lang?}')
+//    ->where(['lang'=>'[a-zA-Z]{2}'])
+    ->middleware('locale')->group($publicLocaleRoutes);
 
 /*
 |--------------------------------------------------------------------------
 | Auth Web Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth:sanctum')->group(function (){
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/blog/upload/{blog?}', [ViewAuthController::class, 'uploadBlogView'])->middleware('include:blog_groups');
+
 });
-
-
-/*
-|--------------------------------------------------------------------------
-| Locale Web Routes
-|--------------------------------------------------------------------------
-*/
-$routesWithLocale = function (){
-    Route::group(["prefix" => 'blogs'], function () {
-        Route::get('/{slug}', [PublicController::class, 'blogView']);
-        Route::get('/', [PublicController::class, 'blogsView']);
-    });
-};
-Route::middleware('locale')->group($routesWithLocale);
-Route::prefix('{lang?}')->middleware('locale')->group($routesWithLocale);
-

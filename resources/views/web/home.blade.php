@@ -18,17 +18,16 @@
             <div class="col-12 col-sm-6">
                 <div class="d-flex flex-column h-100 justify-content-center">
                     <div class="text-spotlight mb-4">
-                        <div>Invest in <span class="text-main">more than 6,000 cryptocurrencies </span> from all
-                            exchanges.
+                        <div>{!! __('web.home.1st_title') !!}
                         </div>
                     </div>
-                    <div class="mb-4">Secured. Hassle-free. 0% fee for private beta.</div>
+                    <div class="mb-4">{{__('web.home.1st_description')}}</div>
                     <form class="mb-4 d-flex flex-wrap" id="form-early-access">
-                        <input id="input-early-access-email" placeholder="Enter your email"
+                        <input id="input-early-access-email" placeholder="{{ __('web.placeholder.email') }}"
                                class="rounded mb-3 mb-lg-0  inp-main flex-grow-1 mw-100" type="email" style="" required>
                         <div class="me-3 d-none d-md-block"></div>
                         <button class="btn btn-main px-3 py-2 py-lg-0 text-center border-light rounded-3 flex-grow-1 flex-md-grow-0">
-                            Get early access
+                            {{__('web.get_early_access')}}
                         </button>
                     </form>
 {{--                    <div class="mb-5 mb-sm-0">--}}
@@ -44,8 +43,8 @@
             <div class="col-12 col-sm-6">
                 <div class="h-100 d-flex">
                     <div class="ms-auto my-auto">
-                        <div class="text-spotlight mb-4">Swap any crypto assets on any Blockchain networks.</div>
-                        <div class="mb-4">Neko is a multichain wallet, now supporting 6000+ tokens on:</div>
+                        <div class="text-spotlight mb-4">{{__('web.home.2nd_title')}}</div>
+                        <div class="mb-4">{{__('web.home.2nd_description')}}</div>
                         <div class="d-flex flex-wrap">
                             @foreach($networks as $network)
                                 <div class="rounded-7 bg-gray py-2 px-2 me-3 d-flex flex-nowrap mb-3 mb-lg-0">
@@ -66,10 +65,10 @@
             <div class="col-12 col-sm-6">
                 <div class="h-100 d-flex">
                     <div class="ms-auto my-auto">
-                        <div class="text-spotlight mb-4">Investment made easy.</div>
-                        <div class="mb-4">With simplified user interface, for the first time Neko offers crypto enthusiasts the swapping process at ease.</div>
+                        <div class="text-spotlight mb-4">{{__('web.home.3rd_title')}}</div>
+                        <div class="mb-4">{{__('web.home.3rd_description')}}</div>
                         <a href="#input-early-access-email" class="btn btn-main px-3 text-center">
-                            Get early access
+                            {{__('web.get_early_access')}}
                         </a>
                     </div>
                 </div>
@@ -83,10 +82,10 @@
             <div class="col-12 col-sm-6">
                 <div class="h-100 d-flex">
                     <div class="ms-auto my-auto">
-                        <div class="text-spotlight mb-4">Stay on top of your portfolio. Anytime. Anywhere.</div>
-                        <div class="mb-4">Neko’s detailed Profit and Loss tracker keeps you well informed regarding your investment performance.</div>
+                        <div class="text-spotlight mb-4">{{__('web.home.4th_title')}}</div>
+                        <div class="mb-4">{{__('web.home.4th_description')}}</div>
                         <a href="#input-early-access-email" class="btn btn-main px-3 text-center">
-                            Get early access
+                            {{__('web.get_early_access')}}
                         </a>
                     </div>
                 </div>
@@ -94,8 +93,8 @@
         </div>
         <div class="my-5 py-5">
             <div class="text-center">
-                <h1 class="text-main">Main Features</h1>
-                <h5 class="fw-normal">See what Neko can do</h5>
+                <h1 class="text-main">{{__('web.home.main_feature')}}</h1>
+                <h5 class="fw-normal">{{__('web.home.main_feature_description')}}</h5>
             </div>
 
             <div class="py-5"></div>
@@ -104,8 +103,8 @@
                     <div class="col-12 col-sm-6 col-lg-4">
                         <div class="rounded-1-56 h-100 shadow-lg-light p-4 p-md-5 d-flex flex-column justify-content-between">
                             <div>
-                                <h5 class="text-main mb-3">{{$feature['title']}}</h5>
-                                <div class="mb-5">{{$feature['description']}}</div>
+                                <h5 class="text-main mb-3">{{__($feature['title'])}}</h5>
+                                <div class="mb-5">{{__($feature['description'])}}</div>
                             </div>
                             <img class="w-100 mx-auto" src="{{$feature['image_url']}}">
                         </div>
@@ -115,8 +114,8 @@
         </div>
         <div class="my-5 py-5">
             <div class="text-start text-sm-center mb-5">
-                <h1 class="text-main">Road map</h1>
-                <h5 class="fw-normal">See what is going on with Neko</h5>
+                <h1 class="text-main">{{__('web.home.road_map')}}</h1>
+                <h5 class="fw-normal">{{__('web.home.road_map_description')}}</h5>
             </div>
             <div class="row row-eq-height position-relative">
 
@@ -164,7 +163,7 @@
 
         <div class="my-5 py-5">
             <div class="text-center mb-5 pb-5">
-                <h1 class="text-main">Founding Team</h1>
+                <h1 class="text-main">{{__('web.founding_team')}}</h1>
                 {{--                <h5 class="fw-normal">See what is going on with Neko</h5>--}}
             </div>
             <div class="row gy-5">
@@ -180,20 +179,20 @@
         <div class="my-5 py-5">
             <div class="bg-main w-100 rounded-2-7 text-white text-center py-5 px-4">
                 <img class="mb-3" src="/images/logo/logo_white.svg">
-                <h3 class="mb-4">Join our beta program for free</h3>
-                <div class="mb-5">Leave your email and we will send you a private invitation for beta app</div>
+                <h3 class="mb-4">{{__('web.home.join_beta')}}</h3>
+                <div class="mb-5">{{__('web.home.join_beta_description')}}</div>
 
                 <form id="form-early-access-2">
                     <div class="row">
                     <div class="col-12 col-lg-10 offset-lg-1">
                         <div class="mb-4 d-flex flex-wrap justify-content-center mx-0 px-0 mx-lg-5 px-lg-5">
-                            <input id="input-early-access-email-2" placeholder="Enter your email"
+                            <input id="input-early-access-email-2" placeholder="{{__('web.placeholder.email')}}"
                                    class="rounded mb-3 mb-md-0  inp-main flex-grow-1 border-0" type="email" style=""
                                    required>
                             <div class="me-3 d-none d-md-block"></div>
                             <button
                                 class="btn btn-main px-3 py-2 text-center border-light rounded-3 flex-grow-1 flex-lg-grow-0">
-                                Get early access
+                                {{__('web.get_early_access')}}
                             </button>
                         </div>
                         </div>
@@ -223,7 +222,7 @@
                     </div>
                     <div class="text-center bg-gray p-3 mb-4 rounded-7">
                         <div class="text-center mb-3">
-                            We have added your email <span class="text-main" id="early-access-email">(benedict.strange@gmail.com)</span>
+                            We have added your email <span class="text-main" id="early-access-email">(@gmail.com)</span>
                             to the signup queue.
                         </div>
                         <div class="fw-bold" style="font-size: 24px;">You’re the <span id="count-all"></span>!</div>

@@ -21,28 +21,68 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<nav class="navbar navbar-expand-sm navbar-light  bg-white">
     <div class="container-md">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="{{route('home')}}">
             <img width="100" height="28" src="/images/logo/long-orange-text-black-neko.svg" alt="">
         </a>
-        <button hidden class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="ms-auto">
-            <a href="https://docs.nekoinvest.io/" target="_blank" class="btn btn-sm rounded btn-main py-2 px-3">Litepaper</a>
-{{--            <a href="/#input-early-access-email" class="btn btn-sm rounded btn-main ">Get early--}}
-{{--                access</a>--}}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link active" aria-current="page" href="#">Home</a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" href="#">Link</a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item dropdown">--}}
+{{--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--}}
+{{--                        Dropdown--}}
+{{--                    </a>--}}
+{{--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+{{--                        <li><a class="dropdown-item" href="#">Action</a></li>--}}
+{{--                        <li><a class="dropdown-item" href="#">Another action</a></li>--}}
+{{--                        <li><hr class="dropdown-divider"></li>--}}
+{{--                        <li><a class="dropdown-item" href="#">Something else here</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--}}
+{{--                </li>--}}
+            </ul>
+            <form class="d-flex">
+                <div class="ms-auto d-flex">
+                    <div class="dropdown">
+                        <div class="btn btn-sm rounded btn-main py-2 px-3 dropdown-toggle me-2" type="button"
+                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ strtoupper($locale) }}
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            @foreach($locales as $lang)
+                                <li>
+                                    @if($lang !== $locale)
+                                        <a href="/{{request()->path()}}?redirect_locale={{$lang}}"
+                                           class="dropdown-item pointer">{{ __("web.$lang") }}</a>
+                                    @else
+                                        <a href="#" class="dropdown-item pointer">{{ __("web.$lang") }}</a>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <a href="https://docs.nekoinvest.io/" target="_blank" class="btn btn-sm rounded btn-main py-2 px-3">Litepaper</a>
+                </div>
+{{--                <div class="ms-auto">--}}
+{{--                    <a href="/#input-early-access-email" class="hide-from-home btn btn-sm rounded btn-main ">Get early--}}
+{{--                        access</a>--}}
+{{--                </div>--}}
+            </form>
         </div>
-        {{--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
-        {{--            <div class="ms-auto">--}}
-        {{--                <a  href="/#input-early-access-email" class="hide-from-home btn btn-sm rounded btn-main ">Get early access</a>--}}
-        {{--            </div>--}}
-        {{--        </div>--}}
     </div>
 </nav>
+
 
 @yield('content')
 <footer>
@@ -51,13 +91,13 @@
             <div class="row py-0 py-sm-5">
                 <div class="col-md-3 mb-5">
                     <a href="/">
-                        <img width="50"  src="/images/no_padding_light.png" alt="">
+                        <img width="50" src="/images/no_padding_light.png" alt="">
                     </a>
                 </div>
 
                 <div class="col-md-3 col-6 mb-3 text-white">
-                    <div class="mb-3"><a href="/">Home</a></div>
-                    <div class="mb-3"><a href="/">Blog</a></div>
+                    <div class="mb-3"><a href="{{route('home')}}">{{__('homepage')}}</a></div>
+                    <div class="mb-3"><a href="{{route('blogs')}}">{{__('blog')}}</a></div>
                     <div class="mb-sm-0">
                         <a target="_blank" href="https://docs.nekoinvest.io/" class="pointer">
                             Litepaper
@@ -65,7 +105,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-6 mb-5 text-white">
-                    <div class="mb-3"><a href="/cryptocurrencies">How to buy</a></div>
+                    <div class="mb-3"><a href="{{route('cryptocurrencies')}}">{{__('how_to_buy')}}</a></div>
                     <div class="mb-3"><a>Brand assets</a></div>
                     <div class="mb-sm-0"><a class="pointer" data-bs-toggle="modal"
                                             data-bs-target="#modal-check-my-spot">Check my spot</a></div>
@@ -93,6 +133,8 @@
     _locale = '{{$locale}}';
     axios.defaults.withCredentials = true;
     axios.defaults.credentials = true;
+
+
 </script>
 @include('web.modal.check_my_spot')
 

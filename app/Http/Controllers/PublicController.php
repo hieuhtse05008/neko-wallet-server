@@ -77,36 +77,37 @@ class PublicController extends ViewController
 
     public function homeView(Request $request)
     {
+//        dd($request->all());
         $networks = Network::whereIn('id', [1, 2, 4])->get();
         $features = [
             [
-                'title' => 'Invest in any token',
-                'description' => 'By sourcing liquidity from multiple major exchanges, Neko provides you the ability to invest in 6000+ tokens',
+                'title' => 'web.home.feature.1st_title',
+                'description' => 'web.home.feature.1st_description',
                 'image_url' => '/images/feature/boat.png',
             ],
             [
-                'title' => 'Support MultiChains',
-                'description' => 'With Neko cross-chain protocol, you will be able to swap between assets that belongs to different blockchain networks seamlessly',
+                'title' => 'web.home.feature.2nd_title',
+                'description' => 'web.home.feature.2nd_description',
                 'image_url' => '/images/feature/exchange.png',
             ],
             [
-                'title' => 'Secured Wallets',
-                'description' => 'Since Neko Wallet is a non-custodial wallet, you are in full control your assets, and own the proofs that the funds are yours',
+                'title' => 'web.home.feature.3rd_title',
+                'description' => 'web.home.feature.3rd_description',
                 'image_url' => '/images/feature/nft.png',
             ],
             [
-                'title' => 'dApps Connect',
-                'description' => 'With Wallet Connect and in-app browser, you can easly connect your wallets with dApps right on your mobile devices',
+                'title' => 'web.home.feature.4th_title',
+                'description' => 'web.home.feature.4th_description',
                 'image_url' => '/images/feature/dapps.png',
             ],
             [
-                'title' => 'Full Market Overview',
-                'description' => 'Stay informed of trend and vast investment opportunities on field',
+                'title' => 'web.home.feature.5th_title',
+                'description' => 'web.home.feature.5th_description',
                 'image_url' => '/images/feature/market.png',
             ],
             [
-                'title' => 'Projects Discovery',
-                'description' => 'By prospecting numerous projects, Neko discover hidden gems and feed them to you',
+                'title' => 'web.home.feature.6th_title',
+                'description' => 'web.home.feature.6th_description',
                 'image_url' => '/images/feature/inspect.png',
             ],
         ];

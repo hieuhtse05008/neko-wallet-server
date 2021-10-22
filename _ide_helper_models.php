@@ -97,21 +97,24 @@ namespace App\Models{
  *          type="string",
  *          format="date-time"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperBlog
  * @property int $id
- * @property string|null $slug
- * @property string $title
+ * @property array|null $slug
+ * @property array $title
  * @property string|null $image_url
- * @property string|null $content
+ * @property array|null $content
  * @property string|null $status
  * @property string|null $type
  * @property string|null $tags
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string $description
+ * @property array $description
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BlogGroup[] $blog_groups
+ * @property-read int|null $blog_groups_count
+ * @property-read array $translations
  * @method static \Database\Factories\BlogFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Blog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Blog newQuery()
@@ -183,15 +186,16 @@ namespace App\Models{
  *          type="string",
  *          format="date-time"
  *      )
- *
+ * 
  * )
+ * @mixin IdeHelperBlogGroup
  * @property int $id
  * @property string $name
  * @property string $type
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BlogLinkGroup[] $blogGroups
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\RefBlogGroup[] $blogGroups
  * @property-read int|null $blog_groups_count
  * @method static \Database\Factories\BlogGroupFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|BlogGroup newModelQuery()
@@ -206,81 +210,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|BlogGroup whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|BlogGroup withTrashed()
  * @method static \Illuminate\Database\Query\Builder|BlogGroup withoutTrashed()
- * @mixin \Eloquent
  */
 	class IdeHelperBlogGroup extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * Class BlogLinkGroup
- *
- * @package App\Models
- * @version October 11, 2021, 4:05 am UTC
- * @OA\Schema (
- *     title="BlogLinkGroup",
- *     @OA\Xml(
- *         name="BlogLinkGroup"
- *     ),
- *     required={"blog_id", "blog_group_id"},
- *      @OA\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      )
- * ,
- *      @OA\Property(
- *          property="blog_id",
- *          description="blog_id",
- *          type="integer",
- *          format="int32"
- *      )
- * ,
- *      @OA\Property(
- *          property="blog_group_id",
- *          description="blog_group_id",
- *          type="integer",
- *          format="int32"
- *      )
- * ,
- *      @OA\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      )
- * ,
- *      @OA\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
- *
- * )
- * @property int $id
- * @property int $blog_id
- * @property int $blog_group_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Blog $blog
- * @property-read \App\Models\BlogGroup $blogGroup
- * @method static \Database\Factories\BlogLinkGroupFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|BlogLinkGroup newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BlogLinkGroup newQuery()
- * @method static \Illuminate\Database\Query\Builder|BlogLinkGroup onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|BlogLinkGroup query()
- * @method static \Illuminate\Database\Eloquent\Builder|BlogLinkGroup whereBlogGroupId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BlogLinkGroup whereBlogId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BlogLinkGroup whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BlogLinkGroup whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BlogLinkGroup whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|BlogLinkGroup withTrashed()
- * @method static \Illuminate\Database\Query\Builder|BlogLinkGroup withoutTrashed()
- * @mixin \Eloquent
- */
-	class IdeHelperBlogLinkGroup extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -321,7 +252,7 @@ namespace App\Models{
  *          type="string",
  *          format="date-time"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperCategory
  * @property int $id
@@ -399,7 +330,7 @@ namespace App\Models{
  *          description="verified",
  *          type="boolean"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperCryptocurrency
  * @property int $id
@@ -483,7 +414,7 @@ namespace App\Models{
  *          type="string",
  *          format="date-time"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperCryptocurrencyCategory
  * @property int $id
@@ -557,7 +488,7 @@ namespace App\Models{
  *          type="string",
  *          format="date-time"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperCryptocurrencyInfo
  * @property int $id
@@ -638,7 +569,7 @@ namespace App\Models{
  *          description="binance_id",
  *          type="string"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperCryptocurrencyMapping
  * @property int $id
@@ -756,7 +687,7 @@ namespace App\Models{
  *          type="string",
  *          format="date-time"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperExchangeGuide
  * @property int $id
@@ -846,7 +777,7 @@ namespace App\Models{
  *          type="string",
  *          format="date-time"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperExchangePair
  * @property int $id
@@ -979,7 +910,7 @@ namespace App\Models{
  *          description="is_active",
  *          type="boolean"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperNetwork
  * @property int $id
@@ -1051,7 +982,7 @@ namespace App\Models{
  *          description="binance_id",
  *          type="string"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperNetworkMapping
  * @property int $id
@@ -1105,6 +1036,77 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PersonalAccessToken whereUpdatedAt($value)
  */
 	class IdeHelperPersonalAccessToken extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class RefBlogGroup
+ *
+ * @package App\Models
+ * @version October 13, 2021, 4:24 am UTC
+ * @OA\Schema (
+ *     title="RefBlogGroup",
+ *     @OA\Xml(
+ *         name="RefBlogGroup"
+ *     ),
+ *     required={"blog_id", "blog_group_id"},
+ *      @OA\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="blog_id",
+ *          description="blog_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="blog_group_id",
+ *          description="blog_group_id",
+ *          type="integer",
+ *          format="int32"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * ,
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * 
+ * )
+ * @mixin IdeHelperRefBlogGroup
+ * @property int $id
+ * @property int $blog_id
+ * @property int $blog_group_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $type
+ * @property-read \App\Models\Blog $blog
+ * @property-read \App\Models\BlogGroup $blogGroup
+ * @method static \Database\Factories\RefBlogGroupFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefBlogGroup newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RefBlogGroup newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RefBlogGroup query()
+ * @method static \Illuminate\Database\Eloquent\Builder|RefBlogGroup whereBlogGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefBlogGroup whereBlogId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefBlogGroup whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefBlogGroup whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefBlogGroup whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefBlogGroup whereUpdatedAt($value)
+ */
+	class IdeHelperRefBlogGroup extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -1182,7 +1184,7 @@ namespace App\Models{
  *          type="integer",
  *          format="int32"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperToken
  * @property int $id
@@ -1321,7 +1323,7 @@ namespace App\Models{
  *          type="string",
  *          format="date-time"
  *      )
- *
+ * 
  * )
  * @mixin IdeHelperUser
  * @property int $id

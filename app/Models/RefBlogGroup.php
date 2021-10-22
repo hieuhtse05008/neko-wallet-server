@@ -8,52 +8,52 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class RefBlogGroup
+ *
  * @package App\Models
  * @version October 13, 2021, 4:24 am UTC
- *
- *
- * @OA\Schema(
+ * @OA\Schema (
  *     title="RefBlogGroup",
  *     @OA\Xml(
  *         name="RefBlogGroup"
  *     ),
  *     required={"blog_id", "blog_group_id"},
-  *      @OA\Property(
+ *      @OA\Property(
  *          property="id",
  *          description="id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="blog_id",
  *          description="blog_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="blog_group_id",
  *          description="blog_group_id",
  *          type="integer",
  *          format="int32"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
  *          format="date-time"
  *      )
-,
+ * ,
  *      @OA\Property(
  *          property="updated_at",
  *          description="updated_at",
  *          type="string",
  *          format="date-time"
  *      )
-
+ * 
  * )
+ * @mixin IdeHelperRefBlogGroup
  */
 
 class RefBlogGroup extends Model

@@ -23,7 +23,7 @@
 
             @foreach($blogs as $blog)
                 <div class="col-12 col-sm-6  col-lg-4 pb-3">
-                    <a href="/{{$locale}}/blogs/{{$blog['slug']}}" class="pointer h-100">
+                    <a href="{{route('blog',['slug'=>$blog['slug']])}}" class="pointer h-100">
 
                         <div class="img-blog rounded-t-7 img-blog bg-white shadow" style="background-image: url('{{$blog['image_url']}}')"></div>
 

@@ -5,14 +5,14 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class RemoveUsedSwapOrders extends Command
+class RemoveUnusedSwapOrders extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'remove:used_swap_orders';
+    protected $signature = 'remove:unused_swap_orders';
 
     /**
      * The console command description.
