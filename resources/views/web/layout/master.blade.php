@@ -116,7 +116,7 @@
                         </div>
                         <div class="me-5"><a href="https://t.me/nekoinvest"><i class="fab fa-telegram-plane"></i></a>
                         </div>
-                        <div><a href="https://discord.gg/nhZsK6Xarz"><i class="fab fa-discord"></i></a></div>
+                        <div><a href="https://discord.gg/898xnMFXkU"><i class="fab fa-discord"></i></a></div>
                     </div>
                 </div>
             </div>

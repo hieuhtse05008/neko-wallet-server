@@ -131,8 +131,8 @@
                     </div>
 {{--                    <div class="text-truncate mb-3">--}}
 {{--                        <div>Discord</div>--}}
-{{--                        <a class="text-main" target="_blank" href="https://discord.gg/nhZsK6Xarz">--}}
-{{--                            https://discord.gg/nhZsK6Xarz--}}
+{{--                        <a class="text-main" target="_blank" href="https://discord.gg/898xnMFXkU">--}}
+{{--                            https://discord.gg/898xnMFXkU--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 {{--                    <div class="text-truncate mb-3">--}}

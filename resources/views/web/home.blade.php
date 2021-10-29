@@ -266,7 +266,7 @@
                             {{--                                <div>--}}
                             {{--                                    <a class="rounded-circle text-white d-flex"--}}
                             {{--                                       style="background: #7289da;"--}}
-                            {{--                                       href="https://discord.gg/nhZsK6Xarz"><i--}}
+                            {{--                                       href="https://discord.gg/898xnMFXkU"><i--}}
                             {{--                                            class="fab fa-discord  link-icon"></i>--}}
                             {{--                                    </a>--}}
                             {{--                                </div>--}}
