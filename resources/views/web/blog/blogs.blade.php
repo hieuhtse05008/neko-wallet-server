@@ -92,7 +92,7 @@
             background-position: center center !important;
             background-size: cover !important;
             border-radius: 5px;
-            height: 200px;
+            padding-bottom: 65%;
         }
         .search-wrap input:focus {
             outline: none;
