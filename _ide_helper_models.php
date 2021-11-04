@@ -103,15 +103,15 @@ namespace App\Models{
  * @property int $id
  * @property array|null $slug
  * @property array $title
+ * @property array $description
  * @property string|null $image_url
- * @property array|null $content
+ * @property string|null $content_en
  * @property string|null $status
  * @property string|null $type
  * @property string|null $tags
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property array $description
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BlogGroup[] $blog_groups
  * @property-read int|null $blog_groups_count
  * @property-read array $translations
@@ -119,7 +119,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Blog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Blog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Blog query()
- * @method static \Illuminate\Database\Eloquent\Builder|Blog whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereContentEn($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Blog whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Blog whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Blog whereDescription($value)
@@ -497,7 +497,6 @@ namespace App\Models{
  * @property object|null $links
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property mixed|null $test
  * @property float|null $current_supply
  * @property float|null $max_supply
  * @property object|null $market_cap_dominance
@@ -520,7 +519,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereMarketCapDominance($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereMaxSupply($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereTest($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CryptocurrencyInfo whereUpdatedAt($value)
  */
 	class IdeHelperCryptocurrencyInfo extends \Eloquent {}
@@ -1090,9 +1088,9 @@ namespace App\Models{
  * @property int $id
  * @property int $blog_id
  * @property int $blog_group_id
+ * @property string $type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $type
  * @property-read \App\Models\Blog $blog
  * @property-read \App\Models\BlogGroup $blogGroup
  * @method static \Database\Factories\RefBlogGroupFactory factory(...$parameters)
