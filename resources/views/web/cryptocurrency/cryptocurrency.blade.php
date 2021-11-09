@@ -30,11 +30,20 @@
                                  type="button" data-bs-toggle="collapse"
                                  data-bs-target="#how-to-neko">
                                 How to buy {{$cryptocurrency->symbol}} on Neko Invest app
-                            </div>
-                            <div id="how-to-neko" class="collapse">
-                                <ul class=" pb-3">
-                                    @if(!empty($neko_exchange_guide['guide_html']))
 
+                            </div>
+                            <h6 class="fw-light">
+                                <div>For more information:</div>
+                                <a target="_blank" href="https://nekoinvest.io/en/blogs/how-to-create-and-use-neko-wallet">
+                                    How to download and use Neko Invest app
+                                    <i class="fal fa-external-link"></i>
+                                </a>
+                                {{--                                    Download Neko Invest app in Appstore--}}
+                            </h6>
+                            <div id="how-to-neko" class="collapse">
+                                <ul class="pb-3">
+
+                                    @if(!empty($neko_exchange_guide['guide_html']))
                                                 @foreach($neko_exchange_guide['guide_html']['steps'] as $step_key => $step)
                                                     <li>
                                                         <div class="collapse-btn mb-3"><b>Step {{$step_key + 1}}
