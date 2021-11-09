@@ -259,7 +259,7 @@
                             @foreach($cryptocurrency->categories as $category)
                                 @if(!empty($category))
                                     <a class="bg-main border-0 btn btn-sm btn-xs mb-2 me-2 rounded shadow-sm text-white"
-                                       href="/cryptocurrencies?category={{$category->id}}">{{$category->name}}</a>
+                                       href="{{route("cryptocurrencies",['category_id'=>$category['id']])}}">{{$category->name}}</a>
                                 @endif
                             @endforeach
                         </div>

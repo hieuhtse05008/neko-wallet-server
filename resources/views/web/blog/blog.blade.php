@@ -29,13 +29,21 @@
     <script>
         const slug = '{{$slug}}';
         const blog_slug = '{{$blog->slug}}';
-        console.log(slug , blog_slug,_locale);
-        if(slug !== blog_slug && blog_slug && slug){
-            console.log('redirect',`/${_locale}/blogs/${blog_slug}`);
+        console.log(slug, blog_slug, _locale);
+        if (slug !== blog_slug && blog_slug && slug) {
+            console.log('redirect', `/${_locale}/blogs/${blog_slug}`);
             window.location.href = `/${_locale}/blogs/${blog_slug}`;
         }
     </script>
 @endpush
+@section('meta')
+    <meta property="og:url" content="{{route('blog',['slug'=>$blog['slug']])}}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="NEKO Invest"/>
+    <meta property="og:description" content="{{$blog->title}}"/>
+    <meta property="og:image" content="{{$blog->image_url}}"/>
+    <meta property="og:locale" content="{{$locale}}"/>
+@endsection
 @section('styles')
     <link rel="stylesheet" href="/css/ckeditor/ckeditor.css">
     <style>
