@@ -5,7 +5,7 @@
         <div class="my-5 d-flex justify-content-center flex-column align-items-center">
             <h1>How to buy</h1>
             <div class="mt-3">
-                <form method="GET" action="/cryptocurrencies">
+                <form method="GET" action="/{{$locale}}/cryptocurrencies">
                     <div class="align-items-center bg-white d-flex rounded-3 pe-3 text-truncate search-wrap">
                         <i class="far fa-search me-2"></i>
 
@@ -23,7 +23,11 @@
         <div class="smooth-scroll-x mb-5 d-none d-lg-block">
             <div
                 class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill @if(empty($category_id)) bg-main text-white @endif"
-                onclick="window.location.href = '/cryptocurrencies?category_id=&search={{$search}}'">
+                onclick="window.location.href =
+
+                    '{{route("cryptocurrencies",['search'=>$search])}}'
+                    "
+            >
                 All ({{ $count_total_cryptocurrencies }})
             </div>
 
@@ -31,7 +35,7 @@
                 @if($key < 5)
                     <div
                         class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill @if($category_id == $category['id']) bg-main text-white @endif"
-                        onclick="window.location.href = '/cryptocurrencies?category_id={{$category['id']}}&search={{$search}}'"
+                        onclick="window.location.href = '{{route("cryptocurrencies",['category_id'=>$category['id'],'search'=>$search])}}'"
                     >{{ $category['name'] }} ({{ count($category['cryptocurrencies']) }})
                     </div>
                 @endif
@@ -50,7 +54,7 @@
                     @if($key >= 5)
                         <div
                             class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill @if($category_id == $category['id']) bg-main text-white @endif"
-                            onclick="window.location.href = '/cryptocurrencies?category_id={{$category['id']}}&search={{$search}}'"
+                            onclick="window.location.href = '{{route("cryptocurrencies",['category_id'=>$category['id'],'search'=>$search])}}'"
                         >{{ $category['name'] }} ({{ count($category['cryptocurrencies']) }})
                         </div>
                     @endif
@@ -63,13 +67,13 @@
         >
             <div
                 class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill @if(empty($category_id)) bg-main text-white @endif"
-                onclick="window.location.href = '/cryptocurrencies?category_id=&search={{$search}}'">
+                onclick="window.location.href = '{{route("cryptocurrencies",['search'=>$search])}}'">
                 All ({{ $count_total_cryptocurrencies }})
             </div>
             @foreach($categories as $category)
                 <div
                     class="btn btn-sm mb-2 me-2 pointer px-3 rounded-pill @if($category_id == $category['id']) bg-main text-white @endif"
-                    onclick="window.location.href = '/cryptocurrencies?category_id={{$category['id']}}&search={{$search}}'"
+                    onclick="window.location.href = '{{route("cryptocurrencies",['category_id'=>$category['id'],'search'=>$search])}}'"
                 >
                     {{ $category['name'] }} ({{ count($category['cryptocurrencies']) }})
                 </div>
@@ -84,7 +88,9 @@
         <div class="row row-eq-height">
             @foreach($cryptocurrencies as $cryptocurrency)
                 <div class="col-6 col-sm-4 col-md-3 col-lg-2 pb-3">
-                    <a href="/cryptocurrency/{{$cryptocurrency->name}}">
+                    <a href="{{route('cryptocurrency',['cryptocurrency'=>$cryptocurrency])}}">
+
+
                         <div
                             class="align-items-center d-flex flex-column h-100 justify-content-center p-3 pointer rounded-7 shadow text-center bg-white">
                             <img src="{{$cryptocurrency->icon_url}}" class="table-crypto-image mr-2 mb-3"

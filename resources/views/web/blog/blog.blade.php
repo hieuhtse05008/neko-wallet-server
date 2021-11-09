@@ -12,6 +12,9 @@
             <div class="blog-title mb-5">
                 {{$blog->title}}
             </div>
+            <div class="mb-5">
+                <img class="w-100" src="{{$blog->image_url}}">
+            </div>
             <hr>
             <div class="pt-5 overflow-auto">
                 <div class="ck-content">

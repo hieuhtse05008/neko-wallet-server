@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Cryptocurrency;
 use App\Models\CryptocurrencyInfo;
 use App\Models\EarlyAccessEmail;
+use App\Models\ExchangeGuide;
 use App\Models\Network;
 use App\Repositories\BlogRepository;
 use App\Repositories\CategoryRepository;
@@ -26,10 +27,10 @@ class PublicController extends ViewController
     protected $categoryRepository;
     protected $blogRepository;
 
-    public function __construct(CryptocurrencyRepository $cryptocurrencyRepository,
+    public function __construct(CryptocurrencyRepository         $cryptocurrencyRepository,
                                 CryptocurrencyCategoryRepository $cryptocurrencyCategoryRepository,
-                                CategoryRepository $categoryRepository,
-                                BlogRepository $blogRepository
+                                CategoryRepository               $categoryRepository,
+                                BlogRepository                   $blogRepository
     )
     {
         parent::__construct();
@@ -216,7 +217,7 @@ class PublicController extends ViewController
         ]);
     }
 
-    public function tokenView(Cryptocurrency $cryptocurrency)
+    public function tokenView($lang, Cryptocurrency $cryptocurrency)
     {
 
         $related_coins = Cryptocurrency::where('cryptocurrencies.id', '>', $cryptocurrency->id)
@@ -224,10 +225,29 @@ class PublicController extends ViewController
             ->select('cryptocurrencies.*')
             ->limit(12)
             ->get();
-
+        $exchange_guides = $cryptocurrency->exchange_guides()->get();
+        $neko_exchange_guide = [
+            'id' => '0',
+            'name' => 'NEKO',
+            'guide_html' => [
+                'steps' => [
+                    ['text' => 'Create/Login to your Neko Invest app account',
+                        'image_url' => '',],
+                    ['text' => 'Go to Market page, click on the Search icon and search [TOKEN] in the search bar.',
+                        'image_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/images/1636366375WvZNyMWvLiDgY3y.jpg',],
+                    ['text' => 'Click on [TOKEN] logo and choose Invest. ',
+                        'image_url' => '',],
+                    ['text' => 'Entering the amount of [TOKEN] that you want to buy. Then click on the Get Quotes button.',
+                        'image_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/images/1636366322y919PHen13XXakQ.jpg',],
+                    ['text' => 'Swipe the Swipe to swap button and now you own  [TOKEN]. You can check your [TOKEN] balance in your wallet by going to Wallet page.',
+                        'image_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/images/1636366282fkVuygewNk3agPb.jpg',],
+                ]
+            ],
+        ];
         return $this->view('web.cryptocurrency.cryptocurrency', [
             'cryptocurrency' => $cryptocurrency,
-            'exchange_guides' => $cryptocurrency->exchange_guides()->get(),
+            'exchange_guides' => $exchange_guides,
+            'neko_exchange_guide' => $neko_exchange_guide,
             'related_coins' => $related_coins,
         ]);
     }
@@ -248,7 +268,6 @@ class PublicController extends ViewController
     {
         return $this->view('web.privacy_policy');
     }
-
 
 
     public function blogsView(Request $request)

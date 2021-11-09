@@ -44,7 +44,7 @@ Route::group(["prefix" => 'mobile'], function () {
 Route::get('/test', [PublicController::class, 'test']);
 
 $publicLocaleRoutes = function () {
-    Route::get('/', [PublicController::class, 'homeView'])->name("home");
+
     Route::group(["prefix" => 'blogs'], function () {
         Route::get('/', [PublicController::class, 'blogsView'])->name("blogs");
         Route::get('/{slug}', [PublicController::class, 'blogView'])->name("blog");
@@ -52,6 +52,8 @@ $publicLocaleRoutes = function () {
     Route::get('/login', [PublicController::class, 'loginView'])->name("login");
     Route::get('/cryptocurrencies', [PublicController::class, 'tokensView'])->middleware("include:cryptocurrencies")->name("cryptocurrencies");
     Route::get('/cryptocurrency/{cryptocurrency:name}', [PublicController::class, 'tokenView'])->name("cryptocurrency");
+
+    Route::get('/', [PublicController::class, 'homeView'])->name("home");
 };
 
 Route::prefix('{lang?}')

@@ -4,7 +4,7 @@
     <div class="crypto-wrap">
         <div class="crypto-cover"></div>
         <div class="crypto-content bg-white rounded-7">
-            <a class="d-flex align-items-center mb-5" href="/cryptocurrencies">
+            <a class="d-flex align-items-center mb-5" href="{{route('cryptocurrencies')}}">
                 <i class="far fa-long-arrow-left"></i>&nbsp;&nbsp;Back
             </a>
             <div class="crypto-time mb-3">
@@ -18,14 +18,41 @@
                 @if(!empty(object_get($cryptocurrency,'cryptocurrency_info.description')))
                     <div class="mb-5">
                         <div class="text-main pg-title mb-4">What is {{$cryptocurrency->name}}</div>
-                        <div class="pg-content">{!!  nl2br(e($cryptocurrency->cryptocurrency_info->description)) !!}</div>
+                        <div
+                            class="pg-content">{!!  nl2br(e($cryptocurrency->cryptocurrency_info->description)) !!}</div>
                     </div>
                 @endif
+                <div class="mb-5 arrow-list">
+                    <div class="text-main pg-title mb-4">How to buy {{$cryptocurrency->symbol}}?</div>
+                    <ul class="pg-content">
+                        <li class="">
+                            <div class="fw-bold mb-2 collapse-btn"
+                                 type="button" data-bs-toggle="collapse"
+                                 data-bs-target="#how-to-neko">
+                                How to buy {{$cryptocurrency->symbol}} on Neko Invest app
+                            </div>
+                            <div id="how-to-neko" class="collapse">
+                                <ul class=" pb-3">
+                                    @if(!empty($neko_exchange_guide['guide_html']))
 
-                @if( count($exchange_guides) > 0)
-                    <div class="mb-5 arrow-list">
-                        <div class="text-main pg-title mb-4">How to buy {{$cryptocurrency->symbol}}?</div>
-                        <ul class="pg-content">
+                                                @foreach($neko_exchange_guide['guide_html']['steps'] as $step_key => $step)
+                                                    <li>
+                                                        <div class="collapse-btn mb-3"><b>Step {{$step_key + 1}}
+                                                                :&nbsp;</b> {{str_replace('[TOKEN]',strtoupper($cryptocurrency->symbol),$step['text'])}}
+                                                        </div>
+                                                        @if(!empty($step['image_url']))
+                                                            <img class="w-100 mb-3" src="{{$step['image_url']}}">
+                                                        @endif
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+
+                                    @endif
+
+                                </ul>
+                            </div>
+                        </li>
+                        @if( count($exchange_guides) > 0)
                             @foreach($exchange_guides as $exchange_guide)
                                 <li class="">
                                     <div class="fw-bold mb-2 collapse-btn"
@@ -85,9 +112,10 @@
                                     </div>
                                 </li>
                             @endforeach
-                        </ul>
-                    </div>
-                @endif
+
+                        @endif
+                    </ul>
+                </div>
 
                 @if(count($cryptocurrency->tokens) > 0 )
 
@@ -210,18 +238,18 @@
                                 https://twitter.com/Neko_Invest
                             </a>
                         </div>
-                        {{--                        <div class="d-flex text-truncate">--}}
-                        {{--                            <span>Discord:</span>&nbsp;&nbsp;--}}
-                        {{--                            <a class="text-main" target="_blank" href="https://discord.gg/898xnMFXkU">--}}
-                        {{--                                https://discord.gg/898xnMFXkU--}}
-                        {{--                            </a>--}}
-                        {{--                        </div>--}}
-                        {{--                        <div class="d-flex text-truncate">--}}
-                        {{--                            <span>Telegram:</span>&nbsp;&nbsp;--}}
-                        {{--                            <a class="text-main" target="_blank" href="https://t.me/nekoinvest">--}}
-                        {{--                                https://t.me/nekoinvest--}}
-                        {{--                            </a>--}}
-                        {{--                        </div>--}}
+{{--                                                <div class="d-flex text-truncate">--}}
+{{--                                                    <span>Discord:</span>&nbsp;&nbsp;--}}
+{{--                                                    <a class="text-main" target="_blank" href="https://discord.gg/898xnMFXkU">--}}
+{{--                                                        https://discord.gg/898xnMFXkU--}}
+{{--                                                    </a>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="d-flex text-truncate">--}}
+{{--                                                    <span>Telegram:</span>&nbsp;&nbsp;--}}
+{{--                                                    <a class="text-main" target="_blank" href="https://t.me/nekoinvest">--}}
+{{--                                                        https://t.me/nekoinvest--}}
+{{--                                                    </a>--}}
+{{--                                                </div>--}}
                     </div>
                 </div>
                 @if(!empty($cryptocurrency->categories) && count($cryptocurrency->categories) > 0)
@@ -246,8 +274,9 @@
             <div class="row row-eq-height">
                 @foreach($related_coins as $cryptocurrency)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 pb-3">
-                        <a href="/cryptocurrency/{{$cryptocurrency->name}}">
-                            <div class="align-items-center d-flex flex-column h-100 justify-content-center p-3 pointer rounded-7 shadow text-center bg-white">
+                            <a href="{{route('cryptocurrency',['cryptocurrency'=>$cryptocurrency])}}">
+                            <div
+                                class="align-items-center d-flex flex-column h-100 justify-content-center p-3 pointer rounded-7 shadow text-center bg-white">
                                 <img src="{{$cryptocurrency->icon_url}}" class="table-crypto-image mr-2 mb-3"
                                      style="width: 36px;">
                                 <div>
