@@ -107,7 +107,7 @@
         $.post(`/register-early-access`, {email, _token, }).then(res => {
             console.log(res);
             if (res.info) {
-                $('#input-share-ref-spot').val(`https://www.nekoinvest.io/?ref=${res.info.code}`);
+                $('#input-share-ref-spot').val(`https://nekoinvest.io/?ref=${res.info.code}`);
 
                 $('#my-spot').text((`${res.register_count}`).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 $('#count-ahead').text((`${res.register_count - 1}`).replace(/\B(?=(\d{3})+(?!\d))/g, ","));

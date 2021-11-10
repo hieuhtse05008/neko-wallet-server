@@ -285,7 +285,7 @@
             $.post(`/register-early-access`, {email, _token, ref: '{{ app('request')->input('ref')}}'}).then(res => {
                 console.log(res);
                 if (res.info) {
-                    $('#input-share-ref').val(`https://www.nekoinvest.io/?ref=${res.info.code}`);
+                    $('#input-share-ref').val(`https://nekoinvest.io/?ref=${res.info.code}`);
                     $('#early-access-email').text(`${email}`);
                     $('#count-all').text((`${res.register_count}`).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     $('#modal-register-early-access-success').modal('show');
