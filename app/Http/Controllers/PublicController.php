@@ -312,4 +312,9 @@ class PublicController extends ViewController
 
         return $this->view('web.login.login');
     }
+    public function nftView()
+    {
+
+        return $this->view('web.nft.index');
+    }
 }
