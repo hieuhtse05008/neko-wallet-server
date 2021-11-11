@@ -1,0 +1,503 @@
+// If you want to override variables do it here
+
+// Import styles
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/src/index.scss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+// If you want to add something do it here
+
+@import "variables";
+@import "custom";
+
+body {
+    color: #535353;
+}
+
+body, .dropdown-menu {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 14px;
+
+
+}
+
+
+.btn-no-color {
+    border-color: transparent !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+
+.btn-warning.disabled, .btn-warning:disabled {
+    color: white;
+}
+
+.text-black {
+    color: black !important;
+}
+
+.btn:focus, .btn.focus {
+    box-shadow: none !important;
+}
+
+.card {
+    border: none !important;
+}
+
+.e-table {
+    border-spacing: 0 0.5rem;
+    border-collapse: initial;
+
+    .e-table-header {
+        white-space: nowrap;
+    }
+
+    tr th, tr td {
+        background-color: white;
+        border: none;
+    }
+
+    tr th:first-child, tr td:first-child {
+        border-top-left-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+    }
+
+    tr th:last-child, tr td:last-child {
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+    }
+
+    & .table-hover {
+        tr:hover {
+            th, td {
+                background-color: rgba(0, 0, 0, 0.075) !important;
+
+            }
+
+
+        }
+
+    }
+}
+
+a {
+    color: black;
+
+    &:hover {
+        color: black;
+        text-decoration: none;
+    }
+}
+
+.form-group, .input-group {
+    input.form-control {
+        border: none;
+        background-color: $background-color-input;
+    }
+}
+
+.btn {
+    font-size: 14px;
+}
+
+.display-none {
+    display: none;
+}
+
+.modal-header {
+    border-bottom: none;
+
+    .modal-title {
+        text-align: left;
+        width: 100%;
+        font-size: 16px;
+    }
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.no-bg-color {
+    background-color: transparent;
+}
+
+.ck-progress-bar {
+    height: 5px !important;
+    background: $success !important;
+}
+
+.e-date-range-picker .vue-daterange-picker {
+    border: none;
+    width: 100%;
+
+    .reportrange-text {
+        background-color: $background-color-input !important;
+    }
+}
+
+.reportrange-text {
+    i {
+        margin-right: 0.5rem;
+    }
+}
+
+.b-dropdown-form:focus {
+    outline: none !important;
+}
+
+*:focus {
+    outline: none;
+}
+
+.multiselect__input {
+    font-size: 14px !important;
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+    vertical-align: unset !important;
+}
+
+.multiselect__placeholder {
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    color: #495057 !important;
+}
+
+.multiselect {
+    min-height: 35px !important;
+}
+
+.multiselect__tags {
+    padding-top: 6px !important;
+    min-height: 35px !important;
+    border: 1px solid #ced4da !important;
+}
+
+.multiselect__select::before {
+    color: black !important;
+    border-color: black transparent transparent !important;
+}
+
+.multiselect__tag {
+    margin-bottom: 2px !important;
+}
+
+.custom-checkbox label.custom-control-label {
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
+    filter: grayscale(1);
+}
+
+.custom-control-input[disabled] ~ .custom-control-label, .custom-control-input:disabled ~ .custom-control-label {
+    cursor: not-allowed;
+}
+
+a.router-link-exact-active i, a.active i {
+    color: white;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed !important;
+}
+
+.multiselect__option--group {
+    background-color: #8a8a8a !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.multiselect__option--group.multiselect__option--highlight {
+    background: #35495e !important;
+    color: #fff !important;
+}
+
+.btn-warning {
+    color: white;
+
+    &:hover {
+        color: white;
+
+    }
+}
+
+.e-dropdown {
+    .dropdown-item {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+
+        &:active {
+            background-color: lightgrey;
+        }
+    }
+
+    input {
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+.e-multi-dropdown {
+    .dropdown-item {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+
+        &:active {
+            background-color: lightgrey;
+        }
+    }
+
+    .dropdown-toggle {
+        display: flex;
+        padding: 0;
+        flex-wrap: wrap;
+        margin-bottom: -0.5rem !important;
+    }
+
+    input {
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+
+.smooth-scroll-y {
+    overflow: hidden;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f7f7f7;
+        border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        cursor: pointer;
+        background: #adadad;
+        border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #9e9e9e;
+    }
+}
+
+.table-smooth-scroll-y {
+    .b-table-sticky-header {
+        @extend .smooth-scroll-y;
+    }
+}
+
+.multiselect, .multiselect__input, .multiselect__single {
+    font-size: 14px !important;
+}
+
+.collapsed > .when-open,
+.not-collapsed > .when-closed {
+    display: none;
+}
+
+.vue-swatches__fallback__input {
+    height: 40px !important;
+    width: 100px !important;
+}
+
+.e-background {
+    background-color: $background-color;
+}
+
+.e-background2 {
+    background-color: $background-color2;
+}
+
+.filepond--credits {
+    display: none;
+}
+
+.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
+    background-color: $success !important;
+    filter: none;
+}
+
+@media (min-width: 1200px) {
+    .modal-xl {
+        max-width: 1200px;
+    }
+}
+
+.filepond--drop-label {
+    cursor: pointer !important;
+
+    * {
+        cursor: pointer !important;
+    }
+}
+
+
+.form-control:disabled, .form-control[readonly] {
+    cursor: not-allowed;
+}
+
+.dot-long-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mw-35px {
+    max-width: 35px;
+}
+
+//.btn {
+//    border: none !important;
+//}
+
+.dropdown-menu {
+    z-index: 2000;
+}
+
+.vue__time-picker.schedule-time-picker {
+    width: 55px !important;
+
+    & input.display-time {
+        width: 55px !important;
+        border-radius: 5px;
+    }
+}
+
+.e-time-picker {
+    border-radius: 0.25rem;
+}
+
+.upcase-1st:first-letter {
+    text-transform: capitalize;
+}
+
+.btn-link {
+    color: black !important;
+}
+
+
+.modal-xlg {
+    max-width: 90vw !important;
+}
+
+
+.custom-control-input[variant=danger]:checked ~ .custom-control-label::before,
+.custom-checkbox .custom-control-input[variant=danger]:disabled:checked ~ .custom-control-label::before {
+    background: $danger !important;
+    border-color: $danger !important;
+}
+
+.e-fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    right: 0;
+    left: $sidebar-width;
+    transition: all 0.3s;
+
+}
+
+#app-content {
+    &.active {
+        & .e-fixed-bottom {
+            left: 0;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    #app-content {
+        & .e-fixed-bottom {
+            left: 0;
+        }
+
+        &.active {
+            & .e-fixed-bottom {
+                left: $sidebar-width;
+            }
+        }
+    }
+}
+
+
+.select-multi-level {
+
+
+    & .first-level-menu.active {
+        display: inline;
+        z-index: 10;
+    }
+
+    .first-level-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: none;
+
+        & > div {
+            width: 120px;
+            position: relative;
+
+            &:hover {
+                background-color: #eeeeee;
+
+                .second-level-menu {
+                    display: inline;
+                }
+            }
+
+            &:last-child {
+            }
+        }
+
+
+    }
+
+    .second-level-menu {
+        position: absolute;
+        top: 0;
+        left: 100px;
+        width: 150px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: none;
+        border-radius: 5px;
+        border: solid 1px #d5d5d5;
+        background-color: white;
+        z-index: 11;
+        margin-top: 5px;
+        overflow-y: scroll;
+        max-height: 280px;
+        cursor: pointer;
+
+        & > div {
+            padding: 10px;
+
+            &:last-child {
+            }
+
+            &:hover {
+                background-color: #eeeeee;
+            }
+        }
+    }
+}
+
+
+.bg-gradient{
+    background: linear-gradient(79.16deg, #EE0979 -1.71%, #FF6A00 116.61%);
+}
