@@ -97,13 +97,14 @@
         }, i.p = "/", i.oe = function (e) {
             throw console.error(e), e
         };
-        var a = this["webpackJsonpcandy-machine-mint"] = this["webpackJsonpcandy-machine-mint"] || [], c = a.push.bind(a);
+        var a = this["webpackJsonpcandy-machine-mint"] = this["webpackJsonpcandy-machine-mint"] || [],
+            c = a.push.bind(a);
         a.push = t, a = a.slice();
         for (var l = 0; l < a.length; l++) t(a[l]);
         var f = c;
         r()
     }([])</script>
-<script src="/nft/static/js/2.bb7898c8.chunk.js"></script>
-<script src="/nft/static/js/main.c695977f.chunk.js"></script>
+<script src="/nft/static/js/2.18702ebb.chunk.js"></script>
+<script src="/nft/static/js/main.b783ae44.chunk.js"></script>
 </body>
 </html>
