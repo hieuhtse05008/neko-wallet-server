@@ -104,7 +104,7 @@
         var f = c;
         r()
     }([])</script>
-<script src="/nft/static/js/2.18702ebb.chunk.js"></script>
-<script src="/nft/static/js/main.b783ae44.chunk.js"></script>
+<script src="/nft/static/js/2.680efc20.chunk.js"></script>
+<script src="/nft/static/js/main.3f02dffd.chunk.js"></script>
 </body>
 </html>
