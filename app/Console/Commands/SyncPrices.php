@@ -49,7 +49,7 @@ class SyncPrices extends Command
 //        dd(config('database.connections.timescale_price'));
         //4022 1M
         $connection = 'timescale_price';
-        for ($i = 1; $i <= 13000; $i++) {
+        for ($i = 12255; $i <= 14512; $i++) {
             $this->handleCoin($i, $connection);
         }
         return 0;
@@ -70,7 +70,7 @@ class SyncPrices extends Command
 
 
             $httpClient = new \GuzzleHttp\Client();
-            $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=7D";
+            $url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id=$id&range=ALL";
             $response = $httpClient->get($url);
             $res = json_decode($response->getBody()->getContents())->data;
             usleep(500000);
