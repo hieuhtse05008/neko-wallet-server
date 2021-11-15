@@ -47,9 +47,9 @@ class SyncPrices extends Command
     private function handlePrices()
     {
 //        dd(config('database.connections.timescale_price'));
-        //4022 1M
+        //4022 1M 12639
         $connection = 'timescale_price';
-        for ($i = 12255; $i <= 14512; $i++) {
+        for ($i = 12639; $i <= 14512; $i++) {
             $this->handleCoin($i, $connection);
         }
         return 0;
