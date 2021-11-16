@@ -165,7 +165,7 @@ class PublicController extends ViewController
             ['name' => 'PHAN MINH DUONG', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH', 'avatar' => '/images/founder/duongpm.png'],
             ['name' => 'HA TRUNG HIEU', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH', 'avatar' => '/images/founder/hieuht.png'],
             ['name' => 'HANH PHAM', 'role' => 'Graphic Designer', 'department' => '', 'avatar' => '/images/founder/hanhpt.png'],
-            ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni', 'avatar' => '/images/founder/longhd.png'],
+//            ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni', 'avatar' => '/images/founder/longhd.png'],
         ];
 //dd($this->user->tokens);
         return $this->view('web.home', [
