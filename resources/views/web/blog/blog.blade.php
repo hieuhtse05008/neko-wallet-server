@@ -3,7 +3,7 @@
     <div class="blog-wrap">
         <div class="blog-cover"></div>
         <div class="blog-content bg-white rounded-7  shadow">
-            <a class="d-flex align-items-center mb-5" href="/blogs">
+            <a class="d-flex align-items-center mb-5" href="{{route('blogs')}}">
                 <i class="far fa-long-arrow-left"></i>&nbsp;&nbsp;Back
             </a>
             <div class="blog-time mb-3">

@@ -80,6 +80,7 @@ class BlogRepositoryEloquent extends Repository implements BlogRepository
 
         if (!$disabledRequestCriteria){
             $this->pushCriteria(app(RequestCriteria::class));
+
         }
         if(isset($filter['blog_group'])){
             $this->pushCriteria(BlogJoinGroupCriteria::class);

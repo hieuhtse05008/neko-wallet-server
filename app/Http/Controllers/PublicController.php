@@ -277,7 +277,7 @@ class PublicController extends ViewController
         ];
 
         $this->blogRepository->skipPresenter(true);
-        $blogs = $this->blogRepository->list(48, $filter);
+        $blogs = $this->blogRepository->orderBy('created_at','desc')->list(48, $filter);
 
         return $this->view('web.blog.blogs', [
             'blogs' => $blogs,
