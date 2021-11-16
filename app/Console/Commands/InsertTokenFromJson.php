@@ -46,7 +46,8 @@ class InsertTokenFromJson extends Command
     public function handle()
     {
 //        $json_str = file_get_contents("token-02-10-21.json");
-        $json_str = file_get_contents("tokens-15-11-21.json");
+//        $json_str = file_get_contents("tokens-15-11-21.json");
+        $json_str = file_get_contents("tokens-16-11-21.json");
         $tokens = json_decode($json_str);
 
         foreach ($tokens as $token) {
@@ -65,6 +66,7 @@ class InsertTokenFromJson extends Command
                     'address'=>object_get($token,'address'),
                     'active_wallet'=>object_get($token,'active_wallet'),
                     'decimals'=>object_get($token,'decimals') ?? 0,
+                    'swappable'=>object_get($token,'swappable') ?? false,
                 ]);
 
         }
