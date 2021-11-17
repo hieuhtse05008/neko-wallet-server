@@ -47,7 +47,8 @@ class InsertTokenFromJson extends Command
     {
 //        $json_str = file_get_contents("token-02-10-21.json");
 //        $json_str = file_get_contents("tokens-15-11-21.json");
-        $json_str = file_get_contents("tokens-16-11-21.json");
+        //$json_str = file_get_contents("tokens-16-11-21.json");
+        $json_str = file_get_contents("tokens-4.json");
         $tokens = json_decode($json_str);
 
         foreach ($tokens as $token) {
