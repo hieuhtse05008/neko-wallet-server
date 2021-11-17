@@ -49,8 +49,10 @@ class SyncPrices extends Command
 //        dd(config('database.connections.timescale_price'));
         //4022 1M 12639
         $connection = 'timescale_price';
-        for ($i = 12256; $i <= 12639; $i++) {
+
+//        for ($i = 12256; $i <= 12639; $i++) {
 //        for ($i = 12639; $i <= 14512; $i++) {
+        for ($i = 14513; $i <= 14674; $i++) {
             $this->handleCoin($i, $connection);
         }
         return 0;
