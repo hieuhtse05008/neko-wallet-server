@@ -23,7 +23,7 @@
                     </div>
                     <div class="mb-4">{{__('web.home.1st_description')}}</div>
 
-                    <div class="my-4 pointer d-flex align-items-center">
+                    <div class="my-4 pointer d-flex align-items-center" style="max-width: 300px">
                         <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402" class="me-3">
                             <img src="https://d1j8r0kxyu9tj8.cloudfront.net/files/1574313896PGEvFscFfP5Uoow.jpg"/>
                         </a>
