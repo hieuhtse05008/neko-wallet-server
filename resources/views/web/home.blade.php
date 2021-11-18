@@ -22,17 +22,27 @@
                         </div>
                     </div>
                     <div class="mb-4">{{__('web.home.1st_description')}}</div>
-                    <form class="mb-4 d-flex flex-wrap" id="form-early-access">
-                        <input id="input-early-access-email" placeholder="{{ __('web.placeholder.email') }}"
-                               class="rounded mb-3 mb-lg-0  inp-main flex-grow-1 mw-100" type="email" style="" required>
-                        <div class="me-3 d-none d-md-block"></div>
-                        <button class="btn btn-main px-3 py-2 py-lg-0 text-center border-light rounded-3 flex-grow-1 flex-md-grow-0">
-                            {{__('web.get_early_access')}}
-                        </button>
-                    </form>
-{{--                    <div class="mb-5 mb-sm-0">--}}
-{{--                        <i class="fas fa-play-circle"></i> See how it works--}}
-{{--                    </div>--}}
+
+                    <div class="my-4 pointer d-flex align-items-center">
+                        <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402" class="me-3">
+                            <img src="https://d1j8r0kxyu9tj8.cloudfront.net/files/1574313896PGEvFscFfP5Uoow.jpg"/>
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=io.nekoinvest.wallet">
+
+                            <img src="https://d1j8r0kxyu9tj8.cloudfront.net/files/1574313896CQUrhMAjA0i39SM.jpg"/>
+                        </a>
+                    </div>
+                    {{--                    <form class="mb-4 d-flex flex-wrap" id="form-early-access">--}}
+                    {{--                        <input id="input-early-access-email" placeholder="{{ __('web.placeholder.email') }}"--}}
+                    {{--                               class="rounded mb-3 mb-lg-0  inp-main flex-grow-1 mw-100" type="email" style="" required>--}}
+                    {{--                        <div class="me-3 d-none d-md-block"></div>--}}
+                    {{--                        <button class="btn btn-main px-3 py-2 py-lg-0 text-center border-light rounded-3 flex-grow-1 flex-md-grow-0">--}}
+                    {{--                            {{__('web.get_early_access')}}--}}
+                    {{--                        </button>--}}
+                    {{--                    </form>--}}
+                    {{--                    <div class="mb-5 mb-sm-0">--}}
+                    {{--                        <i class="fas fa-play-circle"></i> See how it works--}}
+                    {{--                    </div>--}}
                 </div>
             </div>
         </div>
@@ -67,9 +77,9 @@
                     <div class="ms-auto my-auto">
                         <div class="text-spotlight mb-4">{{__('web.home.3rd_title')}}</div>
                         <div class="mb-4">{{__('web.home.3rd_description')}}</div>
-                        <a href="#input-early-access-email" class="btn btn-main px-3 text-center">
-                            {{__('web.get_early_access')}}
-                        </a>
+                        {{--                        <a href="#input-early-access-email" class="btn btn-main px-3 text-center">--}}
+                        {{--                            {{__('web.get_early_access')}}--}}
+                        {{--                        </a>--}}
                     </div>
                 </div>
             </div>
@@ -84,9 +94,9 @@
                     <div class="ms-auto my-auto">
                         <div class="text-spotlight mb-4">{{__('web.home.4th_title')}}</div>
                         <div class="mb-4">{{__('web.home.4th_description')}}</div>
-                        <a href="#input-early-access-email" class="btn btn-main px-3 text-center">
-                            {{__('web.get_early_access')}}
-                        </a>
+                        {{--                        <a href="#input-early-access-email" class="btn btn-main px-3 text-center">--}}
+                        {{--                            {{__('web.get_early_access')}}--}}
+                        {{--                        </a>--}}
                     </div>
                 </div>
             </div>
@@ -101,7 +111,8 @@
             <div class="row row-eq-height gx-5 gy-5">
                 @foreach($features as $key=>$feature)
                     <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="rounded-1-56 h-100 shadow-lg-light p-4 p-md-5 d-flex flex-column justify-content-between">
+                        <div
+                            class="rounded-1-56 h-100 shadow-lg-light p-4 p-md-5 d-flex flex-column justify-content-between">
                             <div>
                                 <h5 class="text-main mb-3">{{__($feature['title'])}}</h5>
                                 <div class="mb-5">{{__($feature['description'])}}</div>
@@ -123,7 +134,8 @@
                     <div class="col-12 col-sm-6 col-lg-3 gy-3">
                         <div class="rounded-7 p-0 p-sm-4 h-100 position-relative">
                             <div class="bg-main road-map-line position-absolute d-none d-md-block w-100 ms-4"></div>
-                            <div class="road-map-line-mobile h-100 position-absolute mt-3 ms-3 bg-main d-block d-md-none"></div>
+                            <div
+                                class="road-map-line-mobile h-100 position-absolute mt-3 ms-3 bg-main d-block d-md-none"></div>
                             <div class="mb-5 rounded-pill btn me-auto
                             @if(isset($road_map['current']))
                                 bg-main text-white
@@ -139,11 +151,13 @@
                                     <div class="d-flex">
                                         <div class="me-2">
                                             @if($item['done'])
-{{--                                                <i class="text-main fas fa-check-circle bg-white"></i>--}}
-                                                <img src="/images/logo/icon_fill.svg" width="16"  style="max-width: unset!important;">
+                                                {{--                                                <i class="text-main fas fa-check-circle bg-white"></i>--}}
+                                                <img src="/images/logo/icon_fill.svg" width="16"
+                                                     style="max-width: unset!important;">
                                             @else
-{{--                                                <i class="text-main far fa-circle bg-white"></i>--}}
-                                                <img src="/images/logo/icon_outline.svg" width="16" style="max-width: unset!important;">
+                                                {{--                                                <i class="text-main far fa-circle bg-white"></i>--}}
+                                                <img src="/images/logo/icon_outline.svg" width="16"
+                                                     style="max-width: unset!important;">
 
                                             @endif
                                         </div>
@@ -176,37 +190,37 @@
                 @endforeach
             </div>
         </div>
-        <div class="my-5 py-5">
-            <div class="bg-main w-100 rounded-2-7 text-white text-center py-5 px-4">
-                <img class="mb-3" src="/images/logo/logo_white.svg">
-                <h3 class="mb-4">{{__('web.home.join_beta')}}</h3>
-                <div class="mb-5">{{__('web.home.join_beta_description')}}</div>
+        {{--        <div class="my-5 py-5">--}}
+        {{--            <div class="bg-main w-100 rounded-2-7 text-white text-center py-5 px-4">--}}
+        {{--                <img class="mb-3" src="/images/logo/logo_white.svg">--}}
+        {{--                <h3 class="mb-4">{{__('web.home.join_beta')}}</h3>--}}
+        {{--                <div class="mb-5">{{__('web.home.join_beta_description')}}</div>--}}
 
-                <form id="form-early-access-2">
-                    <div class="row">
-                    <div class="col-12 col-lg-10 offset-lg-1">
-                        <div class="mb-4 d-flex flex-wrap justify-content-center mx-0 px-0 mx-lg-5 px-lg-5">
-                            <input id="input-early-access-email-2" placeholder="{{__('web.placeholder.email')}}"
-                                   class="rounded mb-3 mb-md-0  inp-main flex-grow-1 border-0" type="email" style=""
-                                   required>
-                            <div class="me-3 d-none d-md-block"></div>
-                            <button
-                                class="btn btn-main px-3 py-2 text-center border-light rounded-3 flex-grow-1 flex-lg-grow-0">
-                                {{__('web.get_early_access')}}
-                            </button>
-                        </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="mx-auto rounded-2-7 " style="
-    background: #fc78191a;
-    width: 85%;
-    height: 139px;
-    margin-top: -100px;
-">
-            </div>
-        </div>
+        {{--                <form id="form-early-access-2">--}}
+        {{--                    <div class="row">--}}
+        {{--                    <div class="col-12 col-lg-10 offset-lg-1">--}}
+        {{--                        <div class="mb-4 d-flex flex-wrap justify-content-center mx-0 px-0 mx-lg-5 px-lg-5">--}}
+        {{--                            <input id="input-early-access-email-2" placeholder="{{__('web.placeholder.email')}}"--}}
+        {{--                                   class="rounded mb-3 mb-md-0  inp-main flex-grow-1 border-0" type="email" style=""--}}
+        {{--                                   required>--}}
+        {{--                            <div class="me-3 d-none d-md-block"></div>--}}
+        {{--                            <button--}}
+        {{--                                class="btn btn-main px-3 py-2 text-center border-light rounded-3 flex-grow-1 flex-lg-grow-0">--}}
+        {{--                                {{__('web.get_early_access')}}--}}
+        {{--                            </button>--}}
+        {{--                        </div>--}}
+        {{--                        </div>--}}
+        {{--                    </div>--}}
+        {{--                </form>--}}
+        {{--            </div>--}}
+        {{--            <div class="mx-auto rounded-2-7 " style="--}}
+        {{--    background: #fc78191a;--}}
+        {{--    width: 85%;--}}
+        {{--    height: 139px;--}}
+        {{--    margin-top: -100px;--}}
+        {{--">--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
     </div>
     <div class="modal fade" id="modal-register-early-access-success" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -301,14 +315,16 @@
 @section('styles')
     <style>
         .road-map-line {
-            height:1px !important;
+            height: 1px !important;
             z-index: -1;
             top: 42px;
         }
+
         .road-map-line-mobile {
 
-            width: 1px!important;
-            line-height: 1px!important; z-index: -2;
+            width: 1px !important;
+            line-height: 1px !important;
+            z-index: -2;
         }
 
         img {
