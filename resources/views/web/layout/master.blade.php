@@ -118,6 +118,15 @@
                         </div>
                         <div><a href="https://discord.gg/898xnMFXkU"><i class="fab fa-discord"></i></a></div>
                     </div>
+                    <div class="my-4 pointer d-flex align-items-center" style="max-width: 300px">
+                        <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402"  class="me-3 ">
+                            <img src="https://d1j8r0kxyu9tj8.cloudfront.net/files/1574313896PGEvFscFfP5Uoow.jpg"  class="rounded-3"/>
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=io.nekoinvest.wallet">
+
+                            <img src="https://d1j8r0kxyu9tj8.cloudfront.net/files/1574313896CQUrhMAjA0i39SM.jpg" class="rounded-3"/>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
