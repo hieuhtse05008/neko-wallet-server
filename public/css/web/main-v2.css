@@ -133,7 +133,7 @@ body{
     font-weight: 500;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    transition: opacity .5s linear;
+    transition: opacity .3s linear;
 
 }
 .design-wrap .design-item.active .design-title{

@@ -291,7 +291,7 @@
 
                children.each(function (i) {
                    const e = $(this);
-                           e.css({}).animate({top: `+=60px`}, 1500);
+                           e.css({}).animate({top: `+=60px`}, 1000);
 
 
                });
@@ -300,11 +300,11 @@
                 children.eq(2).addClass('active');
                 children.eq(3).removeClass('active');
                 wrapper.children('.design-item').last().remove();
-            }, 1500);
+            }, 1000);
 
 
         }
-        setInterval(nextDesign,3000);
+        setInterval(nextDesign,1500);
         //=============================================================================================================
         const featureCount = {{count($features)}};
 
