@@ -283,7 +283,7 @@
             const firstChild = wrapper.children('.design-left');
             newChild.insertAfter(firstChild);
             const children = wrapper.children('.design-item');
-
+            if(children.length > 6) return;
             children.each(function () {
                 const e = $(this);
                 e.css({top:'-60px'});
