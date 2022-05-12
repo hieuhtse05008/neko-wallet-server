@@ -291,7 +291,7 @@
 
                children.each(function (i) {
                    const e = $(this);
-                           e.css({}).animate({top: `+=60px`}, 1000);
+                           e.css({}).animate({top: `+=60px`}, 700);
 
 
                });
@@ -300,7 +300,7 @@
                 children.eq(2).addClass('active');
                 children.eq(3).removeClass('active');
                 wrapper.children('.design-item').last().remove();
-            }, 1000);
+            }, 700);
 
 
         }
