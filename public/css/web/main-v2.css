@@ -123,9 +123,9 @@ body{
     line-height: 28px;
 }
 
-.design-wrap .design-item{
-    transition:  background 1s ease-out;
-}
+/*.design-wrap .design-item{*/
+/*    transition:  background 1s ease-out;*/
+/*}*/
 .design-wrap .design-item .design-title{
     opacity: .5;
     background: linear-gradient(126.6deg, #ffffff1f 28.69%, #ffffff00 100%);
