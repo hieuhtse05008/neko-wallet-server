@@ -54,6 +54,7 @@ $publicLocaleRoutes = function () {
     Route::get('/cryptocurrencies', [PublicController::class, 'tokensView'])->middleware("include:cryptocurrencies")->name("cryptocurrencies");
     Route::get('/cryptocurrency/{cryptocurrency:name}', [PublicController::class, 'tokenView'])->name("cryptocurrency");
 
+    Route::get('/v2', [PublicController::class, 'homeViewV2'])->name("home-v2");
     Route::get('/', [PublicController::class, 'homeView'])->name("home");
 };
 

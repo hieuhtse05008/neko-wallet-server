@@ -6,11 +6,9 @@ namespace App\Http\Controllers;
 
 use App\Enum\Locales;
 use App\Models\Blog;
-use App\Models\Category;
 use App\Models\Cryptocurrency;
 use App\Models\CryptocurrencyInfo;
 use App\Models\EarlyAccessEmail;
-use App\Models\ExchangeGuide;
 use App\Models\Network;
 use App\Repositories\BlogRepository;
 use App\Repositories\CategoryRepository;
@@ -76,9 +74,97 @@ class PublicController extends ViewController
     }
 
 
+    public function homeViewV2(Request $request)
+    {
+        $pros = [
+            [
+                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520879213YTsl7GENrWWefg.png',
+                'title' => 'Non-Custodial',
+                'description' => 'Take full control of assets, web3 native (can connect to Web3 Daap and game)'
+            ],
+            [
+                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652087924JXoLwRosRqcAKfQ.png',
+                'title' => 'Security first',
+                'description' => 'Your keys... your assets'
+            ],
+            [
+                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652087933zHmLkZmwae7yHwe.png',
+                'title' => 'Gaming-friendly',
+                'description' => 'Manage and store your Web3 gaming assets with wisdom'
+            ],
+        ];
+
+        $features = [
+            [
+                'title' => 'Inventory',
+                'description' => 'Organize digital assets (NFT & Game tokens) by Games & Networks.',
+                'active' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088491vwA7YAsKtwnCp04.png',
+                'inactive' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088486BMO9BteGFypo2vQ.png',
+                'img'=>'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088716behmGdyaIEnfNJk.png',
+                'satellites' => [
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090229sLqrSVXhjZeNWXq.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520902525IGkEz2e6zONWtf.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520902557pR51LSADEPweXl.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090249SqAi1Y5QTR8V7s3.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090231AE2pY0gLrEzcHEk.png',
+                ]
+            ],
+            [
+                'title' => 'True Multi-chain',
+                'description' => 'Support multi-chain asset storage and transactions.',
+                'active' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088526a6nVh6C6y9EnR0y.png',
+                'inactive' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088523gfmS4kPAAY5FajU.png',
+                'img'=>'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088749deQ0TFH2ru1jRcg.png',
+                'satellites' => [
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090164yi3iejqSSlKN84i.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090167DXfN7DXpkHMowRc.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520901773eSGyq9lhjMEBgf.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090180cwrtSFkGEkRIDVQ.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090184geztbdueAjyrCfl.png',
+                ]
+            ],
+            [
+                'title' => 'Dapp Browser',
+                'description' => 'Connect/buy/sell your assets on any NFT Marketplaces.',
+                'active' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088543JPlIrLqqrN3AnMz.png',
+                'inactive' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520885416Rfbhlmeqk5N5kM.png',
+                'img'=>'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088720YUijMuUgwgKa3dY.png',
+                'satellites' => [
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520903028sNsRtLdWA0aQq6.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090304ymFnH81oky7iz8m.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090314iWLwE6XQ6Wif9h2.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090316wwPV7VdyAjiiemG.png',
+                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090319JcJeyhlzKV6z9eL.png',
+                ]
+            ],
+        ];
+        $designs = [
+            'Defi',
+            'Gaming',
+            'The Metaverse',
+            'NFTs & Collectibles',
+            'Exchanges',
+        ];
+        $partners = [
+            'http://d1j8r0kxyu9tj8.cloudfront.net/files/16523280644zZhS9SFPMFsNnn.png',
+            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328067cOlcQFRtgoaycAv.png',
+            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328079faSz7y7McKc4wHm.png',
+            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328082JYQSj8g1nbtm3nj.png',
+            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328096ne8iZeDjFcU7yv7.png',
+            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328099TBP4vByNvAJ6O5s.png',
+            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328105bp1CHSlNsqYcGb7.png',
+        ];
+        return $this->view('web.home.home-v2', [
+            'pros' => $pros,
+            'features' => $features,
+            'designs' => $designs,
+            'partners' => $partners,
+        ]);
+    }
+
     public function homeView(Request $request)
     {
-//        dd($request->all());
+
         $networks = Network::whereIn('id', [1, 2, 4])->get();
         $features = [
             [
@@ -277,7 +363,7 @@ class PublicController extends ViewController
         ];
 
         $this->blogRepository->skipPresenter(true);
-        $blogs = $this->blogRepository->orderBy('created_at','desc')->list(48, $filter);
+        $blogs = $this->blogRepository->orderBy('created_at', 'desc')->list(48, $filter);
 
         return $this->view('web.blog.blogs', [
             'blogs' => $blogs,
@@ -312,6 +398,7 @@ class PublicController extends ViewController
 
         return $this->view('web.login.login');
     }
+
     public function nftView()
     {
 

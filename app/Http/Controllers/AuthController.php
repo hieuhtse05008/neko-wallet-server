@@ -27,17 +27,15 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-//dd($credentials);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $token = $request->user()->createToken('authToken')->plainTextToken;
             $request->user()->withAccessToken($token);
-//            dd($token);
+
 
             return redirect()->intended('/');
 
         }
-
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
