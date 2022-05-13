@@ -94,8 +94,8 @@
             </ul>
             <form class="d-flex">
                 <div class="ms-auto d-flex">
-                    <div class="dropdown">
-                        <div class="btn btn-sm rounded btn-main py-2 px-3 dropdown-toggle me-2" type="button"
+                    <div class="dropdown ">
+                        <div class="btn btn-sm rounded btn-main py-2 px-3 dropdown-toggle me-2 text-white" type="button"
                              id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ strtoupper($locale) }}
                         </div>
