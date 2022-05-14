@@ -100,7 +100,8 @@ class PublicController extends ViewController
                 'description' => 'Organize digital assets (NFT & Game tokens) by Games & Networks.',
                 'active' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088491vwA7YAsKtwnCp04.png',
                 'inactive' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088486BMO9BteGFypo2vQ.png',
-                'img'=>'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088716behmGdyaIEnfNJk.png',
+
+                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088716behmGdyaIEnfNJk.png',
                 'satellites' => [
                     'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090229sLqrSVXhjZeNWXq.png',
                     'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520902525IGkEz2e6zONWtf.png',
@@ -114,7 +115,7 @@ class PublicController extends ViewController
                 'description' => 'Support multi-chain asset storage and transactions.',
                 'active' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088526a6nVh6C6y9EnR0y.png',
                 'inactive' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088523gfmS4kPAAY5FajU.png',
-                'img'=>'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088749deQ0TFH2ru1jRcg.png',
+                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088749deQ0TFH2ru1jRcg.png',
                 'satellites' => [
                     'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090164yi3iejqSSlKN84i.png',
                     'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090167DXfN7DXpkHMowRc.png',
@@ -128,7 +129,7 @@ class PublicController extends ViewController
                 'description' => 'Connect/buy/sell your assets on any NFT Marketplaces.',
                 'active' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088543JPlIrLqqrN3AnMz.png',
                 'inactive' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520885416Rfbhlmeqk5N5kM.png',
-                'img'=>'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088720YUijMuUgwgKa3dY.png',
+                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088720YUijMuUgwgKa3dY.png',
                 'satellites' => [
                     'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520903028sNsRtLdWA0aQq6.png',
                     'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090304ymFnH81oky7iz8m.png',
@@ -148,11 +149,11 @@ class PublicController extends ViewController
         $partners = [
             'http://d1j8r0kxyu9tj8.cloudfront.net/files/16523280644zZhS9SFPMFsNnn.png',
             'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328067cOlcQFRtgoaycAv.png',
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328079faSz7y7McKc4wHm.png',
+            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652501189NUbetyvuaINNr7i.png',
             'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328082JYQSj8g1nbtm3nj.png',
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328096ne8iZeDjFcU7yv7.png',
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328099TBP4vByNvAJ6O5s.png',
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328105bp1CHSlNsqYcGb7.png',
+            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652501192lywVdOyQdbLG8bE.png',
+            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652501207UKGbVqfK3jdK2z9.png',
+
         ];
         return $this->view('web.home.home-v2', [
             'pros' => $pros,
@@ -399,9 +400,14 @@ class PublicController extends ViewController
         return $this->view('web.login.login');
     }
 
-    public function nftView()
+//    public function nftView()
+//    {
+//
+//        return $this->view('web.nft.index');
+//    }
+    public function download()
     {
 
-        return $this->view('web.nft.index');
+        return $this->view('web.download');
     }
 }

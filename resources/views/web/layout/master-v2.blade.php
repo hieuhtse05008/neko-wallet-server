@@ -13,10 +13,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="/images/logo/neko-logo-orange.png">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/web/main-v2.css?123">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet">
-{{--    <style>--}}
-{{--        @import "/css/fontawesome/fontawesome.css";--}}
-{{--    </style>--}}
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap"
+          rel="stylesheet">
+    <style>
+        @import "/css/fontawesome/fontawesome.css";
+    </style>
     @yield('styles')
 
     <script>
@@ -36,10 +37,10 @@
         };
         window.addEventListener('scroll', function () {
             var scrolled = window.pageYOffset;
-            const levels = [1,2,3,4,5];
-            levels.forEach(level=>{
+            const levels = [1, 2, 3, 4, 5];
+            levels.forEach(level => {
                 try {
-                    [...document.querySelectorAll(`.scroll-vertical-up-${level}`)].forEach(e=>{
+                    [...document.querySelectorAll(`.scroll-vertical-up-${level}`)].forEach(e => {
                         trans(e, -0.1 * level);
                     });
                 } catch (error) {
@@ -60,14 +61,15 @@
             <img width="42" src="/images/no_padding_light.png" alt="">
 
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-white">
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link active" aria-current="page" href="#">Home</a>--}}
-{{--                </li>--}}
+                {{--                <li class="nav-item">--}}
+                {{--                    <a class="nav-link active" aria-current="page" href="#">Home</a>--}}
+                {{--                </li>--}}
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Overview</a>
                 </li>
@@ -77,27 +79,26 @@
                 <li class="nav-item">
                     <a class="nav-link " href="#">Support</a>
                 </li>
-{{--                <li class="nav-item dropdown">--}}
-{{--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--}}
-{{--                        Dropdown--}}
-{{--                    </a>--}}
-{{--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-{{--                        <li><a class="dropdown-item" href="#">Action</a></li>--}}
-{{--                        <li><a class="dropdown-item" href="#">Another action</a></li>--}}
-{{--                        <li><hr class="dropdown-divider"></li>--}}
-{{--                        <li><a class="dropdown-item" href="#">Something else here</a></li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--}}
-{{--                </li>--}}
+                {{--                <li class="nav-item dropdown">--}}
+                {{--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--}}
+                {{--                        Dropdown--}}
+                {{--                    </a>--}}
+                {{--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+                {{--                        <li><a class="dropdown-item" href="#">Action</a></li>--}}
+                {{--                        <li><a class="dropdown-item" href="#">Another action</a></li>--}}
+                {{--                        <li><hr class="dropdown-divider"></li>--}}
+                {{--                        <li><a class="dropdown-item" href="#">Something else here</a></li>--}}
+                {{--                    </ul>--}}
+                {{--                </li>--}}
+                {{--                <li class="nav-item">--}}
+                {{--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--}}
+                {{--                </li>--}}
             </ul>
-            <form class="d-flex">
-                <div class="ms-auto d-flex">
+            <form class="d-block d-sm-flex">
+                <div class="ms-auto d-flex mb-2 mb-sm-">
                     <div class="dropdown ">
-                        <div class="btn btn-sm rounded btn-main py-2 px-3 dropdown-toggle me-2 text-white" type="button"
-                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ strtoupper($locale) }}
+                        <div class="btn btn-sm rounded btn-main py-2 px-3 dropdown-toggle me-2 text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            EN
                         </div>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             @foreach($locales as $lang)
@@ -112,13 +113,16 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="pointer d-flex align-items-center" style="max-width: 300px">
-                        <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402"  class="me-3 ">
-                            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070264oTiwuzsFfBW5v82.png"  class="rounded-3"/>
+                    </div>
+                <div class="ms-auto d-flex">
+
+                <div class="pointer d-flex align-items-center" style="max-width: 300px">
+                        <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402" class="me-3 ">
+                            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070264oTiwuzsFfBW5v82.png" class="rounded-3">
                         </a>
                         <a href="https://play.google.com/store/apps/details?id=io.nekoinvest.wallet">
 
-                            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070268QfV4rizJ5hzOb8s.png" class="rounded-3"/>
+                            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070268QfV4rizJ5hzOb8s.png" class="rounded-3">
                         </a>
                     </div>
                 </div>
@@ -131,55 +135,72 @@
 
 @yield('content')
 <footer
-{{--    class="border-top border-gray"--}}
+    {{--    class="border-top border-gray"--}}
 >
     <hr class="m-0">
     <div class="container-md">
-            <div class="row">
-                <div class="col-md-3 p-5">
-                    <a href="/">
-                        <img width="42" src="/images/no_padding_light.png" alt="">
-                    </a>
-                </div>
+        <div class="row">
+            <div class="col-md-2 col-12 p-5 text-center text-sm-start">
+                <a href="/">
+                    <img width="42" src="/images/no_padding_light.png" alt="">
+                </a>
+            </div>
+            <div class="col-md-3 col-12 p-5 pt-0 pt-sm-5 text-gray text-center text-sm-start">
+                <div class="mb-3"><a href="#">About us</a></div>
 
-                <div class="col-md-3 col-6 p-5 text-gray border-end border-gray">
-                    <div class="mb-3"><a href="{{route('home')}}">{{__('web.homepage')}}</a></div>
-                    <div class="mb-3"><a href="{{route('blogs')}}">{{__('web.blog')}}</a></div>
-                    <div class="mb-3"><a href="{{route('home')}}">{{__('web.homepage')}}</a></div>
-                    <div class="mb-3"><a href="{{route('blogs')}}">{{__('web.blog')}}</a></div>
-                    <div class="mb-3"><a href="{{route('home')}}">{{__('web.homepage')}}</a></div>
-                    <div class="mb-3"><a href="{{route('blogs')}}">{{__('web.blog')}}</a></div>
-                    <div class="mb-sm-0">
-                        <a target="_blank" href="https://docs.nekoinvest.io/" class="pointer">
-                            Litepaper
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6 p-5 text-gray border-end border-gray">
-                    <div class="mb-3"><a href="{{route('cryptocurrencies')}}">{{__('web.how_to_buy')}}</a></div>
-                    <div class="mb-3"><a>Brand assets</a></div>
-                    <div class="mb-sm-0"><a class="pointer" data-bs-toggle="modal"
-                                            data-bs-target="#modal-check-my-spot">Check my spot</a></div>
-                </div>
-                <div class="text-gray p-5 col-md-3">
-                    <div class="d-flex">
-                        <div class="me-5"><a href="https://twitter.com/Neko_Invest"><i class="fab fa-twitter"></i></a>
-                        </div>
-                        <div class="me-5"><a href="https://t.me/nekoinvest"><i class="fab fa-telegram-plane"></i></a>
-                        </div>
-                        <div><a href="https://discord.gg/898xnMFXkU"><i class="fab fa-discord"></i></a></div>
-                    </div>
+                <div class="mb-3"><a href="{{route('blogs')}}">Learn</a></div>
+                <div class="mb-3"><a href="#">Support</a></div>
+                <div class="mb-3"><a href="#">Terms of Service</a></div>
+                <div class="mb-3"><a href="#">Privacy Policy</a></div>
+                {{--                    <div class="mb-sm-0">--}}
+                {{--                        <a target="_blank" href="https://docs.nekoinvest.io/" class="pointer">--}}
+                {{--                            Litepaper--}}
+                {{--                        </a>--}}
+                {{--                    </div>--}}
+            </div>
+            <div class="border-end border-gray col-auto p-0"></div>
 
+            <div class="col-md-3 col-12 p-5 px-0 px-sm-5 text-white text-center text-sm-start">
+                <h5 class="mb-4">
+                    Join us on
+                </h5>
+                <div class="d-flex justify-content-between d-sm-block">
+                    <div class="mb-3">
+                        <a href="https://twitter.com/Neko_Invest"><i
+                                class="fab fa-twitter bg-white me-2 p-2 rounded-circle text-dark"></i> Twitter</a>
+                    </div>
+                    <div class="mb-3">
+                        <a href="https://t.me/nekoinvest"><i
+                                class="fab fa-telegram-plane bg-white me-2 p-2 rounded-circle text-dark"></i> Telegram</a>
+                    </div>
+                    <div class="mb-3">
+                        <a href="https://discord.gg/898xnMFXkU"><i
+                                class="fab fa-discord bg-white me-2 p-2 rounded-circle text-dark"></i> Discord</a>
+                    </div>
                 </div>
 
             </div>
+            <div class="border-end border-gray col-auto p-0"></div>
+
+            <div class="p-5 col-md-3 col-12 text-center text-sm-start ">
+                <h5 class="mb-4 tex">For partnership</h5>
+                <div class="mb-1">Contact us</div>
+                <div class="mb-3"><a href="mailto:info@nekowallet.io">info@nekowallet.io</a></div>
+            </div>
+        </div>
 
     </div>
     <hr class="m-0">
     <div class="container-md">
-        <div class="d-flex justify-content-between align-items-center py-4">
-            <div>Copyright © 2022 Neko Global. All rights reserved.</div>
-            <div>Copyright © 2022 Neko Global. All rights reserved.</div>
+        <div class="d-flex justify-content-between align-items-center flex-column flex-sm-row py-4">
+            <div class="text-gray text-center text-gray text-sm-start">Copyright © 2022 Neko Global. <br class="d-block d-sm-none"> All rights reserved.</div>
+            <div class="mt-3 d-block d-sm-none"></div>
+            <div onclick="document.body.scrollTop = 0;document.documentElement.scrollTop = 0;"
+                 class="d-flex align-items-center pointer text-gray justify-content-center">
+                Back to top
+                <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652501566cOmWW7pIToQR1ik.png" height="32"
+                     width="32" class="ms-2">
+            </div>
         </div>
     </div>
 </footer>

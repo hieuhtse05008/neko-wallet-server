@@ -42,7 +42,8 @@ Route::group(["prefix" => 'mobile'], function () {
     Route::get('/cryptocurrency/{cryptocurrency:id}', [PublicController::class, 'cryptocurrencyMobileView']);
 });
 Route::get('/test', [PublicController::class, 'test']);
-Route::get('/pages/nft', [PublicController::class, 'nftView']);
+//Route::get('/pages/nft', [PublicController::class, 'nftView']);
+Route::get('/download', [PublicController::class, 'download']);
 
 $publicLocaleRoutes = function () {
 

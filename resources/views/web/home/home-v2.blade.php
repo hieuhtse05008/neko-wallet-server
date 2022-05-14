@@ -32,13 +32,15 @@
                     <div class="d-flex justify-content-end">
                         <h2 class="pe-5 pt-5 text-center">
                             <div>for Web 3 Gaming experience</div>
-                            <div class="btn btn-warning text-white mt-5" style="
+                            <a class="btn btn-warning text-white mt-5"
+                               href="http://onelink.to/neko-wallet"
+                               style="
                padding: 19px 64px;
                background: linear-gradient(200.42deg, #FCA24F 13.57%, #B8681E 98.35%);
                border-radius: 3px;
                font-size: 24px; font-weight: 500;
          ">Download Neko now
-                            </div>
+                            </a>
                         </h2>
 
                     </div>
@@ -120,8 +122,8 @@ width: 90%;
                             >
                                 <div class="satellite" style="
 
-                                    left: {{($key2 % 3 ) * 50/2 + 50 }}px;
-                                    top: {{($key2 % 3 ) * 50/2 + 50 }}px;
+                                    left: {{($key2 % 3 ) * 50/2 + 75 }}px;
+                                    top: {{($key2 % 3 ) * 50/2 + 75 }}px;
                                     animation-delay: -{{$key2*(90/5)}}s;
 
                                     "
@@ -171,14 +173,16 @@ width: 90%;
     {{--mobile--}}
     <div class="d-flex d-sm-none">
         @foreach($features as $key=>$feature)
-            <div class="{{$key >0 ? 'd-none' : ''}} position-relative visible overflow-hidden d-flex align-items-center justify-content-center d-none-transition"
-                 id="feature-left-mobile-{{$key}}"
-                 style="    height: 135vw;    width: 100vw;    ">
+            <div
+                class="{{$key >0 ? 'd-none' : ''}} position-relative visible overflow-hidden d-flex align-items-center justify-content-center d-none-transition"
+                id="feature-left-mobile-{{$key}}"
+                style="    height: 135vw;    width: 100vw;    ">
                 <img class="img position-absolute"
                      src="{{$feature['img']}}"
                      style="width: 100vw;height: auto;z-index: 1;"
                 >
                 @foreach($feature['satellites'] as $key2=>$satellite)
+
                     <div class="planet"
                          style="animation-delay: -{{$key2*(90/5)}}s; "
                     >
@@ -199,7 +203,8 @@ width: 90%;
             </div>
         @endforeach
     </div>
-    <div id="mobileCarousel" class="d-block d-sm-none carousel slide mt-5 pt-5" data-bs-ride="carousel">
+    <div id="mobileCarousel" class="d-block d-sm-none carousel slide mt-5 pt-5" data-bs-ride="carousel"
+         style="height: 180px;">
         <div class="carousel-inner">
             @foreach($features as $key=>$feature)
                 <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
@@ -226,9 +231,10 @@ width: 90%;
 
         </div>
         <div class="carousel-indicators position-static mt-4">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#mobileCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#mobileCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#mobileCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
 
     </div>
@@ -264,7 +270,7 @@ width: 90%;
             <div class="col-1 d-none d-sm-block"></div>
             <div class="col-1 d-none d-sm-block"></div>
 
-            <div class="col-12 col-sm-5">
+            <div class="col-12 col-sm-5 order-1 order-md-0">
                 <div class="rounded h-100 card-gray">
                     <div class="d-flex flex-column h-100 rounded"
                          style=" background-image: url(http://d1j8r0kxyu9tj8.cloudfront.net/files/1652159538aNEQZqlkXFlwKSd.png); background-repeat: no-repeat; background-size: contain; background-position-x: center; background-position-y: bottom;">
@@ -276,9 +282,15 @@ width: 90%;
                             </div>
                         </div>
                         <div class="d-flex h-100">
-                            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652159536v6MdJWJLf4BjPMK.png"
-                                 class="mt-auto mx-auto"
-                                 style="width: 100%;image-rendering: -webkit-optimize-contrast;">
+<div class="mt-auto mx-auto d-flex"
+     style="width: 100%;image-rendering: -webkit-optimize-contrast;">
+
+                            {!! file_get_contents("http://d1j8r0kxyu9tj8.cloudfront.net/files/1652519145FMUyNHfarKrTfXa.svg") !!}
+</div>
+
+{{--                            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652159536v6MdJWJLf4BjPMK.png"--}}
+{{--                                 class="mt-auto mx-auto"--}}
+{{--                                 style="width: 100%;image-rendering: -webkit-optimize-contrast;">--}}
                         </div>
                     </div>
                 </div>
@@ -292,30 +304,30 @@ width: 90%;
                     >
 
                         <div class="p-4 ">
-                            <h4 class="text-main pb-2">Best price execution on the market </h4>
-                            <div class="text-gray">Stay informed of trend and vast investment opportunities on field.
-                            </div>
+                            <h4 class="text-main pb-2">Multi-wallet management </h4>
+                            <div class="text-gray">Toggle seamlessly between your different wallets in one click.</div>
                         </div>
 
                         <div class="pt-5 mt-5">
                             <img class="invisible"
-                                 src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652157843kHC6bXGrqW8UMVQ.png">
+                                 src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652500425BpJYOYBoImjpzfd.png">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         {{--===========================================================================================================================================================================================================--}}
-        <div style="margin-top: 200px;"></div>
+        <div class="d-none d-sm-flex" style="margin-top: 200px;"></div>
+        <div class="d-flex d-sm-none" style="margin-top: 50px;"></div>
         <div class="row">
-            <div class="col-12 col-sm-5">
+            <div class="col-12 col-sm-5 overflow-hidden d-flex">
 
                 <div class="design-wrap d-flex design-wrap flex-column position-relative" id="designs"
-                     style="height: 300px; overflow: hidden;">
+                     style="">
                     <div class="d-flex align-items-center design-left" id="design-left"
                          style="    position: absolute;top: 135px;">
                         Designed for
-                        <div class="needle mx-4"></div>
+                        <div class="needle mx-3 mx-sm-4"></div>
                     </div>
                     @foreach($designs as $key=>$design)
                         <div
@@ -325,7 +337,7 @@ width: 90%;
 
                             <div class="d-flex align-items-center design-left invisible">
                                 Designed for
-                                <div class="needle mx-4"></div>
+                                <div class="needle  mx-3 mx-sm-4"></div>
                             </div>
                             <div class="design-title ">
                                 <div class="design-title-mask">{{$design}}</div>
@@ -338,10 +350,10 @@ width: 90%;
             <div class="col-1 d-none d-sm-block"></div>
             <div class="col-12 col-sm-6">
                 <div class="py-5">
-                    <h1 class="text-center text-sm-end">Ready to use the ultimate <br> Metaverse Wallet?</h1>
+                    <h1 class="text-center text-sm-end">Ready to use the ultimate <br class="d-none d-sm-block"> Metaverse Wallet?</h1>
                     <div class="my-5"></div>
-                    <div class="pointer d-flex align-items-center justify-content-end">
-                        <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402" class="me-3 ">
+                    <div class="pointer d-flex align-items-center justify-content-sm-end justify-content-center">
+                        <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402" class="me-3">
                             <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070264oTiwuzsFfBW5v82.png"
                                  class="rounded-3"/>
                         </a>
@@ -356,18 +368,26 @@ width: 90%;
         </div>
         {{--===========================================================================================================================================================================================================--}}
         <div style="margin-top: 200px;"></div>
+        <div class="align-items-center d-sm-flex justify-content-between d-none">
+            @foreach($partners as $partner)
+                <div>
+                    <img src="{{$partner}}">
+                </div>
+            @endforeach
+        </div>
+        <div class="align-items-center d-flex justify-content-between w-100 d-sm-none py-3" style="overflow-x: scroll; overflow-y:hidden; ">
+            @foreach($partners as $partner)
+                <div class="me-5">
+                    <img src="{{$partner}}">
+                </div>
+            @endforeach
+        </div>
+        <div style="margin-top: 100px;" class="py-0 py-sm-5"></div>
 
     </div>
 
 
-    <div class="align-items-center d-sm-flex justify-content-around d-none">
-        @foreach($partners as $partner)
-            <div>
-                <img src="{{$partner}}">
-            </div>
-        @endforeach
-    </div>
-    <div style="margin-top: 200px;"></div>
+
 
 @endsection
 @push('scripts')
@@ -438,3 +458,4 @@ width: 90%;
 @endpush
 @section('styles')
 @endsection
+
