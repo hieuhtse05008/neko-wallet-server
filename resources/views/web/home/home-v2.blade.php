@@ -281,16 +281,16 @@ width: 90%;
                                 investment.
                             </div>
                         </div>
-                        <div class="d-flex h-100">
-<div class="mt-auto mx-auto d-flex"
-     style="width: 100%;image-rendering: -webkit-optimize-contrast;">
+                        <div class="d-block d-sm-flex h-100">
+                            <div class="mt-auto mx-auto d-flex"
+                                 style="image-rendering: -webkit-optimize-contrast;">
 
-                            {!! file_get_contents("http://d1j8r0kxyu9tj8.cloudfront.net/files/1652519145FMUyNHfarKrTfXa.svg") !!}
-</div>
+                                {!! file_get_contents("http://d1j8r0kxyu9tj8.cloudfront.net/files/1652519145FMUyNHfarKrTfXa.svg") !!}
+                            </div>
 
-{{--                            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652159536v6MdJWJLf4BjPMK.png"--}}
-{{--                                 class="mt-auto mx-auto"--}}
-{{--                                 style="width: 100%;image-rendering: -webkit-optimize-contrast;">--}}
+                            {{--                            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652159536v6MdJWJLf4BjPMK.png"--}}
+                            {{--                                 class="mt-auto mx-auto"--}}
+                            {{--                                 style="width: 100%;image-rendering: -webkit-optimize-contrast;">--}}
                         </div>
                     </div>
                 </div>
@@ -350,7 +350,8 @@ width: 90%;
             <div class="col-1 d-none d-sm-block"></div>
             <div class="col-12 col-sm-6">
                 <div class="py-5">
-                    <h1 class="text-center text-sm-end">Ready to use the ultimate <br class="d-none d-sm-block"> Metaverse Wallet?</h1>
+                    <h1 class="text-center text-sm-end">Ready to use the ultimate <br class="d-none d-sm-block">
+                        Metaverse Wallet?</h1>
                     <div class="my-5"></div>
                     <div class="pointer d-flex align-items-center justify-content-sm-end justify-content-center">
                         <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402" class="me-3">
@@ -375,7 +376,8 @@ width: 90%;
                 </div>
             @endforeach
         </div>
-        <div class="align-items-center d-flex justify-content-between w-100 d-sm-none py-3" style="overflow-x: scroll; overflow-y:hidden; ">
+        <div class="align-items-center d-flex justify-content-between w-100 d-sm-none py-3"
+             style="overflow-x: scroll; overflow-y:hidden; ">
             @foreach($partners as $partner)
                 <div class="me-5">
                     <img src="{{$partner}}">
