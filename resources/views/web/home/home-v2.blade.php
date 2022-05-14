@@ -300,7 +300,7 @@ width: 90%;
                      style="background: linear-gradient(200.42deg, rgba(252, 162, 79, 0.24) 13.57%, rgba(184, 104, 30, 0.12) 98.35%);border: 1px solid rgba(255, 255, 255, 0.07);border-radius: 3px;"
                 >
                     <div class="rounded h-100"
-                         style=" background-image: url(http://d1j8r0kxyu9tj8.cloudfront.net/files/1652157843kHC6bXGrqW8UMVQ.png); background-repeat: no-repeat; background-position-x: center; background-position-y: bottom;"
+                         style=" background-image: url(http://d1j8r0kxyu9tj8.cloudfront.net/files/1652523684k0MkHTZlcQFMXuL.png); background-repeat: no-repeat; background-position-x: center; background-position-y: bottom;"
                     >
 
                         <div class="p-4 ">
@@ -310,7 +310,7 @@ width: 90%;
 
                         <div class="pt-5 mt-5">
                             <img class="invisible"
-                                 src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652500425BpJYOYBoImjpzfd.png">
+                                 src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652523684k0MkHTZlcQFMXuL.png">
                         </div>
                     </div>
                 </div>

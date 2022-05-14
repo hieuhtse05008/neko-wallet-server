@@ -101,7 +101,7 @@ class PublicController extends ViewController
                 'active' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088491vwA7YAsKtwnCp04.png',
                 'inactive' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088486BMO9BteGFypo2vQ.png',
 
-                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088716behmGdyaIEnfNJk.png',
+                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652523642eoKGB3iRas4yZYW.png',
                 'satellites' => [
                     'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090229sLqrSVXhjZeNWXq.png',
                     'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520902525IGkEz2e6zONWtf.png',
