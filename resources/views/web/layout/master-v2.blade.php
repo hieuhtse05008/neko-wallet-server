@@ -143,7 +143,7 @@
         <div class="row">
             <div class="col-md-2 col-12 p-5 text-center text-sm-start">
                 <a href="/">
-                    <img width="42" src="/images/no_padding_light.png" alt="">
+                    <img width="42" height="42" src="/images/no_padding_light.png" alt="">
                 </a>
             </div>
             <div class="col-md-3 col-12 p-5 pt-0 pt-sm-5 text-gray text-center text-sm-start">
@@ -206,7 +206,6 @@
     </div>
 </footer>
 
-<script src="/js/vue.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/axios.js"></script>
 <script src="/js/jquery.min.js"></script>

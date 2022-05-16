@@ -61,6 +61,7 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="/js/vue.js"></script>
     <script>
         const faq = new Vue({
             el: '#faq',
