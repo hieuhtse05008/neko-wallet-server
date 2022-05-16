@@ -71,14 +71,14 @@
                 {{--                <li class="nav-item">--}}
                 {{--                    <a class="nav-link active" aria-current="page" href="#">Home</a>--}}
                 {{--                </li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link active" href="#">Overview</a>--}}
+{{--                </li>--}}
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Overview</a>
+                    <a class="nav-link active" href="{{route('blogs')}}">Learn</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">Learn</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="#">Support</a>
+                    <a class="nav-link active" href="{{route('faqs')}}">Support</a>
                 </li>
                 {{--                <li class="nav-item dropdown">--}}
                 {{--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--}}
@@ -150,7 +150,7 @@
                 <div class="mb-3"><a href="#">About us</a></div>
 
                 <div class="mb-3"><a href="{{route('blogs')}}">Learn</a></div>
-                <div class="mb-3"><a href="/faqs">Support</a></div>
+                <div class="mb-3"><a href="{{route('faqs')}}">Support</a></div>
                 <div class="mb-3"><a href="/terms-of-service">Terms of Service</a></div>
                 <div class="mb-3"><a href="/privacy-policy">Privacy Policy</a></div>
                 {{--                    <div class="mb-sm-0">--}}
