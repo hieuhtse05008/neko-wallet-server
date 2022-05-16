@@ -19,7 +19,7 @@
         <div class="container my-5 d-none-transition" v-if="!toggleQuestion">
             <h1>How can we help you?</h1>
         </div>
-        <div class="container mb-5 pb-5" v-if="!toggleQuestion">
+        <div class="container d-none-transition" v-if="!toggleQuestion">
             <div class="d-flex mb-3">
                 <div class="">
                     <h4 class=" d-none-transition">Frequently asked questions</h4>
@@ -50,15 +50,23 @@
                 </p>
                 <div class="mt-5">
                     <h5 class="mb-3">Related articles</h5>
+                    <ul>
+                        <li v-for="item in relatedQuestions" class="pointer py-1" @click="showQuestion(item)">
+                            @{{ item['question'] }}
+                        </li>
+                    </ul>
 
-                    <div v-for="item in relatedQuestions" class="pointer" @click="showQuestion(item)">
-                        @{{ item['question'] }}
-                    </div>
                 </div>
             </div>
         </div>
+        <div class="container my-5 pb-5">
+            <h4>Can’t find what you’re looking for?</h4>
+            <div class="my-4"></div>
+            <a class="border border-white rounded px-3 py-2" href="mailto:info@nekowallet.io">Contact us: info@nekowallet.io</a>
+
+        </div>
     </section>
-    </div>
+
 @endsection
 @push('scripts')
     <script src="/js/vue.js"></script>
