@@ -5,6 +5,7 @@
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     @yield("meta")
+
     <title>Neko Wallet</title>
 
     <meta name="description" content="">
@@ -12,7 +13,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/images/logo/neko-logo-orange.png">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/web/main-v2.css?123">
+    <link rel="stylesheet" href="/css/web/main-v2.css?1233">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap"
           rel="stylesheet">
     <style>
@@ -95,7 +96,7 @@
                 {{--                </li>--}}
             </ul>
             <form class="d-block d-sm-flex">
-                <div class="ms-auto d-flex mb-2 mb-sm-">
+                <div class="ms-auto d-flex mb-2 mb-sm-0">
                     <div class="dropdown ">
                         <div class="btn btn-sm rounded btn-main py-2 px-3 dropdown-toggle me-2 text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             EN
@@ -149,9 +150,9 @@
                 <div class="mb-3"><a href="#">About us</a></div>
 
                 <div class="mb-3"><a href="{{route('blogs')}}">Learn</a></div>
-                <div class="mb-3"><a href="#">Support</a></div>
-                <div class="mb-3"><a href="#">Terms of Service</a></div>
-                <div class="mb-3"><a href="#">Privacy Policy</a></div>
+                <div class="mb-3"><a href="/faqs">Support</a></div>
+                <div class="mb-3"><a href="/terms-of-service">Terms of Service</a></div>
+                <div class="mb-3"><a href="/privacy-policy">Privacy Policy</a></div>
                 {{--                    <div class="mb-sm-0">--}}
                 {{--                        <a target="_blank" href="https://docs.nekoinvest.io/" class="pointer">--}}
                 {{--                            Litepaper--}}

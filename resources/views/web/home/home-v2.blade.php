@@ -459,5 +459,13 @@ width: 90%;
     </script>
 @endpush
 @section('styles')
+    <style>
+        body{
+            background: url("http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070666CoBNfjPfA1fkcum.png") top/cover;
+            min-height: 4659px;
+
+        }
+    </style>
 @endsection
+
 

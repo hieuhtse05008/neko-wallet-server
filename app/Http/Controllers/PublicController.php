@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Enum\FAQs;
 use App\Enum\Locales;
 use App\Models\Blog;
 use App\Models\Cryptocurrency;
@@ -354,6 +355,15 @@ class PublicController extends ViewController
     public function privacyPolicyView()
     {
         return $this->view('web.privacy_policy');
+    }
+
+
+    public function faqsView()
+    {
+
+        return $this->view('web.faqs',[
+            'questions'=>FAQs::items
+        ]);
     }
 
 

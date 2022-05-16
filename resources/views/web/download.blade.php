@@ -1,4 +1,4 @@
-@extends('web.layout.master-v2')
+@extends('web.layout.home-v2')
 
 @section('content')
     <div class="d-flex" style="height: 60vh;">
