@@ -466,7 +466,7 @@ width: 90%;
 @section('styles')
     <style>
         body {
-            background: url("http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070666CoBNfjPfA1fkcum.png") top/cover;
+            /*background: url("http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070666CoBNfjPfA1fkcum.png") top/cover;*/
             /*background: url("http://d1j8r0kxyu9tj8.cloudfront.net/files/1652684275vmAwY81bOKIe7Ck.svg") top/cover;*/
 
 
