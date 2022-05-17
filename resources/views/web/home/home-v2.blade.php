@@ -120,7 +120,7 @@
                                     "
 
                                 >
-                                    <img loading="lazy" src="{{$satellite}}">
+                                    <img  src="{{$satellite}}">
 
                                 </div>
                             </div>
@@ -186,7 +186,7 @@
                             "
 
                         >
-                            <img loading="lazy" src="{{$satellite}}">
+                            <img  src="{{$satellite}}">
 
                         </div>
                     </div>
@@ -199,7 +199,9 @@
         <div class="carousel-inner">
             @foreach($features as $key=>$feature)
                 <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
-                    <div class="pointer px-3" onclick="activeFeature({{$key}})">
+                    <div class="pointer px-3"
+                         onclick="activeFeature({{$key}})"
+                    >
 
                         <div class="d-flex">
                             <img loading="lazy" src="{{$feature['active']}}" width="58" height="58"
@@ -393,8 +395,8 @@
         const mobileCarousel = document.querySelector('#mobileCarousel')
 
         mobileCarousel.addEventListener('slide.bs.carousel', function (e) {
-            $(`#feature-left-mobile-${e.from}`).addClass('d-none');
-            $(`#feature-left-mobile-${e.to}`).removeClass('d-none');
+            // $(`#feature-left-mobile-${e.from}`).addClass('d-none');
+            // $(`#feature-left-mobile-${e.to}`).removeClass('d-none');
         })
         //=============================================================================================================
         const _designs = {!! collect($designs) !!};
