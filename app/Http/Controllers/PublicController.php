@@ -372,7 +372,7 @@ class PublicController extends ViewController
         $filter = [
             'search' => $request->search,
             'blog_group'=>[
-                'type' => 'category',
+                'type' => 'kind',
                 'ids' =>[2]
             ],
         ];
