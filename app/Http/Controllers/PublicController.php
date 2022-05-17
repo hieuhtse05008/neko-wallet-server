@@ -43,9 +43,9 @@ class PublicController extends ViewController
     public function test()
     {
         return [
-            'ok' => file_exists('https://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
-            'ok2' => getimagesize('https://nekoinvest.io/images/home/protect.png'),
-            'ok3' => getimagesize('https://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
+            'ok' => file_exists('httpss://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
+            'ok2' => getimagesize('httpss://nekoinvest.io/images/home/protect.png'),
+            'ok3' => getimagesize('httpss://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
         ];
     }
 
@@ -79,17 +79,17 @@ class PublicController extends ViewController
     {
         $pros = [
             [
-                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520879213YTsl7GENrWWefg.png',
+                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/16520879213YTsl7GENrWWefg.png',
                 'title' => 'Non-Custodial',
                 'description' => 'Take full control of assets, web3 native (can connect to Web3 Daap and game)'
             ],
             [
-                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652087924JXoLwRosRqcAKfQ.png',
+                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652087924JXoLwRosRqcAKfQ.png',
                 'title' => 'Security first',
                 'description' => 'Your keys... your assets'
             ],
             [
-                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652087933zHmLkZmwae7yHwe.png',
+                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652087933zHmLkZmwae7yHwe.png',
                 'title' => 'Gaming-friendly',
                 'description' => 'Manage and store your Web3 gaming assets with wisdom'
             ],
@@ -99,44 +99,46 @@ class PublicController extends ViewController
             [
                 'title' => 'Inventory',
                 'description' => 'Organize digital assets (NFT & Game tokens) by Games & Networks.',
-                'active' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088491vwA7YAsKtwnCp04.png',
-                'inactive' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088486BMO9BteGFypo2vQ.png',
+                'active' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088491vwA7YAsKtwnCp04.png',
+                'inactive' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088486BMO9BteGFypo2vQ.png',
 
-                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652523642eoKGB3iRas4yZYW.png',
+                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652523642eoKGB3iRas4yZYW.png',
                 'satellites' => [
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090229sLqrSVXhjZeNWXq.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520902525IGkEz2e6zONWtf.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520902557pR51LSADEPweXl.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090249SqAi1Y5QTR8V7s3.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090231AE2pY0gLrEzcHEk.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090229sLqrSVXhjZeNWXq.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/16520902525IGkEz2e6zONWtf.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/16520902557pR51LSADEPweXl.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090249SqAi1Y5QTR8V7s3.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090231AE2pY0gLrEzcHEk.png',
                 ]
             ],
             [
                 'title' => 'True Multi-chain',
                 'description' => 'Support multi-chain asset storage and transactions.',
-                'active' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088526a6nVh6C6y9EnR0y.png',
-                'inactive' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088523gfmS4kPAAY5FajU.png',
-                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088749deQ0TFH2ru1jRcg.png',
+                'active' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088526a6nVh6C6y9EnR0y.png',
+                'inactive' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088523gfmS4kPAAY5FajU.png',
+//                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088749deQ0TFH2ru1jRcg.png',
+                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652774847vkEngkJkJNSlW89.png',
                 'satellites' => [
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090164yi3iejqSSlKN84i.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090167DXfN7DXpkHMowRc.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520901773eSGyq9lhjMEBgf.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090180cwrtSFkGEkRIDVQ.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090184geztbdueAjyrCfl.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090164yi3iejqSSlKN84i.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090167DXfN7DXpkHMowRc.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/16520901773eSGyq9lhjMEBgf.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090180cwrtSFkGEkRIDVQ.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090184geztbdueAjyrCfl.png',
                 ]
             ],
             [
                 'title' => 'Dapp Browser',
                 'description' => 'Connect/buy/sell your assets on any NFT Marketplaces.',
-                'active' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088543JPlIrLqqrN3AnMz.png',
-                'inactive' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520885416Rfbhlmeqk5N5kM.png',
-                'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652088720YUijMuUgwgKa3dY.png',
+                'active' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088543JPlIrLqqrN3AnMz.png',
+                'inactive' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/16520885416Rfbhlmeqk5N5kM.png',
+//                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088720YUijMuUgwgKa3dY.png',
+                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/16527743458MsQVjPmUgGQaU9.png',
                 'satellites' => [
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/16520903028sNsRtLdWA0aQq6.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090304ymFnH81oky7iz8m.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090314iWLwE6XQ6Wif9h2.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090316wwPV7VdyAjiiemG.png',
-                    'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652090319JcJeyhlzKV6z9eL.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/16520903028sNsRtLdWA0aQq6.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090304ymFnH81oky7iz8m.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090314iWLwE6XQ6Wif9h2.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090316wwPV7VdyAjiiemG.png',
+                    'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090319JcJeyhlzKV6z9eL.png',
                 ]
             ],
         ];
@@ -148,12 +150,12 @@ class PublicController extends ViewController
             'Exchanges',
         ];
         $partners = [
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/16523280644zZhS9SFPMFsNnn.png',
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328067cOlcQFRtgoaycAv.png',
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652501189NUbetyvuaINNr7i.png',
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652328082JYQSj8g1nbtm3nj.png',
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652501192lywVdOyQdbLG8bE.png',
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652501207UKGbVqfK3jdK2z9.png',
+            'https://d1j8r0kxyu9tj8.cloudfront.net/files/16523280644zZhS9SFPMFsNnn.png',
+            'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652328067cOlcQFRtgoaycAv.png',
+            'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652501189NUbetyvuaINNr7i.png',
+            'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652328082JYQSj8g1nbtm3nj.png',
+            'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652501192lywVdOyQdbLG8bE.png',
+            'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652501207UKGbVqfK3jdK2z9.png',
 
         ];
         return $this->view('web.home.home-v2', [
@@ -322,13 +324,13 @@ class PublicController extends ViewController
                     ['text' => 'Create/Login to your Neko Invest app account',
                         'image_url' => '',],
                     ['text' => 'Go to Market page, click on the Search icon and search [TOKEN] in the search bar.',
-                        'image_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/images/1636366375WvZNyMWvLiDgY3y.jpg',],
+                        'image_url' => 'httpss://d1j8r0kxyu9tj8.cloudfront.net/images/1636366375WvZNyMWvLiDgY3y.jpg',],
                     ['text' => 'Click on [TOKEN] logo and choose Invest. ',
                         'image_url' => '',],
                     ['text' => 'Entering the amount of [TOKEN] that you want to buy. Then click on the Get Quotes button.',
-                        'image_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/images/1636366322y919PHen13XXakQ.jpg',],
+                        'image_url' => 'httpss://d1j8r0kxyu9tj8.cloudfront.net/images/1636366322y919PHen13XXakQ.jpg',],
                     ['text' => 'Swipe the Swipe to swap button and now you own  [TOKEN]. You can check your [TOKEN] balance in your wallet by going to Wallet page.',
-                        'image_url' => 'https://d1j8r0kxyu9tj8.cloudfront.net/images/1636366282fkVuygewNk3agPb.jpg',],
+                        'image_url' => 'httpss://d1j8r0kxyu9tj8.cloudfront.net/images/1636366282fkVuygewNk3agPb.jpg',],
                 ]
             ],
         ];

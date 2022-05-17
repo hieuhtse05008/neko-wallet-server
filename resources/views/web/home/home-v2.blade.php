@@ -11,10 +11,8 @@
             <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/16520737224GvS7tesiRpiZze.png"
                  class="scroll-vertical-up-2"
                  style="width: unset;position: absolute; z-index: -1; top: 90%; right: 12%; transform: translate3d(0px, 59px, 0px);">
-            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652073905dfPD78CwgbpsiLf.png"
-                 class="scroll-vertical-up-3"
-                 style="width: unset; position: absolute; z-index: -1; top: 5%; right: 8%; transform: translate3d(0px, 38px, 0px);">
-            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652083141bAwWZLvjqKKziQH.png"
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652772085GkYsbMM1oc0U2mz.png" class="scroll-vertical-up-3" style="width: unset; position: absolute; z-index: -1; top: -5%; right: 5%; transform: translate3d(0px, 38px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652771953gIhTDpmyBhTyDNq.png"
                  class="scroll-vertical-up-3"
                  style="width: unset;position: absolute; z-index: -1; top: 30%; right: 64%; transform: translate3d(0px, 59px, 0px);">
             <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652082439EkOmKJWKmUqob4M.png"
@@ -53,11 +51,7 @@
         </div>
         {{--        mobile --}}
         <div class="row gx-0 position-relative d-flex d-sm-none">
-            {{--            <img  src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652072352mvzu065mrCU4QVW.png" class="scroll-vertical-up-2" style="width: unset; position: absolute; z-index: -1; left: 15%; top: 0%; transform: translate3d(0px, 59px, 0px);">--}}
-            {{--            <img   src="http://d1j8r0kxyu9tj8.cloudfront.net/files/16520737224GvS7tesiRpiZze.png" class="scroll-vertical-up-2" style="width: unset;position: absolute; z-index: -1; top: 90%; right: 12%; transform: translate3d(0px, 59px, 0px);">--}}
-            {{--            <img   src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652073905dfPD78CwgbpsiLf.png" class="scroll-vertical-up-3" style="width: unset; position: absolute; z-index: -1; top: 5%; right: 8%; transform: translate3d(0px, 38px, 0px);">--}}
-            {{--            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652083141bAwWZLvjqKKziQH.png" class="scroll-vertical-up-3" style="width: unset;position: absolute; z-index: -1; top: 30%; right: 64%; transform: translate3d(0px, 59px, 0px);">--}}
-            {{--            <img  src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652082439EkOmKJWKmUqob4M.png" class="scroll-vertical-up-4" style="width: unset; position: absolute; z-index: -1; top: 13%; left: 80%; transform: translate3d(0px, 30.4px, 0px);">--}}
+
 
             <div class="col-12">
 
@@ -78,14 +72,17 @@ width: 90%;
 
                 </div>
             </div>
-            <div class="col-2">
-
-            </div>
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/16520737224GvS7tesiRpiZze.png" class="scroll-vertical-up-2" style="width: 20%; position: absolute; z-index: -1; left: 5%; bottom: 40%; transform: translate3d(0px, 15.6px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652072352mvzu065mrCU4QVW.png" class="scroll-vertical-up-2" style="width: unset; position: absolute; z-index: -1; bottom: 10%; right: -25%; transform: translate3d(0px, 15.6px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652772085GkYsbMM1oc0U2mz.png" class="scroll-vertical-up-3" style="width: unset; position: absolute; z-index: -1; bottom: 45%; right: 25%; transform: translate3d(0px, 23.4px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652771953gIhTDpmyBhTyDNq.png" class="scroll-vertical-up-3" style="width: 90%; position: absolute; z-index: -1; bottom: 8%; right: 45%; transform: translate3d(0px, 23.4px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652082439EkOmKJWKmUqob4M.png" class="scroll-vertical-up-4" style="width: 60%; position: absolute; z-index: -1; bottom: 20%; right: 0%; transform: translate3d(0px, 31.2px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652082439EkOmKJWKmUqob4M.png" class="invisible" style="">
         </div>
     </div>
     {{--===========================================================================================================================================================================================================--}}
     <div class="container">
-        <div style="margin-top: 300px;"></div>
+        <div style="margin-top: 300px;" class="d-none d-sm-block"></div>
 
         <div class="row gy-5">
             @foreach($pros as $pro)
