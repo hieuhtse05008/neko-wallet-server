@@ -81,7 +81,7 @@
         <div class="row gy-5">
             @foreach($pros as $pro)
                 <div class="col-12 col-sm-4">
-                    <div class="rounded text-center p-5"
+                    <div class="rounded text-center p-5 shadow-sm"
                          style="background: rgba(255, 255, 255, 0.07);border: 1px solid rgba(255, 255, 255, 0.07); min-height: 300px;">
                         <img loading="lazy" src="{{$pro['img']}}" class="mb-3">
                         <h4>{{$pro['title']}}</h4>
@@ -243,7 +243,7 @@
             </div>
             <div class="col-1 d-none d-sm-block"></div>
             <div class="col-12 col-sm-10">
-                <div class="rounded  p-3  p-sm-5 card-gray"
+                <div class="rounded  p-3  p-sm-5 card-gray shadow-sm"
                      style="">
                     <div class="d-flex justify-content-around align-items-center  flex-column flex-sm-row">
                         <div>
@@ -265,7 +265,7 @@
             <div class="col-1 d-none d-sm-block"></div>
 
             <div class="col-12 col-sm-5 order-1 order-md-0">
-                <div class="rounded h-100 card-gray">
+                <div class="rounded h-100 card-gray shadow-sm">
                     <div class="d-flex flex-column h-100 rounded"
                          style=" background-image: url(http://d1j8r0kxyu9tj8.cloudfront.net/files/1652159538aNEQZqlkXFlwKSd.png); background-repeat: no-repeat; background-size: contain; background-position-x: center; background-position-y: bottom;">
 
@@ -290,7 +290,7 @@
                 </div>
             </div>
             <div class="col-12 col-sm-5">
-                <div class="rounded h-100"
+                <div class="rounded h-100 shadow-sm"
                      style="background: linear-gradient(200.42deg, rgba(252, 162, 79, 0.24) 13.57%, rgba(184, 104, 30, 0.12) 98.35%);border: 1px solid rgba(255, 255, 255, 0.07);border-radius: 3px;"
                 >
                     <div class="rounded h-100"
