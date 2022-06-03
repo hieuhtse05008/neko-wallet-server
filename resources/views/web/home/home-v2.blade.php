@@ -11,7 +11,9 @@
             <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/16520737224GvS7tesiRpiZze.png"
                  class="scroll-vertical-up-2"
                  style="width: unset;position: absolute; z-index: -1; top: 90%; right: 12%; transform: translate3d(0px, 59px, 0px);">
-            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652772085GkYsbMM1oc0U2mz.png" class="scroll-vertical-up-3" style="width: unset; position: absolute; z-index: -1; top: -5%; right: 5%; transform: translate3d(0px, 38px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652772085GkYsbMM1oc0U2mz.png"
+                 class="scroll-vertical-up-3"
+                 style="width: unset; position: absolute; z-index: -1; top: -5%; right: 5%; transform: translate3d(0px, 38px, 0px);">
             <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652771953gIhTDpmyBhTyDNq.png"
                  class="scroll-vertical-up-3"
                  style="width: unset;position: absolute; z-index: -1; top: 30%; right: 64%; transform: translate3d(0px, 59px, 0px);">
@@ -62,16 +64,31 @@
                     <div style="font-size:4rem;line-height: 5rem;" class="fw-bold text-center">All-in-one</div>
                     <div style="font-size:4rem;line-height: 5rem;" class="fw-bold text-center">solution</div>
                     <h4 class="text-center fw-normal my-3">for NFT & Web 3 Gaming experience</h4>
-                    <div class="btn btn-sm py-2 mx-2 text-white text-white mt-5 fw-bold" style="font-weight: 500;font-size: 18px;width: 90%;background: linear-gradient(200.42deg, #FCA24F 13.57%, #B8681E 98.35%);">Download Neko now</div>
+                    <a class="btn btn-sm py-2 mx-2 text-white text-white mt-5 fw-bold"
+                         href="http://onelink.to/neko-wallet"
+                         style="font-weight: 500;font-size: 18px;width: 90%;background: linear-gradient(200.42deg, #FCA24F 13.57%, #B8681E 98.35%);">
+                        Download Neko now
+                    </a>
 
                 </div>
             </div>
-            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/16520737224GvS7tesiRpiZze.png" class="scroll-vertical-up-2" style="width: 20%; position: absolute; z-index: -1; left: 5%; bottom: 40%; transform: translate3d(0px, 15.6px, 0px);">
-            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652072352mvzu065mrCU4QVW.png" class="scroll-vertical-up-2" style="width: unset; position: absolute; z-index: -1; bottom: 10%; right: -25%; transform: translate3d(0px, 15.6px, 0px);">
-            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652772085GkYsbMM1oc0U2mz.png" class="scroll-vertical-up-3" style="width: unset; position: absolute; z-index: -1; bottom: 45%; right: 25%; transform: translate3d(0px, 23.4px, 0px);">
-            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652771953gIhTDpmyBhTyDNq.png" class="scroll-vertical-up-3" style="width: 90%; position: absolute; z-index: -1; bottom: 8%; right: 45%; transform: translate3d(0px, 23.4px, 0px);">
-            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652082439EkOmKJWKmUqob4M.png" class="scroll-vertical-up-4" style="width: 60%; position: absolute; z-index: -1; bottom: 20%; right: 0%; transform: translate3d(0px, 31.2px, 0px);">
-            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652082439EkOmKJWKmUqob4M.png" class="invisible" style="">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/16520737224GvS7tesiRpiZze.png"
+                 class="scroll-vertical-up-2"
+                 style="width: 20%; position: absolute; z-index: -1; left: 5%; bottom: 40%; transform: translate3d(0px, 15.6px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652072352mvzu065mrCU4QVW.png"
+                 class="scroll-vertical-up-2"
+                 style="width: unset; position: absolute; z-index: -1; bottom: 10%; right: -25%; transform: translate3d(0px, 15.6px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652772085GkYsbMM1oc0U2mz.png"
+                 class="scroll-vertical-up-3"
+                 style="width: unset; position: absolute; z-index: -1; bottom: 45%; right: 25%; transform: translate3d(0px, 23.4px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652771953gIhTDpmyBhTyDNq.png"
+                 class="scroll-vertical-up-3"
+                 style="width: 90%; position: absolute; z-index: -1; bottom: 8%; right: 45%; transform: translate3d(0px, 23.4px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652082439EkOmKJWKmUqob4M.png"
+                 class="scroll-vertical-up-4"
+                 style="width: 60%; position: absolute; z-index: -1; bottom: 20%; right: 0%; transform: translate3d(0px, 31.2px, 0px);">
+            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652082439EkOmKJWKmUqob4M.png" class="invisible"
+                 style="">
         </div>
     </div>
     {{--===========================================================================================================================================================================================================--}}
@@ -120,7 +137,7 @@
                                     "
 
                                 >
-                                    <img  src="{{$satellite}}">
+                                    <img src="{{$satellite}}">
 
                                 </div>
                             </div>
@@ -186,7 +203,7 @@
                             "
 
                         >
-                            <img  src="{{$satellite}}">
+                            <img src="{{$satellite}}">
 
                         </div>
                     </div>
@@ -476,7 +493,7 @@
         }
 
         @media (min-width: 1024px) {
-            body{
+            body {
                 /*background: url("data:image/svg+xml,%3Csvg width='1600' height='4659' viewBox='0 0 1600 4659' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_1894_5610)'%3E%3Crect width='1600' height='4659' fill='%23161C2A'/%3E%3Cg opacity='0.4'%3E%3Cg filter='url(%23filter0_f_1894_5610)'%3E%3Cellipse rx='683' ry='623' transform='matrix(1 0 0 -1 1337 2258)' fill='%234D3589'/%3E%3C/g%3E%3Cg filter='url(%23filter1_f_1894_5610)'%3E%3Cellipse rx='651.829' ry='344.872' transform='matrix(0.983125 -0.182937 -0.182937 -0.983125 269.107 2505.07)' fill='%230025CE'/%3E%3C/g%3E%3Cg filter='url(%23filter2_f_1894_5610)'%3E%3Cpath d='M757 2515C197.742 2544.51 25.5005 3071.5 -169 3056.5C-413.5 3037.64 -367.943 2543.34 -169 2355C65.5005 2133 1136 2495 757 2515Z' fill='%2300EAFF'/%3E%3C/g%3E%3Cg filter='url(%23filter3_f_1894_5610)'%3E%3Cellipse rx='295.5' ry='265' transform='matrix(1 0 0 -1 -23.5 2958)' fill='%23303E57'/%3E%3C/g%3E%3C/g%3E%3Cg opacity='0.4'%3E%3Cg filter='url(%23filter4_f_1894_5610)'%3E%3Cellipse cx='490.907' cy='536.139' rx='408.405' ry='226.668' transform='rotate(-157.625 490.907 536.139)' fill='%230034EB'/%3E%3C/g%3E%3Cg filter='url(%23filter5_f_1894_5610)'%3E%3Ccircle cx='876.348' cy='727.5' r='279.5' transform='rotate(-180 876.348 727.5)' fill='%23425680'/%3E%3C/g%3E%3Cg filter='url(%23filter6_f_1894_5610)'%3E%3Cellipse cx='-97.2979' cy='62.6104' rx='918.493' ry='283' transform='rotate(-150.605 -97.2979 62.6104)' fill='%230A34CD'/%3E%3C/g%3E%3Cg filter='url(%23filter7_f_1894_5610)'%3E%3Cellipse cx='572.556' cy='73.3101' rx='1384.58' ry='372.11' transform='rotate(-156.669 572.556 73.3101)' fill='%2300F3F9'/%3E%3C/g%3E%3Cg filter='url(%23filter8_f_1894_5610)'%3E%3Cellipse cx='159.348' cy='50' rx='486.5' ry='121' transform='rotate(-180 159.348 50)' fill='%2381FFD9'/%3E%3C/g%3E%3C/g%3E%3Cg opacity='0.4'%3E%3Cg filter='url(%23filter9_f_1894_5610)'%3E%3Cellipse cx='1395.96' cy='4593.78' rx='769.889' ry='451.758' transform='rotate(-8.9599 1395.96 4593.78)' fill='%230034EB'/%3E%3C/g%3E%3Cg opacity='0.4' filter='url(%23filter10_f_1894_5610)'%3E%3Cellipse cx='1538' cy='4398.82' rx='291' ry='324.5' fill='%2300EAFF'/%3E%3C/g%3E%3Cg opacity='0.4' filter='url(%23filter11_f_1894_5610)'%3E%3Cellipse cx='1664.34' cy='3977.12' rx='281.5' ry='372' transform='rotate(-14.0221 1664.34 3977.12)' fill='%2300EAFF'/%3E%3C/g%3E%3Cg filter='url(%23filter12_f_1894_5610)'%3E%3Cellipse cx='-355' cy='4731.32' rx='1251' ry='657' fill='%23005080'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3Cdefs%3E%3Cfilter id='filter0_f_1894_5610' x='354' y='1335' width='1966' height='1846' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='150' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter1_f_1894_5610' x='-774.867' y='1745.56' width='2087.95' height='1519.02' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='200' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter2_f_1894_5610' x='-535.728' y='2083.22' width='1573.16' height='1173.59' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='100' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter3_f_1894_5610' x='-619' y='2393' width='1191' height='1130' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='150' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter4_f_1894_5610' x='-246.567' y='-74.8421' width='1474.95' height='1221.96' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='175' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter5_f_1894_5610' x='296.848' y='148' width='1159' height='1159' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='150' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter6_f_1894_5610' x='-1159.64' y='-701.332' width='2124.68' height='1527.88' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='125' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter7_f_1894_5610' x='-1057.44' y='-922.868' width='3260' height='1992.36' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='175' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter8_f_1894_5610' x='-527.152' y='-271' width='1373' height='642' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='100' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter9_f_1894_5610' x='232.172' y='3731.6' width='2327.58' height='1724.38' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='200' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter10_f_1894_5610' x='1047' y='3874.32' width='982' height='1049' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='100' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter11_f_1894_5610' x='1176.66' y='3409.75' width='975.357' height='1134.74' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='100' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3Cfilter id='filter12_f_1894_5610' x='-1906' y='3774.32' width='3102' height='1914' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='150' result='effect1_foregroundBlur_1894_5610'/%3E%3C/filter%3E%3CclipPath id='clip0_1894_5610'%3E%3Crect width='1600' height='4659' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E") top/cover;*/
             }
         }
