@@ -29,7 +29,7 @@
                     <div style="font-size:10rem;line-height: 11rem;" class="fw-bold text-end">solution</div>
                     <div class="d-flex justify-content-end">
                         <h2 class="pe-5 pt-5 text-center">
-                            <div>for Web 3 Gaming experience</div>
+                            <div>for NFT & Web 3 Gaming experience</div>
                             <a class="btn btn-warning text-white mt-5"
                                href="http://onelink.to/neko-wallet"
                                style="
@@ -61,7 +61,7 @@
 
                     <div style="font-size:4rem;line-height: 5rem;" class="fw-bold text-center">All-in-one</div>
                     <div style="font-size:4rem;line-height: 5rem;" class="fw-bold text-center">solution</div>
-                    <h4 class="text-center fw-normal my-3">for Web 3 Gaming experience</h4>
+                    <h4 class="text-center fw-normal my-3">for NFT & Web 3 Gaming experience</h4>
                     <div class="btn btn-sm py-2 mx-2 text-white text-white mt-5 fw-bold" style="font-weight: 500;font-size: 18px;width: 90%;background: linear-gradient(200.42deg, #FCA24F 13.57%, #B8681E 98.35%);">Download Neko now</div>
 
                 </div>
