@@ -79,7 +79,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          type="string",
  *          format="date-time"
  *      )
- * 
+ *
  * )
  * @mixin IdeHelperBlog
  */
@@ -133,7 +133,7 @@ class Blog extends Model
     public static $rules = [
         'slug' => 'required|string',
         'title' => 'required|string',
-        'description' => 'required|string',
+        'description' => 'nullable|string',
         'content' => 'required|string',
         'image_url' => 'nullable|string',
         'status' => 'nullable|string|max:255',
