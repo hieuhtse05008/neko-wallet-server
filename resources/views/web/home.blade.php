@@ -268,7 +268,7 @@
                             <div class="me-3">
                                 <a class="rounded-circle text-white d-flex"
                                    style="background: #1DA0F1;"
-                                   href="https://twitter.com/Neko_Invest"><i
+                                   href="https://twitter.com/nekowallet"><i
                                         class="fab fa-twitter link-icon"></i></a></div>
                             {{--                                <div class="me-3">--}}
                             {{--                                    <a class="rounded-circle text-white d-flex"--}}

@@ -125,8 +125,8 @@
 
                     <div class="text-truncate mb-3">
                         <div>Twitter</div>
-                        <a class="text-main" target="_blank" href="https://twitter.com/Neko_Invest">
-                            https://twitter.com/Neko_Invest
+                        <a class="text-main" target="_blank" href="https://twitter.com/nekowallet">
+                            https://twitter.com/nekowallet
                         </a>
                     </div>
 {{--                    <div class="text-truncate mb-3">--}}

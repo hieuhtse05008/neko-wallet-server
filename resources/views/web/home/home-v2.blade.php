@@ -367,15 +367,12 @@
                     <div class="my-5"></div>
                     <div class="pointer d-flex align-items-center justify-content-sm-end justify-content-center">
                         <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402" class="me-3">
-                            <img loading="lazy"
-                                 src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070264oTiwuzsFfBW5v82.png"
-                                 class="rounded-3"/>
+                            {!! file_get_contents("http://d1j8r0kxyu9tj8.cloudfront.net/files/1653276620pg71wEkqZEzA2wh.svg") !!}
+
                         </a>
                         <a href="https://play.google.com/store/apps/details?id=io.nekoinvest.wallet">
+                            {!! file_get_contents("http://d1j8r0kxyu9tj8.cloudfront.net/files/1653276286WEsctcH0oa9e4sq.svg") !!}
 
-                            <img loading="lazy"
-                                 src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070268QfV4rizJ5hzOb8s.png"
-                                 class="rounded-3"/>
                         </a>
                     </div>
                 </div>

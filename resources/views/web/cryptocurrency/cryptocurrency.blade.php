@@ -243,8 +243,8 @@
                     <div class="pg-content">
                         <div class="d-flex text-truncate">
                             <span>Twitter:</span>&nbsp;&nbsp;
-                            <a class="text-main" target="_blank" href="https://twitter.com/Neko_Invest">
-                                https://twitter.com/Neko_Invest
+                            <a class="text-main" target="_blank" href="https://twitter.com/nekowallet">
+                                https://twitter.com/nekowallet
                             </a>
                         </div>
 {{--                                                <div class="d-flex text-truncate">--}}

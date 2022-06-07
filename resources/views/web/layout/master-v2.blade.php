@@ -118,12 +118,12 @@
                 <div class="ms-auto d-flex">
 
                 <div class="pointer d-flex align-items-center" style="max-width: 300px">
-                        <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402" class="me-3 " class="shadow-sm">
+                        <a href="https://play.google.com/store/apps/details?id=io.nekoinvest.wallet" class="me-3 " class="shadow-sm">
 {{--                            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070264oTiwuzsFfBW5v82.png" class="rounded-3">--}}
                             {!! file_get_contents("http://d1j8r0kxyu9tj8.cloudfront.net/files/1653276286WEsctcH0oa9e4sq.svg") !!}
 
                         </a>
-                        <a href="https://play.google.com/store/apps/details?id=io.nekoinvest.wallet" class="shadow-sm">
+                        <a href="https://apps.apple.com/bw/app/neko-invest/id1586438402" class="shadow-sm">
 {{--                            <img src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652070268QfV4rizJ5hzOb8s.png" class="rounded-3">--}}
                             {!! file_get_contents("http://d1j8r0kxyu9tj8.cloudfront.net/files/1653276620pg71wEkqZEzA2wh.svg") !!}
 
@@ -171,7 +171,7 @@
                 </h5>
                 <div class="d-flex justify-content-between d-sm-block">
                     <div class="mb-3">
-                        <a href="https://twitter.com/Neko_Invest"><i
+                        <a href="https://twitter.com/nekowallet"><i
                                 class="fab fa-twitter bg-white me-2 p-2 rounded-circle text-dark"></i> Twitter</a>
                     </div>
                     <div class="mb-3">
