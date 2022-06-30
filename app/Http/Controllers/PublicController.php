@@ -81,7 +81,7 @@ class PublicController extends ViewController
             [
                 'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/16520879213YTsl7GENrWWefg.png',
                 'title' => 'Non-Custodial',
-                'description' => 'Take full control of assets, web3 native (can connect to Web3 Daap and game)'
+                'description' => 'Take full control of assets, web3 native (can connect to Web3 Dapp and game)'
             ],
             [
                 'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652087924JXoLwRosRqcAKfQ.png',
@@ -91,7 +91,7 @@ class PublicController extends ViewController
             [
                 'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652087933zHmLkZmwae7yHwe.png',
                 'title' => 'Gaming-friendly',
-                'description' => 'Manage and store your Web3 gaming assets with wisdom'
+                'description' => 'Manage and store your Web3 gaming assets wisely'
             ],
         ];
 
@@ -128,7 +128,7 @@ class PublicController extends ViewController
             ],
             [
                 'title' => 'Dapp Browser',
-                'description' => 'Connect/buy/sell your assets on any NFT Marketplaces.',
+                'description' => 'Connect/buy/sell your assets on any NFT Marketplace.',
                 'active' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088543JPlIrLqqrN3AnMz.png',
                 'inactive' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/16520885416Rfbhlmeqk5N5kM.png',
 //                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088720YUijMuUgwgKa3dY.png',
@@ -243,7 +243,7 @@ class PublicController extends ViewController
                     ['title' => 'Neko Index Fund', 'done' => false],
                     ['title' => 'Aggregate DeFi Yield product', 'done' => false],
                     ['title' => 'Launch Neko-verse applications for Neko NFT', 'done' => false],
-                    ['title' => 'Aggregate multichain NFT Marketplaces', 'done' => false],
+                    ['title' => 'Aggregate multichain NFT Marketplace', 'done' => false],
                 ],
             ],
         ];

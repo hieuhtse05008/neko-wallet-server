@@ -256,7 +256,7 @@
             <div class="col-12 text-center mt-5 pb-5">
                 <h1>Tailored experience for<br>
                     Web3 Gaming enthusiasts</h1>
-                <div class="text-gray">A metaverse wallet any-one can use</div>
+                <div class="text-gray">A metaverse wallet anyone can use</div>
             </div>
             <div class="col-1 d-none d-sm-block"></div>
             <div class="col-12 col-sm-10">
