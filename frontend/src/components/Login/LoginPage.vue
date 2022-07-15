@@ -26,7 +26,7 @@
               <v-btn
                 color="primary"
                 class="mt-5"
-                @click="handleSubmit"
+                @click="this.handleSubmit"
                 width="100%"
               >
                 Login
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import router from '@/router'
+
 export default {
   name: 'LoginPage',
   data() {
@@ -52,7 +54,11 @@ export default {
       password: '',
     }
   },
-  methods: {},
+  methods: {
+    handleSubmit: () => {
+      router.push('/blog')
+    },
+  },
 }
 </script>
 
