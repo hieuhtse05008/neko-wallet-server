@@ -105,9 +105,9 @@ Route::prefix("v1")->group(function () {
 
 Route::prefix("auth/v1")->middleware('auth:sanctum')->group(function () {
     Route::group(["prefix" => 'blogs'], function () {
-        Route::get("/", [App\Http\Controllers\API\BlogAPIController::class, 'index']);
+        Route::get("/", [App\Http\Controllers\API\BlogAPIController::class, 'index'])->middleware('include:blog_groups');
         Route::post("/", [App\Http\Controllers\API\BlogAPIController::class, 'store']);
-        Route::get("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'show']);
+        Route::get("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'show'])->middleware('include:blog_groups');
         Route::put("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'update']);
         Route::delete("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'destroy']);
     });
