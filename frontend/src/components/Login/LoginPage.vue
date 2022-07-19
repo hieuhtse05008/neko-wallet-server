@@ -4,7 +4,7 @@
       <v-layout align-center justify-center>
         <v-col cols="4">
           <v-sheet class="secondary rounded-xl pa-12">
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form">
               <div class="pb-2">Email address</div>
               <v-text-field
                 v-model="email"
@@ -13,7 +13,6 @@
                 outlined
                 full-width
               ></v-text-field>
-
               <div class="pb-2">Password</div>
               <v-text-field
                 v-model="password"
@@ -26,7 +25,7 @@
               <v-btn
                 color="primary"
                 class="mt-5"
-                @click="this.handleSubmit"
+                @click="handleSubmit"
                 width="100%"
               >
                 Login
@@ -45,6 +44,7 @@
 
 <script>
 import router from '@/router'
+import { login } from '../../services/Api/publicApi'
 
 export default {
   name: 'LoginPage',
@@ -54,9 +54,20 @@ export default {
       password: '',
     }
   },
-  methods: {
-    handleSubmit: () => {
+  mounted() {
+    if (localStorage.getItem('token')) {
       router.push('/blog')
+    }
+  },
+  methods: {
+    handleSubmit: async function () {
+      try {
+        const result = await login(this.email, this.password)
+        localStorage.setItem('token', result.data.token)
+        router.push('/blog')
+      } catch {
+        console.log('Login failed')
+      }
     },
   },
 }

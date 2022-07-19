@@ -21,14 +21,14 @@
             md="6"
             lg="4"
             xl="3"
-            v-for="(item, index) in this.$data.items"
+            v-for="(item, index) in this.$data.blogs"
             :key="index"
           >
             <v-card
               class="mb-5"
               max-width="374"
               elevation="3"
-              @click="handleClick"
+              @click="() => handleClick(item.id)"
             >
               <template slot="progress">
                 <v-progress-linear
@@ -37,12 +37,9 @@
                   indeterminate
                 ></v-progress-linear>
               </template>
-              <v-img
-                height="250"
-                src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png"
-              ></v-img>
+              <v-img height="250" :src="item.image_url"></v-img>
             </v-card>
-            <h3>TECHNOLOGY: EVM AND NON-EVM?</h3>
+            <h3>{{ item.title.en }}</h3>
           </v-col>
         </v-layout>
       </v-row>
@@ -52,76 +49,33 @@
 
 <script>
 import router from '@/router'
+import { getBlogs } from '../../services/Api/privateApi.js'
 
 export default {
   name: 'BlogPage',
+
   data() {
     return {
-      email: '',
-      password: '',
-      items: [
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-        {
-          image:
-            'http://d1j8r0kxyu9tj8.cloudfront.net/files/1638764763zRl8n8Y3NFFIRCn.png',
-          title: 'Blog',
-        },
-      ],
+      blogs: [],
     }
   },
+
   methods: {
-    handleClick: () => {
-      router.push('/blog/upload/1')
+    handleClick: (id) => {
+      router.push(`/blog/upload/${id}`)
     },
+    getListBlogs: async function () {
+      try {
+        const response = await getBlogs()
+        this.blogs = response.data.blogs
+      } catch {
+        console.log('error')
+      }
+    },
+  },
+
+  mounted: function () {
+    this.getListBlogs()
   },
 }
 </script>

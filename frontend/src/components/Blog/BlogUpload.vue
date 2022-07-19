@@ -49,9 +49,10 @@
             chips
             accept="image/png, image/jpeg, image/bmp"
             placeholder="Pick an avatar"
-            prepend-icon="mdi-camera"
-            label="Avatar"
+            v-model="image"
+            @change="previewImage"
           ></v-file-input>
+          <v-img v-if="url" :src="url" />
         </v-col>
       </v-row>
 
@@ -157,12 +158,20 @@ export default {
           value: '2',
         },
       ],
+      image: null,
+      url: null,
       editor: ClassicEditor,
       editorData: '<p>Content of the editor.</p>',
       editorConfig: {
         // The configuration of the editor.
       },
     }
+  },
+  methods: {
+    previewImage() {
+      if (this.image) return (this.url = URL.createObjectURL(this.image))
+      this.url = null
+    },
   },
 }
 </script>
