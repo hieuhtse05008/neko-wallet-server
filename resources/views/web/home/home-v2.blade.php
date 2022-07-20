@@ -293,10 +293,9 @@
                             </div>
                         </div>
                         <div class="d-block d-sm-flex h-100">
-                            <div class="mt-auto mx-auto d-flex"
-                                 style="image-rendering: -webkit-optimize-contrast;">
+                            <div class="mt-auto mx-auto d-flex">
 
-                                {!! file_get_contents("http://d1j8r0kxyu9tj8.cloudfront.net/files/1652519145FMUyNHfarKrTfXa.svg") !!}
+                                {!! file_get_contents("https://d1tbiuj8b0dqq6.cloudfront.net/image/1652519145FMUyNHfarKrTfXa.svg") !!}
                             </div>
 
                             {{--                            <img  loading="lazy" src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652159536v6MdJWJLf4BjPMK.png"--}}
