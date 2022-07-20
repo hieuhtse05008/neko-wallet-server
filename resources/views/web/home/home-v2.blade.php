@@ -284,19 +284,18 @@
             <div class="col-12 col-sm-5 order-1 order-md-0">
                 <div class="rounded h-100 card-gray shadow-sm">
                     <div class="d-flex flex-column h-100 rounded"
-                         style=" background-image: url(http://d1j8r0kxyu9tj8.cloudfront.net/files/1652159538aNEQZqlkXFlwKSd.png); background-repeat: no-repeat; background-size: contain; background-position-x: center; background-position-y: bottom;">
+                         style=" background-image: url(https://d1j8r0kxyu9tj8.cloudfront.net/files/1652159538aNEQZqlkXFlwKSd.png); background-repeat: no-repeat; background-size: contain; background-position-x: center; background-position-y: bottom;">
 
                         <div class="p-4 ">
                             <h4 class="text-main pb-2">Take full control of your portfolio </h4>
-                            <div class="text-gray">Our detailed Portfolio tracker keeps you well informed on your
+                            <div class="text-gray">Our detailed Portfolio tracker keeps you well-informed on your
                                 investment.
                             </div>
                         </div>
                         <div class="d-block d-sm-flex h-100">
-                            <div class="mt-auto mx-auto d-flex"
-                                 style="image-rendering: -webkit-optimize-contrast;">
+                            <div class="mt-auto mx-auto d-flex">
 
-                                {!! file_get_contents("http://d1j8r0kxyu9tj8.cloudfront.net/files/1652519145FMUyNHfarKrTfXa.svg") !!}
+                                {!! file_get_contents("https://d1tbiuj8b0dqq6.cloudfront.net/image/1652519145FMUyNHfarKrTfXa.svg") !!}
                             </div>
 
                             {{--                            <img  loading="lazy" src="http://d1j8r0kxyu9tj8.cloudfront.net/files/1652159536v6MdJWJLf4BjPMK.png"--}}
