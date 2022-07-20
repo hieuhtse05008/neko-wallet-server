@@ -22,7 +22,7 @@ export default {
   methods: {
     handleLogout: async function () {
       try {
-        await logout()
+        logout()
       } catch (error) {
         console.log(error)
       }
