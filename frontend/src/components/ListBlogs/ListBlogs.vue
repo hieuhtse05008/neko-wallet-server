@@ -21,11 +21,12 @@
             md="6"
             lg="4"
             xl="3"
+            mb-6
             v-for="(item, index) in this.$data.blogs"
             :key="index"
           >
             <v-card
-              class="mb-5"
+              class="mx-2 mb-2"
               max-width="374"
               elevation="3"
               @click="() => handleClick(item.id)"
@@ -39,8 +40,9 @@
               </template>
               <v-img height="250" :src="item.image_url"></v-img>
             </v-card>
-            <h3>{{ item.title.en }}</h3>
+            <h3 class="mx-2">{{ item.title.en }}</h3>
           </v-col>
+          <v-spacer></v-spacer>
         </v-layout>
       </v-row>
     </v-container>

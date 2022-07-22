@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import BlogPage from '../components/Blog/BlogPage.vue'
+import ListBlogs from '../components/ListBlogs/ListBlogs.vue'
 import LoginPage from '../components/Login/LoginPage.vue'
-import BlogUpload from '../components/Blog/BlogUpload.vue'
+import BlogUpload from '../components/BlogUpload/BlogUpload.vue'
 
 Vue.use(VueRouter)
 
@@ -10,11 +10,16 @@ const routes = [
   {
     path: '/blog',
     name: 'Blog',
-    component: BlogPage,
+    component: ListBlogs,
+  },
+  {
+    path: '/blog/upload/',
+    name: 'Blog Upload Create',
+    component: BlogUpload,
   },
   {
     path: '/blog/upload/:id',
-    name: 'Blog Upload',
+    name: 'Blog Upload Update',
     component: BlogUpload,
   },
   {
