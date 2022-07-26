@@ -1,8 +1,8 @@
 import baseAxios from './baseAxios'
 
-const privateAxios = baseAxios
+const authAxios = baseAxios
 
-privateAxios.interceptors.request.use(
+authAxios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')
     if (token) {
@@ -15,7 +15,7 @@ privateAxios.interceptors.request.use(
   }
 )
 
-privateAxios.interceptors.response.use(
+authAxios.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response.status === 401) {
@@ -25,4 +25,4 @@ privateAxios.interceptors.response.use(
   }
 )
 
-export default privateAxios
+export default authAxios

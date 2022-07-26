@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { logout } from '../../services/Api/privateApi'
+import { logout } from '../../services/Api/authApi'
 import router from '@/router'
 
 export default {

@@ -337,7 +337,7 @@ import {
   getBlogGroups,
   updateBlogDetail,
   createBlogGroup,
-} from '../../services/Api/privateApi'
+} from '../../services/Api/authApi'
 
 const defaultLocaleObject = (function () {
   let obj = {}

@@ -7,11 +7,12 @@ use App\Criteria\RequestCriteria;
 use App\Models\Blog;
 use App\Repositories\Repository;
 use App\Presenters\BlogPresenter;
+
 /**
  * Class BlogRepositoryEloquent
  * @package App\Repositories
  * @version September 23, 2021, 8:05 am UTC
-*/
+ */
 
 class BlogRepositoryEloquent extends Repository implements BlogRepository
 {
@@ -58,8 +59,8 @@ class BlogRepositoryEloquent extends Repository implements BlogRepository
      */
     static public function queryFilter($query, $filter)
     {
-        if(isset($filter['statuses'])){
-            $query = $query->whereIn('blogs.status',$filter['statuses']);
+        if (isset($filter['statuses'])) {
+            $query = $query->whereIn('blogs.status', $filter['statuses']);
         }
         return $query;
     }
@@ -78,28 +79,26 @@ class BlogRepositoryEloquent extends Repository implements BlogRepository
         // TODO: Implement list() method.
         $this->resetCriteria();
 
-        if (!$disabledRequestCriteria){
+        if (!$disabledRequestCriteria) {
             $this->pushCriteria(app(RequestCriteria::class));
-
         }
-        if(isset($filter['blog_group'])){
+        if (isset($filter['blog_group'])) {
             $this->pushCriteria(BlogJoinGroupCriteria::class);
         }
 
         $this->scopeQuery(function ($query) use ($filter) {
-            if(isset($filter['blog'])){
-                $query = self::queryFilter($query,$filter['blog']);
+            if (isset($filter['blog'])) {
+                $query = self::queryFilter($query, $filter['blog']);
             }
-            if(isset($filter['blog_group'])){
-                $query = BlogGroupRepositoryEloquent::queryFilter($query,$filter['blog_group']);
+            if (isset($filter['blog_group'])) {
+                $query = BlogGroupRepositoryEloquent::queryFilter($query, $filter['blog_group']);
             }
-            return $query->select('blogs.*');
+            return $query->groupBy('blogs.id')->select('blogs.*');
         });
 
         if ($limit) {
             return $this->paginate($limit);
         }
         return $this->get();
-
     }
 }

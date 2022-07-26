@@ -10,6 +10,8 @@
             class="search-field"
             outlined
             label="Search"
+            v-model="params.search"
+            @keyup.enter="handleSearch"
             prepend-inner-icon="mdi-magnify"
           ></v-text-field>
         </div>
@@ -51,7 +53,7 @@
 
 <script>
 import router from '@/router'
-import { getBlogs } from '../../services/Api/privateApi.js'
+import { getBlogs } from '../../services/Api/authApi.js'
 
 export default {
   name: 'BlogPage',
@@ -59,6 +61,9 @@ export default {
   data() {
     return {
       blogs: [],
+      params: {
+        search: null,
+      },
     }
   },
 
@@ -68,8 +73,16 @@ export default {
     },
     getListBlogs: async function () {
       try {
-        const response = await getBlogs()
+        const response = await getBlogs(this.params)
         this.blogs = response.data.blogs
+      } catch {
+        console.log('error')
+      }
+    },
+    handleSearch: async function () {
+      try {
+        if (this.params.search === '') this.params.search = null
+        await this.getListBlogs()
       } catch {
         console.log('error')
       }

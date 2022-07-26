@@ -1,35 +1,35 @@
-import privateAxios from '../privateAxios'
+import authAxios from '../authAxios'
 
 export const logout = () => {
-  privateAxios({
+  authAxios({
     method: 'POST',
     url: '/logout',
   })
 }
 
-export const getBlogs = (data) =>
-  privateAxios({
+export const getBlogs = (params) =>
+  authAxios({
     method: 'GET',
-    url: '/auth/v1/blogs',
-    data: data,
+    url: '/auth/v1/blogs?orderBy=id',
+    params: params,
   })
 
 // Blog Detail
 export const getBlogDetail = (id) =>
-  privateAxios({
+  authAxios({
     method: 'GET',
     url: `/auth/v1/blogs/${id}`,
   })
 
 export const createBlogDetail = (data) =>
-  privateAxios({
+  authAxios({
     method: 'POST',
     url: '/auth/v1/blogs',
     data: data,
   })
 
 export const updateBlogDetail = (data) =>
-  privateAxios({
+  authAxios({
     method: 'PUT',
     url: `/auth/v1/blogs/${data.id}`,
     data: data,
@@ -37,13 +37,13 @@ export const updateBlogDetail = (data) =>
 
 // Blog group
 export const getBlogGroups = () =>
-  privateAxios({
+  authAxios({
     method: 'GET',
     url: '/auth/v1/blog-groups',
   })
 
 export const createBlogGroup = (data) =>
-  privateAxios({
+  authAxios({
     method: 'POST',
     url: '/auth/v1/blog-groups',
     data: data,
