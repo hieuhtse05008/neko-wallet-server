@@ -410,6 +410,10 @@ export default {
             return obj
           })(),
           tags: result.tags ? result.tags : '',
+          blog_groups:
+            result.blog_groups.length > 0
+              ? result.blog_groups
+              : [...this.form.blog_groups],
         }
       } catch (error) {
         console.log(error)
