@@ -13,13 +13,13 @@ const routes = [
     component: ListBlogs,
   },
   {
-    path: '/blog/upload/',
-    name: 'Blog Upload Create',
+    path: '/blog/upload/:id',
+    name: 'Blog Upload Update',
     component: BlogUpload,
   },
   {
-    path: '/blog/upload/:id',
-    name: 'Blog Upload Update',
+    path: '/blog/upload/',
+    name: 'Blog Upload Create',
     component: BlogUpload,
   },
   {

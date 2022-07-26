@@ -1,8 +1,6 @@
-import axios from 'axios'
+import baseAxios from './baseAxios'
 
-const privateAxios = axios.create({
-  baseURL: 'http://localhost:4444/api/',
-})
+const privateAxios = baseAxios
 
 privateAxios.interceptors.request.use(
   (config) => {

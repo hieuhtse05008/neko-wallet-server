@@ -148,6 +148,22 @@
               >
                 <v-list-item-title>{{ item.name }}</v-list-item-title>
               </v-list-item>
+              <v-list-item>
+                <v-btn
+                  class="btn-add-blog-group text-none"
+                  color="primary"
+                  @click="
+                    () =>
+                      handleOpenDialogCreateBlogGroup(
+                        'Create category',
+                        'category'
+                      )
+                  "
+                >
+                  <v-icon left> mdi-plus-thick </v-icon>
+                  Add
+                </v-btn>
+              </v-list-item>
             </v-list>
           </v-menu>
         </v-col>
@@ -173,10 +189,23 @@
             <v-list>
               <v-list-item
                 v-for="(item, index) in allKinds"
+                class="pr-20"
                 :key="index"
                 @click="() => handleChangeBlogGroups(item, 'kind')"
               >
                 <v-list-item-title>{{ item.name }}</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-btn
+                  class="btn-add-blog-group text-none"
+                  color="primary"
+                  @click="
+                    () => handleOpenDialogCreateBlogGroup('Create kind', 'kind')
+                  "
+                >
+                  <v-icon left> mdi-plus-thick </v-icon>
+                  Add
+                </v-btn>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -212,14 +241,103 @@
           </v-menu>
         </v-col>
       </v-row>
+
+      <v-row class="mb-10 justify-end">
+        <v-btn
+          class="text-none mx-1"
+          color="primary"
+          dark
+          @click="handleOpenDialogPreview"
+        >
+          Preview
+        </v-btn>
+        <v-btn class="text-none" color="primary" dark @click="handleSubmitBlog">
+          Save
+        </v-btn>
+      </v-row>
+
+      <v-row justify="center">
+        <v-dialog
+          content-class="dialog-create-blog-group"
+          v-model="dialogCreateBlogGroup.visible"
+          max-width="400px"
+          transition="dialog-top-transition"
+        >
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">{{ dialogCreateBlogGroup.title }}</span>
+            </v-card-title>
+            <v-card-text class="py-0">
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="dialogCreateBlogGroup.content"
+                      outlined
+                      dense
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="primary"
+                elevation="0"
+                @click="handleSubmitBlogGroup"
+              >
+                Save
+              </v-btn>
+              <v-btn elevation="0" @click="handleCloseDialogCreateBlogGroup">
+                Close
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+
+      <v-row justify="center">
+        <v-dialog
+          content-class="dialog-preview-blog"
+          v-model="dialogPreviewVisible"
+          width="90%"
+          max-width="1140px"
+          transition="dialog-top-transition"
+        >
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">{{ form.title[current_locale.id] }}</span>
+            </v-card-title>
+            <v-card-text class="py-0 m-0">
+              <div
+                class="ck-content"
+                v-html="form.content[current_locale.id]"
+              ></div>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn elevation="0" @click="handleCloseDialogPreview">
+                Close
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
     </v-container>
   </v-container>
 </template>
 
 <script>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { getBlogDetail, getBlogGroups } from '../../services/Api/privateApi'
 import { LOCALES, AVAILABLE_LOCALES, STATUSES } from '../../utils/constants'
+import {
+  getBlogDetail,
+  createBlogDetail,
+  getBlogGroups,
+  updateBlogDetail,
+  createBlogGroup,
+} from '../../services/Api/privateApi'
 
 const defaultLocaleObject = (function () {
   let obj = {}
@@ -229,6 +347,11 @@ const defaultLocaleObject = (function () {
   return obj
 })()
 
+const defaultSelect = {
+  id: null,
+  name: 'None',
+}
+
 export default {
   data() {
     return {
@@ -236,13 +359,22 @@ export default {
         id: this.$route.params.id,
         status: 'draft',
         image_url: '',
-        type: '',
-        title: defaultLocaleObject,
-        description: defaultLocaleObject,
-        slug: defaultLocaleObject,
-        content: defaultLocaleObject,
+        type: null,
+        title: { ...defaultLocaleObject },
+        description: { ...defaultLocaleObject },
+        slug: { ...defaultLocaleObject },
+        content: { ...defaultLocaleObject },
         tags: '',
-        blog_groups: [],
+        blog_groups: [
+          {
+            ...defaultSelect,
+            type: 'category',
+          },
+          {
+            ...defaultSelect,
+            type: 'kind',
+          },
+        ],
       },
       current_locale: {
         id: 'en',
@@ -255,6 +387,13 @@ export default {
       editorConfig: {
         // Configure the editor toolbar
       },
+      dialogCreateBlogGroup: {
+        title: '',
+        content: '',
+        visible: false,
+        type: '',
+      },
+      dialogPreviewVisible: false,
     }
   },
   methods: {
@@ -346,6 +485,59 @@ export default {
     //   }
     //   this.url = null
     // },
+    handleSubmitBlog: async function () {
+      try {
+        if (this.id) {
+          await updateBlogDetail({
+            ...this.form,
+            category_id: this.currentCategory.id,
+            kind_id: this.currentKind.id,
+          })
+          window.location.reload()
+        } else {
+          const result = await createBlogDetail({
+            ...this.form,
+            category_id: this.currentCategory.id,
+            kind_id: this.currentKind.id,
+          })
+          window.location.assign(`/blog/upload/${result.data.blog.id}`)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    handleOpenDialogCreateBlogGroup: function (title, type) {
+      this.dialogCreateBlogGroup.visible = true
+      this.dialogCreateBlogGroup.title = title
+      this.dialogCreateBlogGroup.type = type
+    },
+
+    handleCloseDialogCreateBlogGroup: function () {
+      this.dialogCreateBlogGroup.visible = false
+    },
+
+    handleOpenDialogPreview: function () {
+      this.dialogPreviewVisible = true
+    },
+
+    handleCloseDialogPreview: function () {
+      this.dialogPreviewVisible = false
+    },
+
+    handleSubmitBlogGroup: async function () {
+      try {
+        const result = await createBlogGroup({
+          name: this.dialogCreateBlogGroup.content,
+          type: this.dialogCreateBlogGroup.type,
+        })
+        this.all_blog_groups.push(result.data.blog_group)
+        this.handleCloseDialogCreateBlogGroup()
+        this.dialogCreateBlogGroup.content = ''
+      } catch (error) {
+        console.log(error)
+      }
+    },
   },
   mounted() {
     this.getBlogGroups()
@@ -356,24 +548,25 @@ export default {
       return this.form.blog_groups.find((e) => e.type === 'category')
     },
     allCategories: function () {
-      return this.all_blog_groups.filter((e) => e.type === 'category')
+      return [
+        { ...defaultSelect, type: 'category' },
+        ...this.all_blog_groups.filter((e) => e.type === 'category'),
+      ]
     },
     currentKind: function () {
       return this.form.blog_groups.find((e) => e.type === 'kind')
     },
     allKinds: function () {
-      return this.all_blog_groups.filter((e) => e.type === 'kind')
+      return [
+        { ...defaultSelect, type: 'kind' },
+        ...this.all_blog_groups.filter((e) => e.type === 'kind'),
+      ]
     },
     currentStatus: function () {
-      return this.statuses.find((e) => e.key === this.form.status)
-    },
-  },
-  watch: {
-    form: {
-      handler: function () {
-        console.log(this.form)
-      },
-      deep: true,
+      const _currentStatus = this.statuses.find(
+        (e) => e.key === this.form.status
+      )
+      return _currentStatus ? _currentStatus : this.statuses[0]
     },
   },
 }
@@ -381,5 +574,11 @@ export default {
 <style>
 .ck-editor__editable_inline {
   min-height: 300px;
+}
+.btn-add-blog-group {
+  width: 100%;
+}
+.dialog-create-blog-group {
+  align-self: flex-start;
 }
 </style>

@@ -1,14 +1,7 @@
-import axios from 'axios'
-
-const authApi = axios.create({
-  baseURL: 'http://localhost:4444/api/',
-  headers: {
-    Accept: 'application/json',
-  },
-})
+import baseAxios from '../baseAxios'
 
 export const login = (email, password) => {
-  return authApi({
+  return baseAxios({
     method: 'POST',
     url: '/login',
     data: {
