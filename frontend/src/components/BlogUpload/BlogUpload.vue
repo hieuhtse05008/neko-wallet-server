@@ -89,18 +89,50 @@
           <h4>Content</h4>
         </v-col>
         <v-col cols="12" class="pa-0">
-          <ckeditor
+          <!-- <ckeditor
             class="editor"
             :editor="editor"
             v-model="form.content[current_locale.id]"
             :config="editorConfig"
-          ></ckeditor>
+          ></ckeditor> -->
+          <!-- <editor
+            api-key="zmiwpg2nlm7n7wrd9jtcaown05jejazf05thfo7z5ynj9mma"
+            :init="{
+              menubar: false,
+              plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen media',
+                'insertdatetime media table paste code help wordcount nonbreaking autoresize',
+              ],
+              toolbar:
+                'formatselect | fontsizeselect | fontselect | alignGroup | bold italic underline strikethrough link removeFormat | undo redo  searchreplace | forecolor backcolor blockquote code | indent outdent | bullist numlist |image table media',
+              toolbar_groups: {
+                alignGroup: {
+                  icon: 'align-left',
+                  tooltip: 'Alignment',
+                  items: 'alignleft aligncenter alignright alignjustify',
+                },
+              },
+              autoresize_min_height: 500,
+            }"
+            v-model="form.content[current_locale.id]"
+          /> -->
+          <div>
+            <textarea
+              name="content"
+              id="editor"
+              disabled
+              class="w-100"
+              v-model="form.content[current_locale.id]"
+            >
+            </textarea>
+          </div>
         </v-col>
       </v-row>
 
       <v-row class="mb-10">
         <v-col cols="12" class="pa-0 mb-2">
-          <h4>Tags</h4>
+          <h4>Tags (split by " , ")</h4>
         </v-col>
         <v-col cols="12" class="pa-0">
           <v-text-field
@@ -138,6 +170,7 @@
                 v-on="on"
               >
                 {{ currentCategory?.name }}
+                <v-icon right> mdi-menu-down </v-icon>
               </v-btn>
             </template>
             <v-list>
@@ -184,6 +217,7 @@
                 v-on="on"
               >
                 {{ currentKind?.name }}
+                <v-icon right> mdi-menu-down </v-icon>
               </v-btn>
             </template>
             <v-list>
@@ -227,6 +261,7 @@
                 v-on="on"
               >
                 {{ currentStatus.name }}
+                <v-icon right> mdi-menu-down </v-icon>
               </v-btn>
             </template>
             <v-list>
@@ -301,8 +336,6 @@
         <v-dialog
           content-class="dialog-preview-blog"
           v-model="dialogPreviewVisible"
-          width="90%"
-          max-width="1140px"
           transition="dialog-top-transition"
         >
           <v-card>
@@ -310,10 +343,7 @@
               <span class="text-h5">{{ form.title[current_locale.id] }}</span>
             </v-card-title>
             <v-card-text class="py-0 m-0">
-              <div
-                class="ck-content"
-                v-html="form.content[current_locale.id]"
-              ></div>
+              <div v-html="form.content[current_locale.id]"></div>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -329,7 +359,6 @@
 </template>
 
 <script>
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { LOCALES, AVAILABLE_LOCALES, STATUSES } from '../../utils/constants'
 import {
   getBlogDetail,
@@ -338,6 +367,8 @@ import {
   updateBlogDetail,
   createBlogGroup,
 } from '../../services/Api/authApi'
+
+let editor
 
 const defaultLocaleObject = (function () {
   let obj = {}
@@ -360,6 +391,7 @@ export default {
         status: 'draft',
         image_url: '',
         type: null,
+        editor: null,
         title: { ...defaultLocaleObject },
         description: { ...defaultLocaleObject },
         slug: { ...defaultLocaleObject },
@@ -383,10 +415,6 @@ export default {
       locales: LOCALES,
       all_blog_groups: [],
       statuses: STATUSES,
-      editor: ClassicEditor,
-      editorConfig: {
-        // Configure the editor toolbar
-      },
       dialogCreateBlogGroup: {
         title: '',
         content: '',
@@ -491,7 +519,7 @@ export default {
     // },
     handleSubmitBlog: async function () {
       try {
-        if (this.id) {
+        if (this.form.id) {
           await updateBlogDetail({
             ...this.form,
             category_id: this.currentCategory.id,
@@ -547,6 +575,76 @@ export default {
     this.getBlogGroups()
     this.form.id && this.getBlog()
   },
+  created() {
+    setTimeout(
+      function () {
+        ClassicEditor.create(document.querySelector('#editor'), {
+          toolbar: [
+            'heading',
+            '|',
+            'alignment',
+            '|',
+            'bold',
+            'italic',
+            'underline',
+            'strikethrough',
+            'link',
+            'removeFormat',
+            '|',
+            'undo',
+            'redo',
+            'findAndReplace',
+            '|',
+            'fontsize',
+            'fontColor',
+            'fontBackgroundColor',
+            'blockQuote',
+            'code',
+            '|',
+            'outdent',
+            'indent',
+            '|',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'uploadImage',
+            'insertTable',
+            'mediaEmbed',
+            '|',
+
+            // 'fontfamily',
+          ],
+          image: {
+            // You need to configure the image toolbar, too, so it uses the new style buttons.
+            toolbar: [
+              'imageTextAlternative',
+              '|',
+              'imageStyle:block',
+              'imageStyle:alignLeft',
+              'imageStyle:alignRight',
+              'imageStyle:inline',
+              'imageStyle:side',
+              'imageStyle:alignCenter',
+              'imageStyle:alignBlockLeft',
+              'imageStyle:alignBlockRight',
+              'resizeImage:50',
+              'resizeImage:75',
+              'resizeImage:original',
+            ],
+          },
+          extraPlugins: [MyCustomUploadAdapterPlugin],
+        })
+          .then((e) => {
+            editor = e
+            this.editor = e
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+      }.bind(this),
+      500
+    )
+  },
   computed: {
     currentCategory: function () {
       return this.form.blog_groups.find((e) => e.type === 'category')
@@ -576,9 +674,6 @@ export default {
 }
 </script>
 <style>
-.ck-editor__editable_inline {
-  min-height: 300px;
-}
 .btn-add-blog-group {
   width: 100%;
 }
