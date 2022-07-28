@@ -428,7 +428,8 @@ export default {
     methods: {
         getBlog: async function () {
             try {
-                const result = (await getBlogDetail(this.form.id)).data.blog
+                const result = (await getBlogDetail(this.form.id)).data.blog;
+                console.log({result})
                 this.form = {
                     ...result,
                     content: (function () {
