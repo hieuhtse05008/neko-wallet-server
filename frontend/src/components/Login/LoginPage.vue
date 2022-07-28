@@ -82,7 +82,7 @@ export default {
         router.push('/blog')
       } catch {
         console.log('Login failed')
-        this.message = 'Email or password is incorrect'
+        this.message = 'Email or password is incorrect';
       }
     },
   },
