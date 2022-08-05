@@ -212,4 +212,10 @@ function MyCustomUploadAdapterPlugin(editor) {
 }
 </script>
 
-<style></style>
+<style>
+#editor,
+.ck-blurred.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline,
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-focused {
+  min-height: 50vh;
+}
+</style>

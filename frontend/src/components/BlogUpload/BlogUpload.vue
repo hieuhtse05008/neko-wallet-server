@@ -48,7 +48,6 @@
           <v-textarea
             class=""
             outlined
-            dense
             v-model="form.description[current_locale.id]"
           ></v-textarea>
         </v-col>
@@ -86,15 +85,6 @@
 
       <v-row class="mb-10">
         <v-col cols="12" class="pa-0 mb-2">
-          <h4>Content</h4>
-        </v-col>
-        <v-col cols="12" class="pa-0">
-          <CkEditor v-model="form.content[current_locale.id]" />
-        </v-col>
-      </v-row>
-
-      <v-row class="mb-10">
-        <v-col cols="12" class="pa-0 mb-2">
           <h4>Tags (split by " , ")</h4>
         </v-col>
         <v-col cols="12" class="pa-0">
@@ -102,6 +92,7 @@
             class=""
             outlined
             dense
+            placeholder='Split by " , "'
             v-model="form.tags"
           ></v-text-field>
         </v-col>
@@ -115,6 +106,15 @@
           >
             #{{ item }}
           </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-row class="mb-10">
+        <v-col cols="12" class="pa-0 mb-2">
+          <h4>Content</h4>
+        </v-col>
+        <v-col cols="12" class="pa-0">
+          <CkEditor v-model="form.content[current_locale.id]" />
         </v-col>
       </v-row>
 
@@ -249,7 +249,13 @@
         >
           Preview
         </v-btn>
-        <v-btn class="text-none" color="primary" dark @click="handleSubmitBlog">
+        <v-btn
+          class="text-none"
+          color="primary"
+          dark
+          @click="handleSubmitBlog"
+          :loading="loading"
+        >
           Save
         </v-btn>
       </v-row>
@@ -391,6 +397,7 @@ export default {
         type: '',
       },
       dialogPreviewVisible: false,
+      loading: false,
     }
   },
   methods: {
@@ -486,7 +493,12 @@ export default {
     //   }
     //   this.url = null
     // },
+    handleSubmitBlogSuccess: async function () {
+      this.loading = false
+      alert('Blog is saved successfully!')
+    },
     handleSubmitBlog: async function () {
+      this.loading = true
       try {
         this.form.content
         if (this.form.id) {
@@ -495,6 +507,7 @@ export default {
             category_id: this.currentCategory.id,
             kind_id: this.currentKind.id,
           })
+          this.handleSubmitBlogSuccess()
           window.location.reload()
         } else {
           const result = await createBlogDetail({
@@ -502,6 +515,7 @@ export default {
             category_id: this.currentCategory.id,
             kind_id: this.currentKind.id,
           })
+          this.handleSubmitBlogSuccess()
           window.location.assign(`/blog/upload/${result.data.blog.id}`)
         }
       } catch (error) {
