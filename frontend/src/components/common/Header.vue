@@ -51,11 +51,16 @@ export default {
 
 <style>
 .v-toolbar__content {
-  justify-content: end;
   padding: 10px;
+  width: 90%;
+  margin: 0 auto;
 }
 .app-bar {
   height: 60px !important;
-  padding: 10px 80px 0 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  position: fixed !important;
 }
 </style>

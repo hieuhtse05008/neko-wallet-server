@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid class="pa-16">
+  <v-container fluid class="pa-0 pt-16">
     <v-container>
       <v-row class="mb-1" justify="center" align="center">
-        <span class="page-name">Blogs</span>
+        <div class="page-name">Blogs</div>
       </v-row>
       <v-row class="mb-10">
         <div class="search-field-container">
@@ -20,10 +20,10 @@
         <v-layout justify-start wrap>
           <v-col
             xs="12"
-            md="6"
-            lg="4"
-            xl="3"
-            mb-6
+            sm="6"
+            md="4"
+            lg="3"
+            xl="2.4"
             v-for="(item, index) in this.$data.blogs"
             :key="index"
           >
@@ -40,7 +40,7 @@
                   indeterminate
                 ></v-progress-linear>
               </template>
-              <v-img height="250" :src="item.image_url"></v-img>
+              <v-img :src="item.image_url"></v-img>
             </v-card>
             <h3 class="mx-2">{{ item.title.en }}</h3>
           </v-col>
@@ -97,13 +97,13 @@ export default {
 
 <style scoped>
 .page-name {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #000;
 }
 
 .search-field {
-  width: 50%;
+  width: 70vw;
   height: 50px;
   margin: 0 auto;
 }
