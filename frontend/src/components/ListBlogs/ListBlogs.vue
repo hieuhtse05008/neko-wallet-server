@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pa-0 pt-16">
+  <v-container fluid class="pa-0 pt-16 container-content">
     <v-container>
       <v-row class="mb-1" justify="center" align="center">
         <div class="page-name">Blogs</div>
@@ -91,6 +91,7 @@ export default {
 
   mounted: function () {
     this.getListBlogs()
+    document.title = 'List Blog'
   },
 }
 </script>

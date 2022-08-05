@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="container-login primary">
+  <v-container fluid class="container-content primary">
     <v-container>
       <v-layout align-center justify-center>
         <v-col xs="12" sm="8" md="6" lg="4">
@@ -13,6 +13,7 @@
                 dense
                 outlined
                 full-width
+                @keyup.enter="handleSubmit"
                 :rules="emailValidation"
               ></v-text-field>
               <div class="pb-2">Password</div>
@@ -22,6 +23,7 @@
                 dense
                 outlined
                 full-width
+                @keyup.enter="handleSubmit"
                 :rules="passwordValidation"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="showPassword ? 'text' : 'password'"
@@ -73,6 +75,7 @@ export default {
     if (localStorage.getItem('token')) {
       router.push('/blog')
     }
+    document.title = 'Login'
   },
   computed: {
     width: function () {
@@ -107,14 +110,6 @@ export default {
 .message {
   color: red;
   font-size: 12px;
-}
-
-.container-login {
-  min-height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 60px;
 }
 
 .login-form {

@@ -1,6 +1,11 @@
-import baseAxios from './baseAxios'
+import axios from 'axios'
 
-const authAxios = baseAxios
+const authAxios = axios.create({
+  baseURL: 'http://localhost:4444/api/',
+  headers: {
+    Accept: 'application/json',
+  },
+})
 
 authAxios.interceptors.request.use(
   (config) => {

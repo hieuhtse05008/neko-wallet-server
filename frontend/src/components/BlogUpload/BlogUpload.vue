@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pt-16 pa-md-16">
+  <v-container fluid class="pt-16 pa-md-16 container-content">
     <v-container class="pa-30">
       <v-row class="mb-10">
         <v-col cols="12" class="pa-0 mb-2">
@@ -101,7 +101,9 @@
             class="mr-1 text-none px-2"
             color="primary"
             dark
-            v-for="(item, index) in form.tags.split(',')"
+            v-for="(item, index) in form.tags.split(',').filter((item) => {
+              return item !== ''
+            })"
             :key="index"
           >
             #{{ item }}
@@ -419,8 +421,10 @@ export default {
               ? result.blog_groups
               : [...this.form.blog_groups],
         }
+        document.title = this.form.title[this.current_locale.id]
       } catch (error) {
         console.log(error)
+        document.title = 'Update Blog'
       }
     },
 
@@ -557,7 +561,11 @@ export default {
   },
   mounted() {
     this.getBlogGroups()
-    this.form.id && this.getBlog()
+    if (this.form.id) {
+      this.getBlog()
+    } else {
+      document.title = 'Create Blog'
+    }
   },
   computed: {
     currentCategory: function () {
