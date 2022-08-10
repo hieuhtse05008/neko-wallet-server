@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/login', [PublicController::class, 'loginView']);
+Route::get('/manage/{any}', [PublicController::class, 'manageView'])->where('any', '.*');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/register-early-access', [PublicController::class, 'registerEarlyAccessWithEmail']);
@@ -56,12 +57,12 @@ $publicLocaleRoutes = function () {
     Route::get('/cryptocurrencies', [PublicController::class, 'tokensView'])->middleware("include:cryptocurrencies")->name("cryptocurrencies");
     Route::get('/cryptocurrency/{cryptocurrency:name}', [PublicController::class, 'tokenView'])->name("cryptocurrency");
 
-//    Route::get('/v2', [PublicController::class, 'homeViewV2'])->name("home-v2");
+    //    Route::get('/v2', [PublicController::class, 'homeViewV2'])->name("home-v2");
     Route::get('/', [PublicController::class, 'homeViewV2'])->name("home");
 };
 
 Route::prefix('{lang?}')
-//    ->where(['lang'=>'[a-zA-Z]{2}'])
+    //    ->where(['lang'=>'[a-zA-Z]{2}'])
     ->middleware('locale')->group($publicLocaleRoutes);
 
 /*
@@ -71,5 +72,4 @@ Route::prefix('{lang?}')
 */
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/blog/upload/{blog?}', [ViewAuthController::class, 'uploadBlogView'])->middleware('include:blog_groups');
-
 });
