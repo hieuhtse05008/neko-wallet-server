@@ -79,7 +79,7 @@ class PublicController extends ViewController
                 'description' => 'Support multi-chain asset storage and transactions.',
                 'active' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088526a6nVh6C6y9EnR0y.png',
                 'inactive' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088523gfmS4kPAAY5FajU.png',
-//                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088749deQ0TFH2ru1jRcg.png',
+                //                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088749deQ0TFH2ru1jRcg.png',
                 'img' => 'http://d1j8r0kxyu9tj8.cloudfront.net/files/1652774847vkEngkJkJNSlW89.png',
                 'satellites' => [
                     'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652090164yi3iejqSSlKN84i.png',
@@ -94,7 +94,7 @@ class PublicController extends ViewController
                 'description' => 'Connect/buy/sell your assets on any NFT Marketplace.',
                 'active' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088543JPlIrLqqrN3AnMz.png',
                 'inactive' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/16520885416Rfbhlmeqk5N5kM.png',
-//                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088720YUijMuUgwgKa3dY.png',
+                //                'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/1652088720YUijMuUgwgKa3dY.png',
                 'img' => 'https://d1j8r0kxyu9tj8.cloudfront.net/files/16527743458MsQVjPmUgGQaU9.png',
                 'satellites' => [
                     'https://d1j8r0kxyu9tj8.cloudfront.net/files/16520903028sNsRtLdWA0aQq6.png',
@@ -218,9 +218,9 @@ class PublicController extends ViewController
             ['name' => 'PHAN MINH DUONG', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH', 'avatar' => '/images/founder/duongpm.png'],
             ['name' => 'HA TRUNG HIEU', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH', 'avatar' => '/images/founder/hieuht.png'],
             ['name' => 'HANH PHAM', 'role' => 'Graphic Designer', 'department' => '', 'avatar' => '/images/founder/hanhpt.png'],
-//            ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni', 'avatar' => '/images/founder/longhd.png'],
+            //            ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni', 'avatar' => '/images/founder/longhd.png'],
         ];
-//dd($this->user->tokens);
+        //dd($this->user->tokens);
         return $this->view('web.home', [
             'founders' => $founders,
             'road_maps' => $road_maps,
@@ -249,8 +249,8 @@ class PublicController extends ViewController
     public function faqsView()
     {
 
-        return $this->view('web.faqs',[
-            'questions'=>FAQs::items
+        return $this->view('web.faqs', [
+            'questions' => FAQs::items
         ]);
     }
 
@@ -259,9 +259,9 @@ class PublicController extends ViewController
     {
         $filter = [
             'search' => $request->search,
-            'blog_group'=>[
+            'blog_group' => [
                 'type' => 'kind',
-                'ids' =>[2]
+                'ids' => [2]
             ],
         ];
 
@@ -283,7 +283,7 @@ class PublicController extends ViewController
             }
         })->first();
 
-//        dd($request->slug, $this->locale,$blog);
+        //        dd($request->slug, $this->locale,$blog);
 
         if (empty($blog)) {
             abort(404);
@@ -302,11 +302,16 @@ class PublicController extends ViewController
         return $this->view('web.login.login');
     }
 
-//    public function nftView()
-//    {
-//
-//        return $this->view('web.nft.index');
-//    }
+    public function manageView()
+    {
+        return $this->view('web.manage.index');
+    }
+
+    //    public function nftView()
+    //    {
+    //
+    //        return $this->view('web.nft.index');
+    //    }
     public function download()
     {
 

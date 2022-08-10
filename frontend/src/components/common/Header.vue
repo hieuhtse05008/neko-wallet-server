@@ -1,6 +1,7 @@
 <template>
   <v-app-bar
     class="app-bar"
+    ref="appBar"
     app
     absolute
     dense
@@ -8,8 +9,8 @@
     elevate-on-scroll
     scroll-target="#main"
   >
-    <v-row class="p-5">
-      <v-col cols="6">
+    <v-row>
+      <v-col class="pa-0" cols="6">
         <v-toolbar-title class="title">
           <a href="/login">
             <img
@@ -21,7 +22,7 @@
           </a>
         </v-toolbar-title>
       </v-col>
-      <v-col cols="6" class="text-right">
+      <v-col cols="6" class="text-right pa-0">
         <v-btn color="primary" dark @click="handleLogout"> Logout </v-btn>
       </v-col>
     </v-row>
@@ -46,21 +47,24 @@ export default {
       router.push('/login')
     },
   },
+  mounted: function () {
+    this.$refs.appBar.$el
+      .querySelector('.v-toolbar__content')
+      .classList.add('container')
+  },
 }
 </script>
 
 <style>
 .v-toolbar__content {
-  padding: 10px;
   width: 90%;
-  margin: 0 auto;
+  padding: 0 !important;
 }
 .app-bar {
   height: 60px !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
   position: fixed !important;
 }
 </style>
