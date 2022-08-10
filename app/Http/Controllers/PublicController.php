@@ -7,72 +7,35 @@ namespace App\Http\Controllers;
 use App\Enum\FAQs;
 use App\Enum\Locales;
 use App\Models\Blog;
-use App\Models\Cryptocurrency;
-use App\Models\CryptocurrencyInfo;
-use App\Models\EarlyAccessEmail;
-use App\Models\Network;
 use App\Repositories\BlogRepository;
-use App\Repositories\CategoryRepository;
-use App\Repositories\CryptocurrencyCategoryRepository;
-use App\Repositories\CryptocurrencyRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PublicController extends ViewController
 {
     protected $lang;
-    protected $cryptocurrencyRepository;
-    protected $cryptocurrencyCategoryRepository;
-    protected $categoryRepository;
     protected $blogRepository;
 
-    public function __construct(CryptocurrencyRepository         $cryptocurrencyRepository,
-                                CryptocurrencyCategoryRepository $cryptocurrencyCategoryRepository,
-                                CategoryRepository               $categoryRepository,
-                                BlogRepository                   $blogRepository
+    public function __construct(BlogRepository                   $blogRepository
     )
     {
         parent::__construct();
         $this->lang = config('app.locale');
-        $this->cryptocurrencyRepository = $cryptocurrencyRepository;
-        $this->cryptocurrencyCategoryRepository = $cryptocurrencyCategoryRepository;
-        $this->categoryRepository = $categoryRepository;
+
         $this->blogRepository = $blogRepository;
     }
 
     public function test()
     {
-        return [
-            'ok' => file_exists('httpss://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
-            'ok2' => getimagesize('httpss://nekoinvest.io/images/home/protect.png'),
-            'ok3' => getimagesize('httpss://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
-        ];
+//        return $this->view('web.test' );
+//        return [
+//            'ok' => file_exists('httpss://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
+//            'ok2' => getimagesize('httpss://nekoinvest.io/images/home/protect.png'),
+//            'ok3' => getimagesize('httpss://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
+//        ];
     }
 
-    public function registerEarlyAccessWithEmail(Request $request)
-    {
-        $object = EarlyAccessEmail::firstOrCreate([
-            'email' => $request->email,
-        ], [
-            'ref' => $request->ref,
-        ]);
-        $object->code = substr(md5($object->id), 0, 8);
-        $object->save();
 
-        //
-        $start_time = new Carbon(1632009600);
-        $end_time = $object->created_at->timestamp;
-        $interval = $end_time - $start_time->timestamp;
-        $hours_passed = $interval / 3600;
-        $register_count = max((int)$hours_passed * 40 + 1293, 1293);
-        $total_register = (int)((now()->timestamp - $start_time->timestamp) / 3600 * 40 + 1293);
-
-        return [
-            'info' => $object,
-            'register_count' => $register_count,
-            'total_register' => $total_register,
-        ];
-    }
 
 
     public function homeViewV2(Request $request)
@@ -266,88 +229,11 @@ class PublicController extends ViewController
         ]);
     }
 
-    public function tokensView(Request $request)
-    {
-        //======================================================
-        $this->categoryRepository->skipPresenter(false);
-        $categories = $this->categoryRepository->with(['cryptocurrencies'])->list(null, []);
-
-        $categories = collect($categories)->sortBy([
-            function ($a, $b) {
-                return (int)(count($a['cryptocurrencies']) < count($b['cryptocurrencies']));
-            },
-        ]);
-
-        //======================================================
-
-        $count_total_cryptocurrencies = CryptocurrencyInfo::count('cryptocurrency_id');
-
-        //======================================================
-        $this->cryptocurrencyRepository->skipPresenter(true);
-
-        $filter = [
-            'search' => $request->search,
-            'cryptocurrency_info' => true,
-            'cryptocurrency' => [
-                'from_rank' => 1,
-            ],
-            'category' => [
-                'category_ids' => [$request->category_id],
-            ]
-        ];
-        $cryptocurrencies = $this->cryptocurrencyRepository->orderBy('rank')->list(48, $filter);
 
 
-        return $this->view('web.cryptocurrency.cryptocurrencies', [
-            'cryptocurrencies' => $cryptocurrencies,
-            'categories' => $categories,
-            'count_total_cryptocurrencies' => $count_total_cryptocurrencies,
-            'category_id' => $request->category_id,
-            'search' => $request->search,
-        ]);
-    }
 
-    public function tokenView($lang, Cryptocurrency $cryptocurrency)
-    {
 
-        $related_coins = Cryptocurrency::where('cryptocurrencies.id', '>', $cryptocurrency->id)
-            ->join('cryptocurrency_info', 'cryptocurrencies.id', '=', 'cryptocurrency_info.cryptocurrency_id')
-            ->select('cryptocurrencies.*')
-            ->limit(12)
-            ->get();
-        $exchange_guides = $cryptocurrency->exchange_guides()->get();
-        $neko_exchange_guide = [
-            'id' => '0',
-            'name' => 'NEKO',
-            'guide_html' => [
-                'steps' => [
-                    ['text' => 'Create/Login to your Neko Invest app account',
-                        'image_url' => '',],
-                    ['text' => 'Go to Market page, click on the Search icon and search [TOKEN] in the search bar.',
-                        'image_url' => 'httpss://d1j8r0kxyu9tj8.cloudfront.net/images/1636366375WvZNyMWvLiDgY3y.jpg',],
-                    ['text' => 'Click on [TOKEN] logo and choose Invest. ',
-                        'image_url' => '',],
-                    ['text' => 'Entering the amount of [TOKEN] that you want to buy. Then click on the Get Quotes button.',
-                        'image_url' => 'httpss://d1j8r0kxyu9tj8.cloudfront.net/images/1636366322y919PHen13XXakQ.jpg',],
-                    ['text' => 'Swipe the Swipe to swap button and now you own  [TOKEN]. You can check your [TOKEN] balance in your wallet by going to Wallet page.',
-                        'image_url' => 'httpss://d1j8r0kxyu9tj8.cloudfront.net/images/1636366282fkVuygewNk3agPb.jpg',],
-                ]
-            ],
-        ];
-        return $this->view('web.cryptocurrency.cryptocurrency', [
-            'cryptocurrency' => $cryptocurrency,
-            'exchange_guides' => $exchange_guides,
-            'neko_exchange_guide' => $neko_exchange_guide,
-            'related_coins' => $related_coins,
-        ]);
-    }
 
-    public function cryptocurrencyMobileView(Cryptocurrency $cryptocurrency)
-    {
-        return $this->view('mobile.cryptocurrency', [
-            'cryptocurrency' => $cryptocurrency,
-        ]);
-    }
 
     public function termsOfServiceView()
     {

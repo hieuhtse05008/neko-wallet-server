@@ -39,9 +39,7 @@ Route::post('/register-early-access', [PublicController::class, 'registerEarlyAc
 Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
 Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);
 Route::get('/faqs', [PublicController::class, 'faqsView'])->name('faqs');
-Route::group(["prefix" => 'mobile'], function () {
-    Route::get('/cryptocurrency/{cryptocurrency:id}', [PublicController::class, 'cryptocurrencyMobileView']);
-});
+
 Route::get('/test', [PublicController::class, 'test']);
 //Route::get('/pages/nft', [PublicController::class, 'nftView']);
 Route::get('/download', [PublicController::class, 'download']);
@@ -53,8 +51,6 @@ $publicLocaleRoutes = function () {
         Route::get('/{slug}', [PublicController::class, 'blogView'])->name("blog");
     });
     Route::get('/login', [PublicController::class, 'loginView'])->name("login");
-    Route::get('/cryptocurrencies', [PublicController::class, 'tokensView'])->middleware("include:cryptocurrencies")->name("cryptocurrencies");
-    Route::get('/cryptocurrency/{cryptocurrency:name}', [PublicController::class, 'tokenView'])->name("cryptocurrency");
 
 //    Route::get('/v2', [PublicController::class, 'homeViewV2'])->name("home-v2");
     Route::get('/', [PublicController::class, 'homeViewV2'])->name("home");
