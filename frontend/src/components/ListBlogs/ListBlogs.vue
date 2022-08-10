@@ -16,7 +16,7 @@
           ></v-text-field>
         </div>
       </v-row>
-      <v-row>
+      <v-row class="mb-5">
         <v-layout justify-start wrap>
           <v-col
             xs="12"
@@ -29,7 +29,6 @@
           >
             <v-card
               class="mx-2 mb-2"
-              max-width="374"
               elevation="3"
               @click="() => handleClick(item.id)"
             >
