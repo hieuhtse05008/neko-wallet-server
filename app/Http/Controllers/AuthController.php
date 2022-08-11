@@ -35,10 +35,9 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $token = $request->user()->createToken('authToken')->plainTextToken;
             $request->user()->withAccessToken($token);
-            return $token;
+            // return $token;
 
-            // return redirect()->intended('/');
-
+            return redirect()->intended('/');
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
