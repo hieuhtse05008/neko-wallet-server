@@ -12,7 +12,7 @@
     <v-row>
       <v-col class="pa-0" cols="6">
         <v-toolbar-title class="title">
-          <a href="/login">
+          <a href="/blog">
             <img
               width="100"
               height="28"
@@ -22,31 +22,15 @@
           </a>
         </v-toolbar-title>
       </v-col>
-      <v-col cols="6" class="text-right pa-0">
-        <v-btn color="primary" dark @click="handleLogout"> Logout </v-btn>
-      </v-col>
+      <v-col cols="6" class="text-right pa-0"> </v-col>
     </v-row>
   </v-app-bar>
 </template>
 
 <script>
-import { logout } from '../../services/Api/authApi'
-import router from '@/router'
-
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Header',
-  methods: {
-    handleLogout: async function () {
-      try {
-        logout()
-      } catch (error) {
-        console.log(error)
-      }
-      localStorage.removeItem('token')
-      router.push('/login')
-    },
-  },
   mounted: function () {
     this.$refs.appBar.$el
       .querySelector('.v-toolbar__content')
