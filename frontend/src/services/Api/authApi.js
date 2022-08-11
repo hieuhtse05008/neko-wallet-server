@@ -1,5 +1,11 @@
 import authAxios from '../authAxios'
 
+export const getProfile = () =>
+  authAxios({
+    method: 'GET',
+    url: '/auth/v1/blogs/profile',
+  })
+
 export const getBlogs = (params) =>
   authAxios({
     method: 'GET',

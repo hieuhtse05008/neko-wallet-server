@@ -2,8 +2,6 @@
   <v-app-bar
     class="app-bar"
     ref="appBar"
-    app
-    absolute
     dense
     color="secondary"
     elevate-on-scroll
@@ -49,6 +47,5 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed !important;
 }
 </style>

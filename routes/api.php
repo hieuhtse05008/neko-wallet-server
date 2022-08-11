@@ -55,6 +55,7 @@ Route::post('/login', [App\Http\Controllers\AuthController::class, 'sanctumToken
 Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::prefix("auth/v1")->middleware('auth:sanctum')->group(function () {
     Route::group(["prefix" => 'blogs'], function () {
+        Route::get("/profile", [App\Http\Controllers\API\BlogAPIController::class, 'getProfile']);
         Route::get("/", [App\Http\Controllers\API\BlogAPIController::class, 'index'])->middleware('include:blog_groups');
         Route::post("/", [App\Http\Controllers\API\BlogAPIController::class, 'store']);
         Route::get("{blog}", [App\Http\Controllers\API\BlogAPIController::class, 'show'])->middleware("include:blog_groups");

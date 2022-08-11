@@ -10,6 +10,7 @@ use App\Repositories\BlogRepository;
 use App\Repositories\RefBlogGroupRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\APIController;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 /**
@@ -85,12 +86,12 @@ class BlogAPIController extends APIController
     public function index(Request $request)
     {
         $filter = [
-            'blog'=>[
-                'statuses'=>$request->statuses
+            'blog' => [
+                'statuses' => $request->statuses
             ],
-            'blog_group'=>[
-                'ids'=>$request->blog_group_ids,
-                'type'=>$request->type,
+            'blog_group' => [
+                'ids' => $request->blog_group_ids,
+                'type' => $request->type,
             ],
         ];
         $limit = $request->limit;
@@ -144,12 +145,12 @@ class BlogAPIController extends APIController
         $input = $request->validated();
         $blog = $this->blogRepository->create($input);
 
-        foreach (array_keys(BlogGroup::TYPES) as $type){
-            if(isset($input["{$type}_id"])){
+        foreach (array_keys(BlogGroup::TYPES) as $type) {
+            if (isset($input["{$type}_id"])) {
                 $this->refBlogGroupRepository->updateOrCreate([
                     'blog_id' => $blog['id'],
-                    'type'=>$type,
-                ],[
+                    'type' => $type,
+                ], [
                     'blog_group_id' => $input["{$type}_id"],
                 ]);
             }
@@ -267,16 +268,15 @@ class BlogAPIController extends APIController
         $input = $request->validated();
 
         $blog = $this->blogRepository->update($input, $blog->id);
-        foreach (array_keys(BlogGroup::TYPES) as $type){
-            if(isset($input["{$type}_id"])){
+        foreach (array_keys(BlogGroup::TYPES) as $type) {
+            if (isset($input["{$type}_id"])) {
                 $this->refBlogGroupRepository->updateOrCreate([
                     'blog_id' => $blog['id'],
-                    'type'=>$type,
-                ],[
+                    'type' => $type,
+                ], [
                     'blog_group_id' => $input["{$type}_id"],
                 ]);
             }
-
         }
 
         return $this->respondSuccess([
@@ -335,5 +335,13 @@ class BlogAPIController extends APIController
         $blog->delete();
 
         return $this->respondSuccessWithMessage('Blog deleted successfully');
+    }
+
+    public function getProfile()
+    {
+        $user = Auth::user();
+        return $this->respondSuccess([
+            'user' => $user
+        ]);
     }
 }
