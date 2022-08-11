@@ -469,7 +469,7 @@
                         extraPlugins: [MyCustomUploadAdapterPlugin,],
                     }).then(e => {
                         editor = e;
-                        this.editor = e;
+                        // this.editor = e;
                     }).catch(error => {
                         console.error(error);
                     });

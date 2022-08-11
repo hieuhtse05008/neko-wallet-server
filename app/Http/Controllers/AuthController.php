@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use Response;
 
 class AuthController extends Controller
 {
@@ -31,9 +35,9 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $token = $request->user()->createToken('authToken')->plainTextToken;
             $request->user()->withAccessToken($token);
+            return $token;
 
-
-            return redirect()->intended('/');
+            // return redirect()->intended('/');
 
         }
         return back()->withErrors([
@@ -48,13 +52,25 @@ class AuthController extends Controller
             // Revoke all tokens...
             $request->user()->tokens()->delete();
         }
-        Auth::logout();
-        $request->session()->flush();
+        // Auth::logout();
+        // $request->session()->flush();
 
-        return redirect('/');
-
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ], 200);
     }
 
+    public function sanctumToken(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-
+        if (Auth::attempt($credentials)) {
+            $token = $request->user()->createToken('authToken')->plainTextToken;
+            return Response::json(['token' => $token]);
+        }
+        return Response::json(['error' => 'Unauthorized'], 401);
+    }
 }

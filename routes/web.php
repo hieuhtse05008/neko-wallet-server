@@ -33,15 +33,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/login', [PublicController::class, 'loginView']);
+Route::get('/manage/{any}', [PublicController::class, 'manageView'])->where('any', '.*');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/register-early-access', [PublicController::class, 'registerEarlyAccessWithEmail']);
 Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
 Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);
 Route::get('/faqs', [PublicController::class, 'faqsView'])->name('faqs');
-Route::group(["prefix" => 'mobile'], function () {
-    Route::get('/cryptocurrency/{cryptocurrency:id}', [PublicController::class, 'cryptocurrencyMobileView']);
-});
+
 Route::get('/test', [PublicController::class, 'test']);
 //Route::get('/pages/nft', [PublicController::class, 'nftView']);
 Route::get('/download', [PublicController::class, 'download']);
@@ -53,15 +52,13 @@ $publicLocaleRoutes = function () {
         Route::get('/{slug}', [PublicController::class, 'blogView'])->name("blog");
     });
     Route::get('/login', [PublicController::class, 'loginView'])->name("login");
-    Route::get('/cryptocurrencies', [PublicController::class, 'tokensView'])->middleware("include:cryptocurrencies")->name("cryptocurrencies");
-    Route::get('/cryptocurrency/{cryptocurrency:name}', [PublicController::class, 'tokenView'])->name("cryptocurrency");
 
-//    Route::get('/v2', [PublicController::class, 'homeViewV2'])->name("home-v2");
+    //    Route::get('/v2', [PublicController::class, 'homeViewV2'])->name("home-v2");
     Route::get('/', [PublicController::class, 'homeViewV2'])->name("home");
 };
 
 Route::prefix('{lang?}')
-//    ->where(['lang'=>'[a-zA-Z]{2}'])
+    //    ->where(['lang'=>'[a-zA-Z]{2}'])
     ->middleware('locale')->group($publicLocaleRoutes);
 
 /*
@@ -71,5 +68,4 @@ Route::prefix('{lang?}')
 */
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/blog/upload/{blog?}', [ViewAuthController::class, 'uploadBlogView'])->middleware('include:blog_groups');
-
 });
