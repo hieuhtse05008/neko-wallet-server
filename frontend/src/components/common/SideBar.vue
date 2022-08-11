@@ -18,23 +18,17 @@
     <v-divider></v-divider>
 
     <v-list nav dense>
-      <v-list-item link>
+      <v-list-item
+        :class="currentItemIndex === index ? 'selected' : ''"
+        :key="index"
+        v-for="(item, index) in NavItems"
+        @click="() => handleClickItem(`/${item.path}`, index)"
+        link
+      >
         <v-list-item-icon>
-          <v-icon>mdi-folder</v-icon>
+          <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>My Files</v-list-item-title>
-      </v-list-item>
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-account-multiple</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Shared with me</v-list-item-title>
-      </v-list-item>
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-star</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Starred</v-list-item-title>
+        <v-list-item-title>{{ item.name }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -42,7 +36,7 @@
 
 <script>
 import { getProfile } from '@/services/Api/authApi'
-
+import router from '@/router'
 export default {
   name: 'SideBar',
   data() {
@@ -51,6 +45,19 @@ export default {
       name: null,
       email: null,
       avatar_url: null,
+      currentItemIndex: 0,
+      NavItems: [
+        {
+          path: 'blog',
+          name: 'Blogs',
+          icon: 'mdi-folder',
+        },
+        {
+          path: 'test',
+          name: 'Test',
+          icon: 'mdi-account-group',
+        },
+      ],
     }
   },
   methods: {
@@ -67,9 +74,19 @@ export default {
         console.log('get profile error')
       }
     },
+    handleClickItem(path, index) {
+      this.currentItemIndex = index
+      router.push(path)
+    },
   },
   mounted: function () {
     this.getProfile()
   },
 }
 </script>
+
+<style scoped>
+.selected {
+  background-color: #e0e0e0;
+}
+</style>
