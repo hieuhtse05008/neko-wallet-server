@@ -16,7 +16,8 @@
           ></v-text-field>
         </div>
       </v-row>
-      <v-row class="mb-5">
+
+      <v-row class="mb-5" v-if="!loading">
         <v-layout justify-start wrap>
           <v-col
             xs="12"
@@ -46,6 +47,36 @@
           <v-spacer></v-spacer>
         </v-layout>
       </v-row>
+
+      <v-row class="mb-5" v-if="loading">
+        <v-layout justify-start wrap>
+          <v-col
+            xs="12"
+            sm="6"
+            md="4"
+            lg="3"
+            xl="2.4"
+            v-for="(item, index) in new Array(params.limit).fill(0)"
+            :key="index"
+          >
+            <v-skeleton-loader
+              class="mx-2 mb-2"
+              type="card"
+              min-width="150"
+            ></v-skeleton-loader>
+          </v-col>
+          <v-spacer></v-spacer>
+        </v-layout>
+      </v-row>
+
+      <v-row class="mb-5" justify="center" align="center">
+        <v-pagination
+          v-model="params.page"
+          :length="totalPage"
+          circle
+          @input="getListBlogs"
+        ></v-pagination>
+      </v-row>
     </v-container>
   </v-container>
 </template>
@@ -53,6 +84,7 @@
 <script>
 import router from '@/router'
 import { getBlogs } from '../../services/Api/authApi.js'
+import { QUANTITY_CARD } from '../../utils/constants'
 
 export default {
   name: 'BlogPage',
@@ -62,7 +94,11 @@ export default {
       blogs: [],
       params: {
         search: null,
+        page: 1,
+        limit: QUANTITY_CARD,
       },
+      totalPage: 0,
+      loading: true,
     }
   },
 
@@ -70,17 +106,26 @@ export default {
     handleClick: (id) => {
       router.push(`/blog/upload/${id}`)
     },
+    sleep: function (ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms))
+    },
     getListBlogs: async function () {
+      this.loading = true
       try {
         const response = await getBlogs(this.params)
-        this.blogs = response.data.blogs
+        this.blogs = response.data.blogs.items
+        this.params.page = response.data.blogs.meta.current_page
+        this.totalPage = response.data.blogs.meta.total_pages
+        await this.sleep(1000)
       } catch {
         console.log('error')
       }
+      this.loading = false
     },
     handleSearch: async function () {
       try {
         if (this.params.search === '') this.params.search = null
+        this.params.page = 1
         await this.getListBlogs()
       } catch {
         console.log('error')

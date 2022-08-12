@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/login', [PublicController::class, 'loginView']);
-Route::get('/manage/{any}', [PublicController::class, 'manageView'])->where('any', '.*');
+Route::get('/manage/{any?}', [PublicController::class, 'manageView']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/register-early-access', [PublicController::class, 'registerEarlyAccessWithEmail']);

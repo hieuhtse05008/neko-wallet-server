@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\APIController;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 /**
@@ -302,5 +303,13 @@ class UserAPIController extends APIController
         $user->delete();
 
         return $this->respondSuccessWithMessage('User deleted successfully');
+    }
+
+    public function getProfile()
+    {
+        $user = Auth::user();
+        return $this->respondSuccess([
+            'user' => $user
+        ]);
     }
 }

@@ -10,7 +10,7 @@
     <v-row>
       <v-col class="pa-0" cols="6">
         <v-toolbar-title class="title">
-          <a href="/blog">
+          <a href="/">
             <img
               width="100"
               height="28"

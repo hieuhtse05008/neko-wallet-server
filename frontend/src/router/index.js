@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/blog',
+    path: '*',
     name: 'Blog',
     component: ListBlogs,
   },
@@ -25,7 +25,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: '/manage/',
+  base: '/manage',
   routes,
 })
 

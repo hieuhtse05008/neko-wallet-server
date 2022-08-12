@@ -10,7 +10,6 @@ use App\Repositories\BlogRepository;
 use App\Repositories\RefBlogGroupRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\APIController;
-use Illuminate\Support\Facades\Auth;
 use Response;
 
 /**
@@ -335,13 +334,5 @@ class BlogAPIController extends APIController
         $blog->delete();
 
         return $this->respondSuccessWithMessage('Blog deleted successfully');
-    }
-
-    public function getProfile()
-    {
-        $user = Auth::user();
-        return $this->respondSuccess([
-            'user' => $user
-        ]);
     }
 }

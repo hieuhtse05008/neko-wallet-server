@@ -28,3 +28,5 @@ export const TYPES = {
   category: { key: 'category', name: 'Category' },
   kind: { key: 'kind', name: 'Kind' },
 }
+
+export const QUANTITY_CARD = 12
