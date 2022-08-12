@@ -60,12 +60,28 @@
             test our product and making it become the favorite<br>
             wallet for all people
         </div>
-        <div class="text-center">
+        <div class="text-center mb-5">
 
-        <a  href="https://discord.gg/898xnMFXkU" class="btn rounded-pill text-white bg-discord d-inline-flex px-5 py-3 fw-light">
-            <h3 class="m-0" style="line-height: 0;"><i class="fab fa-discord text-white me-2 "></i></h3>
-            <h4 class="m-0 fw-normal">Join our Discord</h4>
-        </a>
+            <a href="https://discord.gg/898xnMFXkU"
+               class="btn rounded-pill text-white bg-discord d-inline-flex px-5 py-3 fw-light">
+                <h3 class="m-0" style="line-height: 0;"><i class="fab fa-discord text-white me-2 "></i></h3>
+                <h4 class="m-0 fw-normal">Join our Discord</h4>
+            </a>
+        </div>
+        <div class="container align-items-center d-sm-flex justify-content-between d-none">
+            @foreach($partners as $partner)
+                <div class="">
+                    <img loading="lazy" src="{{$partner}}">
+                </div>
+            @endforeach
+        </div>
+        <div class="align-items-center d-flex justify-content-between w-100 d-sm-none py-3"
+             style="overflow-x: scroll; overflow-y:hidden; ">
+            @foreach($partners as $partner)
+                <div class="me-5">
+                    <img loading="lazy" src="{{$partner}}">
+                </div>
+            @endforeach
         </div>
     </section>
 
@@ -110,7 +126,7 @@
             transform: translateY(-50%);
             z-index: -1;
 
-            background: linear-gradient(90deg, rgba(255,255,255,0) 4%, rgba(255,255,255,.3) 50%, rgba(255,255,255,0) 96%);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 4%, rgba(255, 255, 255, .3) 50%, rgba(255, 255, 255, 0) 96%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
 
