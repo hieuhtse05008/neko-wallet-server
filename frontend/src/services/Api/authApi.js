@@ -1,12 +1,5 @@
 import authAxios from '../authAxios'
 
-export const logout = () => {
-  authAxios({
-    method: 'POST',
-    url: '/logout',
-  })
-}
-
 export const getBlogs = (params) =>
   authAxios({
     method: 'GET',

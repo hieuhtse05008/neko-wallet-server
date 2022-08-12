@@ -51,8 +51,8 @@ class AuthController extends Controller
             // Revoke all tokens...
             $request->user()->tokens()->delete();
         }
-        // Auth::logout();
-        // $request->session()->flush();
+        Auth::logout();
+        $request->session()->flush();
 
         return response()->json([
             'message' => 'Successfully logged out'
