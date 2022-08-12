@@ -53,8 +53,8 @@ $publicLocaleRoutes = function () {
     });
     Route::get('/login', [PublicController::class, 'loginView'])->name("login");
 
-    //    Route::get('/v2', [PublicController::class, 'homeViewV2'])->name("home-v2");
-    Route::get('/', [PublicController::class, 'homeViewV2'])->name("home");
+
+    Route::get('/', [PublicController::class, 'homeView'])->name("home");
 };
 
 Route::prefix('{lang?}')

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Enum\FAQs;
 use App\Enum\Locales;
+use App\Enum\ViewTexts;
 use App\Models\Blog;
 use App\Repositories\BlogRepository;
 use Carbon\Carbon;
@@ -36,7 +37,9 @@ class PublicController extends ViewController
     }
 
 
-
+    public function homeView(Request $request){
+        return $this->view('v3.home.home',ViewTexts::HOME);
+    }
 
     public function homeViewV2(Request $request)
     {
@@ -128,110 +131,6 @@ class PublicController extends ViewController
             'partners' => $partners,
         ]);
     }
-
-    public function homeView(Request $request)
-    {
-
-        $networks = Network::whereIn('id', [1, 2, 4])->get();
-        $features = [
-            [
-                'title' => 'web.home.feature.1st_title',
-                'description' => 'web.home.feature.1st_description',
-                'image_url' => '/images/feature/boat.png',
-            ],
-            [
-                'title' => 'web.home.feature.2nd_title',
-                'description' => 'web.home.feature.2nd_description',
-                'image_url' => '/images/feature/exchange.png',
-            ],
-            [
-                'title' => 'web.home.feature.3rd_title',
-                'description' => 'web.home.feature.3rd_description',
-                'image_url' => '/images/feature/nft.png',
-            ],
-            [
-                'title' => 'web.home.feature.4th_title',
-                'description' => 'web.home.feature.4th_description',
-                'image_url' => '/images/feature/dapps.png',
-            ],
-            [
-                'title' => 'web.home.feature.5th_title',
-                'description' => 'web.home.feature.5th_description',
-                'image_url' => '/images/feature/market.png',
-            ],
-            [
-                'title' => 'web.home.feature.6th_title',
-                'description' => 'web.home.feature.6th_description',
-                'image_url' => '/images/feature/inspect.png',
-            ],
-        ];
-        $road_maps = [
-            [
-                'time' => '2021',
-                'title' => 'MVP',
-                'current' => true,
-                'items' => [
-                    ['title' => 'Support BSC, Ethereum & Solana', 'done' => true],
-                    ['title' => 'Aggregator & Multichain wallet ', 'done' => true],
-                    ['title' => 'Secure Seed round', 'done' => true],
-                    ['title' => 'Beta release', 'done' => true],
-                ],
-            ],
-            [
-                'time' => 'Q1 2022',
-                'title' => 'Beta Release',
-                'items' => [
-                    ['title' => 'Refine platform performance, UIUX', 'done' => false],
-                    ['title' => 'Integrate more public networks', 'done' => false],
-                    ['title' => 'Add Decentralized Fund Management feature', 'done' => false],
-                    ['title' => 'Add cross-chain protocol aggregation', 'done' => false],
-                    ['title' => 'Secure Strategic round', 'done' => false],
-                ],
-            ],
-            [
-                'time' => 'Q2 2022',
-                'title' => 'Public Release',
-                'items' => [
-                    ['title' => 'Smart contract Audit', 'done' => false],
-                    ['title' => 'Aggregate more Dexes', 'done' => false],
-                    ['title' => 'Add Limit Order protocol', 'done' => false],
-                    ['title' => 'Introduce Neko NFT collection based on the branding of Neko', 'done' => false],
-                    ['title' => 'Issue token $NEKO', 'done' => false],
-                ],
-            ],
-            [
-                'time' => 'Q3-Q4 2022',
-                'title' => 'User Growth',
-                'items' => [
-                    ['title' => 'Neko Index Fund', 'done' => false],
-                    ['title' => 'Aggregate DeFi Yield product', 'done' => false],
-                    ['title' => 'Launch Neko-verse applications for Neko NFT', 'done' => false],
-                    ['title' => 'Aggregate multichain NFT Marketplace', 'done' => false],
-                ],
-            ],
-        ];
-        $founders = [
-            ['name' => 'LEO NGUYEN', 'role' => 'CEO', 'department' => 'Msc. Strategy - Aalto Uni', 'avatar' => '/images/founder/locnv.png'],
-            ['name' => 'NGUYEN VIET HUNG', 'role' => 'Product', 'department' => 'Computer Science FPT Uni', 'avatar' => '/images/founder/hungnv.png'],
-            ['name' => 'TRINH ANH DUC', 'role' => 'Strategy & Finance', 'department' => 'Venture Capital', 'avatar' => '/images/founder/ducta.png'],
-            ['name' => 'DUONG NHAT ANH', 'role' => 'NFT Designer', 'department' => 'Graphic Design FPT Uni', 'avatar' => '/images/founder/anhnd.png'],
-            ['name' => 'PHAN MINH DUONG', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH', 'avatar' => '/images/founder/duongpm.png'],
-            ['name' => 'HA TRUNG HIEU', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH', 'avatar' => '/images/founder/hieuht.png'],
-            ['name' => 'HANH PHAM', 'role' => 'Graphic Designer', 'department' => '', 'avatar' => '/images/founder/hanhpt.png'],
-            //            ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni', 'avatar' => '/images/founder/longhd.png'],
-        ];
-        //dd($this->user->tokens);
-        return $this->view('web.home', [
-            'founders' => $founders,
-            'road_maps' => $road_maps,
-            'networks' => $networks,
-            'features' => $features,
-        ]);
-    }
-
-
-
-
 
 
 

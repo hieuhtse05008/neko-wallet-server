@@ -1,0 +1,92 @@
+
+body {
+
+    /*opacity: 0.4;*/
+    /*transform: matrix(1, 0, 0, -1, 0, 0);*/
+    font-family: Roboto;
+    color: white !important;
+    background: #161C2A;
+}
+
+:root {
+    --main-color: #FC7819;
+    --gray-color: rgba(250, 250, 250, 0.1);
+    --gray-text-color:rgba(250, 250, 250, 0.8);
+    /*--xs: 0;*/
+    /*--sm: 576px;*/
+    /*--md: 768px;*/
+    /*--lg: 992px;*/
+    /*--xl: 1200px;*/
+    /*--xxl: 1400px;*/
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    cursor: pointer;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 100px;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background: #9e9e9e;
+    border-radius: 100px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #9e9e9e;
+}
+
+.bg-gray {
+    background-color: var(--gray-color);
+}
+.bg-discord {
+    background-color: #7289DA;
+}
+a:hover{
+    color: white;
+}
+
+#navbar{
+    transition: all .3s ease-in-out;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+
+.text-main {
+    color: rgba(252, 158, 79, 1);
+}
+
+.text-gray {
+    color: var(--gray-text-color);
+}
+.mh-1vh{
+    min-height: calc(100vh - 78.41px);
+}
+
+.fs-60px{
+    font-size: 60px;
+}
+
+@media (max-width: 576px) {
+    .fs-60px {
+        font-size: 30px;
+    }
+
+}
+
+object{
+    pointer-events: none;
+}
