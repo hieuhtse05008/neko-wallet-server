@@ -14,6 +14,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/images/logo/neko-logo-orange.png">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
+
     <link rel="stylesheet" href="/css/web/main-v3.css?1233">
     <link rel="stylesheet" href="/css/fontawesome/fontawesome.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap"
@@ -88,7 +89,7 @@
 
 
 @yield('content')
-<footer
+<footer id="footer"
     {{--    class="border-top border-gray"--}}
 >
     <hr class="m-0">
@@ -124,6 +125,7 @@
         </div>
     </div>
 </footer>
+
 
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/axios.js"></script>
