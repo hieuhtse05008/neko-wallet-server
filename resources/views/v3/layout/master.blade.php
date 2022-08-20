@@ -136,7 +136,7 @@
     axios.defaults.withCredentials = true;
     axios.defaults.credentials = true;
 </script>
-@include('web.modal.check_my_spot')
+
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q091EE5SJE"></script>
