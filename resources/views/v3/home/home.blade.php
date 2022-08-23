@@ -1,9 +1,9 @@
 @extends('v3.layout.master')
 @section('content')
 
-    <section style="height: 75vh">
-        <div class="text-center" style="padding-top: 25vh;">
-            <h1 class="color-gradient fs-60px">Your All-in-one Solution</h1>
+    <section style="" id="top-section">
+        <div class="text-center">
+            <h1 class="color-gradient fs-60px fw-bold">Your All-in-one Solution</h1>
             <h1 class="fs-60px mb-3">For NFT & Web3</h1>
             <div class="mb-5 d-none d-md-block">
                 <div>
@@ -33,8 +33,8 @@
             </div>
         </div>
     </section>
-    <section class="d-flex flex-column justify-content-center position-relative" id="phone"
-             style="min-height: 100vh;">
+    <section class="d-flex flex-column justify-content-center position-relative h-100vh" id="phone"
+             style="">
 
         <img src="/images/v3/home/bg-gradient.webp" class="bg position-absolute">
 
@@ -93,9 +93,9 @@
 
     </section>
 
-    <section class="snap-container " id="snap" style="height: 100vh; overflow: hidden;">
+    <section class="snap-container" id="snap" style=" overflow: hidden;">
 
-        <div class="snap-item" style="height: 100vh;">
+        <div class="snap-item h-100vh" style="">
             <div class="bg  h-100">
                 <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center h-100">
                     <div class="feature-paginator d-block d-md-none" style="">
@@ -104,7 +104,7 @@
                         <div class="rounded-pill mb-2 bg-gray"></div>
                         <div class="rounded-pill mb-2 bg-gray"></div>
                     </div>
-                    <div class="position-relative pt-5 pt-md-0">
+                    <div class="position-relative pt-5 pt-md-0 w-100">
                         <div class="feature-paginator d-none d-md-block" style="">
                             <div class="rounded-pill mb-2 bg-white"></div>
                             <div class="rounded-pill mb-2 bg-gray"></div>
@@ -137,7 +137,7 @@
                 </div>
             </div>
         </div>
-        <div class="snap-item opacity-0 d-none" style="height: 100vh;">
+        <div class="snap-item opacity-0 d-none h-100vh" style="">
 
             <div class="bg  h-100">
                 <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center h-100">
@@ -147,8 +147,8 @@
                         <div class="rounded-pill mb-2 bg-gray"></div>
                         <div class="rounded-pill mb-2 bg-gray"></div>
                     </div>
-                    <div class="position-relative pt-5 pt-md-0">
-                        <div class="feature-paginator d-none d-md-block" style="">
+                    <div class="position-relative pt-5 pt-md-0 w-100">
+                        <div class="feature-paginator d-none d-md-block " style="">
                             <div class="rounded-pill mb-2 bg-gray"></div>
                             <div class="rounded-pill mb-2 bg-white"></div>
                             <div class="rounded-pill mb-2 bg-gray"></div>
@@ -177,7 +177,7 @@
                 </div>
             </div>
         </div>
-        <div class="snap-item opacity-0 d-none" style="height: 100vh;">
+        <div class="snap-item opacity-0 d-none h-100vh" style="">
             <div class="bg  h-100">
 
                 <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center h-100">
@@ -187,7 +187,7 @@
                         <div class="rounded-pill mb-2 bg-white"></div>
                         <div class="rounded-pill mb-2 bg-gray"></div>
                     </div>
-                    <div class="position-relative pt-5 pt-md-0">
+                    <div class="position-relative pt-5 pt-md-0  w-100">
                         <div class="feature-paginator d-none d-md-block" style="">
                             <div class="rounded-pill mb-2 bg-gray"></div>
                             <div class="rounded-pill mb-2 bg-gray"></div>
@@ -198,14 +198,18 @@
                         <h1 class="mb-4">Lightning Transaction.<br>Super Low Fee.</h1>
                         <div>We know you're busy, so we designed<br> Neko to be fast and easy to use.</div>
                     </div>
-                    <div class="position-relative h-100 min-width-50">
+                    <div class="d-block d-md-none h-100 min-width-50 position-relative w-100">
+                        <img src="/images/v3/home/features/3-m.webp" class="center position-absolute w-100" style="visibility: visible;">
+
+                    </div>
+                    <div class="position-relative h-100 min-width-50 d-none d-md-block">
                         <img src="/images/v3/home/features/3-swap.png" class="position-absolute w-100 center-y">
-                        <img src="/images/v3/home/features/3-swap.png" class="invisible bottom-0 w-100">
+{{--                        <img src="/images/v3/home/features/3-swap.png" class="invisible bottom-0 w-100">--}}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="snap-item opacity-0 d-none" style="height: 100vh;">
+        <div class="snap-item opacity-0 d-none h-100vh" style="">
             <div class="bg  h-100">
 
                 <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center h-100">
@@ -215,7 +219,7 @@
                         <div class="rounded-pill mb-2 bg-gray"></div>
                         <div class="rounded-pill mb-2 bg-white"></div>
                     </div>
-                    <div class="position-relative pt-5 pt-md-0">
+                    <div class="position-relative pt-5 pt-md-0  w-100">
                         <div class="feature-paginator d-none d-md-block" style="">
                             <div class="rounded-pill mb-2 bg-gray"></div>
                             <div class="rounded-pill mb-2 bg-gray"></div>
@@ -226,9 +230,12 @@
                         <h1 class="mb-4">Explore the best of what<br>the market has to offer</h1>
                         <div>Neko is your one-stop tool <br> for all of your NFT needs.</div>
                     </div>
-                    <div class="position-relative h-100 min-width-50">
+                    <div class="d-block d-md-none h-100 min-width-50 position-relative w-100">
+                        <img src="/images/v3/home/features/4-m.webp" class="center position-absolute w-100" style="visibility: visible;">
+                    </div>
+                    <div class="position-relative h-100 min-width-50 d-none d-md-block" >
                         <img src="/images/v3/home/features/4-phone.png" class="position-absolute bottom-0  w-100">
-                        <img src="/images/v3/home/features/4-phone.png" class="invisible bottom-0 w-100">
+{{--                        <img src="/images/v3/home/features/4-phone.png" class="invisible bottom-0 w-100">--}}
                     </div>
                 </div>
             </div>
@@ -241,8 +248,8 @@
 
     <section class="snap-item" style="min-height: 110vh"></section>
 
-    <section id="end-snap" class="position-relative"
-             style="min-height: 100vh; z-index: 9999;background: rgba(1, 0, 2, 1);">
+    <section id="end-snap" class="position-relative h-100vh"
+             style=" z-index: 9999;background: rgba(1, 0, 2, 1);">
         <h1 class="text-center py-5">The Ultimate Metaverse Wallet</h1>
         <div class="container">
             <div class="row gy-4 gx-4">
@@ -299,7 +306,7 @@
     </section>
     <section class="my-5 py-5"></section>
 
-    <section style="min-height: 100vh;">
+    <section class="h-100vh">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6">
@@ -334,26 +341,28 @@
                         <div class="carousel-inner">
                             @for($i = 1; $i < 7; $i++ )
                                 <div class="carousel-item {{$i > 1 ? '' : 'active'}}">
-                                    <img src="/images/v3/home/tweets/{{$i}}.png"  class=" w-100">
+                                    <img src="/images/v3/home/tweets/{{$i}}.png" class=" w-100">
                                 </div>
                             @endfor
 
                         </div>
-{{--                        <button class="carousel-control-prev" type="button" data-bs-target="#tweets" data-bs-slide="prev">--}}
-{{--                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>--}}
-{{--                            <span class="visually-hidden">Previous</span>--}}
-{{--                        </button>--}}
-{{--                        <button class="carousel-control-next" type="button" data-bs-target="#tweets" data-bs-slide="next">--}}
-{{--                            <span class="carousel-control-next-icon" aria-hidden="true"></span>--}}
-{{--                            <span class="visually-hidden">Next</span>--}}
-{{--                        </button>--}}
+                        {{--                        <button class="carousel-control-prev" type="button" data-bs-target="#tweets" data-bs-slide="prev">--}}
+                        {{--                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>--}}
+                        {{--                            <span class="visually-hidden">Previous</span>--}}
+                        {{--                        </button>--}}
+                        {{--                        <button class="carousel-control-next" type="button" data-bs-target="#tweets" data-bs-slide="next">--}}
+                        {{--                            <span class="carousel-control-next-icon" aria-hidden="true"></span>--}}
+                        {{--                            <span class="visually-hidden">Next</span>--}}
+                        {{--                        </button>--}}
                     </div>
 
                 </div>
             </div>
+            </div>
     </section>
-    <section class="my-5 py-5 d-none d-md-block"></section>
-    <section>
+    <section id="download-section" class="position-relative">
+        <div class="my-5 py-5 d-none d-md-block"></div>
+
         <div class="fw-bold fs-80 text-center mb-3">
             Start using the<br>
             Ultimate Metaverse Wallet
@@ -369,8 +378,8 @@
                 <object data="/images/v3/web/apple_store.svg" type="image/svg+xml"></object>
             </a>
         </div>
+    <div class="my-5 py-5"></div>
     </section>
-    <section class="my-5 py-5"></section>
 
 @endsection
 @push('scripts')
@@ -383,7 +392,7 @@
         var matchSnap = false;
         var currentSnap = 0;
         const handleNavbar = function () {
-
+            if (window.screen.width < 576) return;
             var currentScrollPos = window.pageYOffset;
             if (prevScrollpos > currentScrollPos) {
                 document.getElementById("navbar").style.top = "0";
@@ -464,13 +473,33 @@
     <style>
         body {
 
-            background: rgba(1, 0, 2, 1);
+            background: rgba(1, 0, 2, 1) url('/images/v3/home/bg-gradient-2.webp') no-repeat center;
+            background-position-y: bottom;
+            background-size: contain;
 
         }
 
         html {
             scroll-behavior: smooth;
         }
+
+
+        #navbar{
+
+            /*background: rgba(1, 0, 2, 1);*/
+
+        }
+        .collapsing #nav-content-mobile{
+            height: unset!important;
+        }
+        #top-section{
+            height: 75vh;
+        }
+
+        #top-section > .text-center{
+            padding-top: 25vh;
+        }
+
 
         .text-feature {
             color: rgba(250, 250, 250, 0.3);
@@ -514,7 +543,22 @@
             background-size: cover;
             background-position-y: top;
         }
+        /*section#download-section {*/
+        /*    background: rgba(1, 0, 2, 1) url("/images/v3/home/bg-gradient-2.webp") no-repeat center;*/
+        /*    background-size: cover;*/
+        /*    background-position-y: top;*/
+        /*}*/
 
+        /*section#download-section{*/
+        /*    background-image: url('/images/v3/home/bg-gradient.webp');*/
+        /*    background-size: contain;*/
+        /*    background-repeat: no-repeat;*/
+        /*    background-position: bottom;*/
+        /*}*/
+        .snap-item {
+            position: relative;
+            display: grid;
+        }
 
         .snap-item .bg { /*:not(:last-child)*/
             /*border: solid 1px red;*/
@@ -571,29 +615,43 @@
             background-color: var(--gray-color);
         }
 
-        #tweets .carousel-indicators [data-bs-target]:not(.active){
+        #tweets .carousel-indicators [data-bs-target]:not(.active) {
             width: 10px;
         }
-        #tweets .carousel-indicators [data-bs-target]{
+
+        #tweets .carousel-indicators [data-bs-target] {
             border-top: none;
             border-bottom: none;
             border-radius: 10px;
             width: 20px;
         }
-        #tweets .carousel-item{
+
+        #tweets .carousel-item {
             text-align: center;
         }
-        #tweets .carousel-inner{
-             min-height: 350px;
+
+        #tweets .carousel-inner {
+            min-height: 350px;
+        }
+
+        .h-100vh {
+            min-height: 100vh;
         }
 
         @media (max-width: 576px) {
+            body{
+                background-size: auto;
+
+            }
             section#snap {
 
                 background-size: contain;
 
             }
+            /*div#navbarSupportedContent.show {*/
+            /*    height: calc(100vh - 78px);*/
 
+            /*}*/
             .feature-paginator {
                 transform: none;
                 left: 10px;
@@ -621,9 +679,19 @@
             .fs-80 {
                 font-size: 60px;
             }
+            .h-100vh{
+                padding-top: 78px;
+            }
+            #top-section{
+                height: 50vh;
+            }
+            #top-section > .text-center{
+                padding-top: 10vh;
+            }
         }
+
+
     </style>
 
 @endsection
-
 

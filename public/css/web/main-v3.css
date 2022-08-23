@@ -58,6 +58,25 @@ a:hover{
 
 #navbar{
     transition: all .3s ease-in-out;
+    z-index: 10000;
+
+}
+
+button.navbar-toggler.collapsed .fa-bars, button.navbar-toggler:not(.collapsed) .fa-times{
+    display: block;
+}
+button.navbar-toggler:not(.collapsed) .fa-bars,button.navbar-toggler.collapsed .fa-times{
+    display: none;
+}
+button.navbar-toggler, button.navbar-toggler:focus {
+    border: none;
+    background-color: var(--gray-color);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    z-index: 10000;
+    font-size: 16px;
+    box-shadow: none;
 }
 
 .pointer {
@@ -71,9 +90,6 @@ a:hover{
 
 .text-gray {
     color: var(--gray-text-color);
-}
-.mh-1vh{
-    min-height: calc(100vh - 78.41px);
 }
 
 .fs-60px{

@@ -198,7 +198,7 @@
     <hr class="m-0">
     <div class="container-md">
         <div class="d-flex justify-content-between align-items-center flex-column flex-sm-row py-4">
-            <div class="text-gray text-center text-gray text-sm-start">Copyright © 2022 Neko Global. <br class="d-block d-sm-none"> All rights reserved.</div>
+            <div class="text-gray text-center text-gray text-sm-start">© 2022 Neko Global. <br class="d-block d-sm-none"> All rights reserved.</div>
             <div class="mt-3 d-block d-sm-none"></div>
             <div onclick="document.body.scrollTop = 0;document.documentElement.scrollTop = 0;"
                  class="d-flex align-items-center pointer text-gray justify-content-center">
