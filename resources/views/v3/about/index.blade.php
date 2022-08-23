@@ -2,29 +2,39 @@
 @section('content')
 <section id='members'>
     <div class="container">
-        <div class="row spacing1">
+        <div class="row justify-content-center spacing1">
             <div class="col-11">
-                <div class="text-lelt">
+                <div class="text-center text-sm-start">
                     <h1 class="color-gradient title d-inline">We are Neko. </h1>
                     <h1 class="title mb-3 text-dark d-inline">Behind a great product, there’s a great team. We share our passion and vision for the metaverse.</h1>
                 </div>
             </div>
         </div>
         <div class="row spacing1">
-            <div class="spacing1 col-12 d-flex justify-content-center mb-5 pb-5">
-                <img class="members-img" src="/images/v3/about/members.png">
-            </div>
-        </div>
-        <div class="row spacing1">
-            <div class="col-2"></div>
-            <div class="col-8">
-                <div class="d-flex flex-wrap justify-content-center">
-                    @foreach($tags as $tag)
-                    <button type="button" class="btn btn-primary btn-custom rounded-pill m-2" style="background: {{$tag['color']}}">{{ $tag['content'] }}</button>
+            <div class="col-12 d-flex justify-content-center mb-sm-5 pb-sm-5">
+                <img class="d-none d-sm-block members-img" src="/images/v3/about/members.png">
+                <div class="row justify-content-center d-sm-none">
+                    @foreach ($members as $member)
+                    <div class="col-4 text-center mb-4 tooltip-element px-1">
+                        <img class="avatar" src="{{ $member['avatar'] }}" alt="">
+                        @if (!empty($member['tooltip']))
+                        <span class="fs-6 tooltiptext">{{ $member['tooltip'] }}</span>
+                        @endif
+                    </div>
                     @endforeach
                 </div>
             </div>
-            <div class="col-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-0 col-md-2"></div>
+            <div class="col-12 col-md-8">
+                <div class="d-flex flex-wrap justify-content-center">
+                    @foreach($tags as $tag)
+                    <button type="button" class="btn btn-primary btn-custom rounded-pill m-2 text-nowrap" style="background: {{$tag['color']}}">{{ $tag['content'] }}</button>
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-0 col-md-2"></div>
         </div>
     </div>
 </section>
@@ -37,49 +47,49 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
-                    <div class="timeline-step mb-0">
+            <div class="col-12">
+                <div class="timeline-steps" data-aos="fade-up">
+                    <div class="timeline-step mb-0 ">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                         </div>
                     </div>
-                    <div class="timeline-step mb-0">
+                    <div class="timeline-step mb-0 ">
                         <div class="d-flex flex-column align-items-center">
                             <div class="card mb-3"></div>
                             <div class="text-white fs-4 fw-bold mb-1">2021</div>
-                            <div class="text-white mb-4">Former Neko</div>
+                            <div class="text-white mb-4 fs-7 text-nowrap">Former Neko</div>
                         </div>
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                         </div>
                     </div>
-                    <div class="timeline-step mb-0">
+                    <div class="timeline-step  mb-0">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                         </div>
                     </div>
-                    <div class="timeline-step mb-0">
+                    <div class="timeline-step  mb-0">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                         </div>
                     </div>
-                    <div class="timeline-step mb-0">
+                    <div class="timeline-step  mb-0">
                         <div class="d-flex flex-column align-items-center">
                             <div class="card mb-3"></div>
                             <div class="text-white fs-4 fw-bold mb-1">2022</div>
-                            <div class="text-white mb-4">Neko all-in-one app</div>
+                            <div class="text-white mb-4 fs-7 text-nowrap">Neko all-in-one app</div>
                         </div>
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                         </div>
                     </div>
-                    <div class="timeline-step mb-0">
+                    <div class="timeline-step  mb-0">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                         </div>
                     </div>
-                    <div class="timeline-step mb-0">
+                    <div class="timeline-step  mb-0">
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
                         </div>
@@ -88,7 +98,7 @@
                         <div class="d-flex flex-column align-items-center">
                             <div class="card mb-3"></div>
                             <div class="text-white fs-4 fw-bold mb-1">2023</div>
-                            <div class="text-white mb-4">Neko super app</div>
+                            <div class="text-white mb-4 fs-7 text-nowrap">Neko super app</div>
                         </div>
                         <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top">
                             <div class="inner-circle"></div>
@@ -106,10 +116,10 @@
 </section>
 
 <section id='contact'>
-    <div class="row justify-content-between">
-        <div class="contact-form col-6">
+    <div class="row justify-content-end justify-content-sm-between">
+        <div class="contact-form col-12 col-sm-6">
             <div class="row">
-                <div class="col-12 pb-5 mb-3">
+                <div class="col-12 pb-3 pb-md-5 mb-3">
                     <div class="text-lelt">
                         <h1 class="color-gradient fs-60px fw-bold d-inline">Start a conversation</h1>
                         <h1 class="fs-60px mb-3 text-dark fw-bold d-inline">about a new business or media inquiries</h1>
@@ -118,7 +128,7 @@
                 <div class="col-12 mb-4">
                     <div class="fs-5 text-dark fw-500">👋 Tell us more about you.</div>
                 </div>
-                <div class="col-9">
+                <div class="col-sm-12 col-md-9">
                     <form>
                         @foreach($form as $item)
                         <div class="mb-4">
@@ -137,7 +147,7 @@
                 </div>
             </div>
         </div>
-        <div class="image-iphone col-6 p-0">
+        <div class="image-iphone col-12 col-sm-6 p-0">
             <img class="w-100" src="/images/v3/about/iphone.png">
         </div>
     </div>
@@ -157,7 +167,7 @@
     }
 
     .container {
-        margin-top: 100px;
+        margin-bottom: 100px;
     }
 
     .color-gradient {
@@ -193,8 +203,12 @@
         margin-bottom: 250px;
     }
 
+    .fs-7 {
+        font-size: 14px;
+    }
+
     .members-img {
-        width: 90vh;
+        max-width: 80vw;
     }
 
     #roadmap {
@@ -216,7 +230,6 @@
     .timeline-steps {
         display: flex;
         justify-content: center;
-        flex-wrap: wrap
     }
 
     .timeline-steps .timeline-step {
@@ -225,29 +238,27 @@
         flex-direction: column;
         justify-content: end;
         position: relative;
-        margin: 1rem
+        min-width: 119px;
     }
 
-    @media (min-width:768px) {
-        .timeline-steps .timeline-step:not(:last-child):after {
-            content: "";
-            display: block;
-            border-top: 0.25rem solid rgba(217, 217, 217, 1);
-            width: 7.46rem;
-            position: absolute;
-            left: 40px;
-            top: 169px;
-        }
+    .timeline-steps .timeline-step:not(:last-child):after {
+        content: "";
+        display: block;
+        border-top: 0.25rem solid rgba(217, 217, 217, 1);
+        width: 3.46rem;
+        position: absolute;
+        right: 0;
+        bottom: 13px;
+    }
 
-        .timeline-steps .timeline-step:not(:first-child):before {
-            content: "";
-            display: block;
-            border-top: 0.25rem solid rgba(217, 217, 217, 1);
-            width: 7.46rem;
-            position: absolute;
-            right: 2.5rem;
-            top: 169px;
-        }
+    .timeline-steps .timeline-step:not(:first-child):before {
+        content: "";
+        display: block;
+        border-top: 0.25rem solid rgba(217, 217, 217, 1);
+        width: 3.46rem;
+        position: absolute;
+        left: 0;
+        bottom: 13px;
     }
 
     .timeline-steps .timeline-content {
@@ -265,6 +276,10 @@
         background: rgba(250, 250, 250, 1);
     }
 
+    #contact {
+        overflow: hidden;
+    }
+
     .contact-form {
         padding-left: 9rem;
         padding-top: 9rem;
@@ -272,6 +287,7 @@
 
     .image-iphone {
         margin-top: 200px;
+        width: 50vw;
     }
 
     .fw-500 {
@@ -304,18 +320,186 @@
     }
 
     /* Extra small devices (phones, 600px and down) */
-    @media only screen and (max-width: 600px) {}
+    @media only screen and (max-width: 575px) {
+        .container {
+            margin-bottom: 50px;
+        }
+
+        #roadmap {
+            display: none;
+        }
+
+        .fs-60px {
+            font-size: 44px;
+        }
+
+        .title {
+            font-size: 32px;
+            line-height: 42px;
+        }
+
+        .contact-form {
+            width: 90%;
+            margin: auto;
+            padding: 1rem;
+        }
+
+        .form-control::placeholder {
+            font-size: 14px;
+        }
+
+        .image-iphone {
+            width: 100vw;
+            margin-top: 0;
+        }
+
+        .tooltip-element {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-element .tooltiptext {
+            width: 160px;
+            background: rgba(202, 161, 255, 1);
+            color: #fff;
+            text-align: center;
+            border-radius: 100px;
+            padding: 5px 0;
+
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            bottom: 110%;
+            left: 50%;
+            margin-left: -80px;
+
+        }
+
+        .tooltip-element .tooltiptext::after {
+            content: " ";
+            position: absolute;
+            top: 100%;
+            /* At the bottom of the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(202, 161, 255, 1) transparent transparent transparent;
+        }
+
+        .avatar {
+            width: 100%;
+        }
+
+        .btn-custom {
+            font-size: 12px;
+            padding: 10px 12px;
+        }
+
+        .spacing1 {
+            margin-bottom: 60px;
+        }
+    }
 
     /* Small devices (portrait tablets and large phones, 600px and up) */
-    @media only screen and (min-width: 600px) {}
+    @media only screen and (min-width: 576px) and (max-width: 767px) {
+
+        .fs-60px {
+            font-size: 30px;
+        }
+
+        .title {
+            font-size: 50px;
+            line-height: 60px;
+        }
+
+        .timeline-steps .timeline-step {
+            min-width: 60px;
+            max-width: 60px;
+        }
+
+        .timeline-steps .timeline-step:not(:last-child):after {
+            width: 2rem;
+        }
+
+        .timeline-steps .timeline-step:not(:first-child):before {
+            width: 2rem;
+        }
+
+        .contact-form {
+            padding-left: 5rem;
+            padding-top: 5rem;
+        }
+
+        .form-control::placeholder {
+            font-size: 14px;
+        }
+
+        .btn-custom {
+            font-size: 24px;
+        }
+    }
 
     /* Medium devices (landscape tablets, 768px and up) */
-    @media only screen and (min-width: 768px) {}
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .fs-60px {
+            font-size: 40px;
+        }
+
+        .title {
+            font-size: 60px;
+            line-height: 70px;
+        }
+
+        .timeline-steps .timeline-step {
+            min-width: 85px;
+            max-width: 85px;
+        }
+
+        .timeline-steps .timeline-step:not(:last-child):after {
+            width: 3rem;
+        }
+
+        .timeline-steps .timeline-step:not(:first-child):before {
+            width: 3rem;
+        }
+
+        .contact-form {
+            padding-left: 5rem;
+            padding-top: 5rem;
+        }
+
+        .btn-custom {
+            font-size: 16px;
+        }
+    }
 
     /* Large devices (laptops/desktops, 992px and up) */
-    @media only screen and (min-width: 992px) {}
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .fs-60px {
+            font-size: 50px;
+        }
 
-    /* Extra large devices (large laptops and desktops, 1200px and up) */
+        .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .title {
+            font-size: 70px;
+            line-height: 80px;
+        }
+
+        .contact-form {
+            padding-left: 5rem;
+            padding-top: 5rem;
+        }
+
+        .btn-custom {
+            font-size: 20px;
+        }
+    }
+
     @media only screen and (min-width: 1200px) {}
 </style>
 @endsection
