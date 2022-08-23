@@ -17,9 +17,9 @@ class PublicController extends ViewController
     protected $lang;
     protected $blogRepository;
 
-    public function __construct(BlogRepository                   $blogRepository
-    )
-    {
+    public function __construct(
+        BlogRepository                   $blogRepository
+    ) {
         parent::__construct();
         $this->lang = config('app.locale');
 
@@ -28,17 +28,18 @@ class PublicController extends ViewController
 
     public function test()
     {
-//        return $this->view('web.test' );
-//        return [
-//            'ok' => file_exists('httpss://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
-//            'ok2' => getimagesize('httpss://nekoinvest.io/images/home/protect.png'),
-//            'ok3' => getimagesize('httpss://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
-//        ];
+        //        return $this->view('web.test' );
+        //        return [
+        //            'ok' => file_exists('httpss://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
+        //            'ok2' => getimagesize('httpss://nekoinvest.io/images/home/protect.png'),
+        //            'ok3' => getimagesize('httpss://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
+        //        ];
     }
 
 
-    public function homeView(Request $request){
-        return $this->view('v3.home.home',ViewTexts::HOME);
+    public function homeView(Request $request)
+    {
+        return $this->view('v3.home.home', ViewTexts::HOME);
     }
 
     public function homeViewV2(Request $request)
@@ -132,7 +133,10 @@ class PublicController extends ViewController
         ]);
     }
 
-
+    public function aboutView()
+    {
+        return $this->view('v3.about.index', ViewTexts::ABOUT);
+    }
 
     public function termsOfServiceView()
     {
