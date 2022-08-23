@@ -45,6 +45,8 @@ Route::get('/test', [PublicController::class, 'test']);
 //Route::get('/pages/nft', [PublicController::class, 'nftView']);
 Route::get('/download', [PublicController::class, 'download']);
 
+Route::get('/about', [PublicController::class, 'aboutView'])->name("about");
+
 $publicLocaleRoutes = function () {
 
     Route::group(["prefix" => 'blogs'], function () {
@@ -52,7 +54,6 @@ $publicLocaleRoutes = function () {
         Route::get('/{slug}', [PublicController::class, 'blogView'])->name("blog");
     });
     Route::get('/login', [PublicController::class, 'loginView'])->name("login");
-
 
     Route::get('/', [PublicController::class, 'homeView'])->name("home");
 };
