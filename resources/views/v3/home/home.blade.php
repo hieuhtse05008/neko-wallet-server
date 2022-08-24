@@ -3,7 +3,7 @@
 
     <section style="" id="top-section">
         <div class="text-center">
-            <h1 class="color-gradient fs-60px fw-bold">Your All-in-one Solution</h1>
+            <h1 class="text-gradient fs-60px fw-bold">Your All-in-one Solution</h1>
             <h1 class="fs-60px mb-3">For NFT & Web3</h1>
             <div class="mb-5 d-none d-md-block">
                 <div>
@@ -38,7 +38,7 @@
 
         <img src="/images/v3/home/bg-gradient.webp" class="bg position-absolute">
 
-
+        <div class="d-block d-md-none py-5"></div>
         <div class="text-center position-relative">
             <div id="features-wrap">
                 @foreach($features as $items)
@@ -137,7 +137,8 @@
                 </div>
             </div>
         </div>
-        <div class="snap-item opacity-0 d-none h-100vh" style="">
+{{--        opacity-0 d-none--}}
+        <div class="snap-item h-100vh" style="display: none;">
 
             <div class="bg  h-100">
                 <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center h-100">
@@ -177,7 +178,7 @@
                 </div>
             </div>
         </div>
-        <div class="snap-item opacity-0 d-none h-100vh" style="">
+        <div class="snap-item h-100vh" style="display: none;">
             <div class="bg  h-100">
 
                 <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center h-100">
@@ -209,7 +210,7 @@
                 </div>
             </div>
         </div>
-        <div class="snap-item opacity-0 d-none h-100vh" style="">
+        <div class="snap-item h-100vh" style="display: none;">
             <div class="bg  h-100">
 
                 <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center h-100">
@@ -265,7 +266,7 @@
                     <div class=" text-center radius card-gray">
                         <img src="/images/v3/home/functions/2.png">
                         <h4 class="py-5 m-0">Connect to Web3<br>
-                            through <span class="color-gradient">Dapp Browser</span>
+                            through <span class="text-gradient">Dapp Browser</span>
                         </h4>
                     </div>
                 </div>
@@ -318,7 +319,7 @@
                     <div class="h-100 d-flex">
                         <div class="m-auto">
                             <img src="/images/v3/home/party.png" class="" width="90" height="90">
-                            <h1 class="color-gradient fs-80 fw-bold">Loved by <br>everyone</h1>
+                            <h1 class="text-gradient fs-80 fw-bold">Loved by <br>everyone</h1>
                             <h1 class="fs-80 fw-bold">who <br> loves <br> metaverse</h1>
                         </div>
                     </div>
@@ -363,7 +364,7 @@
     <section id="download-section" class="position-relative">
         <div class="my-5 py-5 d-none d-md-block"></div>
 
-        <div class="fw-bold fs-80 text-center mb-3">
+        <div class="fw-bold fs-80 text-center mb-3 mt-5 mt-md-0">
             Start using the<br>
             Ultimate Metaverse Wallet
         </div>
@@ -387,7 +388,7 @@
     {{--    z-index: auto; position: static; top: auto;--}}
     {{--    z-index: 1000; position: fixed; top: 0px; margin-left: 0px; width: 2135px; left: 0px;--}}
     <script>
-
+        // alert(window.screen.width + ' ' + window.screen.height)
         var prevScrollpos = window.pageYOffset;
         var matchSnap = false;
         var currentSnap = 0;
@@ -418,13 +419,15 @@
 
                             const oldItem = $(items[currentSnap]);
                             const item = $(items[i]);
-                            oldItem.css({}).animate({opacity: 0}, 200, () => {
-                                item.css({}).animate({opacity: 1}, 200);
+                            oldItem.css({}).fadeOut( 200, () => {
+                            // oldItem.css({}).animate({opacity: 0}, 200, () => {
+                            //     item.css({}).animate({opacity: 1}, 200);
+                                item.fadeIn(200);
                                 item.find('.position-absolute').each((j, e) => $(e).css('visibility', 'visible').hide().fadeIn(j * 500));
-                                oldItem.addClass('d-none');
-                                item.removeClass('d-none');
+                                // oldItem.addClass('d-none');
+                                // item.removeClass('d-none');
 
-                                item.find('.position-absolute').fadeIn('slow');
+                                // item.find('.position-absolute').fadeIn('slow');
                             });
                             currentSnap = i;
 
@@ -461,6 +464,7 @@
                 postFixed: function () {
                     matchSnap = false;
                 },
+                zIndex:100
             });
             // $('#end-snap').scrollToFixed();
             const items = $('.snap-item');
@@ -489,6 +493,9 @@
             /*background: rgba(1, 0, 2, 1);*/
 
         }
+        #nav-content-mobile{
+            height: 100vh;
+        }
         .collapsing #nav-content-mobile{
             height: unset!important;
         }
@@ -505,12 +512,6 @@
             color: rgba(250, 250, 250, 0.3);
         }
 
-        .color-gradient {
-            background: linear-gradient(90.46deg, #CD4DCA 33.07%, #7460CB 53.38%, #1AB4D5 65.85%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-        }
 
         #features-wrap {
             width: 100%;
