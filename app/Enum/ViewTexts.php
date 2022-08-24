@@ -163,6 +163,51 @@ final class ViewTexts
                 'placeholder' => 'Type your message',
                 'type' => 'text'
             ]
-        ]
+        ],
+        'members' => [
+            [
+                'avatar' => '/images/v3/about/Avatar.png',
+                'tooltip' => '',
+            ],
+            [
+                'avatar' => '/images/v3/about/Avatar1.png',
+                'tooltip' => 'Leo Nguyen - CEO',
+            ],
+            [
+                'avatar' => '/images/v3/about/Avatar2.png',
+                'tooltip' => '',
+            ],            [
+                'avatar' => '/images/v3/about/Avatar3.png',
+                'tooltip' => '',
+            ],
+            [
+                'avatar' => '/images/v3/about/Avatar4.png',
+                'tooltip' => '',
+            ],
+            [
+                'avatar' => '/images/v3/about/Avatar5.png',
+                'tooltip' => '',
+            ],
+            [
+                'avatar' => '/images/v3/about/Avatar6.png',
+                'tooltip' => '',
+            ],
+            [
+                'avatar' => '/images/v3/about/Avatar7.png',
+                'tooltip' => '',
+            ],
+            [
+                'avatar' => '/images/v3/about/Avatar8.png',
+                'tooltip' => '',
+            ],
+            [
+                'avatar' => '/images/v3/about/Avatar9.png',
+                'tooltip' => '',
+            ],
+            [
+                'avatar' => '/images/v3/about/Avatar10.png',
+                'tooltip' => '',
+            ]
+        ],
     ];
 }
