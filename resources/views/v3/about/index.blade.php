@@ -217,7 +217,7 @@
     }
 
     .members-img {
-        max-width: 80vw;
+        max-width: 60vw;
     }
 
     #roadmap {

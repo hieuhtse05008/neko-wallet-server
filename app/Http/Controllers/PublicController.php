@@ -138,6 +138,16 @@ class PublicController extends ViewController
         return $this->view('v3.about.index', ViewTexts::ABOUT);
     }
 
+    public function termsView()
+    {
+        return $this->view('v3.termsAndPrivacy.terms');
+    }
+
+    public function privacyView()
+    {
+        return $this->view('v3.termsAndPrivacy.privacy');
+    }
+
     public function termsOfServiceView()
     {
         return $this->view('web.terms_of_service');
