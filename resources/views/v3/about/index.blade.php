@@ -1,6 +1,6 @@
 @extends('v3.layout.master')
 @section('content')
-<section id='members'>
+<section id='members' class="mt-5">
     <div class="container">
         <div class="row justify-content-center spacing1">
             <div class="col-11">
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="row spacing1">
+        <div class="row spacing1 px-2">
             <div class="col-12 d-flex justify-content-center mb-sm-5 pb-sm-5">
                 <img class="d-none d-sm-block members-img" src="/images/v3/about/members.png">
                 <div class="row justify-content-center d-sm-none">
@@ -166,6 +166,15 @@
         color: black !important;
     }
 
+    .navbar #navbarSupportedContent ul li a {
+        color: rgba(16, 16, 16, 1);
+    }
+
+    .navbar form button {
+        background-color: rgba(16, 16, 16, 0.1);
+        color: #101010 !important;
+    }
+
     .container {
         margin-bottom: 100px;
     }
@@ -319,6 +328,19 @@
         width: 150px;
     }
 
+    #footer div {
+        color: rgba(16, 16, 16, 0.8);
+    }
+
+    #footer div a {
+        color: rgba(16, 16, 16, 1) !important;
+    }
+
+    #footer .d-flex a i {
+        background: rgba(16, 16, 16, 0.1);
+        color: black !important;
+    }
+
     /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 575px) {
         .container {
@@ -398,6 +420,18 @@
 
         .spacing1 {
             margin-bottom: 60px;
+        }
+
+        .navbar-toggler {
+            background: rgba(16, 16, 16, 0.1);
+        }
+
+        .navbar-toggler i {
+            color: #101010 !important;
+        }
+
+        .modal .modal-content a {
+            color: #fff;
         }
     }
 
