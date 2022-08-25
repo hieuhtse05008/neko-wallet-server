@@ -145,12 +145,12 @@
     <hr class="m-0">
     <div class="container-md">
         <div class="row">
-            <div class="col-md-2 col-12 p-5 text-center text-sm-start">
+            <div class="col-md-2 col-12 p-5 text-center text-md-start">
                 <a href="/">
                     <img width="42" height="42" src="/images/no_padding_light.png" alt="">
                 </a>
             </div>
-            <div class="col-md-3 col-12 p-5 pt-0 pt-sm-5 text-gray text-center text-sm-start">
+            <div class="col-md-3 col-12 p-5 pt-0 pt-sm-5 text-gray text-center text-md-start">
                 <div class="mb-3"><a href="#">About us</a></div>
 
                 <div class="mb-3"><a href="{{route('blogs')}}">Learn</a></div>
@@ -165,7 +165,7 @@
             </div>
             <div class="border-end border-gray col-auto p-0"></div>
 
-            <div class="col-md-3 col-12 p-5 px-0 px-sm-5 text-white text-center text-sm-start">
+            <div class="col-md-3 col-12 p-5 px-0 px-sm-5 text-white text-center text-md-start">
                 <h5 class="mb-4">
                     Join us on
                 </h5>
@@ -187,7 +187,7 @@
             </div>
             <div class="border-end border-gray col-auto p-0"></div>
 
-            <div class="p-5 col-md-3 col-12 text-center text-sm-start ">
+            <div class="p-5 col-md-3 col-12 text-center text-md-start ">
                 <h5 class="mb-4 tex">For partnership</h5>
                 <div class="mb-1">Contact us</div>
                 <div class="mb-3"><a href="mailto:info@nekowallet.io">info@nekowallet.io</a></div>
@@ -198,7 +198,7 @@
     <hr class="m-0">
     <div class="container-md">
         <div class="d-flex justify-content-between align-items-center flex-column flex-sm-row py-4">
-            <div class="text-gray text-center text-gray text-sm-start">© 2022 Neko Global. <br class="d-block d-sm-none"> All rights reserved.</div>
+            <div class="text-gray text-center text-gray text-md-start">© 2022 Neko Global. <br class="d-block d-sm-none"> All rights reserved.</div>
             <div class="mt-3 d-block d-sm-none"></div>
             <div onclick="document.body.scrollTop = 0;document.documentElement.scrollTop = 0;"
                  class="d-flex align-items-center pointer text-gray justify-content-center">

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center spacing1">
             <div class="col-11">
-                <div class="text-center text-sm-start">
+                <div class="text-center text-md-start">
                     <h1 class="color-gradient title d-inline">We are Neko. </h1>
                     <h1 class="title mb-3 text-dark d-inline">Behind a great product, there’s a great team. We share our passion and vision for the metaverse.</h1>
                 </div>
@@ -166,14 +166,14 @@
         color: black !important;
     }
 
-    .navbar #navbarSupportedContent ul li a {
-        color: rgba(16, 16, 16, 1);
-    }
+    /*.navbar #navbarSupportedContent ul li a {*/
+    /*    color: rgba(16, 16, 16, 1);*/
+    /*}*/
 
-    .navbar form button {
-        background-color: rgba(16, 16, 16, 0.1);
-        color: #101010 !important;
-    }
+    /*.navbar form button {*/
+    /*    background-color: rgba(16, 16, 16, 0.1);*/
+    /*    color: #101010 !important;*/
+    /*}*/
 
     .container {
         margin-bottom: 100px;
@@ -328,18 +328,18 @@
         width: 150px;
     }
 
-    #footer div {
-        color: rgba(16, 16, 16, 0.8);
-    }
+    /*#footer div {*/
+    /*    color: rgba(16, 16, 16, 0.8);*/
+    /*}*/
 
-    #footer div a {
-        color: rgba(16, 16, 16, 1) !important;
-    }
+    /*#footer div a {*/
+    /*    color: rgba(16, 16, 16, 1) !important;*/
+    /*}*/
 
-    #footer .d-flex a i {
-        background: rgba(16, 16, 16, 0.1);
-        color: black !important;
-    }
+    /*#footer .d-flex a i {*/
+    /*    background: rgba(16, 16, 16, 0.1);*/
+    /*    color: black !important;*/
+    /*}*/
 
     /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 575px) {

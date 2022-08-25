@@ -52,6 +52,9 @@ body {
 .bg-gray {
     background-color: var(--gray-color);
 }
+.bg-light-gray {
+    background-color: lightgray!important;
+}
 .bg-discord {
     background-color: #7289DA;
 }
@@ -153,9 +156,10 @@ object{
     font-size: 80px;
 }
 
-#modalNavMobile{
-    background: rgb(1 0 2 / 50%);
-    color: white;
+
+#modalNavMobile button[data-bs-dismiss="modal"]{
+    height: 38px;
+    width: 38px;
 }
 
 

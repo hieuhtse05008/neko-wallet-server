@@ -389,19 +389,10 @@
     {{--    z-index: 1000; position: fixed; top: 0px; margin-left: 0px; width: 2135px; left: 0px;--}}
     <script>
         // alert(window.screen.width + ' ' + window.screen.height)
-        var prevScrollpos = window.pageYOffset;
+
         var matchSnap = false;
         var currentSnap = 0;
-        const handleNavbar = function () {
-            if (window.screen.width < 576) return;
-            var currentScrollPos = window.pageYOffset;
-            if (prevScrollpos > currentScrollPos) {
-                document.getElementById("navbar").style.top = "0";
-            } else {
-                document.getElementById("navbar").style.top = "-100%";
-            }
-            prevScrollpos = currentScrollPos;
-        }
+
         //0 5368.3306250000005
         //      1 6569.2681250000005
         //  2 7198.333125
