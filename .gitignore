@@ -15,3 +15,4 @@ composer.lock
 /bootstrap/cache/*
 /resources/json
 /nfts
+.idea
