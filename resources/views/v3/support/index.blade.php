@@ -15,17 +15,46 @@
 </section>
 <section id="support">
     <div class="container">
-        <div class="row pb-5 mb-5">
-            <div class="col">
+        <div class="row pb-3 mb-3 pb-md-5 mb-md-5">
+            <div class="col-12 col-md-6 mb-4">
                 <div class="banner"></div>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-6 mb-4">
                 <div class="banner"></div>
             </div>
         </div>
-        <div class="row pb-5 mb-5">
+        <div class="row pb-3 mb-3 pb-md-5 mb-md-5">
             <div class="text-start">
                 <h1 class="color-gradient title-2 d-inline">Frequently asked</h1>
+            </div>
+        </div>
+        <div class="d-block d-md-none pb-4 mb-3 pb-md-5 mb-md-5">
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Choose a topic
+                </button>
+                <ul class="dropdown-menu px-3" aria-labelledby="dropdownMenuButton1">
+                    <li class="p-1" onclick="handleClickTopicMobile(this)">
+                        <img class="opacity-0" src="/images/v3/terms/Fill.png" alt="">
+                        <a class="dropdown-item opacity-60" href="#">Choose a topic</a>
+                    </li>
+                    <li class="p-1" onclick="handleClickTopicMobile(this)">
+                        <img class="invisible" src="/images/v3/terms/Fill.png" alt="">
+                        <a class="dropdown-item" href="#networks">Network</a>
+                    </li>
+                    <li class="p-1" onclick="handleClickTopicMobile(this)">
+                        <img class="invisible" src="/images/v3/terms/Fill.png" alt="">
+                        <a class="dropdown-item" href="#">Transactions</a>
+                    </li>
+                    <li class="p-1" onclick="handleClickTopicMobile(this)">
+                        <img class="invisible" src="/images/v3/terms/Fill.png" alt="">
+                        <a class="dropdown-item" href="#">Privacy</a>
+                    </li>
+                    <li class="p-1" onclick="handleClickTopicMobile(this)">
+                        <img class="invisible" src="/images/v3/terms/Fill.png" alt="">
+                        <a class="dropdown-item" href="#">Download</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="row">
@@ -37,10 +66,10 @@
                     </a>
                     <div class="collapse show" id="collapse1">
                         <ul>
-                            <li class="topic mb-2" onclick="handleClickTopic(this)"><a href="#">Supported chains</a></li>
-                            <li class="topic mb-2" onclick="handleClickTopic(this)"><a href="#">NFT doesn’t show up</a></li>
-                            <li class="topic mb-2" onclick="handleClickTopic(this)"><a href="#">SFT doesn’t show up</a></li>
-                            <li class="topic mb-2" onclick="handleClickTopic(this)"><a href="#">Missing accounts</a></li>
+                            <li class="topic mb-2" onclick="handleClickTopic(this)"><a href="#supported-chains">Supported chains</a></li>
+                            <li class="topic mb-2" onclick="handleClickTopic(this)"><a href="#NFT-doesn’t-show-up">NFT doesn’t show up</a></li>
+                            <li class="topic mb-2" onclick="handleClickTopic(this)"><a href="#SFT-doesn’t-show-up">SFT doesn’t show up</a></li>
+                            <li class="topic mb-2" onclick="handleClickTopic(this)"><a href="#Missing-accounts">Missing accounts</a></li>
                         </ul>
                     </div>
                 </div>
@@ -78,34 +107,33 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-9 col-lg-8 content">
-                <div class="mb-5">
+            <div id="networks" class="col-12 col-md-9 col-lg-8 content">
+                <div id="supported-chains" class="mb-5">
                     <div class="title-4 mb-4">Which chains does NEKO support?</div>
                     <div class="font-size-main mb-5">
                         NEKO wallet is a multi-chain wallet. We support tokens in SOLANA, BNC, and Ethereum. Neko Wallet currently supports NFT on SOLANA. For NFT on BNC and Ethereum, please kindly wait for our next update.
                     </div>
                     <hr>
                 </div>
-                <div class="mb-5">
+                <div id="NFT-doesn’t-show-up" class="mb-5">
                     <div class="title-4 mb-4">Why doesn’t my NFT show up?</div>
                     <div class="font-size-main mb-5">
                         At the moment, Neko only supports NFT on SOLANA. If you have NFT from other chains, it will not appear on app. In the next update, Neko app will be able to support NFT from BSC and Ethereum. If your NFT from SOLANA, and it still does show up, there is a good chance that it does comply with the Solana NFT standard. It may be missing the metadata required to be displayed properly. Our recomendation is that you contact the respective NFT project and let them know.
                     </div>
                     <hr>
                 </div>
-                <div class="mb-5">
+                <div id="SFT-doesn’t-show-up" class="mb-5">
                     <div class="title-4 mb-4">Why doesn’t my SFT show up?</div>
                     <div class="font-size-main mb-5">
                         At the moment, Neko has not support SFT. Please kindly wait for our next update for this feature
                     </div>
                     <hr>
                 </div>
-                <div class="mb-5">
+                <div id="Missing-accounts" class="">
                     <div class="title-4 mb-4">I imported my wallet but some accounts are missing. How can I restore all of my account?</div>
                     <div class="font-size-main mb-5">
                         The easiest way to restore all of your accounts is to make sure each account has some SOL in it so that NEKO can detect it. Follow these steps and let me know if your issue is resolved: 1. Make sure your Secret recovery Phrase is written down correctly and backed up 2. Send a little SOL to each account you would like to restore 3. Go into Settings, scroll down and click the red button that says "Reset Secret recovery Phrase" 4. Re-import your wallet using your Secret recovery Phrase 5. All of your accounts should be detected and available through Phantom again 6. In a future release, we will be adding some functionality to make this process a lot better and Phantom will be much smarter at detecting your wallets. I hope this helps!
                     </div>
-                    <hr>
                 </div>
             </div>
             <div class="col-0 col-lg-1 "></div>
@@ -132,6 +160,29 @@
     function handleClickTopic(e) {
         removeActiveAll();
         addActive(e);
+    }
+</script>
+
+<script>
+    const dropdownMenu = document.querySelectorAll('.dropdown-menu li');
+    const button = document.querySelector('.dropdown-toggle')
+
+    function removeFillAll() {
+        dropdownMenu.forEach(function(item) {
+            const img = item.querySelector('img');
+            img.classList.add('invisible')
+        })
+    }
+
+    function addFill(element) {
+        element.querySelector('img')?.classList.remove('invisible');
+    }
+
+    function handleClickTopicMobile(e) {
+        const currentContent = e.querySelector('a').textContent;
+        button.textContent = currentContent;
+        removeFillAll();
+        addFill(e);
     }
 </script>
 @endpush
@@ -260,6 +311,35 @@
         opacity: 0.1;
     }
 
+    .dropdown-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: rgba(16, 16, 16, 0.6);
+        font-weight: 400;
+        font-size: 16px;
+        background-color: rgba(238, 238, 238, 1);
+        border-radius: 100px;
+        padding: 0.5rem 1.5rem;
+        border: none;
+        width: 100%;
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        background-color: #989898;
+        border-radius: 10px;
+        color: #FAFAFA;
+        inset: -30px auto auto 0 !important;
+    }
+
+    .dropdown-menu .dropdown-item {
+        font-size: 16px;
+        font-weight: 400;
+        color: #fff;
+        display: inline;
+    }
+
     /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 575px) {
         #support {
@@ -279,12 +359,20 @@
             font-size: 18px;
         }
 
+        .input-search {
+            width: 70%;
+        }
+
     }
 
     /* Small devices (portrait tablets and large phones, 600px and up) */
     @media only screen and (min-width: 576px) and (max-width: 767px) {
         #support {
             margin: 40px 10px;
+        }
+
+        .input-search {
+            width: 70%;
         }
     }
 
