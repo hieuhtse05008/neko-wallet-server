@@ -1,4 +1,4 @@
-@extends('v3.layout.master')
+@extends('v3.layout.master',['theme'=>'light'])
 @section('content')
 <section id="privacy">
     <div class="container">

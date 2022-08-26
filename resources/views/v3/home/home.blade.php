@@ -1,4 +1,4 @@
-@extends('v3.layout.master')
+@extends('v3.layout.master',['theme'=>'dark'])
 @section('content')
 
     <section style="" id="top-section">

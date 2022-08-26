@@ -163,6 +163,10 @@ object{
 }
 
 
+.rounded-20px{
+    border-radius: 20px;
+}
+
 .container,
 .container-fluid,
 .container-xxl,
