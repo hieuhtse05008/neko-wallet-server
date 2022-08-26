@@ -39,8 +39,8 @@ class PublicController extends ViewController
 
     public function homeView(Request $request)
     {
-        return $this->view('v3.home.home', array_merge(ViewTexts::HOME,[
-            'theme'=>'dark'
+        return $this->view('v3.home.home', array_merge(ViewTexts::HOME, [
+            'theme' => 'dark'
         ]));
     }
 
@@ -137,36 +137,43 @@ class PublicController extends ViewController
 
     public function aboutView()
     {
-        return $this->view('v3.about.index', array_merge(ViewTexts::ABOUT,[
-            'theme'=>'light'
+        return $this->view('v3.about.index', array_merge(ViewTexts::ABOUT, [
+            'theme' => 'light'
         ]));
     }
 
     public function termsView()
     {
-        return $this->view('v3.termsAndPrivacy.terms',[
-            'theme'=>'light'
+        return $this->view('v3.termsAndPrivacy.terms', [
+            'theme' => 'light'
         ]);
     }
 
     public function privacyView()
     {
-        return $this->view('v3.termsAndPrivacy.privacy',[
-            'theme'=>'light'
+        return $this->view('v3.termsAndPrivacy.privacy', [
+            'theme' => 'light'
+        ]);
+    }
+
+    public function supportView()
+    {
+        return $this->view('v3.support.index', [
+            'theme' => 'light'
         ]);
     }
 
     public function termsOfServiceView()
     {
-        return $this->view('web.terms_of_service',[
-            'theme'=>'light'
+        return $this->view('web.terms_of_service', [
+            'theme' => 'light'
         ]);
     }
 
     public function privacyPolicyView()
     {
-        return $this->view('web.privacy_policy',[
-            'theme'=>'light'
+        return $this->view('web.privacy_policy', [
+            'theme' => 'light'
         ]);
     }
 
