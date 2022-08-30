@@ -188,7 +188,7 @@ class PublicController extends ViewController
             'search' => $request->search,
             'blog_group' => [
                 'type' => 'kind',
-                'ids' => [BlogGroup::BLOG_GROUP_ID,$category_id]
+                'ids' => [BlogGroup::BLOG_GROUP_ID, $category_id]
             ],
         ];
 
@@ -197,12 +197,12 @@ class PublicController extends ViewController
         $this->blogRepository->skipPresenter();
         $blogs = $this->blogRepository->orderBy('created_at', 'desc')->list(48, $filter);
         $latestBlogs = $this->blogRepository->orderBy('created_at', 'desc')
-            ->list(4, ['type' => 'kind','ids' => [BlogGroup::BLOG_GROUP_ID]] );
+            ->list(4, ['type' => 'kind', 'ids' => [BlogGroup::BLOG_GROUP_ID]]);
 
 
         $category_ids = \App\Models\BlogGroup::getBlogCategories(BlogGroup::BLOG_GROUP_ID);
 
-        $categories = $this->blogGroupRepository->list(null, ['ids'=>$category_ids]);
+        $categories = $this->blogGroupRepository->list(null, ['ids' => $category_ids]);
 
 
         return $this->view('v3.blog.list', [
@@ -230,7 +230,7 @@ class PublicController extends ViewController
         }
 
 
-        return $this->view('web.blog.blog', [
+        return $this->view('v3.blog.detail', [
             'blog' => $blog,
             'slug' => $slug,
         ]);

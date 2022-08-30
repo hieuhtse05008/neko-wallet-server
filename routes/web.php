@@ -45,6 +45,7 @@ Route::get('/test', [PublicController::class, 'test']);
 //Route::get('/pages/nft', [PublicController::class, 'nftView']);
 Route::get('/download', [PublicController::class, 'download']);
 
+// V3
 Route::get('/about', [PublicController::class, 'aboutView'])->name("about");
 Route::get('/terms', [PublicController::class, 'termsView'])->name("terms");
 Route::get('/privacy', [PublicController::class, 'privacyView'])->name("privacy");
