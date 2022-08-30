@@ -4,10 +4,13 @@
 namespace App\Http\Controllers;
 
 
+use App\Enum\BlogGroup;
 use App\Enum\FAQs;
 use App\Enum\Locales;
 use App\Enum\ViewTexts;
 use App\Models\Blog;
+use App\Models\RefBlogGroup;
+use App\Repositories\BlogGroupRepository;
 use App\Repositories\BlogRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,14 +19,17 @@ class PublicController extends ViewController
 {
     protected $lang;
     protected $blogRepository;
+    protected $blogGroupRepository;
 
     public function __construct(
-        BlogRepository                   $blogRepository
+        BlogRepository                   $blogRepository,
+        BlogGroupRepository                   $blogGroupRepository
     ) {
         parent::__construct();
         $this->lang = config('app.locale');
 
         $this->blogRepository = $blogRepository;
+        $this->blogGroupRepository = $blogGroupRepository;
     }
 
     public function test()
@@ -171,23 +177,35 @@ class PublicController extends ViewController
 
     public function blogsView(Request $request)
     {
+        $category_id = (int)$request->get('category');
+
         $filter = [
             'search' => $request->search,
             'blog_group' => [
                 'type' => 'kind',
-                'ids' => [2]
+                'ids' => [BlogGroup::BLOG_GROUP_ID,$category_id]
             ],
         ];
 
-        $this->blogRepository->skipPresenter(true);
+
+
+        $this->blogRepository->skipPresenter();
         $blogs = $this->blogRepository->orderBy('created_at', 'desc')->list(48, $filter);
         $latestBlogs = $this->blogRepository->orderBy('created_at', 'desc')
-            ->list(4, ['type' => 'kind','ids' => [2]]);
+            ->list(4, ['type' => 'kind','ids' => [BlogGroup::BLOG_GROUP_ID]] );
+
+
+        $category_ids = \App\Models\BlogGroup::getBlogCategories(BlogGroup::BLOG_GROUP_ID);
+
+        $categories = $this->blogGroupRepository->list(null, ['ids'=>$category_ids]);
+
 
         return $this->view('v3.blog.list', [
+            'search' => $request->search,
+            'category' => $request->category,
             'latestBlogs' => $latestBlogs,
             'blogs' => $blogs,
-            'search' => $request->search
+            'categories' => $categories,
         ]);
     }
 
