@@ -48,6 +48,7 @@ Route::get('/download', [PublicController::class, 'download']);
 Route::get('/about', [PublicController::class, 'aboutView'])->name("about");
 Route::get('/terms', [PublicController::class, 'termsView'])->name("terms");
 Route::get('/privacy', [PublicController::class, 'privacyView'])->name("privacy");
+Route::get('/support', [PublicController::class, 'supportView'])->name("support");
 
 $publicLocaleRoutes = function () {
 

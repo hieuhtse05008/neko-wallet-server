@@ -166,15 +166,6 @@
         color: black !important;
     }
 
-    /*.navbar #navbarSupportedContent ul li a {*/
-    /*    color: rgba(16, 16, 16, 1);*/
-    /*}*/
-
-    /*.navbar form button {*/
-    /*    background-color: rgba(16, 16, 16, 0.1);*/
-    /*    color: #101010 !important;*/
-    /*}*/
-
     .container {
         margin-bottom: 100px;
     }
@@ -328,19 +319,6 @@
         width: 150px;
     }
 
-    /*#footer div {*/
-    /*    color: rgba(16, 16, 16, 0.8);*/
-    /*}*/
-
-    /*#footer div a {*/
-    /*    color: rgba(16, 16, 16, 1) !important;*/
-    /*}*/
-
-    /*#footer .d-flex a i {*/
-    /*    background: rgba(16, 16, 16, 0.1);*/
-    /*    color: black !important;*/
-    /*}*/
-
     /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 575px) {
         .container {
@@ -420,18 +398,6 @@
 
         .spacing1 {
             margin-bottom: 60px;
-        }
-
-        .navbar-toggler {
-            background: rgba(16, 16, 16, 0.1);
-        }
-
-        .navbar-toggler i {
-            color: #101010 !important;
-        }
-
-        .modal .modal-content a {
-            color: #fff;
         }
     }
 
