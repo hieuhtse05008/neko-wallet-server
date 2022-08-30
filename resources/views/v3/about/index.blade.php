@@ -213,7 +213,7 @@
 
     #roadmap {
         min-height: 900px;
-        background: rgba(1, 0, 2, 1);
+        background: url(/images/v3/support/DarkGradient.png), url(/images/v3/support/Background.png) top center / cover no-repeat;
     }
 
     #roadmap .container {

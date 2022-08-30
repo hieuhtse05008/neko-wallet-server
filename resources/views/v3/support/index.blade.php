@@ -1,4 +1,4 @@
-@extends('v3.layout.master')
+@extends('v3.layout.master', ['theme'=>'light'])
 @section('content')
 <section id="support-center">
     <div class="d-flex flex-column justify-content-center align-items-center">
@@ -200,7 +200,7 @@
 
     #support-center>div {
         min-height: 468px;
-        background-color: black;
+        background: url(/images/v3/support/DarkGradient.png), url(/images/v3/support/Background.png) top center / cover no-repeat;
     }
 
     #support {
