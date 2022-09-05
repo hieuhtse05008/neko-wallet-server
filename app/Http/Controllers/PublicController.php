@@ -223,7 +223,7 @@ class PublicController extends ViewController
             }
         })->first();
 
-        //        dd($request->slug, $this->locale,$blog);
+//                dd($request->slug, $this->locale,$blog);
 
         if (empty($blog)) {
             abort(404);
