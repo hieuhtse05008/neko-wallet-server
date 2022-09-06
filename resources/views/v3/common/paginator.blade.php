@@ -6,7 +6,7 @@ $link_limit = 7;
     <nav>
         <ul class="pagination justify-content-end">
             <li class="page-item pointer {{ ($paginator->currentPage() == 1) ? ' disabled' : '' }}">
-                <a class="page-link bg-transparent border-0 text-dark" href="{{ $paginator->url(1) . $suffix }}">{{"<<"}}</a>
+                <a class="page-link bg-transparent border-0 text-white" href="{{ $paginator->url(1) . $suffix }}">{{"<<"}}</a>
             </li>
             @for ($i = 1; $i <= $paginator->lastPage(); $i++)
                 <?php
@@ -22,12 +22,12 @@ $link_limit = 7;
                 ?>
                 @if ($from < $i && $i < $to)
                     <li class="page-item">
-                        <a class="page-link border-0 rounded {{ ($paginator->currentPage() == $i) ? 'bg-main text-white' : 'bg-transparent text-dark' }}" href="{{ $paginator->url($i) . $suffix }}">{{ $i }}</a>
+                        <a class="page-link border-0 rounded {{ ($paginator->currentPage() == $i) ? 'bg-main text-dark' : 'bg-transparent text-white' }}" href="{{ $paginator->url($i) . $suffix }}">{{ $i }}</a>
                     </li>
                 @endif
             @endfor
             <li class="page-item pointer {{ ($paginator->currentPage() == $paginator->lastPage()) ? ' disabled' : '' }}">
-                <a class="page-link bg-transparent border-0 text-dark" href="{{ $paginator->url($paginator->lastPage()) . $suffix }}">{{">>"}}</a>
+                <a class="page-link bg-transparent border-0 text-white" href="{{ $paginator->url($paginator->lastPage()) . $suffix }}">{{">>"}}</a>
             </li>
         </ul>
     </nav>

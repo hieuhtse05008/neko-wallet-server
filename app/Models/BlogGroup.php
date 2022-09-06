@@ -117,7 +117,10 @@ class BlogGroup extends Model
 
     public static function getBlogCategories($blog_group_id){
         $blog_ids = RefBlogGroup::where('blog_group_id','=', $blog_group_id)->where('type','=','kind')->pluck('blog_id');
-        return RefBlogGroup::whereIn('blog_id',$blog_ids)->where('type','=','category')->distinct('blog_group_id')->pluck('blog_group_id');
+        return RefBlogGroup::whereIn('blog_id',$blog_ids)
+            ->where('type','=','category')
+            ->distinct('blog_group_id')
+            ->pluck('blog_group_id');
 
 
     }

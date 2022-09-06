@@ -187,23 +187,21 @@ class PublicController extends ViewController
         $filter = [
             'search' => $request->search,
             'blog_group' => [
-                'type' => 'kind',
-                'ids' => [BlogGroup::BLOG_GROUP_ID,$category_id]
+                'type' => empty($category_id) ? 'kind' : 'category',
+                'ids' => empty($category_id) ? [BlogGroup::BLOG_GROUP_ID] : [$category_id]
             ],
         ];
 
 
 
         $this->blogRepository->skipPresenter();
-        $blogs = $this->blogRepository->orderBy('created_at', 'desc')->list(48, $filter);
+        $blogs = $this->blogRepository->orderBy('created_at', 'desc')->list(8, $filter);
         $latestBlogs = $this->blogRepository->orderBy('created_at', 'desc')
             ->list(4, ['type' => 'kind','ids' => [BlogGroup::BLOG_GROUP_ID]] );
 
 
         $category_ids = \App\Models\BlogGroup::getBlogCategories(BlogGroup::BLOG_GROUP_ID);
-
-        $categories = $this->blogGroupRepository->list(null, ['ids'=>$category_ids]);
-
+        $categories = $this->blogGroupRepository->list(null, ['blog_group' => ['type' => 'category','ids'=>$category_ids]]);
 
         return $this->view('v3.blog.list', [
             'search' => $request->search,

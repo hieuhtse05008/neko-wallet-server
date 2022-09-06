@@ -36,7 +36,6 @@ Route::get('/login', [PublicController::class, 'loginView']);
 Route::get('/manage/{any}', [PublicController::class, 'manageView'])->where('any', '.*');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
-Route::post('/register-early-access', [PublicController::class, 'registerEarlyAccessWithEmail']);
 Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
 Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);
 Route::get('/faqs', [PublicController::class, 'faqsView'])->name('faqs');
