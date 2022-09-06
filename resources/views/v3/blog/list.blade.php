@@ -41,7 +41,7 @@
         </div>
     </section>
     <div class="my-5 py-5"></div>
-    <section class="my-5 py-5">
+    <section class="mb-5">
         <div class="d-flex justify-content-center align-items-center">
             <div class="align-items-center bg-white d-flex  pe-3 text-truncate" id="search">
                 <i class="far fa-search me-2 text-dark"></i>
@@ -51,14 +51,14 @@
             </div>
         </div>
     </section>
-    <section class="my-5 py-5 container">
+    <section class="my-3 pt-3 container" id="categories">
         <div class="d-flex justify-content-center align-items-center flex-wrap">
-            <div class="me-3 mb-2 {{empty($category) ? 'bg-gray me-3 px-2 py-1 rounded-3' : ''}}">
+            <a href="{{route('blogs',['category'=>null]) . "#categories"}}" class="me-3 mb-2 {{empty($category) ? 'bg-gray me-3 px-2 py-1 rounded-3' : 'text-secondary'}}">
                 All articles
-            </div>
+            </a>
             @foreach($categories as $item)
-                <a href="{{route('blogs',['category'=>$item['id']])}}"
-                   class="me-3 mb-2 {{$category == $item['id'] ? 'bg-gray me-3 px-2 py-1 rounded-3' : ''}}">
+                <a href="{{route('blogs',['category'=>$item['id']]) . "#categories"}}"
+                   class="me-3 mb-2 {{$category == $item['id'] ? 'bg-gray me-3 px-2 py-1 rounded-3' : 'text-secondary'}}">
                     {{$item['name']}}
                 </a>
             @endforeach
@@ -92,7 +92,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center mt-5">
             @include('v3.common.paginator', ['paginator' => $blogs, 'suffix'=>"&search=$search"])
         </div>
     </section>

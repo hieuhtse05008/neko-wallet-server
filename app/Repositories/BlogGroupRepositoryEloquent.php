@@ -57,15 +57,18 @@ class BlogGroupRepositoryEloquent extends Repository implements BlogGroupReposit
     {
 
         if(isset($filter['ids'])){
-//            $query = $query->whereIn('blog_groups.id',$filter['ids']);
-            $query = $query->where(function ($q) use($filter){
-                foreach ($filter['ids'] as $id){
-                    $q = $q->where('blog_groups.id','=',$id);
-                }
-                return $q;
-            });
+            $query = $query->whereIn('blog_groups.id',$filter['ids']);
+//            $query = $query->where(function ($q) use($filter){
+//                foreach ($filter['ids'] as $id){
+//                    $q = $q->where('blog_groups.id','=',$id);
+//                }
+//                return $q;
+//            });
         }
         if(isset($filter['type']) && $filter['type']){
+            $query = $query->where('blog_groups.type','=',$filter['type']);
+        }
+        if(isset($filter['id_type_pairs']) && $filter['type']){
             $query = $query->where('blog_groups.type','=',$filter['type']);
         }
         return $query;

@@ -167,6 +167,10 @@ object{
     border-radius: 20px;
 }
 
+a.page-link{
+    color: white;
+}
+
 .container,
 .container-fluid,
 .container-xxl,
