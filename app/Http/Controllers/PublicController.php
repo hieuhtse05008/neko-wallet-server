@@ -228,7 +228,7 @@ class PublicController extends ViewController
         }
 
 
-        return $this->view('web.blog.blog', [
+        return $this->view('v3.blog.detail', [
             'blog' => $blog,
             'slug' => $slug,
         ]);
