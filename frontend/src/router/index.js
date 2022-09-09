@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ListBlogs from '../components/ListBlogs/ListBlogs.vue'
 import BlogUpload from '../components/BlogUpload/BlogUpload.vue'
+import ContactRequest from '../components/ContactRequest/index.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,11 @@ const routes = [
     path: '/blog/upload/',
     name: 'Blog Upload Create',
     component: BlogUpload,
+  },
+  {
+    path: '/contact-requests',
+    name: 'Contact Requests',
+    component: ContactRequest,
   },
 ]
 

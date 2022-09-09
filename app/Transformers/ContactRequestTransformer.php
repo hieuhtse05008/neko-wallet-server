@@ -52,7 +52,7 @@ class ContactRequestTransformer extends TransformerAbstract
             'company'    => $model->company,
             'email'      => $model->email,
             'content'    => $model->content,
-            'created_at' => strtotime($model->created_at),
+            'created_at' => date_format($model->created_at, "d/m/Y H:i:s"),
         ];
     }
 }

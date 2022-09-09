@@ -129,14 +129,14 @@
                     <div class="fs-5 text-dark fw-500">👋 Tell us more about you.</div>
                 </div>
                 <div class="col-sm-12 col-md-9">
-                    <form>
+                    <form onsubmit="handleSubmitForm(event, this)">
                         @foreach($form as $item)
                         <div class="mb-4">
-                            <label for="{{ $item['id'] }}" class="form-label ps-3 mb-1">{{ $item['label'] }}</label>
+                            <label for="{{ $item['field'] }}" class="form-label ps-3 mb-1">{{ $item['label'] }}</label>
                             @if ($item['id'] === 'inputRequest')
-                            <textarea class="form-control text-area-request-form" placeholder="{{ $item['placeholder'] }}" style="height: 200px"></textarea>
+                            <textarea id="{{ $item['field'] }}" name="{{ $item['field'] }}" class="form-control text-area-request-form" placeholder="{{ $item['placeholder'] }}" style="height: 200px"></textarea>
                             @else
-                            <input type="{{ $item['type'] }}" class="form-control" id="{{ $item['id'] }}" placeholder="{{ $item['placeholder'] }}">
+                            <input id="{{ $item['field'] }}" name="{{ $item['field'] }}" type="{{ $item['type'] }}" class="form-control" id="{{ $item['id'] }}" placeholder="{{ $item['placeholder'] }}">
                             @endif
                         </div>
                         @endforeach
@@ -156,6 +156,17 @@
 
 @push('scripts')
 <script>
+    async function handleSubmitForm(event, formElement) {
+        event.preventDefault();
+        const formData = Object.fromEntries(new FormData(event.target).entries());
+        try {
+            const response = await axios.post('/api/contact-request', formData);
+            formElement.reset();
+            alert('Thank you for your message. We will contact you soon.');
+        } catch (error) {
+            console.log(error);
+        }
+    }
 </script>
 @endpush
 

@@ -47,3 +47,10 @@ export const createBlogGroup = (data) =>
     url: '/auth/v1/blog-groups',
     data: data,
   })
+
+// Contact Request Api
+export const getContactRequests = () =>
+  authAxios({
+    method: 'GET',
+    url: '/contact-request',
+  })

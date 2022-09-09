@@ -53,9 +53,9 @@ export default {
           icon: 'mdi-folder',
         },
         {
-          path: 'test',
-          name: 'Test',
-          icon: 'mdi-account-group',
+          path: 'contact-requests',
+          name: 'Contact Requests',
+          icon: 'mdi-account-arrow-up',
         },
       ],
     }

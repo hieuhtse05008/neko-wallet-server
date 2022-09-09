@@ -143,25 +143,29 @@ final class ViewTexts
                 'id' => 'inputName',
                 'label' => 'Your name',
                 'placeholder' => 'Type your name...',
-                'type' => 'text'
+                'type' => 'text',
+                'field' => 'name',
             ],
             [
                 'id' => 'inputCompany',
                 'label' => 'Company name',
                 'placeholder' => 'Type your company name...',
-                'type' => 'text'
+                'type' => 'text',
+                'field' => 'company',
             ],
             [
                 'id' => 'inputEmail',
                 'label' => 'Email address',
                 'placeholder' => 'Type your email address...',
-                'type' => 'email'
+                'type' => 'email',
+                'field' => 'email',
             ],
             [
                 'id' => 'inputRequest',
                 'label' => 'Request',
                 'placeholder' => 'Type your message',
-                'type' => 'text'
+                'type' => 'text',
+                'field' => 'content',
             ]
         ],
         'members' => [
