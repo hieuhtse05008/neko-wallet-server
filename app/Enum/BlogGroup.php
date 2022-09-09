@@ -7,6 +7,7 @@ namespace App\Enum;
 final class BlogGroup
 {
 
+    const BLOG_GROUP_ID = 2;
     const TYPES_RULE = 'category,kind';
     const TYPES = [
         'category' => ['key' => 'category', 'name' => 'Category'],

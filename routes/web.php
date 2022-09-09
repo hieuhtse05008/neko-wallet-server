@@ -36,14 +36,18 @@ Route::get('/login', [PublicController::class, 'loginView']);
 Route::get('/manage/{any?}', [PublicController::class, 'manageView']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
-Route::post('/register-early-access', [PublicController::class, 'registerEarlyAccessWithEmail']);
-Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
-Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);
-Route::get('/faqs', [PublicController::class, 'faqsView'])->name('faqs');
+//Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
+//Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);
+//Route::get('/faqs', [PublicController::class, 'faqsView'])->name('faqs');
 
 Route::get('/test', [PublicController::class, 'test']);
 //Route::get('/pages/nft', [PublicController::class, 'nftView']);
 Route::get('/download', [PublicController::class, 'download']);
+
+Route::get('/about', [PublicController::class, 'aboutView'])->name("about");
+Route::get('/terms', [PublicController::class, 'termsView'])->name("terms");
+Route::get('/privacy', [PublicController::class, 'privacyView'])->name("privacy");
+Route::get('/support', [PublicController::class, 'supportView'])->name("support");
 
 $publicLocaleRoutes = function () {
 
@@ -53,8 +57,7 @@ $publicLocaleRoutes = function () {
     });
     Route::get('/login', [PublicController::class, 'loginView'])->name("login");
 
-    //    Route::get('/v2', [PublicController::class, 'homeViewV2'])->name("home-v2");
-    Route::get('/', [PublicController::class, 'homeViewV2'])->name("home");
+    Route::get('/', [PublicController::class, 'homeView'])->name("home");
 };
 
 Route::prefix('{lang?}')

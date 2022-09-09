@@ -4,9 +4,13 @@
 namespace App\Http\Controllers;
 
 
+use App\Enum\BlogGroup;
 use App\Enum\FAQs;
 use App\Enum\Locales;
+use App\Enum\ViewTexts;
 use App\Models\Blog;
+use App\Models\RefBlogGroup;
+use App\Repositories\BlogGroupRepository;
 use App\Repositories\BlogRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,28 +19,34 @@ class PublicController extends ViewController
 {
     protected $lang;
     protected $blogRepository;
+    protected $blogGroupRepository;
 
-    public function __construct(BlogRepository                   $blogRepository
-    )
-    {
+    public function __construct(
+        BlogRepository                   $blogRepository,
+        BlogGroupRepository                   $blogGroupRepository
+    ) {
         parent::__construct();
         $this->lang = config('app.locale');
 
         $this->blogRepository = $blogRepository;
+        $this->blogGroupRepository = $blogGroupRepository;
     }
 
     public function test()
     {
-//        return $this->view('web.test' );
-//        return [
-//            'ok' => file_exists('httpss://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
-//            'ok2' => getimagesize('httpss://nekoinvest.io/images/home/protect.png'),
-//            'ok3' => getimagesize('httpss://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
-//        ];
+        //        return $this->view('web.test' );
+        //        return [
+        //            'ok' => file_exists('httpss://s2.coinmarketcap.com/static/img/coins/200x200/6950.png'),
+        //            'ok2' => getimagesize('httpss://nekoinvest.io/images/home/protect.png'),
+        //            'ok3' => getimagesize('httpss://s2.coinmarketcap.com/static/img/coins/200x200/1.png'),
+        //        ];
     }
 
 
-
+    public function homeView(Request $request)
+    {
+        return $this->view('v3.home.home', ViewTexts::HOME);
+    }
 
     public function homeViewV2(Request $request)
     {
@@ -129,111 +139,25 @@ class PublicController extends ViewController
         ]);
     }
 
-    public function homeView(Request $request)
+    public function aboutView()
     {
-
-        $networks = Network::whereIn('id', [1, 2, 4])->get();
-        $features = [
-            [
-                'title' => 'web.home.feature.1st_title',
-                'description' => 'web.home.feature.1st_description',
-                'image_url' => '/images/feature/boat.png',
-            ],
-            [
-                'title' => 'web.home.feature.2nd_title',
-                'description' => 'web.home.feature.2nd_description',
-                'image_url' => '/images/feature/exchange.png',
-            ],
-            [
-                'title' => 'web.home.feature.3rd_title',
-                'description' => 'web.home.feature.3rd_description',
-                'image_url' => '/images/feature/nft.png',
-            ],
-            [
-                'title' => 'web.home.feature.4th_title',
-                'description' => 'web.home.feature.4th_description',
-                'image_url' => '/images/feature/dapps.png',
-            ],
-            [
-                'title' => 'web.home.feature.5th_title',
-                'description' => 'web.home.feature.5th_description',
-                'image_url' => '/images/feature/market.png',
-            ],
-            [
-                'title' => 'web.home.feature.6th_title',
-                'description' => 'web.home.feature.6th_description',
-                'image_url' => '/images/feature/inspect.png',
-            ],
-        ];
-        $road_maps = [
-            [
-                'time' => '2021',
-                'title' => 'MVP',
-                'current' => true,
-                'items' => [
-                    ['title' => 'Support BSC, Ethereum & Solana', 'done' => true],
-                    ['title' => 'Aggregator & Multichain wallet ', 'done' => true],
-                    ['title' => 'Secure Seed round', 'done' => true],
-                    ['title' => 'Beta release', 'done' => true],
-                ],
-            ],
-            [
-                'time' => 'Q1 2022',
-                'title' => 'Beta Release',
-                'items' => [
-                    ['title' => 'Refine platform performance, UIUX', 'done' => false],
-                    ['title' => 'Integrate more public networks', 'done' => false],
-                    ['title' => 'Add Decentralized Fund Management feature', 'done' => false],
-                    ['title' => 'Add cross-chain protocol aggregation', 'done' => false],
-                    ['title' => 'Secure Strategic round', 'done' => false],
-                ],
-            ],
-            [
-                'time' => 'Q2 2022',
-                'title' => 'Public Release',
-                'items' => [
-                    ['title' => 'Smart contract Audit', 'done' => false],
-                    ['title' => 'Aggregate more Dexes', 'done' => false],
-                    ['title' => 'Add Limit Order protocol', 'done' => false],
-                    ['title' => 'Introduce Neko NFT collection based on the branding of Neko', 'done' => false],
-                    ['title' => 'Issue token $NEKO', 'done' => false],
-                ],
-            ],
-            [
-                'time' => 'Q3-Q4 2022',
-                'title' => 'User Growth',
-                'items' => [
-                    ['title' => 'Neko Index Fund', 'done' => false],
-                    ['title' => 'Aggregate DeFi Yield product', 'done' => false],
-                    ['title' => 'Launch Neko-verse applications for Neko NFT', 'done' => false],
-                    ['title' => 'Aggregate multichain NFT Marketplace', 'done' => false],
-                ],
-            ],
-        ];
-        $founders = [
-            ['name' => 'LEO NGUYEN', 'role' => 'CEO', 'department' => 'Msc. Strategy - Aalto Uni', 'avatar' => '/images/founder/locnv.png'],
-            ['name' => 'NGUYEN VIET HUNG', 'role' => 'Product', 'department' => 'Computer Science FPT Uni', 'avatar' => '/images/founder/hungnv.png'],
-            ['name' => 'TRINH ANH DUC', 'role' => 'Strategy & Finance', 'department' => 'Venture Capital', 'avatar' => '/images/founder/ducta.png'],
-            ['name' => 'DUONG NHAT ANH', 'role' => 'NFT Designer', 'department' => 'Graphic Design FPT Uni', 'avatar' => '/images/founder/anhnd.png'],
-            ['name' => 'PHAN MINH DUONG', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH', 'avatar' => '/images/founder/duongpm.png'],
-            ['name' => 'HA TRUNG HIEU', 'role' => 'Blockchain Dev', 'department' => 'Master ICT - USTH', 'avatar' => '/images/founder/hieuht.png'],
-            ['name' => 'HANH PHAM', 'role' => 'Graphic Designer', 'department' => '', 'avatar' => '/images/founder/hanhpt.png'],
-            //            ['name' => 'HOANG DUC LONG', 'role' => 'NFT Dev', 'department' => 'Software Eng. FPT Uni', 'avatar' => '/images/founder/longhd.png'],
-        ];
-        //dd($this->user->tokens);
-        return $this->view('web.home', [
-            'founders' => $founders,
-            'road_maps' => $road_maps,
-            'networks' => $networks,
-            'features' => $features,
-        ]);
+        return $this->view('v3.about.index', ViewTexts::ABOUT);
     }
 
+    public function termsView()
+    {
+        return $this->view('v3.termsAndPrivacy.terms');
+    }
 
+    public function privacyView()
+    {
+        return $this->view('v3.termsAndPrivacy.privacy');
+    }
 
-
-
-
+    public function supportView()
+    {
+        return $this->view('v3.support.index');
+    }
 
     public function termsOfServiceView()
     {
@@ -250,27 +174,41 @@ class PublicController extends ViewController
     {
 
         return $this->view('web.faqs', [
-            'questions' => FAQs::items
+            'questions' => FAQs::items,
+
         ]);
     }
 
 
     public function blogsView(Request $request)
     {
+        $category_id = (int)$request->get('category');
+
         $filter = [
             'search' => $request->search,
             'blog_group' => [
-                'type' => 'kind',
-                'ids' => [2]
+                'type' => empty($category_id) ? 'kind' : 'category',
+                'ids' => empty($category_id) ? [BlogGroup::BLOG_GROUP_ID] : [$category_id]
             ],
         ];
 
-        $this->blogRepository->skipPresenter(true);
-        $blogs = $this->blogRepository->orderBy('created_at', 'desc')->list(48, $filter);
 
-        return $this->view('web.blog.blogs', [
+
+        $this->blogRepository->skipPresenter();
+        $blogs = $this->blogRepository->orderBy('created_at', 'desc')->list(8, $filter);
+        $latestBlogs = $this->blogRepository->orderBy('created_at', 'desc')
+            ->list(4, ['type' => 'kind','ids' => [BlogGroup::BLOG_GROUP_ID]] );
+
+
+        $category_ids = \App\Models\BlogGroup::getBlogCategories(BlogGroup::BLOG_GROUP_ID);
+        $categories = $this->blogGroupRepository->list(null, ['blog_group' => ['type' => 'category','ids'=>$category_ids]]);
+
+        return $this->view('v3.blog.list', [
+            'search' => $request->search,
+            'category' => $request->category,
+            'latestBlogs' => $latestBlogs,
             'blogs' => $blogs,
-            'search' => $request->search
+            'categories' => $categories,
         ]);
     }
 
@@ -283,7 +221,7 @@ class PublicController extends ViewController
             }
         })->first();
 
-        //        dd($request->slug, $this->locale,$blog);
+//                dd($request->slug, $this->locale,$blog);
 
         if (empty($blog)) {
             abort(404);
