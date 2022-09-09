@@ -36,9 +36,9 @@ Route::get('/login', [PublicController::class, 'loginView']);
 Route::get('/manage/{any}', [PublicController::class, 'manageView'])->where('any', '.*');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
-Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
-Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);
-Route::get('/faqs', [PublicController::class, 'faqsView'])->name('faqs');
+//Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
+//Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);
+//Route::get('/faqs', [PublicController::class, 'faqsView'])->name('faqs');
 
 Route::get('/test', [PublicController::class, 'test']);
 //Route::get('/pages/nft', [PublicController::class, 'nftView']);

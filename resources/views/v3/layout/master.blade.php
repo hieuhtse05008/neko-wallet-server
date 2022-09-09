@@ -67,7 +67,7 @@
                     <a class="nav-link active" href="{{route('blogs')}}">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('faqs')}}">Support</a>
+                    <a class="nav-link active" href="{{route('support')}}">Support</a>
                 </li>
 
             </ul>
@@ -137,9 +137,9 @@
                     </a>
                 </div>
                 <div class="d-flex mt-3 justify-content-center justify-content-md-start">
-                    <div class="mb-3 "><a href="/terms-of-service">Terms of Service</a></div>
+                    <div class="mb-3 "><a href="{{route('terms')}}">Terms of Service</a></div>
                     <div class="mx-2">•</div>
-                    <div class="mb-3 "><a href="/privacy-policy">Privacy Policies</a></div>
+                    <div class="mb-3 "><a href="{{route('privacy')}}">Privacy Policies</a></div>
                 </div>
             </div>
 
@@ -195,7 +195,7 @@
                     <div class="d-flex flex-column align-items-center my-5 py-5">
                         <a class="fs-1 fw-bold mb-4" href="{{route('about')}}">About</a>
                         <a class="fs-1 fw-bold mb-4" href="{{route('blogs')}}">Blog</a>
-                        <a class="fs-1 fw-bold mb-4" href="{{route('faqs')}}">Support</a>
+                        <a class="fs-1 fw-bold mb-4" href="{{route('support')}}">Support</a>
                     </div>
                     <div class="d-flex justify-content-center mb-5">
                         <a href="https://play.google.com/store/apps/details?id=io.nekoinvest.wallet">
@@ -216,9 +216,9 @@
                                         href="mailto:info@nekowallet.io">info@nekowallet.io</a>
                                 </div>
                                 <div class="d-flex mt-3 justify-content-center justify-content-md-start">
-                                    <div class="mb-3 text-gray"><a href="/terms-of-service">Terms of Service</a></div>
+                                    <div class="mb-3 text-gray"><a href="{{route('terms')}}">Terms of Service</a></div>
                                     <div class="mx-2">•</div>
-                                    <div class="mb-3 text-gray"><a href="/privacy-policy">Privacy Policies</a></div>
+                                    <div class="mb-3 text-gray"><a href="{{route('privacy')}}">Privacy Policies</a></div>
                                 </div>
                             </div>
 

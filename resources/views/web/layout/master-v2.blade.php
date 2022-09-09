@@ -155,8 +155,8 @@
 
                 <div class="mb-3"><a href="{{route('blogs')}}">Learn</a></div>
                 <div class="mb-3"><a href="{{route('faqs')}}">Support</a></div>
-                <div class="mb-3"><a href="/terms-of-service">Terms of Service</a></div>
-                <div class="mb-3"><a href="/privacy-policy">Privacy Policy</a></div>
+                <div class="mb-3"><a href="{{route('terms')}}">Terms of Service</a></div>
+                <div class="mb-3"><a href="{{route('privacy')}}">Privacy Policy</a></div>
                 {{--                    <div class="mb-sm-0">--}}
                 {{--                        <a target="_blank" href="https://docs.nekoinvest.io/" class="pointer">--}}
                 {{--                            Litepaper--}}
