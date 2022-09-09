@@ -84,3 +84,9 @@ Route::prefix("auth/v1")->middleware('auth:sanctum')->group(function () {
 //        Route::delete("{user}", [App\Http\Controllers\API\UserAPIController::class, 'destroy']);
 //    });
 //});
+
+
+Route::group(["prefix" => 'contact-request'], function () {
+    Route::get("/", [App\Http\Controllers\API\ContactRequestAPIController::class, 'index']);
+    Route::post("/", [App\Http\Controllers\API\ContactRequestAPIController::class, 'store']);
+});

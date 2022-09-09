@@ -21,13 +21,13 @@ class ViewAuthController extends ViewController
     public function uploadBlogView(Blog $blog)
     {
         $relations = getRelationsFromIncludeRequest([]);
-//        dd($blog);
+        //        dd($blog);
         $blog->skipTranslation(true);
         $blogData = $this->blogRepository->with($relations)->parserResult($blog);
-//dd($blogData);
+        //dd($blogData);
         if (empty($blogData['id'])) {
             $defaultLocaleObject = [];
-            foreach (Locales::AVAILABLE_LOCALES as $locale){
+            foreach (Locales::AVAILABLE_LOCALES as $locale) {
                 $defaultLocaleObject[$locale] = '';
             }
             foreach ($blog->getTranslatableAttributes() as $translatableAttribute) {
@@ -40,7 +40,10 @@ class ViewAuthController extends ViewController
             'blog' => $blogData,
             'statuses' => \App\Enum\Blog::STATUSES,
         ]);
-
     }
 
+    public function manageView()
+    {
+        return $this->view('web.manage.index');
+    }
 }

@@ -40,6 +40,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\BlogGroupRepository::class, \App\Repositories\BlogGroupRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\BlogLinkGroupRepository::class, \App\Repositories\BlogLinkGroupRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\RefBlogGroupRepository::class, \App\Repositories\RefBlogGroupRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\ContactRequestRepository::class, \App\Repositories\ContactRequestRepositoryEloquent::class);
         //:end-bindings:
     }
 }

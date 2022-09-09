@@ -33,15 +33,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/login', [PublicController::class, 'loginView']);
-Route::get('/manage/{any?}', [PublicController::class, 'manageView']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
 //Route::get('/terms-of-service', [PublicController::class, 'termsOfServiceView']);
 //Route::get('/privacy-policy', [PublicController::class, 'privacyPolicyView']);
 //Route::get('/faqs', [PublicController::class, 'faqsView'])->name('faqs');
+//Route::get('/pages/nft', [PublicController::class, 'nftView']);
 
 Route::get('/test', [PublicController::class, 'test']);
-//Route::get('/pages/nft', [PublicController::class, 'nftView']);
 Route::get('/download', [PublicController::class, 'download']);
 
 // V3
@@ -72,4 +71,5 @@ Route::prefix('{lang?}')
 */
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/blog/upload/{blog?}', [ViewAuthController::class, 'uploadBlogView'])->middleware('include:blog_groups');
+    Route::get('/manage/{any?}', [ViewAuthController::class, 'manageView'])->where('any', '.*');
 });

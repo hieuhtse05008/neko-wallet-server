@@ -197,11 +197,11 @@ class PublicController extends ViewController
         $this->blogRepository->skipPresenter();
         $blogs = $this->blogRepository->orderBy('created_at', 'desc')->list(8, $filter);
         $latestBlogs = $this->blogRepository->orderBy('created_at', 'desc')
-            ->list(4, ['type' => 'kind','ids' => [BlogGroup::BLOG_GROUP_ID]] );
+            ->list(4, ['type' => 'kind', 'ids' => [BlogGroup::BLOG_GROUP_ID]]);
 
 
         $category_ids = \App\Models\BlogGroup::getBlogCategories(BlogGroup::BLOG_GROUP_ID);
-        $categories = $this->blogGroupRepository->list(null, ['blog_group' => ['type' => 'category','ids'=>$category_ids]]);
+        $categories = $this->blogGroupRepository->list(null, ['blog_group' => ['type' => 'category', 'ids' => $category_ids]]);
 
         return $this->view('v3.blog.list', [
             'search' => $request->search,
@@ -221,7 +221,7 @@ class PublicController extends ViewController
             }
         })->first();
 
-//                dd($request->slug, $this->locale,$blog);
+        //                dd($request->slug, $this->locale,$blog);
 
         if (empty($blog)) {
             abort(404);
@@ -238,11 +238,6 @@ class PublicController extends ViewController
     {
 
         return $this->view('web.login.login');
-    }
-
-    public function manageView()
-    {
-        return $this->view('web.manage.index');
     }
 
     //    public function nftView()
