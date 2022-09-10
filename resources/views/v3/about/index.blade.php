@@ -2,7 +2,7 @@
 @section('content')
 <section id='members' class="mt-5">
     <div class="container">
-        <div class="row justify-content-center spacing1">
+        <div class="row justify-content-start spacing1">
             <div class="col-11">
                 <div class="text-center text-md-start">
                     <h1 class="color-gradient title d-inline">We are Neko. </h1>
@@ -116,40 +116,43 @@
 </section>
 
 <section id='contact'>
-    <div class="row justify-content-end justify-content-sm-between">
-        <div class="col-12 col-sm-6">
-            <div class="contact-form row">
-                <div class="col-12 pb-3 pb-md-5 mb-3">
-                    <div class="text-lelt">
-                        <h1 class="color-gradient fs-60px fw-bold d-inline">Start a conversation </h1>
-                        <h1 class="fs-60px mb-3 text-dark fw-bold d-inline">about a new business or media inquiries</h1>
+    <div class="container">
+        <div class="row justify-content-end justify-content-sm-between">
+            <div class="col-12 col-md-6">
+                <div class="contact-form row">
+                    <div class="col-12 pb-3 pb-md-5 mb-3">
+                        <div class="text-lelt">
+                            <h1 class="color-gradient fs-60px fw-bold d-inline">Start a conversation</h1>
+                            <h1 class="fs-60px mb-3 text-dark fw-bold d-inline">about a new business or media inquiries</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 mb-4">
-                    <div class="fs-5 text-dark fw-500">👋 Tell us more about you.</div>
-                </div>
-                <div class="col-sm-12 col-md-9">
-                    <form onsubmit="handleSubmitForm(event, this)">
-                        @foreach($form as $item)
-                        <div class="mb-4">
-                            <label for="{{ $item['field'] }}" class="form-label ps-3 mb-1">{{ $item['label'] }}</label>
-                            @if ($item['id'] === 'inputRequest')
-                            <textarea id="{{ $item['field'] }}" name="{{ $item['field'] }}" class="form-control text-area-request-form" placeholder="{{ $item['placeholder'] }}" style="height: 200px"></textarea>
-                            @else
-                            <input id="{{ $item['field'] }}" name="{{ $item['field'] }}" type="{{ $item['type'] }}" class="form-control" id="{{ $item['id'] }}" placeholder="{{ $item['placeholder'] }}">
-                            @endif
-                        </div>
-                        @endforeach
-                        <div class="mb-4 text-end">
-                            <button type="submit" class="btn btn-send btn-dark">Send</button>
-                        </div>
-                    </form>
+                    <div class="col-12 mb-4">
+                        <div class="fs-5 text-dark fw-500">👋 Tell us more about you.</div>
+                    </div>
+                    <div class="col-sm-12 col-md-9">
+                        <form onsubmit="handleSubmitForm(event, this)">
+                            @foreach($form as $item)
+                            <div class="mb-4">
+                                <label for="{{ $item['field'] }}" class="form-label ps-3 mb-1">{{ $item['label'] }}</label>
+                                @if ($item['id'] === 'inputRequest')
+                                <textarea id="{{ $item['field'] }}" name="{{ $item['field'] }}" class="form-control text-area-request-form" placeholder="{{ $item['placeholder'] }}" style="height: 200px"></textarea>
+                                @else
+                                <input id="{{ $item['field'] }}" name="{{ $item['field'] }}" type="{{ $item['type'] }}" class="form-control" id="{{ $item['id'] }}" placeholder="{{ $item['placeholder'] }}">
+                                @endif
+                            </div>
+                            @endforeach
+                            <div class="mb-4 text-end">
+                                <button type="submit" class="btn btn-send btn-dark">Send</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-6 p-0">
-            <img class="image-iphone w-100" src="/images/v3/about/iphone.png">
-        </div>
+    </div>
+    <img class="image-iphone position-absolute bottom-0 end-0 d-none d-md-block" src="/images/v3/about/iphone.png">
+    <div class="text-end d-block d-md-none">
+        <img class="image-iphone-small" src="/images/v3/about/iphone.png">
     </div>
 </section>
 @endsection
@@ -301,6 +304,8 @@
 
     #contact {
         overflow: hidden;
+        position: relative;
+        min-height: 70vw;
     }
 
     .contact-form {
@@ -341,6 +346,10 @@
         width: 150px;
     }
 
+    .image-iphone-small {
+        width: 90%;
+    }
+
     /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 575px) {
         .container {
@@ -361,10 +370,10 @@
         }
 
         .contact-form {
-            width: 90%;
-            margin: auto !important;
-            padding: 1rem;
-            padding-left: 0;
+            /* width: 90%;
+            margin: auto; */
+            /* padding: 1rem; */
+            padding-top: 1rem;
         }
 
         .form-control::placeholder {
@@ -520,6 +529,6 @@
         }
     }
 
-    @media only screen and (min-width: 1200px) {}
+    @media only screen and (min-width: 1200px) and (max-width: 1750px) {}
 </style>
 @endsection
