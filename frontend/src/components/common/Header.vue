@@ -20,7 +20,12 @@
           </a>
         </v-toolbar-title>
       </v-col>
-      <v-col cols="6" class="text-right pa-0"> </v-col>
+      <v-col cols="6" class="text-right pa-0"
+        ><v-app-bar-nav-icon
+          class="d-md-none"
+          @click="$emit('clickDrawer')"
+        ></v-app-bar-nav-icon>
+      </v-col>
     </v-row>
   </v-app-bar>
 </template>

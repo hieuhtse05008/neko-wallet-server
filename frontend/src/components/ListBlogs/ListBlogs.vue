@@ -17,65 +17,25 @@
         </div>
       </v-row>
 
-      <v-row class="mb-5" v-if="!loading">
-        <v-layout justify-start wrap>
-          <v-col
-            xs="12"
-            sm="6"
-            md="4"
-            lg="3"
-            xl="2.4"
-            v-for="(item, index) in this.$data.blogs"
-            :key="index"
+      <v-row>
+        <v-col class="col-12">
+          <Table
+            :headers="headers"
+            :items="blogs"
+            :pagination="{
+              page: params.page,
+              totalPage: totalPage,
+              limit: params.limit,
+            }"
+            :onChange="handleOnChangePage"
+            :loading="loading"
+            :onSelectRow="handleSelectRow"
           >
-            <v-card
-              class="mx-2 mb-2"
-              elevation="3"
-              @click="() => handleClick(item.id)"
-            >
-              <template slot="progress">
-                <v-progress-linear
-                  color="deep-purple"
-                  height="10"
-                  indeterminate
-                ></v-progress-linear>
-              </template>
-              <v-img :src="item.image_url"></v-img>
-            </v-card>
-            <h3 class="mx-2">{{ item.title.en }}</h3>
-          </v-col>
-          <v-spacer></v-spacer>
-        </v-layout>
-      </v-row>
-
-      <v-row class="mb-5" v-if="loading">
-        <v-layout justify-start wrap>
-          <v-col
-            xs="12"
-            sm="6"
-            md="4"
-            lg="3"
-            xl="2.4"
-            v-for="(item, index) in new Array(params.limit).fill(0)"
-            :key="index"
-          >
-            <v-skeleton-loader
-              class="mx-2 mb-2"
-              type="card"
-              min-width="150"
-            ></v-skeleton-loader>
-          </v-col>
-          <v-spacer></v-spacer>
-        </v-layout>
-      </v-row>
-
-      <v-row class="mb-5" justify="center" align="center">
-        <v-pagination
-          v-model="params.page"
-          :length="totalPage"
-          circle
-          @input="getListBlogs"
-        ></v-pagination>
+            <template v-slot:[`item.image_url`]="{ item }">
+              <img width="100" height="60" :src="item.image_url" alt="" />
+            </template>
+          </Table>
+        </v-col>
       </v-row>
     </v-container>
   </v-container>
@@ -83,15 +43,25 @@
 
 <script>
 import router from '@/router'
+import Table from '../common/Table.vue'
 import { getBlogs } from '../../services/Api/authApi.js'
 import { QUANTITY_CARD } from '../../utils/constants'
 
 export default {
   name: 'BlogPage',
-
+  components: {
+    Table,
+  },
   data() {
     return {
       blogs: [],
+      headers: [
+        { text: 'ID', value: 'id' },
+        { text: 'Image', value: 'image_url' },
+        { text: 'Title', value: 'title' },
+        { text: 'Description', value: 'description' },
+        { text: 'Author', value: 'author' },
+      ],
       params: {
         search: null,
         page: 1,
@@ -106,17 +76,20 @@ export default {
     handleClick: (id) => {
       router.push(`/blog/upload/${id}`)
     },
-    sleep: function (ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms))
-    },
     getListBlogs: async function () {
       this.loading = true
       try {
         const response = await getBlogs(this.params)
-        this.blogs = response.data.blogs.items
+        this.blogs = response.data.blogs.items.map((item) => {
+          return {
+            id: item.id,
+            image_url: item.image_url,
+            title: item.title.en,
+            description: item.description.en,
+          }
+        })
         this.params.page = response.data.blogs.meta.current_page
         this.totalPage = response.data.blogs.meta.total_pages
-        await this.sleep(1000)
       } catch {
         console.log('error')
       }
@@ -130,6 +103,13 @@ export default {
       } catch {
         console.log('error')
       }
+    },
+    handleOnChangePage: async function (page) {
+      this.params.page = page
+      await this.getListBlogs()
+    },
+    handleSelectRow: function (item) {
+      this.$router.push(`/blog/upload/${item.id}`)
     },
   },
 

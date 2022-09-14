@@ -1,5 +1,13 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
-  <v-navigation-drawer permanent expand-on-hover app>
+  <v-navigation-drawer
+    :permanent="!isMobile"
+    :expand-on-hover="!isMobile"
+    v-model="innerDrawer"
+    :absolute="isMobile"
+    :temporary="isMobile"
+    app
+  >
     <v-list>
       <v-list-item class="px-2">
         <v-list-item-avatar>
@@ -39,6 +47,12 @@ import { getProfile } from '@/services/Api/authApi'
 import router from '@/router'
 export default {
   name: 'SideBar',
+  props: {
+    drawer: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       id: null,
@@ -81,6 +95,24 @@ export default {
   },
   mounted: function () {
     this.getProfile()
+  },
+  computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.width < 960
+    },
+    innerDrawer: {
+      get() {
+        return this.$props.drawer
+      },
+      set(value) {
+        this.$emit('change', value)
+      },
+    },
+  },
+  watch: {
+    isMobile() {
+      console.log(this.isMobile)
+    },
   },
 }
 </script>

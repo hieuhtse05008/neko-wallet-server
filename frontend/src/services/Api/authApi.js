@@ -49,8 +49,8 @@ export const createBlogGroup = (data) =>
   })
 
 // Contact Request Api
-export const getContactRequests = () =>
+export const getContactRequests = (limit, page) =>
   authAxios({
     method: 'GET',
-    url: '/contact-request',
+    url: '/contact-request?limit=' + limit + '&page=' + page,
   })

@@ -1,8 +1,8 @@
 <template>
   <v-app id="app">
-    <SideBar />
+    <SideBar :drawer="drawer" @change="(value) => (drawer = value)" />
     <div class="main">
-      <Header />
+      <Header @clickDrawer="handleClickDrawer" />
       <router-view />
       <Footer />
     </div>
@@ -22,11 +22,27 @@ export default {
     SideBar,
     Footer,
   },
+  data() {
+    return {
+      drawer: false,
+    }
+  },
+  methods: {
+    handleClickDrawer() {
+      this.drawer = !this.drawer
+    },
+  },
 }
 </script>
 
 <style scoped>
 .main {
   padding-left: 56px;
+}
+
+@media (max-width: 960px) {
+  .main {
+    padding-left: 0;
+  }
 }
 </style>
