@@ -122,7 +122,8 @@
                 <div class="contact-form row">
                     <div class="col-12 pb-3 pb-md-5 mb-3">
                         <div class="text-lelt">
-                            <h1 class="color-gradient fs-60px fw-bold d-inline">Start a conversation</h1>
+
+                            <h1 class="color-gradient fs-60px fw-bold d-inline">Start a conversation </h1>
                             <h1 class="fs-60px mb-3 text-dark fw-bold d-inline">about a new business or media inquiries</h1>
                         </div>
                     </div>
