@@ -73,7 +73,7 @@
         </div>
         {{--    </section>--}}
         {{--    <section class="panel" style="height: auto;">--}}
-        <div class="container align-items-center d-md-flex justify-content-between d-none" style="height: 50vh;">
+        <div class="container align-items-center d-md-flex justify-content-between d-none flex-wrap" style="height: 50vh;">
             @foreach($partners as $partner)
                 <div class="">
                     <img loading="lazy" src="{{$partner}}">
@@ -81,7 +81,7 @@
             @endforeach
         </div>
         <div class="w-100 d-md-none py-5 my-5">
-            <div class="align-items-center d-flex justify-content-between w-100 d-md-none py-3  my-5"
+            <div class="align-items-center d-flex justify-content-between w-100 d-md-none py-3  flex-wrap my-5"
                  style=" overflow-x: scroll; overflow-y:hidden; ">
                 @foreach($partners as $partner)
                     <div class="me-5">
