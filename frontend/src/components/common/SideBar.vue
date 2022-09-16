@@ -30,7 +30,7 @@
         :class="currentItemIndex === index ? 'selected' : ''"
         :key="index"
         v-for="(item, index) in NavItems"
-        @click="() => handleClickItem(`/${item.path}`, index)"
+        @click="() => handleClickItem(`/${item.path}`)"
         link
       >
         <v-list-item-icon>
@@ -59,7 +59,6 @@ export default {
       name: null,
       email: null,
       avatar_url: null,
-      currentItemIndex: 0,
       NavItems: [
         {
           path: 'blog',
@@ -88,8 +87,7 @@ export default {
         console.log('get profile error')
       }
     },
-    handleClickItem(path, index) {
-      this.currentItemIndex = index
+    handleClickItem(path) {
       router.push(path)
     },
   },
@@ -107,6 +105,10 @@ export default {
       set(value) {
         this.$emit('change', value)
       },
+    },
+    currentItemIndex() {
+      const currentRouteName = this.$route.name
+      return this.NavItems.findIndex((item) => item.name === currentRouteName)
     },
   },
   watch: {

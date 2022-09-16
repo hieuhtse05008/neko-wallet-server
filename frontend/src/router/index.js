@@ -9,7 +9,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '*',
-    name: 'Blog',
+    name: 'Blogs',
     component: ListBlogs,
   },
   {
