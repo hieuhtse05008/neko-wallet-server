@@ -130,7 +130,8 @@
                         <div class="fs-5 text-dark fw-500">👋 Tell us more about you.</div>
                     </div>
                     <div class="col-sm-12 col-md-9">
-                        <form onsubmit="handleSubmitForm(event, this)">
+                        <form method="POST" action="/api/contact-request">
+                            @csrf
                             @foreach($form as $item)
                             <div class="mb-4">
                                 <label for="{{ $item['field'] }}" class="form-label ps-3 mb-1">{{ $item['label'] }}</label>
@@ -144,6 +145,7 @@
                             <div class="mb-4 text-end">
                                 <button type="submit" class="btn btn-send btn-dark">Send</button>
                             </div>
+                            <span class="message d-none" message="{{ session('message') }}"></span>
                         </form>
                     </div>
                 </div>
@@ -170,6 +172,15 @@
             console.log(error);
         }
     }
+
+    function getMessage() {
+        const message = document.querySelector('.message').getAttribute('message');
+        if (message) {
+            alert(message);
+        }
+    }
+
+    getMessage();
 </script>
 @endpush
 

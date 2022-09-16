@@ -131,11 +131,12 @@ class ContactRequestAPIController extends APIController
     {
         $input = $request->validated();
 
-        $contactRequest = $this->contactRequestRepository->create($input);
+        $this->contactRequestRepository->create($input);
 
-        return $this->respondSuccess([
-            "contact_request" => $contactRequest
-        ]);
+        // return $this->respondSuccess([
+        //     "contact_request" => $contactRequest
+        // ]);
+        return redirect('/about#contact')->with('message', 'Thank you for your message. We will contact you soon.');
     }
 
     /**
