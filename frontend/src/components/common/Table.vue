@@ -1,9 +1,6 @@
 <template>
   <div>
     <v-card class="table" outlined elevation="1">
-      <v-card-title>
-        <h3>{{ title }}</h3>
-      </v-card-title>
       <v-data-table
         :headers="headers"
         :items="items"

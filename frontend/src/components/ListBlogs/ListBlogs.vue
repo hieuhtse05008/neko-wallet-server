@@ -5,19 +5,21 @@
         <div class="page-name">Blogs</div>
       </v-row>
       <v-row class="mb-10">
-        <div class="search-field-container">
-          <v-text-field
-            class="search-field"
-            outlined
-            label="Search"
-            v-model="params.search"
-            @keyup.enter="handleSearch"
-            prepend-inner-icon="mdi-magnify"
-          ></v-text-field>
-        </div>
+        <v-col class="col-12">
+          <div class="search-field-container">
+            <v-text-field
+              class="search-field pa-0"
+              outlined
+              label="Search"
+              v-model="params.search"
+              @keyup.enter="handleSearch"
+              prepend-inner-icon="mdi-magnify"
+            ></v-text-field>
+          </div>
+        </v-col>
       </v-row>
 
-      <v-row>
+      <v-row class="mb-10">
         <v-col class="col-12">
           <Table
             :headers="headers"
@@ -122,9 +124,7 @@ export default {
 
 <style scoped>
 .search-field {
-  width: 70vw;
   height: 50px;
-  margin: 0 auto;
 }
 
 .search-field-container {

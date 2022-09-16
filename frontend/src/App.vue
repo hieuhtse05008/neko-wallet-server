@@ -4,14 +4,14 @@
     <div class="main">
       <Header @clickDrawer="handleClickDrawer" />
       <router-view />
-      <Footer />
+      <!-- <Footer /> -->
     </div>
   </v-app>
 </template>
 
 <script>
 import Header from './components/common/Header.vue'
-import Footer from './components/common/Footer.vue'
+// import Footer from './components/common/Footer.vue'
 import SideBar from './components/common/SideBar.vue'
 import './style.css'
 
@@ -20,7 +20,7 @@ export default {
   components: {
     Header,
     SideBar,
-    Footer,
+    // Footer,
   },
   data() {
     return {

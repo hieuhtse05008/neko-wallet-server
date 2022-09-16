@@ -91,7 +91,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container-content {
   padding-top: 50px;
   padding-bottom: 50px;
