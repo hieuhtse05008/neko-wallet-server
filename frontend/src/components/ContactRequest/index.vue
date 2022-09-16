@@ -1,14 +1,31 @@
 <template>
   <v-container fluid class="container-content">
     <v-container>
-      <Table
-        title="Contact request form"
-        :headers="headers"
-        :items="items"
-        :pagination="pagination"
-        :onChange="onChangePage"
-        :loading="loading"
-      />
+      <v-row class="mb-1" justify="center" align="center">
+        <div class="page-name">Contact request form</div>
+      </v-row>
+      <v-row>
+        <v-col class="col-12">
+          <Table
+            :headers="headers"
+            :items="items"
+            :pagination="pagination"
+            :onChange="onChangePage"
+            :loading="loading"
+          >
+            <template
+              v-for="(customColumn, index) in ['name', 'email', 'company']"
+              v-slot:[`item.${customColumn}`]="{ item }"
+            >
+              <v-row :key="index" justify="center" align="center">
+                <v-col class="col-12">
+                  <CopyClipBroad :text="item[customColumn]" />
+                </v-col>
+              </v-row>
+            </template>
+          </Table>
+        </v-col>
+      </v-row>
     </v-container>
   </v-container>
 </template>
@@ -16,10 +33,12 @@
 <script>
 import { getContactRequests } from '../../services/Api/authApi'
 import Table from '../common/Table.vue'
+import CopyClipBroad from '../common/CopyClipBroad.vue'
 export default {
   name: 'UserRequests',
   components: {
     Table,
+    CopyClipBroad,
   },
   data() {
     return {
@@ -72,7 +91,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .container-content {
   padding-top: 50px;
   padding-bottom: 50px;

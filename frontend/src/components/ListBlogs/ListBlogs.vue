@@ -121,12 +121,6 @@ export default {
 </script>
 
 <style scoped>
-.page-name {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #000;
-}
-
 .search-field {
   width: 70vw;
   height: 50px;

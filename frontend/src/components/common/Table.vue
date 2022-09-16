@@ -19,6 +19,7 @@
     </v-card>
     <v-pagination
       class="mb-4"
+      v-if="pagination.totalPage > 1"
       v-model="localPagination.page"
       :length="pagination.totalPage"
       @input="onChange"
